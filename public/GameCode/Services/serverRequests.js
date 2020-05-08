@@ -59,3 +59,10 @@ const UpdateLeaderBoard = () =>{
     };
   });
 };
+
+
+const UpdateDish = () =>{
+  httpPost('/post/UpdateDishAm', {id : UserID, dishes: amount}, data =>{
+    UpdateDishAmount();
+  });
+};
