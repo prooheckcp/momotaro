@@ -160,6 +160,9 @@ const FoodMousePressed = () =>{
             //Screen Text
                 setTimeout(() => {alert('ADDED'); }, 100);
             console.log(wa.pr + eg.pr + pa.pr);
+            httpPost('/post/UpdateDishAm', {item : LocalF, id : UserID}, data =>{
+                UpdateDish();
+            });
     }
 
     if (eg.x > (width/2 - 320) && eg.x < (width/2 - 230) && eg.y > 300 && eg.y < 390 && ol_oi.x > (width/2 - 160) && ol_oi.x < (width/2 - 70) && ol_oi.y > 300 && ol_oi.y < 390 && br.x > (width/2) && br.x < (width/2 + 90) && br.y > 300 && br.y < 390){
@@ -179,10 +182,8 @@ const FoodMousePressed = () =>{
                 setTimeout(() => {alert('ADDED'); }, 100);
             console.log(wa.pr + eg.pr + pa.pr);
             ///////////
-            httpPost('/post/SendFood', {item : LocalF, id : UserID}, data =>{
+            httpPost('/post/UpdateDishAm', {item : LocalF, id : UserID}, data =>{
                 UpdateDish();
-                console.log(data);
-                
             });
     }
 
@@ -202,6 +203,10 @@ const FoodMousePressed = () =>{
             //Screen Text
                 setTimeout(() => {alert('ADDED'); }, 100);
             console.log(wa.pr + ri.pr + tu.pr);
+            ///////////
+            httpPost('/post/UpdateDishAm', {item : LocalF, id : UserID}, data =>{
+                UpdateDish();
+            });
     }
 
     if (wa.x > (width/2 - 320) && wa.x < (width/2 - 230) && wa.y > 300 && wa.y < 390 && ri.x > (width/2 - 160) && ri.x < (width/2 - 70) && ri.y > 300 && ri.y < 390 && sh.x > (width/2) && sh.x < (width/2 + 90) && sh.y > 300 && sh.y < 390){
@@ -221,6 +226,10 @@ const FoodMousePressed = () =>{
                 setTimeout(() => {alert('ADDED'); }, 100);
             console.log(wa.pr + ri.pr + sh.pr);
             console.log(shi_sus.amount);
+            ///////////
+            httpPost('/post/UpdateDishAm', {item : LocalF, id : UserID}, data =>{
+                UpdateDish();
+            });
     }
    
     if (wa.x > (width/2 - 320) && wa.x < (width/2 - 230) && wa.y > 300 && wa.y < 390 && fl.x > (width/2 - 160) && fl.x < (width/2 - 70) && fl.y > 300 && fl.y < 390 && ca.x > (width/2) && ca.x < (width/2 + 90) && ca.y > 300 && ca.y < 390){
@@ -239,6 +248,10 @@ const FoodMousePressed = () =>{
             //Screen Text
                 setTimeout(() => {alert('ADDED'); }, 100);
             console.log(wa.pr + fl.pr + ca.pr);
+            ///////////
+            httpPost('/post/UpdateDishAm', {item : LocalF, id : UserID}, data =>{
+                UpdateDish();
+            });
     }
 
     if (wa.x > (width/2 - 320) && wa.x < (width/2 - 230) && wa.y > 300 && wa.y < 390 && fl.x > (width/2 - 160) && fl.x < (width/2 - 70) && fl.y > 300 && fl.y < 390 && ch.x > (width/2) && ch.x < (width/2 + 90) && ch.y > 300 && ch.y < 390){
@@ -256,7 +269,11 @@ const FoodMousePressed = () =>{
                 pa.amount -= 1
             //Screen Text
                 setTimeout(() => {alert('ADDED'); }, 100);
-            console.log(wa.pr + eg.pr + pa.pr);        
+            console.log(wa.pr + eg.pr + pa.pr);  
+            ///////////
+            httpPost('/post/UpdateDishAm', {item : LocalF, id : UserID}, data =>{
+                UpdateDish();
+            });      
     }
 
 }
@@ -286,7 +303,7 @@ const Text = () => {
     text("=",(width/2 + 125),350);
 
     textSize(10);
-    text("Water + Eggs + Paste = Noodles", (width/2 + 145), 450);
+    text("Water + Eggs + Pasta = Noodles", (width/2 + 145), 450);
     text("Egg + Oliva Oil + Bread = Omelete", (width/2 + 145), 470);
     text("Water + Rice + Tuna = Tuna Sushi", (width/2 + 145), 490);
     text("Water + Rice + Shrimp = Shrimp Sushi", (width/2 + 145),510);
