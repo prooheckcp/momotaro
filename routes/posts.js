@@ -3,6 +3,17 @@ const router = express.Router();
 const dbase = require('./../services/database');
 
 
+router.post('/UpdateDishAm', (req, res, next) => {
+
+    const UserInfo = req.body;
+    
+    dbase.query('UPDATE dishes_inventory SET dishes_amount = dishes_amount + ' + UserInfo.amount + ' WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
+
+        if(err){console.log(err)};
+        res.send('DONE!')
+
+    });
+});
 
 
 
