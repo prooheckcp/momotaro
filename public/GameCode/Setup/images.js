@@ -27,6 +27,8 @@ let CircleButtonLogOut;
 let CircleButtonMap;
 let CircleButtonStorage;
 
+let ReturnButtonCook;
+
 let levelStar;
 let MoneyFrame;
 //Decoration Variables\\
@@ -169,4 +171,6 @@ JapanCityFriends = loadImage('/get/image/JapanCityFriends');
 CloseMark = loadImage('/get/image/CloseMarket');
 MarketFrame = loadImage('/get/image/MarketFrame');
 MarketButton = loadImage('/get/image/MarketButton');
+
+ReturnButtonCook = loadImage('/get/image/ReturnButtonCook');
 };
