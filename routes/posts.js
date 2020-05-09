@@ -2,7 +2,32 @@ const express = require('express');
 const router = express.Router();
 const dbase = require('./../services/database');
 
+////////////////////////////////////////////ERROR - res.send([{money : results[0].res_money, level: results[0].res_level, exp: results[0].res_exp}]); ////////////////////////////////////////////
+////////////////////////////////////////////Tem um erro relacionado ao "results[0].res_money", que não identifiquei exatamente, por favor, da uma olhada
+router.post('/NpcPay', (req, res, next) => {
 
+    const UserInfo = req.body;
+    
+    dbase.query('UPDATE restaurant SET res_money = res_money + ' + UserInfo.price + ' WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
+
+        if(err){console.log(err)};
+            res.send('DONE!')
+
+    });
+
+});
+
+router.post('/NpcConsume', (req, res, next) => {
+    const UserInfo = req.body;
+
+    dbase.query('UPDATE dishes_inventory SET dishes_amount = dishes_amount - ' + UserInfo.amount + ' WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
+
+        if(err){console.log(err)};
+            res.send('DONE!')
+
+    });
+
+});
 router.post('/UpdateDishAm', (req, res, next) => {
 
     const UserInfo = req.body;
@@ -10,13 +35,12 @@ router.post('/UpdateDishAm', (req, res, next) => {
     dbase.query('UPDATE dishes_inventory SET dishes_amount = dishes_amount + ' + UserInfo.amount + ' WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
 
         if(err){console.log(err)};
-        res.send('DONE!')
+            res.send('DONE!')
 
     });
 });
 
-
-
+/*
 router.post('/buyDecoration', (req, res, next)=>{
     const UserInfo = req.body;
 
@@ -80,7 +104,7 @@ router.post('/levelUp', (req, res, next) => {
 
 });
 
-
+*/
 router.post('/giveExp', (req, res, next) => {
 
     const UserInfo = req.body;
@@ -112,7 +136,7 @@ router.post('/getRestaurantStats', (req, res, next) =>{
 
     dbase.query('SELECT * FROM restaurant WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
 
-        res.send([{money : results[0].res_money, level: results[0].res_level, exp: results[0].res_exp}]);
+       // res.send([{money : results[0].res_money, level: results[0].res_level, exp: results[0].res_exp}]);
 
     });
 
