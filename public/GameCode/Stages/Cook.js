@@ -51,6 +51,15 @@ const CookDraw = ()=>{
   //receitas
       rect((width/2 + 50),430, 200,240);
 
+      circle((width/2 + 330),630, 90);
+      image(ReturnButtonCook, (width/2 + 300), 600, 60,60);
+
+     if(mouseX > (width/2 + 280) && mouseX < (width/2 + 380) && mouseY > 585 && mouseY < 685){
+        circle((width/2 + 330),630, 100);
+        image(ReturnButtonCook, (width/2 + 298), 595, 70,70); 
+      }
+      
+//////////////
 
     if (wa.x > (width/2 - 320) && wa.x < (width/2 - 230) && wa.y > 300 && wa.y < 390 &&
         eg.x > (width/2 - 160) && eg.x < (width/2 - 70) && eg.y > 300 && eg.y < 390 &&
@@ -138,6 +147,9 @@ const CookMousePressed = () =>{
     ol_oi.clicked();
     br.clicked();
     fl.clicked();
+    if(mouseX > (width/2 + 280) && mouseX < (width/2 + 380) && mouseY > 585 && mouseY < 685){
+        Stage = 'Default';
+    }
 }
 
 
