@@ -154,6 +154,10 @@ router.get('/image/frame', (req, res, next) =>{
     res.sendFile(ImagesPathUI('frame.png'));
 });
 
+router.get('/image/ReturnButtonCook', (req, res, next) =>{
+    res.sendFile(ImagesPathUI('Return_Restaurant.png'));
+});
+
 router.get('/image/floor_tile', (req, res, next) =>{
     res.sendFile(ImagesPathRes('WoodFloorTile.png'));
 });
