@@ -66,3 +66,19 @@ const UpdateDish = () =>{
     UpdateDishAmount();
   });
 };
+
+const NpcPay = amount =>{
+  
+  httpPost('/post/NpcPay', {id : UserID, money: amount}, data =>{
+    NpcGiveMoney();
+  });
+
+};
+
+const NpcConsume = () =>{
+  
+  httpPost('/post/NpcConsume', {id : UserID, dishes: amount}, data =>{
+    NpcConsumeDish();
+  });
+  
+};
