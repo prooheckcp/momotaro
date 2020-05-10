@@ -82,16 +82,25 @@ const UpdateDecorationMarketPlace = () =>{
 
 
 const UpdateIngredientsMarketPlace = () =>{
-  
+
 };
 
-const NpcPay = amount =>{
-  
-  httpPost('/post/NpcPay', {id : UserID, money: amount}, data =>{
-    NpcGiveMoney();
+
+const UpdateIngredientsInventory = () =>{
+  httpPost('/post/getIngredientsInventory', {id: UserID}, data =>{
+
+    let LocalData = eval(data);
+
+    ingredientsInventory = [];
+    for(let LocalIgredients of LocalData){
+
+      ingredientsInventory.push(LocalIgredients);
+    };
+
   });
-
 };
+
+
 
 const NpcConsume = () =>{
   

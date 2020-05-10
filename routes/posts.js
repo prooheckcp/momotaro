@@ -3,15 +3,14 @@ const router = express.Router();
 const dbase = require('./../services/database');
 
 ////////////////////////////////////////////ERROR - res.send([{money : results[0].res_money, level: results[0].res_level, exp: results[0].res_exp}]); ////////////////////////////////////////////
-////////////////////////////////////////////Tem um erro relacionado ao "results[0].res_money", que não identifiquei exatamente, por favor, da uma olhada
-router.post('/NpcPay', (req, res, next) => {
 
+
+router.post('/getIngredientsInventory', (req, res, next) =>{
     const UserInfo = req.body;
-    
-    dbase.query('UPDATE restaurant SET res_money = res_money + ' + UserInfo.price + ' WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
 
-        if(err){console.log(err)};
-            res.send('DONE!')
+    dbase.query('SELECT * FROM momotaro.ingredients_inventory WHERE user_id = ' + UserInfo.id + ';', (err, results, fielnds) =>{
+        
+        res.send(results);
 
     });
 

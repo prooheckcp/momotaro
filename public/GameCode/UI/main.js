@@ -289,17 +289,10 @@ const DrawUI = () =>{
 };
 
 
-const DrawStorageWindow = () =>{
-
-};
-
-const DrawConfigurationWindow = () =>{
-
-};
-
-
 
 const UImousePressed = () =>{
+
+    //The generic button with the 3 dots was pressed
     MainUIbutton.pressed(()=>{UIoptionsOpen = !UIoptionsOpen;});
 
     //Leaderboard
@@ -307,6 +300,8 @@ const UImousePressed = () =>{
         LeaderboardsMousePressed();
     }
 
+
+    //After pressing the 3 dots u get to click on several buttons
     if(UIoptionsOpen){
         //Log u off from the game
         LogOffUIbutton.pressed(()=>{
@@ -316,7 +311,9 @@ const UImousePressed = () =>{
             Stage = '';
         });
         //Go to the cooking menu
-        CookingUIbutton.pressed(() => {Stage = 'Cook'});
+        CookingUIbutton.pressed(() => {Stage = 'Cook';
+            UpdateIngredientsInventory();
+        });
         //Go to the decoration menu
         BuildingUIbutton.pressed(() => {Stage = 'Decoration'});
 
@@ -337,86 +334,6 @@ const UImousePressed = () =>{
     };
 
 };
-
-const UIinfo = message =>{
-    textSize(20);
-    textAlign(CENTER, CENTER);
-    let LocalMessageW = textWidth(message);
-    let LocalBoxSizeW = LocalMessageW + 20;
-    let LocalBoxSizeH = 30;
-
-    let InBounds = mouseX + LocalBoxSizeW + 10 < windowWidth;
-
-    fill(0, 100);
-    if(InBounds){
-        rect(mouseX, mouseY - 35, LocalBoxSizeW, LocalBoxSizeH, 20);
-        BetterText(message, mouseX + LocalBoxSizeW/2, mouseY - 35 + LocalBoxSizeH/2);
-    }else{
-        rect(mouseX - LocalBoxSizeW, mouseY - 35, LocalBoxSizeW, LocalBoxSizeH, 20);
-        BetterText(message, mouseX + LocalBoxSizeW/2 - LocalBoxSizeW, mouseY - 35 + LocalBoxSizeH/2);
-    }
-    fill(255);
-};
-
-
-class MoneyDisplayer{
-    constructor(){
-        this.x = 0;
-        this.y = 0;
-        this.w = 0;
-        this.h = 0;
-    }
-
-    draw(){
-        image(MoneyFrame, this.x, this.y, this.w, this.h);
-        textAlign(CENTER, CENTER);
-        textSize(25)
-
-        let LocalPolishedNumber = numberWithCommas(restaurantStats.money)
-
-        BetterText('' + LocalPolishedNumber + ' ¥', this.x + this.w/2, this.y + this.h/2);
-    }
-}
-
-class XPbar{
-    constructor(){
-        this.x = 0;
-        this.y = 0;
-        this.w = 0;
-        this.h = 0;
-    };
-
-    draw(){
-
-
-
-        //Background of the bar
-        fill(0);  
-        rect(this.x, this.y, this.w, this.h, 10);
-
-        //Fill part
-        fill(186, 7, 222);
-        rect(this.x, this.y, (restaurantStats.exp * this.w)/CalculateRequiredEXP(restaurantStats.level), this.h, 10);
-        fill(255);
-        //Star
-        image(levelStar, this.x - 50, this.y - 50 + this.h/2, 100, 100);
-        textAlign(CENTER, CENTER);
-        textSize(30);
-        BetterText('' + restaurantStats.level + '', this.x, this.y + 7 +this.h/2 );
-
-    };
-
-    
-    hovered(){
-        if(CheckIfMouseInRect(this, mouseX, mouseY)){
-            textSize(28);
-            textAlign(CENTER, CENTER);
-            BetterText('Exp: ' + restaurantStats.exp + '/' + CalculateRequiredEXP(restaurantStats.level), this.x + this.w/2, this.y + this.h/2);
-        };
-    };
-
-};
-
 
 
 

@@ -3,10 +3,18 @@ let ingredientsClasses = []; //The igredients classes with the info
 let dishesClasses = []; //The dishes classes with the info
 
 let ingredientsInventory = []; //The inventory of the player when it comes to ingredients
+let ItemsToBeCrafted = {slot1: '', slot2: '', slot3: ''}; //The currents items within the 3 slots
+
+
+//UI ELEMENTS\\
+let BackToTheRestaurantButton;
+
 
 
 const CookSetUp = () => {
 
+    /*Buttons*/
+    BackToTheRestaurantButton = new NewButton(0, 0, 0, 0, CloseMark);
     /*The ingredients classes*/
     ingredientsClasses.push(new ingredients('tu' /*ID*/, tu_Image/*Image*/, 'Tuna'/*Name*/));
     ingredientsClasses.push(new ingredients('sh' /*ID*/, tu_Image/*Image*/, 'Shrimp'/*Name*/));
@@ -34,21 +42,58 @@ const CookSetUp = () => {
 
 
 const CookDraw = ()=>{
-    //Frame background
+
+    let LocalBackgroundFrameX = windowWidth/2 - 500;
+    let LocalBackgroundFrameY = windowHeight/2 - 300;
+
+
+    //Frame background\\
     background(45);
-    image(LeaderboardsFrame, windowWidth/2 - 500, windowHeight/2 - 300, 1000, 600);
-    image(MarketButton, windowWidth/2 - 500, windowHeight/2 - 375, 200, 75);
+    image(LeaderboardsFrame, LocalBackgroundFrameX, LocalBackgroundFrameY, 1000, 600);
+    image(MarketButton, LocalBackgroundFrameX, LocalBackgroundFrameY - 75, 200, 75);
 
-    textSize(30);
+    textSize(35);
     textAlign(CENTER, CENTER);
-    BetterText('Cooking', windowWidth/2 - 400, windowHeight/2 - 337.5);
+    BetterText('Cooking', LocalBackgroundFrameX + 100, LocalBackgroundFrameY - 37.5);
+    //-----------------\\
 
+
+    //Go back button\\
+    BackToTheRestaurantButton.x = LocalBackgroundFrameX + 940;
+    BackToTheRestaurantButton.y = LocalBackgroundFrameY + 10;
+    BackToTheRestaurantButton.w = 50;
+    BackToTheRestaurantButton.h = 50;
+
+    BackToTheRestaurantButton.hovered(()=>{
+        BackToTheRestaurantButton.x -= 5;
+        BackToTheRestaurantButton.y -= 5;
+        BackToTheRestaurantButton.w += 10;
+        BackToTheRestaurantButton.h += 10;
+        tint(190, 190, 59);
+    })
+
+    BackToTheRestaurantButton.draw();
+    noTint();
+    //---------------\\
+    
+    //Crafting bench\\
+
+    //---------------\\
+
+    //Inventory slots\\
+
+    //----------------\\
 
 }
 
 
-const CookMousePressed = () =>{
 
+
+
+const CookMousePressed = () =>{ 
+    BackToTheRestaurantButton.pressed(()=>{
+        Stage = 'Default';
+    });
 }
 
 const CookMouseReleased = () =>{

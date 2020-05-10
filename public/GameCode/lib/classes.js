@@ -1,30 +1,4 @@
-const CheckIfMouseInRect = (button, mx, my) =>{
-    
-    if (mx > button.x && mx < button.x + button.w && my > button.y && my < button.y + button.h){
-        return true;
-    }else{
-        return false;
-    };
-
-}
-
-const BetterText = (string, x, y) => {
-
-    fill(0);
-    text(string, x + 2, y);
-    text(string, x + 2, y + 2);
-    text(string, x + 2, y - 2);
-    text(string, x - 2, y);
-    text(string, x - 2, y + 2);
-    text(string, x - 2, y - 2);
-    text(string, x, y + 2);
-    text(string, x, y - 2);
-
-    fill(255);
-    text(string, x, y);
-
-}
-
+//A simple button with the generic type of info u need\\
 class NewButton{
 
     constructor(x, y, w, h, image){
@@ -82,6 +56,7 @@ class NewButton{
 
 }
 
+//Food related classes\\
 
 class ingredients {
     /*id, image, name*/
@@ -106,7 +81,7 @@ class dishes {
 
 
 
-
+//The furnitures classes, this includes the interections on the decorating menu
 class NewFurniture {
     constructor(id, image, rep, sizeX, sizeY, price, name){
         this.id = id;
@@ -203,26 +178,63 @@ class NewFurniture {
 
 };
 
-const FilterFurnitureByID = id =>{
-    let LocalResponse = 'N/A';
-    for(let object of furniture){
-        if(id == object.id){
-            LocalResponse =  object;
-        }
-    };
-    return LocalResponse;
-};
 
-const FilterFoodByID = id =>{
-    let LocalResponse = 'N/A';
-    for(let object of ingredientsClasses){
-        if(id == object.id){
-            LocalResponse = object;
+//UI elements for the main part of the game\\
+
+class MoneyDisplayer{
+    constructor(){
+        this.x = 0;
+        this.y = 0;
+        this.w = 0;
+        this.h = 0;
+    }
+
+    draw(){
+        image(MoneyFrame, this.x, this.y, this.w, this.h);
+        textAlign(CENTER, CENTER);
+        textSize(25)
+
+        let LocalPolishedNumber = numberWithCommas(restaurantStats.money)
+
+        BetterText('' + LocalPolishedNumber + ' ¥', this.x + this.w/2, this.y + this.h/2);
+    }
+}
+
+class XPbar{
+    constructor(){
+        this.x = 0;
+        this.y = 0;
+        this.w = 0;
+        this.h = 0;
+    };
+
+    draw(){
+
+
+
+        //Background of the bar
+        fill(0);  
+        rect(this.x, this.y, this.w, this.h, 10);
+
+        //Fill part
+        fill(186, 7, 222);
+        rect(this.x, this.y, (restaurantStats.exp * this.w)/CalculateRequiredEXP(restaurantStats.level), this.h, 10);
+        fill(255);
+        //Star
+        image(levelStar, this.x - 50, this.y - 50 + this.h/2, 100, 100);
+        textAlign(CENTER, CENTER);
+        textSize(30);
+        BetterText('' + restaurantStats.level + '', this.x, this.y + 7 +this.h/2 );
+
+    };
+
+    
+    hovered(){
+        if(CheckIfMouseInRect(this, mouseX, mouseY)){
+            textSize(28);
+            textAlign(CENTER, CENTER);
+            BetterText('Exp: ' + restaurantStats.exp + '/' + CalculateRequiredEXP(restaurantStats.level), this.x + this.w/2, this.y + this.h/2);
         };
     };
+
 };
-
-
-function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
