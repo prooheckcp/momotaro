@@ -5,6 +5,7 @@ let dishesClasses = []; //The dishes classes with the info
 let ingredientsInventory = []; //The inventory of the player when it comes to ingredients
 let ItemsToBeCrafted = {slot1: '', slot2: '', slot3: ''}; //The currents items within the 3 slots
 
+let CurrentPageInCooking = 0;
 
 //UI ELEMENTS\\
 let BackToTheRestaurantButton;
@@ -81,6 +82,26 @@ const CookDraw = ()=>{
     //---------------\\
 
     //Inventory slots\\
+
+    //Background of the items displayer
+    fill(0, 50);
+    rect(LocalBackgroundFrameX + 112.5, LocalBackgroundFrameY + 450, 775, 125);
+
+    //Slots with each ingredient on your inventory
+    for(let i = 0 + (CurrentPageInCooking * 6); i < 6 * (CurrentPageInCooking + 1) - (ingredientsInventory.length/(CurrentPageInCooking + 1)) ; i++){
+        
+        //Local variables of each slot
+        let LocalSlotX = LocalBackgroundFrameX + 137.5 + (i * 125);
+        let LocalSlotY = LocalBackgroundFrameY + 462.5;
+
+        //Squared background of the ingredient
+        rect(LocalSlotX, LocalSlotY, 100, 100);
+        let LocalIngredientInfo = FilterIngredientsByID(ingredientsInventory[i].ingredient_id);
+        
+        //Image of them igredient
+        image(LocalIngredientInfo.image, LocalSlotX, LocalSlotY, 100, 100)
+        //image(LocalIngredientInfo.image, LocalBackgroundFrameX + 137.5 + (i * 125), LocalBackgroundFrameY + 462.5, 100, 100)
+    };
 
     //----------------\\
 
