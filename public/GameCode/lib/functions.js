@@ -10,14 +10,16 @@ const FilterFurnitureByID = id =>{
 };
 
 
-//Filter the Food classes table by id
-const FilterFoodByID = id =>{
+//Filter the Ingredients classes table by id
+const FilterIngredientsByID = id =>{
     let LocalResponse = 'N/A';
     for(let object of ingredientsClasses){
         if(id == object.id){
             LocalResponse = object;
         };
     };
+
+    return LocalResponse;
 };
 
 //A small message displayed near your mouse
