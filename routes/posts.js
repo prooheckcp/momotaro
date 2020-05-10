@@ -40,7 +40,7 @@ router.post('/UpdateDishAm', (req, res, next) => {
     });
 });
 
-/*
+
 router.post('/buyDecoration', (req, res, next)=>{
     const UserInfo = req.body;
 
@@ -104,7 +104,7 @@ router.post('/levelUp', (req, res, next) => {
 
 });
 
-*/
+
 router.post('/giveExp', (req, res, next) => {
 
     const UserInfo = req.body;
@@ -136,7 +136,7 @@ router.post('/getRestaurantStats', (req, res, next) =>{
 
     dbase.query('SELECT * FROM restaurant WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
 
-       // res.send([{money : results[0].res_money, level: results[0].res_level, exp: results[0].res_exp}]);
+        res.send([{money : results[0].res_money, level: results[0].res_level, exp: results[0].res_exp}]);
 
     });
 
