@@ -67,6 +67,24 @@ const UpdateDish = () =>{
   });
 };
 
+
+const UpdateDecorationMarketPlace = () =>{
+  loadJSON('/get/DecorationMarket' , data =>{
+
+      //Reset the array
+      DecorationList = [];
+
+      for(let item of data){
+          DecorationList.push(item);
+      };
+  });
+};
+
+
+const UpdateIngredientsMarketPlace = () =>{
+  
+};
+
 const NpcPay = amount =>{
   
   httpPost('/post/NpcPay', {id : UserID, money: amount}, data =>{

@@ -84,196 +84,27 @@ class NewButton{
 
 
 class ingredients {
-    /*na = name, PosX = X, PosY = Y, w = width, h = heigth, pr = price, wa = way of the image; */
-    constructor(n,posX, posY, w, h, pr, wa, co) {
-        this.n = n;
-        this.x = (width/2 + posX); 
-        this.y = posY;
-        this.w = w;
-        this.h = h;
-        this.pr = pr;
-        this.wa = wa;
-        this.co = 255;
-        this.BeingHold = false;
-        this.MouseDistance = {posX, posY};
-
-    }
-    clicked(){  
-        if (CheckIfMouseInRect(this, mouseX, mouseY)) {
-            this.BeingHold = true;
-            this.MouseDistance = {x: mouseX - (this.x + this.w/2),y: mouseY - (this.y + this.h/2)};
-        } 
-    }
-    
-    rele(){
-            this.BeingHold = false;
-    }
-    
-    show(){
-
-    if(this.BeingHold){
-        this.co = 0;
-        let SquareMiddleX = mouseX - (this.w/2) - this.MouseDistance.x;
-        let SquareMiddleY = mouseY - (this.h/2) - this.MouseDistance.y;
-
-        if(windowWidth > SquareMiddleX + this.w && SquareMiddleX > 0){
-        this.x = mouseX - (this.w/2) - this.MouseDistance.x;
-        }else if(SquareMiddleX <= 0){
-            this.x = 0;
-        }else if(windowWidth < SquareMiddleX + this.w){
-            this.x = windowWidth - this.w;
-        }
-
-        if(windowHeight > SquareMiddleY + this.h && SquareMiddleY > 0){
-            this.y = mouseY - (this.h/2) - this.MouseDistance.y;
-        }else if (SquareMiddleY <= 0){
-            this.y = 0;
-        }else if (windowHeight < SquareMiddleY + this.h){
-            this.y = windowHeight - this.h;
-        }
-
-    }else{
-        this.co = 255;
-    }
-
-
-
-    if(this.y > 420 && this.y < 680 && this.x > 226 && this.x < 1000){
-        textAlign(CENTER, CENTER);
-        fill(0);
-        textSize(12);
-        text(this.pr + "¥", this.x + 32, this.y + this.h + 10)
-    }
-
-    fill(this.co)
-    rect(this.x, this.y, this.w, this.h);
-    
-    textAlign(CENTER, CENTER);
-    fill(0);
-    textSize(12);
-    text(this.n,this.x + 32, this.y + 32);
-    
+    /*id, image, name*/
+    constructor( id, image, name) {
+        this.id = id;
+        this.image = image;
+        this.name = name;
     }
 };
    
-class food { 
-    constructor(n,recipe1,recipe2,recipe3, pr, wa) {
-        this.n = n;
-        this.recipe1 = recipe1;
-        this.recipe2 = recipe2;
-        this.recipe3 = recipe3;
-        this.pr = pr;
-        this.wa = wa;
-    }
-
-
-    show(){
-        fill(0); 
-        rect((width/2 + 170), 205, 64, 64);
-    
-        textAlign(CENTER, CENTER);
-        fill(0);
-        textSize(12);
-        text(this.n,(width/2 + 200), 279);
-    }
-}
-
-
-class DecorationMarketClass{
-
-    constructor(id, price){
+class dishes {
+    /*id, image, name, recipes*/
+    constructor(id, image, name, recipes){
         this.id = id;
-        this.price = price;
-        this.x = 0;
-        this.y = 0;
-        this.w = 0;
-        this.h = 0;
+        this.image = image;
+        this.name = name;
+        this.recipes = recipes;
     };
-
-    draw(){
-
-    };
-
-    pressed(){
-
-    };
-
 
 
 };
 
- class dec{
-     /*na = name,PosX = X, PosY = Y, w = width, h = heigth, rep = reputation value, pr = price, wa = way of the image; */
-    constructor(n,posX, posY, w, h, rep, pr, wa, co){
-     this.n = n;
-     this.x = (width/2 + posX); 
-     this.y = posY;
-     this.w = w;
-     this.h = h;
-     this.rep = rep;
-     this.pr = pr;
-     this.wa = wa;
-     this.co = 255;
-     this.BeingHold = false;
-     this.MouseDistance = {posX, posY};
-    }
-    
-    clicked(){  
-        if (CheckIfMouseInRect(this, mouseX, mouseY)) {
-            this.BeingHold = true;
-            this.MouseDistance = {x: mouseX - (this.x + this.w/2),y: mouseY - (this.y + this.h/2)};
-        } 
-    }
-    
-    rele(){
-            this.BeingHold = false;
-    }
-    
-    show(){
 
-    if(this.BeingHold){
-        this.co = 0;
-        let SquareMiddleX = mouseX - (this.w/2) - this.MouseDistance.x;
-        let SquareMiddleY = mouseY - (this.h/2) - this.MouseDistance.y;
-
-        if(windowWidth > SquareMiddleX + this.w && SquareMiddleX > 0){
-        this.x = mouseX - (this.w/2) - this.MouseDistance.x;
-        }else if(SquareMiddleX <= 0){
-            this.x = 0;
-        }else if(windowWidth < SquareMiddleX + this.w){
-            this.x = windowWidth - this.w;
-        }
-
-        if(windowHeight > SquareMiddleY + this.h && SquareMiddleY > 0){
-            this.y = mouseY - (this.h/2) - this.MouseDistance.y;
-        }else if (SquareMiddleY <= 0){
-            this.y = 0;
-        }else if (windowHeight < SquareMiddleY + this.h){
-            this.y = windowHeight - this.h;
-        }
-
-    }else{
-        this.co = 255;
-    }
-
-    if(this.y == 700){
-        textAlign(CENTER, CENTER);
-        fill(0);
-        textSize(12);
-        text(this.pr + "¥", this.x + 32, this.y + this.h + 10)
-        text(this.rep, this.x + 32, this.y + this.h + 20)
-    }
-
-    fill(this.co)
-    rect(this.x, this.y, this.w, this.h);
-    
-    textAlign(CENTER, CENTER);
-    fill(0);
-    textSize(12);
-    text(this.n,this.x + 32, this.y + 32);
-    
-    }
-};
 
 
 class NewFurniture {
@@ -380,6 +211,15 @@ const FilterFurnitureByID = id =>{
         }
     };
     return LocalResponse;
+};
+
+const FilterFoodByID = id =>{
+    let LocalResponse = 'N/A';
+    for(let object of ingredientsClasses){
+        if(id == object.id){
+            LocalResponse = object;
+        };
+    };
 };
 
 

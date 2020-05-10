@@ -3,8 +3,8 @@
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
 
 /////////////////////Arrays\\\\\\\\\\\\\\\\\\\\\
-let DecorationList = [];
-let LastSelectedDecoration = {};
+let DecorationList = []; //The list of items 
+let LastSelectedDecoration = {}; //The last decoration item that you hovered
 
 
 let IgredientsList = [];
@@ -329,15 +329,7 @@ const UImapMousePressed = () =>{
             //Update the shop items
 
             //Update the decoration
-            loadJSON('/get/DecorationMarket' , data =>{
-
-                //Reset the array
-                DecorationList = [];
-
-                for(let item of data){
-                    DecorationList.push(item);
-                };
-            });
+            UpdateDecorationMarketPlace();
         });
     }else{
         if(MarketWindowSection){
