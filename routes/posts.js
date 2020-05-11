@@ -5,6 +5,19 @@ const dbase = require('./../services/database');
 ////////////////////////////////////////////ERROR - res.send([{money : results[0].res_money, level: results[0].res_level, exp: results[0].res_exp}]); ////////////////////////////////////////////
 
 
+//Get the recipes inventory
+
+router.post('/getRecipesInventory', (req, res, next) => {
+    const UserInfo = req.body;
+
+    dbase.query('SELECT * FROM recipes_inventory WHERE user_id = ' + UserInfo.userID + ';', (err, results, fields) =>{
+        if(err){console.log(err)};
+
+        res.send(results);
+    });
+
+});
+
 
 //Get the recipes types
 
@@ -47,9 +60,56 @@ router.post('/CreateNewDish', (req, res, next) => {
 
     const UserInfo = req.body;
 
-    console.log(UserInfo);
+    console.log('I was called')
 
-})
+    dbase.query('SELECT * FROM ingredients_inventory WHERE user_id = ' + UserInfo.userID + ';', (err, results, fields) =>{
+        
+        if(err){console.log(err)};
+
+        let QueryWorked = false;
+        for(let slot in UserInfo.ingredients){
+            for(let row of results){
+            
+            
+                if(row.ingredient_id == UserInfo.ingredients[slot]){
+
+                    //If an ingredient exists then it will decrease it
+                    if(row.ingredient_amount > 0){
+                        dbase.query('UPDATE ingredients_inventory SET ingredient_amount = ingredient_amount - 1 WHERE ingredient_id = "' + row.ingredient_id + '" AND user_id = ' + UserInfo.userID + ';', (err, results, fields) =>{
+                            if(err){console.log(err)};
+                            QueryWorked = true;
+                        });
+                    }else{
+                        res.send('ERROR: there are not enough ingredients');
+                    }
+                }
+
+            };
+        };
+
+
+        dbase.query('SELECT * FROM dishes_inventory WHERE user_id = ' + UserInfo.userID + ' AND dish_id = "br_om";', (err, results, fields) =>{
+            if(err){console.log(err)};
+
+            if(results[0] == undefined){
+                dbase.query('INSERT INTO dishes_inventory(user_id, dishes_amount, dish_id) VALUES(' + UserInfo.userID + ', 1, "' + UserInfo.dishID + '");', (err, results, fields) =>{
+                    if(err){console.log(err)};
+                    res.send('Added a new dish!');
+                });
+            }else{
+                let InfoFromAmountOfDishes = results[0].dishes_amount + 1;
+                dbase.query('UPDATE dishes_inventory SET dishes_amount = dishes_amount + 1 WHERE user_id = ' + UserInfo.userID + ' AND dish_id = "' + UserInfo.dishID + '";', (err, results, fields) =>{
+                    res.send('You now have ' + InfoFromAmountOfDishes + ' of this kind!');
+                });
+            }
+
+        });
+    
+
+    });
+
+
+});
 
 
 router.post('/buyDecoration', (req, res, next)=>{

@@ -112,6 +112,17 @@ const UpdateIngredientsInventory = () =>{
 
   });
 
+  httpPost('/post/getRecipesInventory', {userID: UserID}, data =>{
+
+    let LocalData = eval(data);
+    recipesInventory = [];
+
+    for(let recipe of LocalData){
+      recipesInventory.push(recipe);
+    }
+
+  });
+
 };
 
 const GetDishLevel = dish_id =>{

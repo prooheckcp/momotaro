@@ -4,6 +4,8 @@ let dishesClasses = []; //The dishes classes with the info
 let dishesLevels = []; //The level each recipe requires
 
 let ingredientsInventory = []; //The inventory of the player when it comes to ingredients
+let recipesInventory = []; //The inventory of the player when it comes to recipes
+
 let ItemsToBeCrafted = {slot1: '', slot2: '', slot3: ''}; //The currents items within the 3 slots
 
 let CurrentPageInCooking = 0;
@@ -247,12 +249,30 @@ const CookMousePressed = () =>{
                 let LocalDishToBeCooked = CheckIfAdishIsFullFilled();
 
                 if(LocalDishToBeCooked != undefined){
+
+                    let TheUserHasTheRecipe = false;
+
+                    for(let recipe of recipesInventory){
+                        if(LocalDishToBeCooked.id == recipe.dish_id){
+                            TheUserHasTheRecipe = true;
+                        };
+                    };
+
                     if(restaurantStats.level < GetDishLevel(LocalDishToBeCooked.id)){
                         alert('Your level is too low!');
+                    }else if(!TheUserHasTheRecipe){
+                        alert('You do not own the correct recipe!');
                     }else{
-                        //Collect the cooked item
-                        httpPost('/post/CreateNewDish', {dishID: LocalDishToBeCooked.id, userID: UserID, ingredients: ItemsToBeCrafted}, data =>{
+                        let LocalItemsToBeCrafted = {slot1: ItemsToBeCrafted.slot1, slot2: ItemsToBeCrafted.slot2, slot3: ItemsToBeCrafted.slot3};
+                        
+                        ItemsToBeCrafted.slot1 = '';
+                        ItemsToBeCrafted.slot2 = '';
+                        ItemsToBeCrafted.slot3 = '';
 
+                        //Collect the cooked item
+                        httpPost('/post/CreateNewDish', {dishID: LocalDishToBeCooked.id, userID: UserID, ingredients: LocalItemsToBeCrafted}, data =>{
+                            alert(data);
+                            UpdateIngredientsInventory();
                         });
                     }
                 }
@@ -269,6 +289,7 @@ const CookMousePressed = () =>{
         //The positions of the frames
         let LocalBackgroundFrameX = windowWidth/2 - 500;
         let LocalBackgroundFrameY = windowHeight/2 - 300;
+
 
         if(i < ingredientsInventory.length){
             //Local variables of each slot

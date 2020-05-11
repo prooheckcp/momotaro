@@ -90,7 +90,12 @@ class ingredients {
             rect(this.x, this.y, this.w, this.h);
             
             //Image of them igredient
-            image(this.image, this.x, this.y, this.w, this.h)
+            image(this.image, this.x, this.y, this.w, this.h);
+
+            //Black it out if doesnt have any more on its amount
+            if(this.amount <= 0){
+                rect(this.x, this.y, this.w, this.h); 
+            }
 
             //The amount of each item which you own
             textAlign(RIGHT, BOTTOM);
