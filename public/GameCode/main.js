@@ -33,7 +33,6 @@ function windowResized() {
 
 function mousePressed(){
   
-  clickingSound.play();
     //If the user isnt logged in yet then check
     if(!Logged){
 
