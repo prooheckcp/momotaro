@@ -60,7 +60,6 @@ router.post('/CreateNewDish', (req, res, next) => {
 
     const UserInfo = req.body;
 
-    console.log('I was called')
 
     dbase.query('SELECT * FROM ingredients_inventory WHERE user_id = ' + UserInfo.userID + ';', (err, results, fields) =>{
         
