@@ -105,6 +105,18 @@ class ingredients {
 
     hoveredSlot(){
 
+        if(CheckIfMouseInRect(this, mouseX, mouseY)){
+            
+            //Frame displaying information about this item
+            fill(0, 120);
+            rect(mouseX, mouseY, 200, 100, 20);
+            textAlign(CENTER, TOP);
+            textSize(35);
+            BetterText(''+ this.name +'', mouseX + 100, mouseY + 10)
+            textSize(20);
+            textAlign(LEFT, TOP);
+            BetterText('Amount: '+ this.amount +'', mouseX + 10, mouseY + 60)
+        };
     };
 
     ClickedSlot(){
@@ -159,8 +171,22 @@ class dishes {
         this.image = image;
         this.name = name;
         this.recipes = recipes;
+        
+        
     };
 
+    hoveredSlot(x, y){
+
+        if(mouseX > x && mouseX < x + 100 && mouseY > y && mouseY < y + 100){
+            
+            //Frame displaying information about this item
+            fill(0, 120);
+            rect(mouseX + 20, mouseY, textWidth(this.name), 50, 20);
+            textAlign(CENTER, TOP);
+            textSize(35);
+            BetterText(''+ this.name +'', 20 + mouseX + textWidth(this.name)/2, mouseY + 10)
+        };
+    };
 
 };
 

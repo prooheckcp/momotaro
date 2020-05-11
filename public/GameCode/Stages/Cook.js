@@ -39,7 +39,7 @@ const CookSetUp = () => {
     /*The dishes classes*/
     /*id, image, name, recipes (write the id of each igredient)*/
     dishesClasses.push(new dishes('no' /*id*/, noo_Image /* image*/, 'Noodles' /*Name*/, {ingredient1: 'wa', ingredient2: 'pa', ingredient3: 'ol_oi'} /*Recipes*/));  
-    dishesClasses.push(new dishes('br_om' /*id*/, bre_ome_Image /* image*/, 'Bread Omelete' /*Name*/, {ingredient1: 'wa', ingredient2: 'pa', ingredient3: 'ol_oi'} /*Recipes*/));  
+    dishesClasses.push(new dishes('br_om' /*id*/, bre_ome_Image /* image*/, 'Bread Omelete' /*Name*/, {ingredient1: 'eg', ingredient2: 'br', ingredient3: ''} /*Recipes*/));  
     dishesClasses.push(new dishes('tu_su' /*id*/, tun_sus_Image /* image*/, 'Tuna Sushi' /*Name*/, {ingredient1: 'wa', ingredient2: 'pa', ingredient3: 'ol_oi'} /*Recipes*/));  
     dishesClasses.push(new dishes('sh_su' /*id*/, shi_sus_Image /* image*/, 'Shimp Sushi' /*Name*/, {ingredient1: 'wa', ingredient2: 'pa', ingredient3: 'ol_oi'} /*Recipes*/));  
     dishesClasses.push(new dishes('ch_ca' /*id*/, cho_cak_Image /* image*/, 'Chocolate Cake' /*Name*/, {ingredient1: 'wa', ingredient2: 'pa', ingredient3: 'ol_oi'} /*Recipes*/));  
@@ -66,6 +66,35 @@ const CookDraw = ()=>{
     //-----------------\\
 
 
+ //Arrow Buttons\\
+
+    //Right Arrow
+    if((CurrentPageInCooking + 1) * 6 < ingredientsInventory.length){
+
+        CookingRightArrow.x = LocalBackgroundFrameX + 918.75;
+        CookingRightArrow.y = LocalBackgroundFrameY + 462.5;
+        CookingRightArrow.w = 50;
+        CookingRightArrow.h = 100;
+        CookingRightArrow.hovered(() => {tint(125, 123, 0);});
+
+        CookingRightArrow.draw();
+        noTint();
+    }
+
+    //Left arrow
+    if(CurrentPageInCooking > 0){
+
+        CookingLeftArrow.x = LocalBackgroundFrameX + 31.25;
+        CookingLeftArrow.y = LocalBackgroundFrameY + 462.5;
+        CookingLeftArrow.w = 50;
+        CookingLeftArrow.h = 100;
+        CookingLeftArrow.hovered(() => {tint(125, 123, 0);})
+
+        CookingLeftArrow.draw(); 
+        noTint();
+    }
+    //--------------\\
+
     //Go back button\\
     BackToTheRestaurantButton.x = LocalBackgroundFrameX + 940;
     BackToTheRestaurantButton.y = LocalBackgroundFrameY + 10;
@@ -85,6 +114,7 @@ const CookDraw = ()=>{
     //---------------\\
     
     //Crafting bench\\
+
 
     for(let i = 0; i < 4; i++){
 
@@ -108,13 +138,29 @@ const CookDraw = ()=>{
         if(i == 0 && typeof(ItemsToBeCrafted.slot1) == typeof('string') && ItemsToBeCrafted.slot1 != ''){
             //Hovering the first slot
             image(FilterIngredientsByID(ItemsToBeCrafted.slot1).image, LocalSquareX, LocalSquareY + 100, 100, 100);
+            FilterIngredientsByID(ItemsToBeCrafted.slot1).x = LocalSquareX;
+            FilterIngredientsByID(ItemsToBeCrafted.slot1).y = LocalSquareY + 100;
+            FilterIngredientsByID(ItemsToBeCrafted.slot1).hoveredSlot();
         }else if(i == 1 && typeof(ItemsToBeCrafted.slot2) == typeof('string') && ItemsToBeCrafted.slot2 != ''){
             //Hovering the second slot
             image(FilterIngredientsByID(ItemsToBeCrafted.slot2).image, LocalSquareX, LocalSquareY + 100, 100, 100);
+            FilterIngredientsByID(ItemsToBeCrafted.slot2).x = LocalSquareX;
+            FilterIngredientsByID(ItemsToBeCrafted.slot2).y = LocalSquareY + 100;
+            FilterIngredientsByID(ItemsToBeCrafted.slot2).hoveredSlot();
         }else if(i == 2 && typeof(ItemsToBeCrafted.slot3) == typeof('string') && ItemsToBeCrafted.slot3 != ''){
             //Hover the third slot
             image(FilterIngredientsByID(ItemsToBeCrafted.slot3).image, LocalSquareX, LocalSquareY + 100, 100, 100);
-        }
+            FilterIngredientsByID(ItemsToBeCrafted.slot3).x = LocalSquareX;
+            FilterIngredientsByID(ItemsToBeCrafted.slot3).y = LocalSquareY + 100;
+            FilterIngredientsByID(ItemsToBeCrafted.slot3).hoveredSlot();
+        }else if(i == 3){
+            //Check if there is a plate ready to be collected
+            let LocalDishToBeCooked = CheckIfAdishIsFullFilled();
+            if(LocalDishToBeCooked != undefined){
+                image(LocalDishToBeCooked.image, LocalSquareX, LocalSquareY + 100, 100, 100);
+                LocalDishToBeCooked.hoveredSlot(LocalSquareX, LocalSquareY + 100);
+            }
+        };
 
     }
 
@@ -145,43 +191,20 @@ const CookDraw = ()=>{
             LocalIngredientInfo.amount = ingredientsInventory[i].ingredient_amount;
 
             LocalIngredientInfo.drawSlot();
+        };
+    };
 
-            //In case the mouse is hover the ingredient
+    //Slots with each ingredient on your inventory hovered version
+    for(let i = (CurrentPageInCooking * 6); i < (CurrentPageInCooking + 1) * 6  ; i++){
+        
+        if(i < ingredientsInventory.length){
+            let LocalIngredientInfo = FilterIngredientsByID(ingredientsInventory[i].ingredient_id); 
+            //Hovered a slot
             LocalIngredientInfo.hoveredSlot();
         };
     };
 
     //----------------\\
-
-
-    //Arrow Buttons\\
-
-    //Right Arrow
-    if((CurrentPageInCooking + 1) * 6 < ingredientsInventory.length){
-
-        CookingRightArrow.x = LocalBackgroundFrameX + 918.75;
-        CookingRightArrow.y = LocalBackgroundFrameY + 462.5;
-        CookingRightArrow.w = 50;
-        CookingRightArrow.h = 100;
-        CookingRightArrow.hovered(() => {tint(125, 123, 0);});
-
-        CookingRightArrow.draw();
-        noTint();
-    }
-
-    //Left arrow
-    if(CurrentPageInCooking > 0){
-
-        CookingLeftArrow.x = LocalBackgroundFrameX + 31.25;
-        CookingLeftArrow.y = LocalBackgroundFrameY + 462.5;
-        CookingLeftArrow.w = 50;
-        CookingLeftArrow.h = 100;
-        CookingLeftArrow.hovered(() => {tint(125, 123, 0);})
-
-        CookingLeftArrow.draw(); 
-        noTint();
-    }
-    //--------------\\
 
 }
 
@@ -190,6 +213,27 @@ const CookDraw = ()=>{
 
 
 const CookMousePressed = () =>{ 
+
+    //Pressed one of the crafting place slots
+    for(let i = 0; i < 4; i++){
+
+        //Variables\\
+        let LocalBackgroundFrameX = windowWidth/2 - 500;
+        let LocalBackgroundFrameY = windowHeight/2 - 300;
+        let LocalSquareX = LocalBackgroundFrameX + 150 + 200 * i;
+        let LocalSquareY = LocalBackgroundFrameY;
+
+        if(mouseX > LocalSquareX && mouseY > LocalSquareY && mouseX < LocalSquareX + 100 && mouseY < LocalSquareY + 200){
+            if(i == 0){
+                ItemsToBeCrafted.slot1 = '';
+            }else if(i == 1){
+                ItemsToBeCrafted.slot2 = '';
+            }else if(i == 2){
+                ItemsToBeCrafted.slot3 = '';
+            }
+        };
+
+    };
 
 
     //Pressed one of the slots
@@ -248,3 +292,34 @@ const CookMouseReleased = () =>{
 
 
 }
+
+
+const CheckIfAdishIsFullFilled = () =>{
+
+    //Check all the dishes classes
+    for(let Dish of dishesClasses){
+        let LocalFormula = [];
+        let LocalRecipes = Dish.recipes;
+        LocalFormula.push(LocalRecipes.ingredient1);
+        LocalFormula.push(LocalRecipes.ingredient2);
+        LocalFormula.push(LocalRecipes.ingredient3);
+
+        let CountOfEquals = 0;
+        //Check the current igredients
+        for(let ingredient of LocalFormula){
+            if(ItemsToBeCrafted.slot1 == ingredient){
+                CountOfEquals++;
+            }else if(ItemsToBeCrafted.slot2 == ingredient){
+                CountOfEquals++;
+            }else if(ItemsToBeCrafted.slot3 == ingredient){
+                CountOfEquals++;
+            }
+
+        }
+
+        if(CountOfEquals >= 3){
+            return(Dish);
+        }
+
+    }
+};
