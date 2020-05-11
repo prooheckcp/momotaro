@@ -25,8 +25,16 @@ router.get('/top50players', (req, res, next) =>{
 
 });
 
-//Get the dec_market
+//Get the ingredient_market
+router.get('/IngredientMarket', (req, res, next) =>{
 
+    dbase.query('SELECT * FROM ingredients_market;', (err, results, fields) =>{
+        res.send(results);
+    });
+
+});
+
+//Get the dec_market
 router.get('/DecorationMarket', (req, res, next) =>{
     
     dbase.query('SELECT * FROM dec_market ORDER BY item_price;', (err, results, fields) =>{

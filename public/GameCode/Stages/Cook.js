@@ -1,7 +1,10 @@
 //Variables\\
 let ingredientsClasses = []; //The igredients classes with the info
+let ingredientsList = []; //A list of all the ingredients within the marketplace
+
 let dishesClasses = []; //The dishes classes with the info
 let dishesLevels = []; //The level each recipe requires
+
 
 let ingredientsInventory = []; //The inventory of the player when it comes to ingredients
 let recipesInventory = []; //The inventory of the player when it comes to recipes

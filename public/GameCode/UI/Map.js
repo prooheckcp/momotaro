@@ -97,6 +97,7 @@ const UImapMousePressed = () =>{
 
             //Update the decoration
             UpdateDecorationMarketPlace();
+            UpdateIngredientsMarketPlace();
         });
     }else{
         if(MarketWindowSection){
@@ -137,9 +138,47 @@ const UImapMousePressed = () =>{
                 MarketDecorationPurchaseAmount--}
             });
         }else{
+
             //Ingrediants part
+            if(MarketWindowIngredientsPage > 0){
+                //left arrow
+                MarketWindowIngredientsLeftArrow.pressed(()=>{MarketWindowIngredientsPage--});
+            };
+
+            if(IgredientsList.length > (MarketWindowIngredientsPage + 1) * 6){
+                //Right arrow
+                MarketWindowIngredientsRightArrow.pressed(()=>{MarketWindowIngredientsPage++});  
+            };
+
+
+            if(LastSelectedIngredient.ingredient_id != null){
+
+                MarketIngredientPurchaseButton.pressed(()=>{
+                    if(MarketIngredientPurchaseAmount <= 0){
+                        alert('You need to select at least 1!');
+                    }else{
+                        httpPost('/post/buyIngredient', {amount: MarketIngredientPurchaseAmount, price: LastSelectedIngredient.ingredient_price * MarketIngredientPurchaseAmount, id: UserID, itemid: LastSelectedIngredient.ingredient_id}, data =>{
+                            
+                            alert(data);
+
+                            UpdateRestaurantStats();
+                            UpdateInventoryRequest();
+                            UpdateIngredientsInventory();
+                        });
+                    };
+                });
+            };
+            
+            //Add and sub the amount
+            MarketIngredientPurchaseAdd.pressed(()=>{MarketIngredientPurchaseAmount++});
+            MarketIngredientPurchaseSub.pressed(() =>{
+                if(MarketIngredientPurchaseAmount > 0){MarketIngredientPurchaseAmount--}
+            });
         };
 
+
+
+        //Main buttons
         CloseTheMarketButton.pressed(()=>{MarketWindow = false})
         MarketButtonIngredients.pressed(()=>{MarketWindowSection = false;});
         MarketButtonDecoration.pressed(()=>{MarketWindowSection = true;});

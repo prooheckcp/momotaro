@@ -5,6 +5,53 @@ const dbase = require('./../services/database');
 ////////////////////////////////////////////ERROR - res.send([{money : results[0].res_money, level: results[0].res_level, exp: results[0].res_exp}]); ////////////////////////////////////////////
 
 
+
+//Buy ingredient
+
+router.post('/buyIngredient', (req, res, next) =>{
+    const UserInfo = req.body;
+
+    console.log(UserInfo);
+
+    dbase.query('SELECT res_money FROM restaurant WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
+        if(err){console.log(err)};
+        if(results[0].res_money < UserInfo.price){
+            res.send('Error: Not enough money')
+        }else{
+
+            dbase.query('SELECT * FROM ingredients_inventory WHERE user_id = ' + UserInfo.id + ' AND ingredient_id = "' + UserInfo.itemid + '";', (err, results, fields) =>{
+                if(err){console.log(err)};
+
+                if(results[0] != undefined){
+
+                    //Increase the amount
+                    dbase.query('UPDATE ingredients_inventory SET ingredient_amount = ingredient_amount + '+UserInfo.amount+' WHERE user_id = '+UserInfo.id+' AND ingredient_id = "'+UserInfo.itemid+'" ;', (err, results, fields) =>{
+                        if(err){console.log(err)};
+                        //Decrease the cash
+                        dbase.query('UPDATE restaurant SET res_money = res_money - ' + UserInfo.price + ' WHERE user_id = '+UserInfo.id+';')
+                        res.send('A new item was added');
+                    });
+
+                }else{
+                    //There was no item before
+                    dbase.query('INSERT INTO ingredients_inventory (user_id, ingredient_id, ingredient_amount) VALUES ('+UserInfo.id+', "'+UserInfo.itemid+'", '+UserInfo.amount+');', (err, results, fields) =>{
+                        if(err){console.log(err)};
+                        //Decrease the cash
+                        dbase.query('UPDATE restaurant SET res_money = res_money - ' + UserInfo.price + ' WHERE user_id = '+UserInfo.id+';')
+                        res.send('A new item was added');
+                    });
+                };
+
+
+
+
+            });
+
+        }
+    });
+});
+
+
 //Get the recipes inventory
 
 router.post('/getRecipesInventory', (req, res, next) => {

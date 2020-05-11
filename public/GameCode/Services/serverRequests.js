@@ -82,7 +82,15 @@ const UpdateDecorationMarketPlace = () =>{
 
 
 const UpdateIngredientsMarketPlace = () =>{
+  loadJSON('/get/IngredientMarket', data =>{
+    
+    IgredientsList = [];
 
+    for(let ingredient of data){
+      IgredientsList.push(ingredient);
+    };
+
+  });
 };
 
 

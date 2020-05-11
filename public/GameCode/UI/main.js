@@ -42,15 +42,9 @@ const setupUI = () =>{
     setupLeaderboard();
     //////////////////
 
-    MarketDecorationPurchaseButton = new NewButton(0, 0, 0, 0);
-    MarketDecorationPurchaseAdd = new NewButton(0, 0, 0, 0);
-    MarketDecorationPurchaseSub = new NewButton(0, 0, 0, 0);
-    MarketWindowDecorationLeftArrow = new NewButton(0, 0, 0, 0, LeftYellowArrow);
-    MarketWindowDecorationRightArrow = new NewButton(0, 0, 0, 0, RightYellowArrow);
+    //Calling the setup of the market
+    setupMarketUI();
 
-
-    MarketWindowIngredientsLeftArrow = new NewButton(0, 0, 0, 0, LeftYellowArrow);
-    MarketWindowIngredientsRightArrow = new NewButton(0, 0, 0, 0, RightYellowArrow);
     //Map buttons
     CloseTheMarketButton = new NewButton(0, 0, 0, 0, CloseMark);
     JapanCityFriendsButton = new NewButton(0, 0, 0, 0, JapanCityFriends);

@@ -10,12 +10,14 @@ let LastSelectedIngredient = {};
 //Ingredients SECTION\\
 
 //Variables
+let MarketIngredientPurchaseAmount = 0;
 let MarketWindowIngredientsPage = 0;
-
 //Buttons
 let MarketWindowIngredientsLeftArrow;
 let MarketWindowIngredientsRightArrow;
-
+let MarketIngredientPurchaseAdd;
+let MarketIngredientPurchaseSub;
+let MarketIngredientPurchaseButton;
 //--------------------\\
 
 
@@ -38,6 +40,24 @@ let MarketButtonDecoration;
 let MarketButtonIngredients;
 let CloseTheMarketButton;
 //---------------\\
+
+const setupMarketUI = () =>{
+
+    //Decoration UI
+    MarketDecorationPurchaseButton = new NewButton(0, 0, 0, 0);
+    MarketDecorationPurchaseAdd = new NewButton(0, 0, 0, 0);
+    MarketDecorationPurchaseSub = new NewButton(0, 0, 0, 0);
+    MarketIngredientPurchaseSub = new NewButton(0, 0, 0, 0);
+    MarketWindowDecorationLeftArrow = new NewButton(0, 0, 0, 0, LeftYellowArrow);
+    MarketWindowDecorationRightArrow = new NewButton(0, 0, 0, 0, RightYellowArrow);
+
+    //Ingredients UI
+    MarketIngredientPurchaseAdd = new NewButton(0, 0, 0, 0);
+    MarketIngredientPurchaseSub = new NewButton(0, 0, 0, 0);
+    MarketIngredientPurchaseButton = new NewButton(0, 0, 0, 0);
+    MarketWindowIngredientsLeftArrow = new NewButton(0, 0, 0, 0, LeftYellowArrow);
+    MarketWindowIngredientsRightArrow = new NewButton(0, 0, 0, 0, RightYellowArrow);
+};
 
 
 const DrawMarketWindow = () =>{
@@ -100,10 +120,7 @@ const DrawMarketWindow = () =>{
 
     //Items displayed
     if(MarketWindowSection){
-
-        //image(MarketFrame, windowWidth/2 - 500, windowHeight/2 - 300, 1000, 600);
         
-
         //Displayed item
         if(LastSelectedDecoration.item_id != null){
             let LocalFurniture = FilterFurnitureByID(LastSelectedDecoration.item_id);
@@ -239,6 +256,147 @@ const DrawMarketWindow = () =>{
 
     }else{
 
+
+       
+
+        //This is where the ingredients tab starts
+
+
+                //Displayed item
+                if(LastSelectedIngredient.ingredient_id != null){
+                    
+                    
+
+                    let LocalIngredient = FilterIngredientsByID(LastSelectedIngredient.ingredient_id);
+                    fill(0, 50);
+                    let LocalItemDisplayX = windowWidth/2 - 20;
+                    let LocalItemDisplayY = windowHeight/2 - 250;
+        
+                    //Main frame
+                    rect(LocalItemDisplayX, LocalItemDisplayY, 425, 500);
+                    
+                    //Main image
+        
+                    for(let i = 0; i < 3; i++){
+                        for(let j = 0; j < 3; j++){
+                            image(woodFloorTile, LocalItemDisplayX + i * 64, LocalItemDisplayY + j * 64)
+                        }
+                    }
+        
+                    //The item
+                    image(LocalIngredient.image, LocalItemDisplayX + 64, LocalItemDisplayY + 64)
+        
+                    textAlign(CENTER, TOP);
+                    textSize(35);
+                    //Name of the item
+                    BetterText(LocalIngredient.name, LocalItemDisplayX + 308.5, LocalItemDisplayY + 25);
+                    textSize(20);
+                    
+                    
+                    //Sub
+                    MarketIngredientPurchaseSub.x = LocalItemDisplayX;
+                    MarketIngredientPurchaseSub.y = LocalItemDisplayY + 250;
+                    MarketIngredientPurchaseSub.w = 212.5;
+                    MarketIngredientPurchaseSub.h = 50;
+                    fill(0, 50);
+                    MarketIngredientPurchaseSub.hovered(()=>{fill(207, 207, 0, 50)});
+                    MarketIngredientPurchaseSub.draw()
+                    textSize(50);
+                    textAlign(CENTER, CENTER)
+                    BetterText('-', LocalItemDisplayX + 106.25, LocalItemDisplayY + 275);
+                    //Add
+                    MarketIngredientPurchaseAdd.x = LocalItemDisplayX + 212.5;
+                    MarketIngredientPurchaseAdd.y = LocalItemDisplayY + 250;
+                    MarketIngredientPurchaseAdd.w = 212.5;
+                    MarketIngredientPurchaseAdd.h = 50;
+                    fill(0, 50);
+                    MarketIngredientPurchaseAdd.hovered(()=>{fill(207, 207, 0, 50)});
+                    MarketIngredientPurchaseAdd.draw()
+                    textSize(50);
+                    textAlign(CENTER, CENTER)
+                    BetterText('+', LocalItemDisplayX + 106.25 + 212.5, LocalItemDisplayY + 275);
+        
+                    fill(0, 50);
+                    rect(LocalItemDisplayX, LocalItemDisplayY + 300, 425, 50);
+                    textSize(30);
+                    BetterText('Amount: ' + MarketIngredientPurchaseAmount + '', LocalItemDisplayX + 212.5, LocalItemDisplayY + 325);
+                    //The total price
+                    fill(0, 50);
+                    rect(LocalItemDisplayX, LocalItemDisplayY + 350, 425, 50);
+                    BetterText('Total price: ' + numberWithCommas(LastSelectedIngredient.ingredient_price * MarketIngredientPurchaseAmount) + ' ¥', LocalItemDisplayX + 212.5, LocalItemDisplayY + 375);
+        
+                    MarketIngredientPurchaseButton.x = LocalItemDisplayX;
+                    MarketIngredientPurchaseButton.y = LocalItemDisplayY + 400;
+                    MarketIngredientPurchaseButton.w = 425;
+                    MarketIngredientPurchaseButton.h = 100;
+                    fill(0, 50);
+                    MarketIngredientPurchaseButton.hovered(()=>{fill(207, 207, 0, 50)});
+                    MarketIngredientPurchaseButton.draw();
+                    textAlign(CENTER, CENTER);
+                    textSize(40);
+                    BetterText('Purchase', LocalItemDisplayX + 212.5, LocalItemDisplayY + 450);
+                    
+        
+        
+                }
+        
+                //Draw the items slots
+                if(typeof(IgredientsList) == typeof([])){
+        
+                    for(let i = MarketWindowIngredientsPage * 6; i < (MarketWindowIngredientsPage + 1) * 6; i++){
+                        let LocalJ = i - MarketWindowIngredientsPage * 6;
+                        
+                        if(typeof(IgredientsList[i]) == typeof({})){
+        
+                            let LocalFurniture = FilterIngredientsByID(IgredientsList[i].ingredient_id);
+                            let LocalX = windowWidth/2 - 480;
+                            let LocalY = (windowHeight/2 - 300 + 20) + 85 * LocalJ;
+        
+                            if(mouseX > LocalX && mouseX < LocalX + 400 && mouseY > LocalY && mouseY < LocalY + 75){
+                                fill(207, 207, 0, 200);
+                                
+                                LastSelectedIngredient = IgredientsList[i];
+                            
+                            }else{
+                                fill(0, 100);   
+                            };
+                            
+                            rect(LocalX, LocalY, 400, 75, 10);
+                            textAlign(LEFT, CENTER);
+                            textSize(20);
+                            BetterText(' ' + LocalFurniture.name + ' - ' + numberWithCommas(IgredientsList[i].ingredient_price) + '¥', LocalX, LocalY + 37.5) 
+                            image(LocalFurniture.image, LocalX + 325, LocalY, 75, 75);
+                        };
+                    };  
+        
+                };
+        
+                //Arrows
+                MarketWindowIngredientsLeftArrow.x = windowWidth/2 - 450;
+                MarketWindowIngredientsLeftArrow.y = windowHeight/2 + 230;
+                MarketWindowIngredientsLeftArrow.w = 25;
+                MarketWindowIngredientsLeftArrow.h = 50;
+                
+                MarketWindowIngredientsLeftArrow.hovered(()=>{tint(190, 190, 59);})
+                if(MarketWindowIngredientsPage > 0){
+                    MarketWindowIngredientsLeftArrow.draw();
+                }
+                noTint();
+                MarketWindowIngredientsRightArrow.x = windowWidth/2 - 135;
+                MarketWindowIngredientsRightArrow.y = windowHeight/2 + 230;
+                MarketWindowIngredientsRightArrow.w = 25;
+                MarketWindowIngredientsRightArrow.h = 50;
+        
+                MarketWindowIngredientsRightArrow.hovered(()=>{tint(190, 190, 59);})
+                if(DecorationList.length > (MarketWindowIngredientsPage + 1) * 6){
+                    MarketWindowIngredientsRightArrow.draw();
+                    
+                }
+                noTint();
+                //Page number
+                textAlign(CENTER, CENTER);
+                textSize(25);
+                BetterText('Page: ' + (MarketWindowIngredientsPage + 1) + '/' + (int(IgredientsList.length/6 + 1)) , windowWidth/2 - 280, windowHeight/2 + 230 + 25);
     };
 
 
