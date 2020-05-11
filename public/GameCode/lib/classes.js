@@ -78,6 +78,12 @@ class ingredients {
     drawSlot(){
         /*To display in the cooking stage*/
 
+            if(CheckIfMouseInRect(this, mouseX, mouseY)){
+                fill(242, 255, 0, 150);
+            }else{
+                fill(0, 50);
+            }
+
             //Squared background of the ingredient
             rect(this.x, this.y, this.w, this.h);
             

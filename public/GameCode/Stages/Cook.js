@@ -7,6 +7,8 @@ let ItemsToBeCrafted = {slot1: '', slot2: '', slot3: ''}; //The currents items w
 
 let CurrentPageInCooking = 0;
 
+let ResultOfTheCrafting = null; //The item that is ready to be collected from the cooking in case the other 3 holes are correctly filled
+
 //UI ELEMENTS\\
 let BackToTheRestaurantButton;
 let CookingRightArrow;
@@ -86,6 +88,17 @@ const CookDraw = ()=>{
 
     for(let i = 0; i < 4; i++){
 
+        //Variables\\
+        let LocalSquareX = LocalBackgroundFrameX + 150 + 200 * i;
+        let LocalSquareY = LocalBackgroundFrameY;
+
+        if(mouseX > LocalSquareX && mouseY > LocalSquareY && mouseX < LocalSquareX + 100 && mouseY < LocalSquareY + 200){
+            fill(242, 255, 0, 150); 
+        }else{
+            fill(0, 50);
+        }
+        rect(LocalSquareX, LocalSquareY + 100, 100, 100);
+
     }
 
     //---------------\\
@@ -113,7 +126,7 @@ const CookDraw = ()=>{
             LocalIngredientInfo.w = 100;
             LocalIngredientInfo.h = 100;
             LocalIngredientInfo.amount = ingredientsInventory[i].ingredient_amount;
-            fill(0, 50);
+
             LocalIngredientInfo.drawSlot();
 
             //In case the mouse is hover the ingredient
