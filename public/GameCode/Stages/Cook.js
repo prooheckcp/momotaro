@@ -235,10 +235,13 @@ const CookMousePressed = () =>{
 
         if(mouseX > LocalSquareX && mouseY > LocalSquareY && mouseX < LocalSquareX + 100 && mouseY < LocalSquareY + 200){
             if(i == 0){
+                RaiseTheAmountOfIngredients(ItemsToBeCrafted.slot1);
                 ItemsToBeCrafted.slot1 = '';
             }else if(i == 1){
+                RaiseTheAmountOfIngredients(ItemsToBeCrafted.slot2);
                 ItemsToBeCrafted.slot2 = '';
             }else if(i == 2){
+                RaiseTheAmountOfIngredients(ItemsToBeCrafted.slot3);
                 ItemsToBeCrafted.slot3 = '';
             }else if(i == 3){
                 let LocalDishToBeCooked = CheckIfAdishIsFullFilled();
@@ -299,6 +302,9 @@ const CookMousePressed = () =>{
     //Pressed the cross to go back to the restaurant
     BackToTheRestaurantButton.pressed(()=>{
         Stage = 'Default';
+        ItemsToBeCrafted.slot1 = '';
+        ItemsToBeCrafted.slot2 = '';
+        ItemsToBeCrafted.slot3 = '';
     });
 }
 

@@ -79,3 +79,19 @@ const BetterText = (string, x, y) => {
     text(string, x, y);
 
 }
+
+const LowerTheAmountOfIngredients = ing_id =>{
+    for(let ingredient of ingredientsInventory){
+        if(ingredient.ingredient_id == ing_id){
+            ingredient.ingredient_amount--;
+        }
+    };
+};
+
+const RaiseTheAmountOfIngredients = ing_id =>{
+    for(let ingredient of ingredientsInventory){
+        if(ingredient.ingredient_id == ing_id){
+            ingredient.ingredient_amount++;
+        }
+    };
+};

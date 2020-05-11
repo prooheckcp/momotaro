@@ -122,46 +122,63 @@ class ingredients {
     ClickedSlot(){
         //Clicked thee slot with the mouse in order to enable de drag state 
         if(CheckIfMouseInRect(this, mouseX, mouseY)){
+
+
             if(this.amount > 0){
+                LowerTheAmountOfIngredients(this.id);
                 this.dragged = true;
             };
         }
     };
 
     ReleasedSlot(){
-        for(let i = 0; i < 4; i++){
+    
+    if(this.dragged){
+    
+            let LocalFoundAslot = false;
 
-            let LocalBackgroundFrameX = windowWidth/2 - 500;
-            let LocalBackgroundFrameY = windowHeight/2 - 300;
-            //Variables\\
-            let LocalSquareX = LocalBackgroundFrameX + 150 + 200 * i;
-            let LocalSquareY = LocalBackgroundFrameY;
+            for(let i = 0; i < 4; i++){
 
-            if(mouseX > LocalSquareX && mouseY > LocalSquareY && mouseX < LocalSquareX + 100 && mouseY < LocalSquareY + 200 && this.dragged){
-            
-                if(i == 0){
-                    //Hovering the first slot
-                    print('slot 1: ' + this.name);
-                    ItemsToBeCrafted.slot1 = this.id;
-                }else if(i == 1){
-                    //Hovering the second slot
-                    print('slot 2: ' + this.name);
-                    ItemsToBeCrafted.slot2 = this.id;
-                }else if(i == 2){
-                    //Hover the third slot
-                    print('slot 3: ' + this.name);
-                    ItemsToBeCrafted.slot3 = this.id;
+                let LocalBackgroundFrameX = windowWidth/2 - 500;
+                let LocalBackgroundFrameY = windowHeight/2 - 300;
+                //Variables\\
+                let LocalSquareX = LocalBackgroundFrameX + 150 + 200 * i;
+                let LocalSquareY = LocalBackgroundFrameY;
+
+                if(mouseX > LocalSquareX && mouseY > LocalSquareY && mouseX < LocalSquareX + 100 && mouseY < LocalSquareY + 200 && this.dragged){
+                
+                    if(i == 0){
+                        //Hovering the first slot
+                        print('slot 1: ' + this.name);
+                        ItemsToBeCrafted.slot1 = this.id;
+                        LocalFoundAslot = true;
+                    }else if(i == 1){
+                        //Hovering the second slot
+                        print('slot 2: ' + this.name);
+                        ItemsToBeCrafted.slot2 = this.id;
+                        LocalFoundAslot = true; 
+                    }else if(i == 2){
+                        //Hover the third slot
+                        print('slot 3: ' + this.name);
+                        ItemsToBeCrafted.slot3 = this.id;
+                        LocalFoundAslot = true;
+                    }
                 }
+
+
             }
 
+            //Released the mouse putting the item back to its place
+            
+            if(LocalFoundAslot){
+                
+            }else{
+                RaiseTheAmountOfIngredients(this.id);
+            }
 
-        }
-
-        //Released the mouse putting the item back to its place
-        this.dragged = false;
-
-    };
-
+            this.dragged = false;
+        };
+    }
 };
    
 class dishes {
