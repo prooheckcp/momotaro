@@ -24,7 +24,7 @@ let MarketWindowIngredientsRightArrow;
 
 //Variables
 let MarketDecorationPurchaseAmount = 0;
-
+let MarketWindowDecorationPage = 0;
 //Buttons
 let MarketWindowDecorationLeftArrow;
 let MarketWindowDecorationRightArrow;

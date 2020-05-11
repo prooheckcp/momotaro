@@ -18,16 +18,17 @@ const CookSetUp = () => {
     BackToTheRestaurantButton = new NewButton(0, 0, 0, 0, CloseMark);
     /*The ingredients classes*/
     ingredientsClasses.push(new ingredients('tu' /*ID*/, tu_Image/*Image*/, 'Tuna'/*Name*/));
-    ingredientsClasses.push(new ingredients('sh' /*ID*/, tu_Image/*Image*/, 'Shrimp'/*Name*/));
-    ingredientsClasses.push(new ingredients('ca' /*ID*/, tu_Image/*Image*/, 'Cacoa'/*Name*/));
-    ingredientsClasses.push(new ingredients('ch' /*ID*/, tu_Image/*Image*/, 'Cherry'/*Name*/));
-    ingredientsClasses.push(new ingredients('eg' /*ID*/, tu_Image/*Image*/, 'Eggs'/*Name*/));
-    ingredientsClasses.push(new ingredients('pa' /*ID*/, tu_Image/*Image*/, 'Pasta'/*Name*/));
-    ingredientsClasses.push(new ingredients('ri' /*ID*/, tu_Image/*Image*/, 'Rice'/*Name*/));
-    ingredientsClasses.push(new ingredients('wa' /*ID*/, tu_Image/*Image*/, 'Water'/*Name*/));
-    ingredientsClasses.push(new ingredients('ol_oi' /*ID*/, tu_Image/*Image*/, 'Olivia oil'/*Name*/));
-    ingredientsClasses.push(new ingredients('br' /*ID*/, tu_Image/*Image*/, 'Bread'/*Name*/));
-    ingredientsClasses.push(new ingredients('fl' /*ID*/, tu_Image/*Image*/, 'Flour'/*Name*/));
+    ingredientsClasses.push(new ingredients('sh' /*ID*/, sh_Image/*Image*/, 'Shrimp'/*Name*/));
+    ingredientsClasses.push(new ingredients('ca' /*ID*/, ca_Image/*Image*/, 'Cacoa'/*Name*/));
+    ingredientsClasses.push(new ingredients('ch' /*ID*/, ch_Image/*Image*/, 'Cherry'/*Name*/));
+    ingredientsClasses.push(new ingredients('eg' /*ID*/, eg_Image/*Image*/, 'Eggs'/*Name*/));
+    ingredientsClasses.push(new ingredients('pa' /*ID*/, pa_Image/*Image*/, 'Pasta'/*Name*/));
+    ingredientsClasses.push(new ingredients('ri' /*ID*/, ri_Image/*Image*/, 'Rice'/*Name*/));
+    ingredientsClasses.push(new ingredients('wa' /*ID*/, wa_Image/*Image*/, 'Water'/*Name*/));
+    ingredientsClasses.push(new ingredients('ol_oi' /*ID*/, ol_oi_Image/*Image*/, 'Olivia oil'/*Name*/));
+    ingredientsClasses.push(new ingredients('br' /*ID*/, br_Image/*Image*/, 'Bread'/*Name*/));
+    ingredientsClasses.push(new ingredients('fl' /*ID*/, fl_Image/*Image*/, 'Flour'/*Name*/));
+    
     
     /*The dishes classes*/
     /*id, image, name, recipes (write the id of each igredient)*/
@@ -90,17 +91,18 @@ const CookDraw = ()=>{
     //Slots with each ingredient on your inventory
     for(let i = 0 + (CurrentPageInCooking * 6); i < 6 * (CurrentPageInCooking + 1) - (ingredientsInventory.length/(CurrentPageInCooking + 1)) ; i++){
         
-        //Local variables of each slot
-        let LocalSlotX = LocalBackgroundFrameX + 137.5 + (i * 125);
-        let LocalSlotY = LocalBackgroundFrameY + 462.5;
+        if(i < ingredientsInventory.length){
+            //Local variables of each slot
+            let LocalSlotX = LocalBackgroundFrameX + 137.5 + (i * 125);
+            let LocalSlotY = LocalBackgroundFrameY + 462.5;
 
-        //Squared background of the ingredient
-        rect(LocalSlotX, LocalSlotY, 100, 100);
-        let LocalIngredientInfo = FilterIngredientsByID(ingredientsInventory[i].ingredient_id);
-        
-        //Image of them igredient
-        image(LocalIngredientInfo.image, LocalSlotX, LocalSlotY, 100, 100)
-        //image(LocalIngredientInfo.image, LocalBackgroundFrameX + 137.5 + (i * 125), LocalBackgroundFrameY + 462.5, 100, 100)
+            //Squared background of the ingredient
+            rect(LocalSlotX, LocalSlotY, 100, 100);
+            let LocalIngredientInfo = FilterIngredientsByID(ingredientsInventory[i].ingredient_id);
+            
+            //Image of them igredient
+            image(LocalIngredientInfo.image, LocalSlotX, LocalSlotY, 100, 100)
+        };
     };
 
     //----------------\\
