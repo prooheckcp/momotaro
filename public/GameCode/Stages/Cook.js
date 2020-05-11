@@ -93,11 +93,28 @@ const CookDraw = ()=>{
         let LocalSquareY = LocalBackgroundFrameY;
 
         if(mouseX > LocalSquareX && mouseY > LocalSquareY && mouseX < LocalSquareX + 100 && mouseY < LocalSquareY + 200){
+            //The mouse is hovering this slot
             fill(242, 255, 0, 150); 
+
         }else{
             fill(0, 50);
         }
+
+
+        //The square look
         rect(LocalSquareX, LocalSquareY + 100, 100, 100);
+
+
+        if(i == 0 && typeof(ItemsToBeCrafted.slot1) == typeof('string') && ItemsToBeCrafted.slot1 != ''){
+            //Hovering the first slot
+            image(FilterIngredientsByID(ItemsToBeCrafted.slot1).image, LocalSquareX, LocalSquareY + 100, 100, 100);
+        }else if(i == 1 && typeof(ItemsToBeCrafted.slot2) == typeof('string') && ItemsToBeCrafted.slot2 != ''){
+            //Hovering the second slot
+            image(FilterIngredientsByID(ItemsToBeCrafted.slot2).image, LocalSquareX, LocalSquareY + 100, 100, 100);
+        }else if(i == 2 && typeof(ItemsToBeCrafted.slot3) == typeof('string') && ItemsToBeCrafted.slot3 != ''){
+            //Hover the third slot
+            image(FilterIngredientsByID(ItemsToBeCrafted.slot3).image, LocalSquareX, LocalSquareY + 100, 100, 100);
+        }
 
     }
 
@@ -174,6 +191,26 @@ const CookDraw = ()=>{
 
 const CookMousePressed = () =>{ 
 
+
+    //Pressed one of the slots
+    for(let i = (CurrentPageInCooking * 6); i < (CurrentPageInCooking + 1) * 6  ; i++){
+
+        //The positions of the frames
+        let LocalBackgroundFrameX = windowWidth/2 - 500;
+        let LocalBackgroundFrameY = windowHeight/2 - 300;
+
+        if(i < ingredientsInventory.length){
+            //Local variables of each slot
+            let LocalJ = i - CurrentPageInCooking * 6;
+            let LocalSlotX = LocalBackgroundFrameX + 137.5 + (LocalJ * 125);
+            let LocalSlotY = LocalBackgroundFrameY + 462.5;
+            let LocalIngredientInfo = FilterIngredientsByID(ingredientsInventory[i].ingredient_id);
+
+            LocalIngredientInfo.ClickedSlot();
+        }
+    };
+
+    //Pressed the right arrow to go to the next page
     if((CurrentPageInCooking + 1) * 6 < ingredientsInventory.length){
         CookingRightArrow.pressed(()=>{
             if((CurrentPageInCooking + 1) * 6 < ingredientsInventory.length){
@@ -181,6 +218,8 @@ const CookMousePressed = () =>{
             };
         });
     }
+
+    //Pressed the left arrow to go to the last page
     if(CurrentPageInCooking > 0){
         CookingLeftArrow.pressed(()=>{
             if(CurrentPageInCooking > 0){
@@ -188,11 +227,24 @@ const CookMousePressed = () =>{
             }
         });
     }
+
+    //Pressed the cross to go back to the restaurant
     BackToTheRestaurantButton.pressed(()=>{
         Stage = 'Default';
     });
 }
 
 const CookMouseReleased = () =>{
+
+    //Released the key button
+    for(let i = (CurrentPageInCooking * 6); i < (CurrentPageInCooking + 1) * 6  ; i++){
+
+        if(i < ingredientsInventory.length){
+            let LocalIngredientInfo = FilterIngredientsByID(ingredientsInventory[i].ingredient_id);
+            LocalIngredientInfo.ReleasedSlot();
+        };
+
+    };
+
 
 }

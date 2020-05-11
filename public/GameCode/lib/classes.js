@@ -68,6 +68,8 @@ class ingredients {
 
         /*Dynamic variables*/
         this.amount = 0;
+        this.dragged = 0;
+
         /*Display positions*/
         this.x = 0;
         this.y = 0;
@@ -94,9 +96,57 @@ class ingredients {
             textAlign(RIGHT, BOTTOM);
             textSize(30);
             BetterText('' + this.amount + '', this.x + this.w, this.y + this.h);
+
+            if(this.dragged){
+                image(this.image, mouseX, mouseY, 60, 60);
+            };
+
     };
 
     hoveredSlot(){
+
+    };
+
+    ClickedSlot(){
+        //Clicked thee slot with the mouse in order to enable de drag state 
+        if(CheckIfMouseInRect(this, mouseX, mouseY)){
+            if(this.amount > 0){
+                this.dragged = true;
+            };
+        }
+    };
+
+    ReleasedSlot(){
+        for(let i = 0; i < 4; i++){
+
+            let LocalBackgroundFrameX = windowWidth/2 - 500;
+            let LocalBackgroundFrameY = windowHeight/2 - 300;
+            //Variables\\
+            let LocalSquareX = LocalBackgroundFrameX + 150 + 200 * i;
+            let LocalSquareY = LocalBackgroundFrameY;
+
+            if(mouseX > LocalSquareX && mouseY > LocalSquareY && mouseX < LocalSquareX + 100 && mouseY < LocalSquareY + 200 && this.dragged){
+            
+                if(i == 0){
+                    //Hovering the first slot
+                    print('slot 1: ' + this.name);
+                    ItemsToBeCrafted.slot1 = this.id;
+                }else if(i == 1){
+                    //Hovering the second slot
+                    print('slot 2: ' + this.name);
+                    ItemsToBeCrafted.slot2 = this.id;
+                }else if(i == 2){
+                    //Hover the third slot
+                    print('slot 3: ' + this.name);
+                    ItemsToBeCrafted.slot3 = this.id;
+                }
+            }
+
+
+        }
+
+        //Released the mouse putting the item back to its place
+        this.dragged = false;
 
     };
 
