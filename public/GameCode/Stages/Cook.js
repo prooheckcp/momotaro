@@ -9,13 +9,17 @@ let CurrentPageInCooking = 0;
 
 //UI ELEMENTS\\
 let BackToTheRestaurantButton;
-
+let CookingRightArrow;
+let CookingLeftArrow;
 
 
 const CookSetUp = () => {
 
     /*Buttons*/
     BackToTheRestaurantButton = new NewButton(0, 0, 0, 0, CloseMark);
+    CookingRightArrow = new NewButton(0, 0, 0, 0, RightYellowArrow);
+    CookingLeftArrow = new NewButton(0, 0, 0, 0, LeftYellowArrow);
+
     /*The ingredients classes*/
     ingredientsClasses.push(new ingredients('tu' /*ID*/, tu_Image/*Image*/, 'Tuna'/*Name*/));
     ingredientsClasses.push(new ingredients('sh' /*ID*/, sh_Image/*Image*/, 'Shrimp'/*Name*/));
@@ -89,7 +93,8 @@ const CookDraw = ()=>{
     rect(LocalBackgroundFrameX + 112.5, LocalBackgroundFrameY + 450, 775, 125);
 
     //Slots with each ingredient on your inventory
-    for(let i = 0 + (CurrentPageInCooking * 6); i < 6 * (CurrentPageInCooking + 1) - (ingredientsInventory.length/(CurrentPageInCooking + 1)) ; i++){
+    for(let i = 0 + (CurrentPageInCooking * 6); i < 6 * (CurrentPageInCooking + 1) - (6 - (ingredientsInventory.length/(CurrentPageInCooking + 1))) ; i++){
+        
         
         if(i < ingredientsInventory.length){
             //Local variables of each slot
@@ -102,10 +107,37 @@ const CookDraw = ()=>{
             
             //Image of them igredient
             image(LocalIngredientInfo.image, LocalSlotX, LocalSlotY, 100, 100)
+
+            //The amount of each item which you own
+            textAlign(RIGHT, BOTTOM);
+            textSize(30);
+            //BetterText('' + ingredientsInventory[i].igredient_amount + '', LocalSlotX + 100, LocalSlotY + 100);
         };
     };
 
     //----------------\\
+
+
+    //Arrow Buttons\\
+
+    //Right Arrow
+    CookingRightArrow.x = LocalBackgroundFrameX + 918.75;
+    CookingRightArrow.y = LocalBackgroundFrameY + 462.5;
+    CookingRightArrow.w = 50;
+    CookingRightArrow.h = 100;
+
+    CookingRightArrow.draw();
+    noTint();
+
+    //Left arrow
+    CookingLeftArrow.x = LocalBackgroundFrameX + 31.25;
+    CookingLeftArrow.y = LocalBackgroundFrameY + 462.5;
+    CookingLeftArrow.w = 50;
+    CookingLeftArrow.h = 100;
+
+    CookingLeftArrow.draw(); 
+    noTint();
+    //--------------\\
 
 }
 
