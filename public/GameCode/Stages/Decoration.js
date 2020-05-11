@@ -95,12 +95,20 @@ const DecorationDraw = () =>{
   LeftYellowArrowButton.hovered(() => {tint(125, 123, 0);});
   
   if(LocalBottomFramePage > 1){
+
+    LeftYellowArrowButton.x = windowWidth/2 - 400;
+    LeftYellowArrowButton.y = windowHeight - 137.5 + LocalBottomFrameOffSet;
+
     LeftYellowArrowButton.draw();
   }
   noTint();
   RightYellowArrowButton.hovered(() => {tint(125, 123, 0);});
   
   if(inventory.length > LocalBottomFramePage * 6){
+
+    RightYellowArrowButton.x = windowWidth/2 + 350;
+    RightYellowArrowButton.y = windowHeight - 137.5 + LocalBottomFrameOffSet;
+
     RightYellowArrowButton.draw();
   }
   noTint();

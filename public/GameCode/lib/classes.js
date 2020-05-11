@@ -61,10 +61,39 @@ class NewButton{
 class ingredients {
     /*id, image, name*/
     constructor( id, image, name) {
+        /*Ingredient info*/
         this.id = id;
         this.image = image;
         this.name = name;
+
+        /*Dynamic variables*/
+        this.amount = 0;
+        /*Display positions*/
+        this.x = 0;
+        this.y = 0;
+        this.w = 0;
+        this.h = 0;
     }
+
+    drawSlot(){
+        /*To display in the cooking stage*/
+
+            //Squared background of the ingredient
+            rect(this.x, this.y, this.w, this.h);
+            
+            //Image of them igredient
+            image(this.image, this.x, this.y, this.w, this.h)
+
+            //The amount of each item which you own
+            textAlign(RIGHT, BOTTOM);
+            textSize(30);
+            BetterText('' + this.amount + '', this.x + this.w, this.y + this.h);
+    };
+
+    hoveredSlot(){
+
+    };
+
 };
    
 class dishes {

@@ -23,7 +23,7 @@ const CookSetUp = () => {
     /*The ingredients classes*/
     ingredientsClasses.push(new ingredients('tu' /*ID*/, tu_Image/*Image*/, 'Tuna'/*Name*/));
     ingredientsClasses.push(new ingredients('sh' /*ID*/, sh_Image/*Image*/, 'Shrimp'/*Name*/));
-    ingredientsClasses.push(new ingredients('ca' /*ID*/, ca_Image/*Image*/, 'Cacoa'/*Name*/));
+    ingredientsClasses.push(new ingredients('co' /*ID*/, ca_Image/*Image*/, 'Cocoa'/*Name*/));
     ingredientsClasses.push(new ingredients('ch' /*ID*/, ch_Image/*Image*/, 'Cherry'/*Name*/));
     ingredientsClasses.push(new ingredients('eg' /*ID*/, eg_Image/*Image*/, 'Eggs'/*Name*/));
     ingredientsClasses.push(new ingredients('pa' /*ID*/, pa_Image/*Image*/, 'Pasta'/*Name*/));
@@ -84,6 +84,10 @@ const CookDraw = ()=>{
     
     //Crafting bench\\
 
+    for(let i = 0; i < 4; i++){
+
+    }
+
     //---------------\\
 
     //Inventory slots\\
@@ -93,25 +97,27 @@ const CookDraw = ()=>{
     rect(LocalBackgroundFrameX + 112.5, LocalBackgroundFrameY + 450, 775, 125);
 
     //Slots with each ingredient on your inventory
-    for(let i = 0 + (CurrentPageInCooking * 6); i < 6 * (CurrentPageInCooking + 1) - (6 - (ingredientsInventory.length/(CurrentPageInCooking + 1))) ; i++){
+    for(let i = (CurrentPageInCooking * 6); i < (CurrentPageInCooking + 1) * 6  ; i++){
         
         
         if(i < ingredientsInventory.length){
             //Local variables of each slot
-            let LocalSlotX = LocalBackgroundFrameX + 137.5 + (i * 125);
+            let LocalJ = i - CurrentPageInCooking * 6;
+            let LocalSlotX = LocalBackgroundFrameX + 137.5 + (LocalJ * 125);
             let LocalSlotY = LocalBackgroundFrameY + 462.5;
-
-            //Squared background of the ingredient
-            rect(LocalSlotX, LocalSlotY, 100, 100);
             let LocalIngredientInfo = FilterIngredientsByID(ingredientsInventory[i].ingredient_id);
-            
-            //Image of them igredient
-            image(LocalIngredientInfo.image, LocalSlotX, LocalSlotY, 100, 100)
 
-            //The amount of each item which you own
-            textAlign(RIGHT, BOTTOM);
-            textSize(30);
-            //BetterText('' + ingredientsInventory[i].igredient_amount + '', LocalSlotX + 100, LocalSlotY + 100);
+            //Draws the ingredient slot
+            LocalIngredientInfo.x = LocalSlotX;
+            LocalIngredientInfo.y = LocalSlotY;
+            LocalIngredientInfo.w = 100;
+            LocalIngredientInfo.h = 100;
+            LocalIngredientInfo.amount = ingredientsInventory[i].ingredient_amount;
+            fill(0, 50);
+            LocalIngredientInfo.drawSlot();
+
+            //In case the mouse is hover the ingredient
+            LocalIngredientInfo.hoveredSlot();
         };
     };
 
@@ -121,22 +127,30 @@ const CookDraw = ()=>{
     //Arrow Buttons\\
 
     //Right Arrow
-    CookingRightArrow.x = LocalBackgroundFrameX + 918.75;
-    CookingRightArrow.y = LocalBackgroundFrameY + 462.5;
-    CookingRightArrow.w = 50;
-    CookingRightArrow.h = 100;
+    if((CurrentPageInCooking + 1) * 6 < ingredientsInventory.length){
 
-    CookingRightArrow.draw();
-    noTint();
+        CookingRightArrow.x = LocalBackgroundFrameX + 918.75;
+        CookingRightArrow.y = LocalBackgroundFrameY + 462.5;
+        CookingRightArrow.w = 50;
+        CookingRightArrow.h = 100;
+        CookingRightArrow.hovered(() => {tint(125, 123, 0);});
+
+        CookingRightArrow.draw();
+        noTint();
+    }
 
     //Left arrow
-    CookingLeftArrow.x = LocalBackgroundFrameX + 31.25;
-    CookingLeftArrow.y = LocalBackgroundFrameY + 462.5;
-    CookingLeftArrow.w = 50;
-    CookingLeftArrow.h = 100;
+    if(CurrentPageInCooking > 0){
 
-    CookingLeftArrow.draw(); 
-    noTint();
+        CookingLeftArrow.x = LocalBackgroundFrameX + 31.25;
+        CookingLeftArrow.y = LocalBackgroundFrameY + 462.5;
+        CookingLeftArrow.w = 50;
+        CookingLeftArrow.h = 100;
+        CookingLeftArrow.hovered(() => {tint(125, 123, 0);})
+
+        CookingLeftArrow.draw(); 
+        noTint();
+    }
     //--------------\\
 
 }
@@ -146,6 +160,21 @@ const CookDraw = ()=>{
 
 
 const CookMousePressed = () =>{ 
+
+    if((CurrentPageInCooking + 1) * 6 < ingredientsInventory.length){
+        CookingRightArrow.pressed(()=>{
+            if((CurrentPageInCooking + 1) * 6 < ingredientsInventory.length){
+            CurrentPageInCooking++;
+            };
+        });
+    }
+    if(CurrentPageInCooking > 0){
+        CookingLeftArrow.pressed(()=>{
+            if(CurrentPageInCooking > 0){
+                CurrentPageInCooking--;
+            }
+        });
+    }
     BackToTheRestaurantButton.pressed(()=>{
         Stage = 'Default';
     });
