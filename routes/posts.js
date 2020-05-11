@@ -5,6 +5,21 @@ const dbase = require('./../services/database');
 ////////////////////////////////////////////ERROR - res.send([{money : results[0].res_money, level: results[0].res_level, exp: results[0].res_exp}]); ////////////////////////////////////////////
 
 
+
+//Get the recipes types
+
+router.post('/getRecipesTypes', (req, res, next) =>{
+
+    const UserInfo = req.body;
+
+    console.log(UserInfo);
+
+    dbase.query('SELECT recipes_types.recipe_id, recipe_level, recipe_name, recipes_inventory.dish_id FROM recipes_types INNER JOIN recipes_inventory ON recipes_inventory.recipe_id = recipes_types.recipe_id WHERE user_id = '+ UserInfo.id +';', (err, results, fields) => {
+        res.send(results);
+    });
+
+});
+
 router.post('/getIngredientsInventory', (req, res, next) =>{
     const UserInfo = req.body;
 
@@ -27,17 +42,14 @@ router.post('/NpcConsume', (req, res, next) => {
     });
 
 });
-router.post('/UpdateDishAm', (req, res, next) => {
+
+router.post('/CreateNewDish', (req, res, next) => {
 
     const UserInfo = req.body;
-    
-    dbase.query('UPDATE dishes_inventory SET dishes_amount = dishes_amount + ' + UserInfo.amount + ' WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
 
-        if(err){console.log(err)};
-            res.send('DONE!')
+    console.log(UserInfo);
 
-    });
-});
+})
 
 
 router.post('/buyDecoration', (req, res, next)=>{

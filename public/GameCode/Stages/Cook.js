@@ -1,6 +1,7 @@
 //Variables\\
 let ingredientsClasses = []; //The igredients classes with the info
 let dishesClasses = []; //The dishes classes with the info
+let dishesLevels = []; //The level each recipe requires
 
 let ingredientsInventory = []; //The inventory of the player when it comes to ingredients
 let ItemsToBeCrafted = {slot1: '', slot2: '', slot3: ''}; //The currents items within the 3 slots
@@ -156,6 +157,7 @@ const CookDraw = ()=>{
         }else if(i == 3){
             //Check if there is a plate ready to be collected
             let LocalDishToBeCooked = CheckIfAdishIsFullFilled();
+            //If the item was found then display it
             if(LocalDishToBeCooked != undefined){
                 image(LocalDishToBeCooked.image, LocalSquareX, LocalSquareY + 100, 100, 100);
                 LocalDishToBeCooked.hoveredSlot(LocalSquareX, LocalSquareY + 100);
@@ -230,6 +232,18 @@ const CookMousePressed = () =>{
                 ItemsToBeCrafted.slot2 = '';
             }else if(i == 2){
                 ItemsToBeCrafted.slot3 = '';
+            }else if(i == 3){
+                let LocalDishToBeCooked = CheckIfAdishIsFullFilled();
+
+                if(LocalDishToBeCooked != undefined){
+
+                    //Collect the cooked item
+                    httpPost('/post/CreateNewDish', {dishID: LocalDishToBeCooked.id, userID: UserID, ingredients: ItemsToBeCrafted}, data =>{
+
+                    });
+                    
+                }
+
             }
         };
 

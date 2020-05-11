@@ -73,11 +73,15 @@ CREATE TABLE recipes_types(
 	recipe_id VARCHAR(8) NOT NULL,
     recipe_level INT NOT NULL DEFAULT 0,
     recipe_name VARCHAR(255),
+    dish_id VARCHAR(8),
     PRIMARY KEY(recipe_id)
 );
 /* Add the recipes here */
-
-
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id) VALUES('rcp_1', 1, 'Bread Omelete', 'br_om');
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id) VALUES('rcp_2', 2, 'Tuna Sushi', 'tu_su');
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id) VALUES('rcp_3', 3, 'Shimp Sushi', 'sh_su');
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id) VALUES('rcp_4', 4, 'Chocolate Cake', 'ch_ca');
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id) VALUES('rcp_5', 5, 'Cherry Pie', 'ch_pi');
 /*----------------------*/
 
 

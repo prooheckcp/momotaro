@@ -97,7 +97,22 @@ const UpdateIngredientsInventory = () =>{
       ingredientsInventory.push(LocalIgredients);
     };
 
+
   });
+
+
+  //Adds the recipes info
+  loadJSON('/get/getRecipesTypes' ,data => {
+
+    let LocalData = eval(data);
+
+    for(let recipe of LocalData){
+      dishesLevels.push(recipe);
+      print(recipe);
+    };
+
+  });
+
 };
 
 
