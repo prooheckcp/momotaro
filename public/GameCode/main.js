@@ -5,7 +5,8 @@ function setup() {
 
   //Set the game frame rate
   frameRate(30);
-
+  
+  backgroundMusic.loop();
 };
 
 
@@ -31,6 +32,7 @@ function windowResized() {
 
 function mousePressed(){
 
+  clickingSound.play();
     //If the user isnt logged in yet then check
     if(!Logged){
 
