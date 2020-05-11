@@ -56,7 +56,16 @@ const ImagesPathUI = (ImageName) => path.join(entryPoint, 'Game_Images', 'UI', I
 const ImagesPathRes = (ImageName) => path.join(entryPoint, 'Game_Images', 'Restaurant_Parts', ImageName);
 const ImagesPathDec = (ImageName) => path.join(entryPoint, 'Game_Images', 'Furniture', ImageName);
 const ImagesPathCooK = (ImageName) => path.join(entryPoint, 'Game_Images', 'Food', ImageName);
+const SoundPath = (MusicName) => path.join(entryPoint, 'Game_Images', 'Music', MusicName);
 
+//Music\\
+
+router.get('/music/background_music', (req, res, next) =>{
+    res.sendFile(SoundPath('background_music.ogg'));
+});
+router.get('/music/KnifeChoping', (req, res, next) =>{
+    res.sendFile(SoundPath('KnifeChoping.ogg'));
+});
 //Images\\
 
 //UI

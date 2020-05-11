@@ -1,3 +1,7 @@
+//Music
+let backgroundMusic;
+let clickingSound;
+
 //UI elements\\
 let DefaultRedButton;
 let Logo;
@@ -90,6 +94,13 @@ Logo = loadImage('get/image/logo');
 lake = loadImage('get/image/lake');
 FramePortrait = loadImage('get/image/frame');
 middleFrame = loadImage('get/image/middleframe')
+
+
+//Music\\
+//backgorundMusic 
+backgroundMusic = loadSound('/get/music/background_music');
+//clicking sound
+clickingSound = loadSound('/get/music/KnifeChoping');
 
 //Restaurant parts\\
 woodFloorTile = loadImage('get/image/floor_tile');
