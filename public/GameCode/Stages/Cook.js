@@ -161,6 +161,14 @@ const CookDraw = ()=>{
             if(LocalDishToBeCooked != undefined){
                 image(LocalDishToBeCooked.image, LocalSquareX, LocalSquareY + 100, 100, 100);
                 LocalDishToBeCooked.hoveredSlot(LocalSquareX, LocalSquareY + 100);
+
+                if(restaurantStats.level < GetDishLevel(LocalDishToBeCooked.id)){
+                    fill(0, 120);
+                    rect(LocalSquareX, LocalSquareY + 100, 100, 100);
+                    textAlign(CENTER, CENTER);
+                    textSize(20);
+                    BetterText('Lvl '+GetDishLevel(LocalDishToBeCooked.id)+'!', LocalSquareX + 50, LocalSquareY + 150);
+                }
             }
         };
 
@@ -236,12 +244,14 @@ const CookMousePressed = () =>{
                 let LocalDishToBeCooked = CheckIfAdishIsFullFilled();
 
                 if(LocalDishToBeCooked != undefined){
+                    if(restaurantStats.level < GetDishLevel(LocalDishToBeCooked.id)){
+                        alert('Your level is too low!');
+                    }else{
+                        //Collect the cooked item
+                        httpPost('/post/CreateNewDish', {dishID: LocalDishToBeCooked.id, userID: UserID, ingredients: ItemsToBeCrafted}, data =>{
 
-                    //Collect the cooked item
-                    httpPost('/post/CreateNewDish', {dishID: LocalDishToBeCooked.id, userID: UserID, ingredients: ItemsToBeCrafted}, data =>{
-
-                    });
-                    
+                        });
+                    }
                 }
 
             }

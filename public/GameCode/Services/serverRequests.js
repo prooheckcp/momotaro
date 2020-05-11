@@ -108,14 +108,21 @@ const UpdateIngredientsInventory = () =>{
 
     for(let recipe of LocalData){
       dishesLevels.push(recipe);
-      print(recipe);
     };
 
   });
 
 };
 
+const GetDishLevel = dish_id =>{
+  for(let recipe of dishesLevels){
 
+    if(dish_id == recipe.dish_id){
+      return recipe.recipe_level;
+    }
+
+  };
+};
 
 const NpcConsume = () =>{
   

@@ -77,7 +77,7 @@ CREATE TABLE recipes_types(
     PRIMARY KEY(recipe_id)
 );
 /* Add the recipes here */
-INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id) VALUES('rcp_1', 1, 'Bread Omelete', 'br_om');
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id) VALUES('rcp_1', 21, 'Bread Omelete', 'br_om');
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id) VALUES('rcp_2', 2, 'Tuna Sushi', 'tu_su');
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id) VALUES('rcp_3', 3, 'Shimp Sushi', 'sh_su');
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id) VALUES('rcp_4', 4, 'Chocolate Cake', 'ch_ca');
