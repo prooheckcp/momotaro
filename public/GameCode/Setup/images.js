@@ -83,7 +83,19 @@ let leftEntranceTile;
 let rightEntranceTile;
 let blueWallTile;
 
+//Music
+let backgroundMusic;
+let clickingSound;
+
+
 const SetupImages = () =>{
+
+//Music\\
+//backgorundMusic 
+backgroundMusic = loadSound('/get/music/background_music');
+//clicking sound
+clickingSound = loadSound('/get/music/KnifeChoping');
+
 
 DefaultRedButton = loadImage('/get/image/buttonImage');
 Logo = loadImage('get/image/logo');
