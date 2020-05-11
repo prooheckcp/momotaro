@@ -8,6 +8,11 @@ const dbase = require('./../services/database');
 const restaurant = require(path.join(entryPoint, 'static_data', 'restaurant.js'));
 
 
+router.get('/getRecipesTypes', (req, res, next) =>{
+    dbase.query('SELECT * FROM recipes_types;', (err, results, fields) =>{
+        res.send(results);
+    });
+});
 
 //Get the top 50 players
 
