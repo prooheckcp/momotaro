@@ -46,6 +46,20 @@ router.get('/DecorationMarket', (req, res, next) =>{
 
 });
 
+//Get Chairs position
+
+router.get('/ChairPos', (req, res, next) =>{
+    
+    dbase.query('SELECT item_x, item_y FROM momotaro.dec_in_restaurant WHERE item_id = "cu_ch";', (err, results, fields) =>{
+        if(err){console.log(err)};
+
+        res.send(results);
+
+    });
+
+});
+
+
 //Data such as the restaurant size and tiles size
 router.get('/RestaurantDefaultData', (req, res, next) => {
     res.send(restaurant);
