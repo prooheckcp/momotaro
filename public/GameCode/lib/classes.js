@@ -371,3 +371,41 @@ class XPbar{
     };
 
 };
+
+class npc {
+    constructor(posX, posY, img) {
+      this.posX = posX;
+      this.posY = posY;
+      this.img = img;
+      this.speed = 5;
+    }
+  
+    draw_npc() {
+      rect(this.posX-12, this.posY-12, 25,25);
+    }
+  
+    get_posX() {
+      return this.posX;
+    }
+  
+    get_posY() {
+      return this.posY;
+    }
+  
+    set_posX(posX) {
+      this.posX = posX;
+    }
+  
+    set_posY(posY) {
+      this.posY = posY;
+    }
+  
+    moveX(sig) {
+      this.posX += this.speed*sig;
+    }
+  
+    moveY(sig) {
+      this.posY += this.speed*sig;
+    }
+  
+}
