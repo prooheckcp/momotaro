@@ -18,5 +18,7 @@ const SetupGame = () => {
     //Loads the stages
     CookSetUp();
     
+    //NPC
+    Npcsetup();
 };
 
