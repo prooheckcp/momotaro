@@ -20,18 +20,17 @@ const DrawNpc = () => {
 
     fill(255);
     npc1.draw_npc();
-  
-    //SE NPC = DO TILE DA CADEIRA ENTÃO ELE SE MOVE
 
-    mouseOnTileFun();
+    //SE NPC = DO TILE DA CADEIRA ENTÃO ELE SE MOVE
     for(let i = 0;  i < RestaurantDefaultData.TilesX ;i++){
       for(let j = 0; j < RestaurantDefaultData.TilesY; j++){
 
         let LocalPositions = CalculateRestaurantTile(i, j);
-
+        //console.log(i,j)
         if(i == npc1.get_posX() && j == npc1.get_posY()){
           TimeToEat();
-          console.log(1);
+          console.log("Comeu");
+          
         }else if(move){
             if (npc1.get_posX() < mx) {
                 npc1.moveX(1);
@@ -44,47 +43,16 @@ const DrawNpc = () => {
             }
             if (npc1.get_posY() > my) {
                 npc1.moveY(-1);
-            
           }
         };
       };
     };
   
-/*
-    if(npc1.get_posX() < Itemx && npc1.get_posX() > itemx+1 && npc1.get_posY() < Itemy && npc1.get_posY() > Itemy+1 ){
-        if(move){
-          if (npc1.get_posX() < mx) {
-              npc1.moveX(1);
-          }
-          if (npc1.get_posY() < my) {
-              npc1.moveY(1);
-          }
-          if (npc1.get_posX() > mx) {
-              npc1.moveX(-1);
-          }
-          if (npc1.get_posY() > my) {
-              npc1.moveY(-1);
-          }
-        }
-      }
-      if (npc1.get_posX() >= furniture[1].x &&  npc1.get_posX() < furniture[1].x + 64 && npc1.get_posY() > furniture[1].y  &&  npc1.get_posY() < furniture[1].y + 64){
-          TimeToEat();
-          console.log(1);
-        }
-        if (npc1.get_posX() >= furniture[2].x &&  npc1.get_posX() < furniture[2].x + 64 && npc1.get_posY() > furniture[2].y  &&  npc1.get_posY() < furniture[2].y + 64){
-          TimeToEat();
-          console.log(2);
-        }
-        if (npc1.get_posX() >= furniture[3].x &&  npc1.get_posX() < furniture[3].x + 64 && npc1.get_posY() > furniture[3].y  &&  npc1.get_posY() < furniture[3].y + 64){
-          TimeToEat();
-          console.log(1);
-        }
-*/
 
-  if(npc1.get_posY() >= 181 ) {
+  if(npc1.get_posY() >= 180 ) {
     go_up();
   }
-  if(npc1.get_posY() <= 692 ) {
+  if(npc1.get_posY() <= 700 ) {
     go_down();
   }
   
@@ -123,6 +91,9 @@ const leave = () => {
     
     // Enviar o dinheiro, xp, e -1 comida para o database e - comida X
     NpcConsume();
+    GiveExp();
+    GiveMoney();
+
 }
 
 const go_up = () => {
