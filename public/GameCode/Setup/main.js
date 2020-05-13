@@ -7,7 +7,8 @@ const SetupGame = () => {
     SetUpLogin();
     SetUpSignup();
 
-
+    //For the storage window
+    setupStorageWindow();
     
     //Loads the restaurant default layout
     SetupRestaurant();
