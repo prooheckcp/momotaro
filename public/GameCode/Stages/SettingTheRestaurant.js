@@ -20,9 +20,9 @@ const DrawTheRestaurantSetup = () =>{
     }
 
 
-    let LocalSpeed = (1 * deltaTime/50) 
+    let LocalSpeed = (1 * deltaTime/50);
     if(WoodOffset > RestaurantDefaultData.TilesSize){
-        WoodOffset = 0
+        WoodOffset = 0;
     }else{
         WoodOffset += LocalSpeed;
     };
