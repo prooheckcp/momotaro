@@ -312,6 +312,25 @@ class NewFurniture {
 };
 
 
+class ReputationPointsDisplayer{
+    constructor(){
+        this.x = 0;
+        this.y = 0;
+        this.w = 0;
+        this.h = 0;
+    }
+
+    draw(){
+        image(MoneyFrame, this.x, this.y, this.w, this.h);
+        textAlign(CENTER, CENTER);
+        textSize(20)
+
+        let LocalPolishedNumber = numberWithCommas(CurrentPrestigePoints)
+
+        BetterText('Rep. points: ' + LocalPolishedNumber + '', this.x + this.w/2, this.y + this.h/2);
+    }
+}
+
 //UI elements for the main part of the game\\
 
 class MoneyDisplayer{

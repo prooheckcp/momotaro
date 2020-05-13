@@ -5,6 +5,9 @@ let LocalBottomFramePage = 1; //The page of items that is currently being displa
 let LocalBottomFrameOffSet = 0; //The offset in case I wanna polish this
 let MouseOnTile = {x: null, y: null}; //If the mouse is on a restaurant tile the x and y will change to its number, else they will be kept as null
 
+//UI elements\\
+let ReputationDisplayer;
+
 //Buttons\\
 let LeftYellowArrowButton;
 let RightYellowArrowButton;
@@ -14,7 +17,8 @@ const DecorationSetUp = () => {
   /////////////////UI\\\\\\\\\\\\\\\\\
   LeftYellowArrowButton =  new NewButton(windowWidth/2 - 400, windowHeight - 137.5 + LocalBottomFrameOffSet, 50, 100, LeftYellowArrow);
   RightYellowArrowButton =  new NewButton(windowWidth/2 + 350, windowHeight - 137.5 + LocalBottomFrameOffSet, 50, 100, RightYellowArrow);
-  AcceptDecorationButton = new NewButton(windowWidth/2 + 400, windowHeight - 75 , 75, 75, CircleButtonCheck)
+  AcceptDecorationButton = new NewButton(windowWidth/2 + 400, windowHeight - 75 , 75, 75, CircleButtonCheck);
+  ReputationDisplayer = new ReputationPointsDisplayer();
   //////////////////\\\\\\\\\\\\\\\\\\
   
   ////////////Actual Decoration\\\\\\\\\\\\
@@ -33,6 +37,14 @@ const DecorationSetUp = () => {
   
 
 const DecorationDraw = () =>{
+
+
+  //Draw the reputation displayer
+  ReputationDisplayer.x = windowWidth - 260; 
+  ReputationDisplayer.y = 30;
+  ReputationDisplayer.w = 200;
+  ReputationDisplayer.h = 50;
+  ReputationDisplayer.draw();
 
   //Check where the mouse is
   mouseOnTileFun();

@@ -1,4 +1,7 @@
 const UpdateRestaurantRequest = () => {
+
+
+
     httpPost('/post/getDecoration', {id: UserID}, data =>{
         let LocalData = eval(data)
         PlayerRestaurantFurniture = [];
@@ -6,8 +9,14 @@ const UpdateRestaurantRequest = () => {
           for(let LocalF of LocalData){
               PlayerRestaurantFurniture.push(LocalF);
           };
+          //Calculate the restaurant prestige points worth
+          UpdatePrestigePoints();
         }
     });
+
+  
+  
+
 };
 
 //Updates the user inventory

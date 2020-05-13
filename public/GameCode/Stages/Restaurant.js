@@ -21,7 +21,7 @@ const DrawRestaurant = () => {
     }else if(typeof(PlayerRestaurantFurniture) == typeof([])){
         for(let localF of PlayerRestaurantFurniture){
             let localFpos = CalculateRestaurantTile(localF.item_x, localF.item_y);
-            let localFob = FilterFurnitureByID(localF.item_id)
+            let localFob = FilterFurnitureByID(localF.item_id);
 
             image(localFob.image, localFpos.x, localFpos.y, 64, 64);
         };
