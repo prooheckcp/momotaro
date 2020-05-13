@@ -84,6 +84,10 @@ router.get('/music/KnifeChoping', (req, res, next) =>{
 
 //UI
 
+router.get('/image/StorageFrame', (req, res, next) =>{
+    res.sendFile(ImagesPathUI('StorageFrame.png'));
+});
+
 router.get('/image/LeaderboardTab', (req, res, next) =>{
     res.sendFile(ImagesPathUI('LeaderboardTab.png'));
 });

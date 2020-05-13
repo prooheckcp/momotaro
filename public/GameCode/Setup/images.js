@@ -11,6 +11,7 @@ let FramePortrait;
 let RightYellowArrow;
 let LeftYellowArrow;
 let middleFrame;
+let StorageFrame;
 
 let JapanMap;
 let JapanCityRestaurant;
@@ -182,6 +183,7 @@ JapanCityFriends = loadImage('/get/image/JapanCityFriends');
 CloseMark = loadImage('/get/image/CloseMarket');
 MarketFrame = loadImage('/get/image/MarketFrame');
 MarketButton = loadImage('/get/image/MarketButton');
+StorageFrame = loadImage('/get/image/StorageFrame');
 
 ReturnButtonCook = loadImage('/get/image/ReturnButtonCook');
 };
