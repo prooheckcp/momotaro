@@ -4,10 +4,11 @@ let ingredientsList = []; //A list of all the ingredients within the marketplace
 
 let dishesClasses = []; //The dishes classes with the info
 let dishesLevels = []; //The level each recipe requires
-
+let dishesInventory = []; //The inventory of the player when it comes to dishes
 
 let ingredientsInventory = []; //The inventory of the player when it comes to ingredients
 let recipesInventory = []; //The inventory of the player when it comes to recipes
+
 
 let ItemsToBeCrafted = {slot1: '', slot2: '', slot3: ''}; //The currents items within the 3 slots
 
@@ -46,10 +47,10 @@ const CookSetUp = () => {
     /*id, image, name, recipes (write the id of each igredient)*/
     dishesClasses.push(new dishes('no' /*id*/, noo_Image /* image*/, 'Noodles' /*Name*/, {ingredient1: 'wa', ingredient2: 'pa', ingredient3: 'ol_oi'} /*Recipes*/));  
     dishesClasses.push(new dishes('br_om' /*id*/, bre_ome_Image /* image*/, 'Bread Omelete' /*Name*/, {ingredient1: 'eg', ingredient2: 'br', ingredient3: ''} /*Recipes*/));  
-    dishesClasses.push(new dishes('tu_su' /*id*/, tun_sus_Image /* image*/, 'Tuna Sushi' /*Name*/, {ingredient1: 'wa', ingredient2: 'pa', ingredient3: 'ol_oi'} /*Recipes*/));  
-    dishesClasses.push(new dishes('sh_su' /*id*/, shi_sus_Image /* image*/, 'Shimp Sushi' /*Name*/, {ingredient1: 'wa', ingredient2: 'pa', ingredient3: 'ol_oi'} /*Recipes*/));  
-    dishesClasses.push(new dishes('ch_ca' /*id*/, cho_cak_Image /* image*/, 'Chocolate Cake' /*Name*/, {ingredient1: 'wa', ingredient2: 'pa', ingredient3: 'ol_oi'} /*Recipes*/));  
-    dishesClasses.push(new dishes('ch_pi' /*id*/, che_pie_Image /* image*/, 'Cherry Pie' /*Name*/, {ingredient1: 'wa', ingredient2: 'pa', ingredient3: 'ol_oi'} /*Recipes*/));  
+    dishesClasses.push(new dishes('tu_su' /*id*/, tun_sus_Image /* image*/, 'Tuna Sushi' /*Name*/, {ingredient1: 'tu', ingredient2: 'ri', ingredient3: 'wa'} /*Recipes*/));  
+    dishesClasses.push(new dishes('sh_su' /*id*/, shi_sus_Image /* image*/, 'Shrimp Sushi' /*Name*/, {ingredient1: 'sh', ingredient2: 'ri', ingredient3: 'wa'} /*Recipes*/));  
+    dishesClasses.push(new dishes('ch_ca' /*id*/, cho_cak_Image /* image*/, 'Chocolate Cake' /*Name*/, {ingredient1: 'co', ingredient2: 'fl', ingredient3: 'eg'} /*Recipes*/));  
+    dishesClasses.push(new dishes('ch_pi' /*id*/, che_pie_Image /* image*/, 'Cherry Pie' /*Name*/, {ingredient1: 'ch', ingredient2: 'fl', ingredient3: 'wa'} /*Recipes*/));  
     
 };
 

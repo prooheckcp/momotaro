@@ -1,3 +1,18 @@
+//Filter the dishes classes table by id 
+const FilterDishesByID = id =>{
+    let LocalResponse = 'N/A';
+
+    for(let object of dishesClasses){
+
+        if(id == object.id){
+            LocalResponse = object;
+
+        };
+    };
+    return LocalResponse;
+
+};
+
 //Filter the Furniture classes table by id
 const FilterFurnitureByID = id =>{
     let LocalResponse = 'N/A';

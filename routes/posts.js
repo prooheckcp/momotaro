@@ -6,6 +6,18 @@ const dbase = require('./../services/database');
 
 
 
+router.post('/getInventoryDishes', (req, res, next) => {
+
+    const UserInfo = req.body;
+
+    dbase.query('SELECT * FROM dishes_inventory WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
+        
+        res.send(results);
+
+    });
+
+});
+
 //Buy ingredient
 
 router.post('/buyIngredient', (req, res, next) =>{

@@ -110,6 +110,31 @@ const UpdateStorageInventory = () =>{
 
   });
 
+  httpPost('/post/getInventory', {id : UserID}, data =>{
+    let LocalData = eval(data);
+
+    if(LocalData[0] != null){
+      inventory = [];
+      for(item of LocalData){
+        inventory.push(item);
+      };
+    };
+
+  });
+
+
+  httpPost('/post/getInventoryDishes', {id: UserID}, data => {
+    
+    let LocalData = eval(data);
+
+    dishesInventory = [];
+
+    for(dish of LocalData){
+      dishesInventory.push(dish);
+    };
+
+  });
+
 };
 
 
