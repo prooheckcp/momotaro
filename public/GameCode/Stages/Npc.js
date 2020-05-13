@@ -1,37 +1,43 @@
-let img;
-let npc1;
-let move = true;
+let move=true;
 let mx;
 let my;
-let NpcTileX;
-let NpcTileY;
-
 
 let npcPath;
-let RandomFood = 6;
 
-const Npcsetup = () => {
+
+function Npcsetup() {
   createCanvas(800, 600);
   npcPath = [createVector(0, 200), createVector(200, 200), createVector(100, 100), createVector(200, 300), createVector(350, 350)];
-  npc1 = new npc(npcPath[0].x+600, npcPath[0].x+900);
+  npc1 = new npc(npcPath[0].x+800, npcPath[0].x+400);
+
 }
 
-const DrawNpc = () => {
+function DrawNpc() {
 
-    fill(255);
     npc1.draw_npc();
 
-    //SE NPC = DO TILE DA CADEIRA ENTÃO ELE SE MOVE
+    //TESTE\\
+/*
+   NpcOnTile();
     for(let i = 0;  i < RestaurantDefaultData.TilesX ;i++){
       for(let j = 0; j < RestaurantDefaultData.TilesY; j++){
+        
+        let NpcPositions = CalculateRestaurantTile(i, j);
+        //console.log(npc1.get_posX()/100, npc1.get_posY()/100);
+        if ( i == npc1.get_posX()/103.29 && j == npc1.get_posY()/132.2){
 
-        let LocalPositions = CalculateRestaurantTile(i, j);
-        //console.log(i,j)
-        if(i == npc1.get_posX() && j == npc1.get_posY()){
-          TimeToEat();
-          console.log("Comeu");
-          
-        }else if(move){
+          rect(NpcPositions.x, NpcPositions.y, 64,64)
+
+        }
+      }
+    }
+
+*/
+
+    //FUNCIONANDO 
+//dentro do restaurante E fora de uma mesa
+      //if(npc1.get_posX() > 200 && npc1.get_posX() < 700 && npc1.get_posY() >= 100 && npc1.get_posY() <= 500){
+          if(move){
             if (npc1.get_posX() < mx) {
                 npc1.moveX(1);
             }
@@ -43,11 +49,14 @@ const DrawNpc = () => {
             }
             if (npc1.get_posY() > my) {
                 npc1.moveY(-1);
+            }
+            // if (npc1.get_posX() > ch.x &&  npc1.get_posX() < ch.x + ch.w &&  
+              //npc1.get_posY() > ch.y  &&  npc1.get_posY() < ch.y + ch.h){
+              //TimeToEat();
+            //}
           }
-        };
-      };
-    };
-  
+      
+
 
   if(npc1.get_posY() >= 180 ) {
     go_up();
@@ -64,50 +73,83 @@ const DrawNpc = () => {
     go_left();
   }
   
+  //console.log(npc1.get_posX());
 }
 
-const NpcPressed = () => {
-    mov = true;
-    mx = mouseX;
-    my = mouseY;
-}
+const NpcOnTile = () => {
 
-const TimeToEat = () => {
-  
-    var counter = 0;
-    var timer = setInterval(function() {
-    if( counter >= 10 ) {
-        clearInterval(timer);
+  let LocalNpcOnTile = false;
+
+  for(let i = 0;  i < RestaurantDefaultData.TilesX ;i++){
+    for(let j = 0; j < RestaurantDefaultData.TilesY; j++){
+
+     let LocalTilePos = CalculateRestaurantTile(i, j)
+
+    if(npc1.get_posX() > LocalTilePos.x && npc1.get_posX() < LocalTilePos.x + RestaurantDefaultData.TilesSize && npc1.get_posY() > LocalTilePos.y && mouseY < LocalTilePos.y + RestaurantDefaultData.TilesSize){
+      MouseOnTile.x = i;
+      MouseOnTile.y = j;
+      LocalNpcOnTile = true;
     }
-    leave();
 
-    }, 5000);
+    };
+  };
+
+  if(!LocalNpcOnTile){
+    mx = null;
+    my = null;
+  };
+
+
+};
+
+
+
+function NpcPressed(){
+
+  mov=true;
+  mx=mouseX;
+  my=mouseY;
 
 }
 
-const leave = () => {
+
+
+function TimeToEat(){
+  
+var counter = 0;
+var timer = setInterval(function() {
+  if( counter >= 10 ) {
+    clearInterval(timer);
+  }
+  leave();
+
+}, 5000);
+
+}
+
+
+function leave(){
     npc1.posX = -50;
-    npc1.posY = -50; 
-    
-    // Enviar o dinheiro, xp, e -1 comida para o database e - comida X
+    npc1.posY = -50;
+  
+    // Enviar o dinheiro para o database e - comida X
     NpcConsume();
     GiveExp();
     GiveMoney();
-
 }
 
-const go_up = () => {
+function go_up (){
     npc1.posY = npc1.posY - 2 ;
 }
 
-const go_down = () => {
+function go_down (){
     npc1.posY = npc1.posY + 2 ;
 }
 
-const go_rigth = () => {
+function go_rigth (){
     npc1.posX = npc1.posX + 2 ;
 }
 
-const go_left = () => {
+function go_left (){
     npc1.posX = npc1.posX - 2 ;
 }
