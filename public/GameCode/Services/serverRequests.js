@@ -94,6 +94,26 @@ const UpdateIngredientsMarketPlace = () =>{
 };
 
 
+//Update the ingredients inventory, dishes inventory and the decoration inventory
+const UpdateStorageInventory = () =>{
+
+  httpPost('/post/getIngredientsInventory', {id: UserID}, data =>{
+
+    let LocalData = eval(data);
+
+    ingredientsInventory = [];
+    for(let LocalIgredients of LocalData){
+
+      ingredientsInventory.push(LocalIgredients);
+    };
+
+
+  });
+
+};
+
+
+//Update the ingredients on the cooking tab and the marketplace
 const UpdateIngredientsInventory = () =>{
   httpPost('/post/getIngredientsInventory', {id: UserID}, data =>{
 

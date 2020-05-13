@@ -294,6 +294,9 @@ const UImousePressed = () =>{
         LeaderboardsMousePressed();
     }
 
+    if(StorageWindow){
+        StorageWindowMousePressed();
+    }
 
     //After pressing the 3 dots u get to click on several buttons
     if(UIoptionsOpen){
@@ -319,8 +322,13 @@ const UImousePressed = () =>{
             if(!LeaderboardsWindow){UpdateLeaderBoard()};
             LeaderboardsWindow = !LeaderboardsWindow});
 
+        
+
         //Open and close the storage window
-        StorageUIbutton.pressed(()=>{StorageWindow = !StorageWindow});
+        StorageUIbutton.pressed(()=>{
+            StorageWindow = !StorageWindow;
+            if(StorageWindow){UpdateStorageInventory()};
+        });
 
         MapUIbutton.pressed(()=>{Stage = 'Map';
             UIoptionsOpen = false;});
