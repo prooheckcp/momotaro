@@ -2,7 +2,7 @@
 let NPCconfiguration = {
   npcSize : {x: 50, y: 50},
   defaultTime: 15,
-  MaxWaitingTime: 10
+  MaxWaitingTime: 30
 };
 
 //Objects on which NPCs can sit
@@ -21,6 +21,7 @@ let NPCcreationDebounce = true;
 //Keep track of time
 let TimePassed = 0;
 let LastNPC = 0;
+
 //The current NPCS
 let NPCsInTheRestaurant = [];
 
@@ -42,23 +43,44 @@ function DrawNpc() {
   }
 
   //Draw the NPCs on the screen
-  for(let NPC of NPCsInTheRestaurant){
+  for(let i = 0; i < NPCsInTheRestaurant.length; i++){
+
+    //Assign the NPC variable
+    let NPC = NPCsInTheRestaurant[i];
+
+    //NPC position
+    let NPCwaitingPosition = {
+      x: windowWidth/2 - (RestaurantDefaultData.TilesX/2 * RestaurantDefaultData.TilesSize) + RestaurantDefaultData.TilesSize + ((i * (NPCconfiguration.npcSize.x + 20))),
+      y: windowHeight/2 + (RestaurantDefaultData.TilesY/2 * RestaurantDefaultData.TilesSize) + RestaurantDefaultData.TilesSize
+    };
+
+    //Check if the mouse is located on the NPC
+    if(mouseX > NPCwaitingPosition.x && mouseX < NPCconfiguration.npcSize.x + NPCwaitingPosition.x && mouseY > NPCwaitingPosition.y && mouseY < NPCwaitingPosition.y + NPCconfiguration.npcSize.y){
+      NPC.beingHovered = true;
+    }else{
+      NPC.beingHovered = false;
+    };
+
 
     //Draw the NPC
     if(NPC.NPCskin == null){
-      rect(windowWidth/2 - (RestaurantDefaultData.TilesX/2 * RestaurantDefaultData.TilesSize) + RestaurantDefaultData.TilesSize, windowHeight/2 + (RestaurantDefaultData.TilesY/2 * RestaurantDefaultData.TilesSize), NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
+      if(NPC.selected){fill(250, 233, 0)}else{fill(255)};
+
+      //Decide the position
+      if(!NPC.sit){
+        rect(NPCwaitingPosition.x, NPCwaitingPosition.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
+      }else{
+        rect(NPC.chairPos.x , NPC.chairPos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
+      }
+
     }else{
-      image(NPC.NPCskin, windowWidth/2 - (RestaurantDefaultData.TilesX/2 * RestaurantDefaultData.TilesSize) + RestaurantDefaultData.TilesSize, windowHeight/2 + (RestaurantDefaultData.TilesY/2 * RestaurantDefaultData.TilesSize), NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
+      image(NPC.NPCskin, NPCwaitingPosition.x, NPCwaitingPosition.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
     }
 
     //If the time ran out then delete the NPC
     if(NPC.enteredTime + NPCconfiguration.MaxWaitingTime < TimePassed){
       let LocalNPCindex = NPCsInTheRestaurant.indexOf(NPC);
       NPCsInTheRestaurant.remove(NPC);
-
-      print('DELETED NPC');
-      //print('Deleted an NPC');
-      print(NPCsInTheRestaurant);
     }
 
 
@@ -76,50 +98,91 @@ const CreateNewNPC = () => {
 
   let LocalToBeSentData = {
     NPCskin: null,
-    x: windowWidth/2 - (RestaurantDefaultData.TilesX/2 * RestaurantDefaultData.TilesSize) + RestaurantDefaultData.TilesSize,
-    y: windowHeight/2 + (RestaurantDefaultData.TilesY/2 * RestaurantDefaultData.TilesSize),
+    x: 0,
+    y: 0,
     enteredTime: TimePassed,
-    sit : false
+    sit : false,
+    selected: false,
+    chairPos: {x: 0, y: 0},
+    beingHovered : false
   }
-
-
 
   LastNPC = TimePassed; 
   NPCsInTheRestaurant.push(LocalToBeSentData);
   NPCcreationDebounce = true;
-  print(NPCsInTheRestaurant);
 }
 
 function NpcPressed(){
-
   
+  //Select a NPC
+  for(let NPC of NPCsInTheRestaurant){
+    if(NPC.beingHovered){
+
+      let LocalInitialState = NPC.selected;
+
+      //Remove the selected from other NPCs
+      for(let NPC2 of NPCsInTheRestaurant){
+        NPC2.selected = false;
+      }
+
+      //Set the correct NPC as selected
+      NPC.selected = !LocalInitialState;
+    };
+  }
   let ClickedObject = CheckObjectOnTile();
 
   for(let NPC of NPCsInTheRestaurant){
 
+    let SomeoneIsSittingThere = true;
     //Check if the object exists
     if(typeof(ClickedObject) != typeof('String')){
 
       //Check if the NPC is already in a chair 
       if(!NPC.sit){
 
+        //Break the loop in case there is no selected NPC
+          let AtLestOneHoveredNPC = false;
+          for(let NPC of NPCsInTheRestaurant){
+            if(NPC.selected){
+              AtLestOneHoveredNPC = true
+            };
+          };
+          if(!AtLestOneHoveredNPC){
+            break;
+          };
+
+          //Check if there was already someone sitting on that table
+          for(let NPC of NPCsInTheRestaurant){
+
+            let LocalMousePos = CalculateRestaurantTile(MouseOnTile.x, MouseOnTile.y);
+            if(NPC.chairPos.x  == LocalMousePos.x && NPC.chairPos.y == LocalMousePos.y){
+              alert('There is already a user in this chair');
+              SomeoneIsSittingThere = false;
+            };
+
+          };
+
         //Check the object type
         for(let chair of ObjectsThatAreSittable){
 
           if(chair == ClickedObject.item_id){
-            print('Can sit!')
+
+            //If the chair exists check if the NPC is selected
+            if(NPC.selected == true && NPC.sit == false && SomeoneIsSittingThere){
+
+              //Set a NPC position and variables
+              NPC.selected = false;
+              NPC.sit = true;
+
+              //The position of the chair
+              NPC.chairPos = CalculateRestaurantTile(MouseOnTile.x, MouseOnTile.y);
+              print('Sitted a NPC')
+            }
           }
         }
-
-      }
-
-  
-
-    }else{
-      print('Object does not exist!')
+      };
     }
-
-  }
+  };
 
 }
 
@@ -150,4 +213,3 @@ const CheckObjectOnTile = mousePositions =>{
 
 
 };
-// MouseOnTile
