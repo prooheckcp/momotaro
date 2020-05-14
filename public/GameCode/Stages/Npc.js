@@ -1,9 +1,13 @@
 //Variables\\
 let NPCconfiguration = {
   npcSize : {x: 50, y: 50},
-  defaultTime: 120,
-  MaxWaitingTime: 60
+  defaultTime: 15,
+  MaxWaitingTime: 10
 };
+
+//Objects on which NPCs can sit
+
+const ObjectsThatAreSittable = ['ch_fr', 'ch_ba', 'cu_ch'];
 
 //Prestige Points
 let CurrentPrestigePoints = 0;
@@ -18,7 +22,7 @@ let NPCcreationDebounce = true;
 let TimePassed = 0;
 let LastNPC = 0;
 //The current NPCS
-const NPCsInTheRestaurant = [];
+let NPCsInTheRestaurant = [];
 
 
 function Npcsetup() {
@@ -31,8 +35,6 @@ function DrawNpc() {
   //Check on how much time has passed
   TimePassed += deltaTime/1000
 
-
-
   //Create a new NPC
   if(LastNPC + TimeBetweenEachNPC < TimePassed && NPCcreationDebounce){
     NPCcreationDebounce = false;
@@ -42,21 +44,23 @@ function DrawNpc() {
   //Draw the NPCs on the screen
   for(let NPC of NPCsInTheRestaurant){
 
-    //If the time ran out then delete the NPC
-    if(NPC.enteredTime + NPCconfiguration.MaxWaitingTime < TimePassed){
-      let LocalNPCindex = NPCsInTheRestaurant.indexOf(NPC);
-      NPCsInTheRestaurant.slice(LocalNPCindex, 1);
-      print('Deleted an NPC');
-      print(NPCsInTheRestaurant);
-    }
-
-
     //Draw the NPC
     if(NPC.NPCskin == null){
       rect(windowWidth/2 - (RestaurantDefaultData.TilesX/2 * RestaurantDefaultData.TilesSize) + RestaurantDefaultData.TilesSize, windowHeight/2 + (RestaurantDefaultData.TilesY/2 * RestaurantDefaultData.TilesSize), NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
     }else{
       image(NPC.NPCskin, windowWidth/2 - (RestaurantDefaultData.TilesX/2 * RestaurantDefaultData.TilesSize) + RestaurantDefaultData.TilesSize, windowHeight/2 + (RestaurantDefaultData.TilesY/2 * RestaurantDefaultData.TilesSize), NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
     }
+
+    //If the time ran out then delete the NPC
+    if(NPC.enteredTime + NPCconfiguration.MaxWaitingTime < TimePassed){
+      let LocalNPCindex = NPCsInTheRestaurant.indexOf(NPC);
+      NPCsInTheRestaurant.remove(NPC);
+
+      print('DELETED NPC');
+      //print('Deleted an NPC');
+      print(NPCsInTheRestaurant);
+    }
+
 
   };
 
@@ -67,11 +71,15 @@ const CreateNewNPC = () => {
 
   print('A new NPC was created');
 
+  //Update the dishes inventory
+  UpdateDishesInventory();
+
   let LocalToBeSentData = {
     NPCskin: null,
     x: windowWidth/2 - (RestaurantDefaultData.TilesX/2 * RestaurantDefaultData.TilesSize) + RestaurantDefaultData.TilesSize,
     y: windowHeight/2 + (RestaurantDefaultData.TilesY/2 * RestaurantDefaultData.TilesSize),
-    enteredTime: TimePassed
+    enteredTime: TimePassed,
+    sit : false
   }
 
 
@@ -83,7 +91,36 @@ const CreateNewNPC = () => {
 }
 
 function NpcPressed(){
-  print(CheckObjectOnTile());
+
+  
+  let ClickedObject = CheckObjectOnTile();
+
+  for(let NPC of NPCsInTheRestaurant){
+
+    //Check if the object exists
+    if(typeof(ClickedObject) != typeof('String')){
+
+      //Check if the NPC is already in a chair 
+      if(!NPC.sit){
+
+        //Check the object type
+        for(let chair of ObjectsThatAreSittable){
+
+          if(chair == ClickedObject.item_id){
+            print('Can sit!')
+          }
+        }
+
+      }
+
+  
+
+    }else{
+      print('Object does not exist!')
+    }
+
+  }
+
 }
 
 const UpdatePrestigePoints = () =>{

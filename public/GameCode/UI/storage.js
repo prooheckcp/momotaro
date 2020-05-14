@@ -58,6 +58,23 @@ const setupStorageWindow = () =>{
 
 const DrawStorageWindow = () =>{
 
+
+    //Default stats of the window 
+    StorageMainFrameDetails = {
+        x: windowWidth/2 - 500,
+        y: windowHeight/2 - 300
+    };
+
+    //The info about the slots displayed on each tab
+    LocalSlotInformation = {
+        x: StorageMainFrameDetails.x + 10,
+        y: StorageMainFrameDetails.y + 10,
+        w: 100,
+        h: 100,
+        slotLengthX: 9,
+        slotLengthY: 4
+    };
+
     //Left arrow
     StorageLeftArrow.x = StorageMainFrameDetails.x + 20;
     StorageLeftArrow.y = StorageMainFrameDetails.y + 475;

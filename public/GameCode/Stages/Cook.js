@@ -278,6 +278,7 @@ const CookMousePressed = () =>{
                             alert(data);
                             clickingSound.play();
                             UpdateIngredientsInventory();
+                            UpdateDishesInventory();
                         });
                     }
                 }

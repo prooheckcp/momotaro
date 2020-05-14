@@ -204,3 +204,18 @@ const NpcConsume = () =>{
   });
   
 };
+
+
+const UpdateDishesInventory = () =>{
+  httpPost('/post/getInventoryDishes', {id: UserID}, data => {
+    
+    let LocalData = eval(data);
+
+    dishesInventory = [];
+
+    for(dish of LocalData){
+      dishesInventory.push(dish);
+    };
+
+  });
+}
