@@ -97,19 +97,12 @@ function DrawNpc() {
 
     //Check if the user has the dish the NPC wants\\
     for(let dish of dishesInventory){
-      if(dish.dish_id == NPC.dish.dish_id && NPC.sit && dish.dishes_amount > 0){
+      if(dish.dish_id == NPC.dish.dish_id && NPC.sit && dish.dishes_amount > 0 && !NPC.fed){
 
+        NPC.fed = true; 
         //Buy the dish proccess
-        setInterval(() => {
-          let LocalStatusResult = NPCbuyDish(dish.dish_id);
-          if(LocalStatusResult.status == 'ok'){
-            //Remove the NPC and update the stats
-            UpdateIngredientsInventory();
-            UpdateRestaurantStats();
-          }else{
-            //Alert the console
-            print(LocalStatusResult.status);
-          };          
+        let LocalInterval = setTimeout(() => {
+          NPCbuyDish(dish.dish_id, NPC);
         }, 1000);
 
 
@@ -118,7 +111,7 @@ function DrawNpc() {
     //---------------------------------------------\\
 
     //If the time ran out then delete the NPC\\
-    if(NPC.enteredTime + NPCconfiguration.MaxWaitingTime < TimePassed){
+    if(NPC.enteredTime + NPCconfiguration.MaxWaitingTime < TimePassed && !NPC.fed){
       let LocalNPCindex = NPCsInTheRestaurant.indexOf(NPC);
       NPCsInTheRestaurant.remove(NPC);
     };
@@ -147,7 +140,8 @@ const CreateNewNPC = () => {
     selected: false,
     chairPos: {x: 0, y: 0},
     beingHovered : false,
-    dish: null
+    dish: null,
+    fed: false
   }
 
   //Choose the dish\\

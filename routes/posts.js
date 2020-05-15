@@ -5,6 +5,17 @@ const dbase = require('./../services/database');
 ////////////////////////////////////////////ERROR - res.send([{money : results[0].res_money, level: results[0].res_level, exp: results[0].res_exp}]); ////////////////////////////////////////////
 
 
+//Decrease the dish, give the money and the exp
+router.post('/ConsumeDish', (req, res, next) => {
+    const UserInfo = req.body;
+
+    dbase.query('CALL purchaseDish("' + UserInfo.DishID + '", ' + UserInfo.id + ');', (err, results, fields) =>{
+
+        if(err){console.log(err)};
+        res.send({status: 'ok'});
+    });
+
+});
 
 router.post('/getInventoryDishes', (req, res, next) => {
 
@@ -98,18 +109,6 @@ router.post('/getIngredientsInventory', (req, res, next) =>{
     dbase.query('SELECT * FROM momotaro.ingredients_inventory WHERE user_id = ' + UserInfo.id + ';', (err, results, fielnds) =>{
         
         res.send(results);
-
-    });
-
-});
-
-router.post('/NpcConsume', (req, res, next) => {
-    const UserInfo = req.body;
-
-    dbase.query('UPDATE dishes_inventory SET dishes_amount = dishes_amount - ' + UserInfo.amount + ' WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
-
-        if(err){console.log(err)};
-            res.send('DONE!')
 
     });
 

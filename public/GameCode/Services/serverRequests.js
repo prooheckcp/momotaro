@@ -1,8 +1,25 @@
-const NPCbuyDish = (dishID) =>{
+//The purchase of a dish
+const NPCbuyDish = (dishID, NPC) =>{
 
-  print(dishID);
+  httpPost('/post/ConsumeDish', 'json', {id: UserID, DishID: dishID}, data =>{
 
-  return {status: 'bruh'};
+    if(data.status == 'ok'){
+      print('yummi :)')
+      //Remove the NPC and update the stats
+      UpdateIngredientsInventory();
+      UpdateRestaurantStats();
+
+      
+      setTimeout(() => {
+        NPCsInTheRestaurant.remove(NPC);
+      }, 2000);
+
+    }else{
+      //Alert the console
+      print(LocalStatusResult.status);
+    };          
+
+  });
 
 };
 
