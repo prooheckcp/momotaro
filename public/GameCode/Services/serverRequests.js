@@ -1,6 +1,12 @@
+const NPCbuyDish = (dishID) =>{
+
+  print(dishID);
+
+  return {status: 'bruh'};
+
+};
+
 const UpdateRestaurantRequest = () => {
-
-
 
     httpPost('/post/getDecoration', {id: UserID}, data =>{
         let LocalData = eval(data)
@@ -15,7 +21,7 @@ const UpdateRestaurantRequest = () => {
     });
 
   
-  
+    UpdateIngredientsInventory();
 
 };
 
@@ -106,6 +112,7 @@ const UpdateIngredientsMarketPlace = () =>{
 //Update the ingredients inventory, dishes inventory and the decoration inventory
 const UpdateStorageInventory = () =>{
 
+
   httpPost('/post/getIngredientsInventory', {id: UserID}, data =>{
 
     let LocalData = eval(data);
@@ -122,13 +129,13 @@ const UpdateStorageInventory = () =>{
   httpPost('/post/getInventory', {id : UserID}, data =>{
     let LocalData = eval(data);
 
+    inventory = [];
     if(LocalData[0] != null){
-      inventory = [];
+      
       for(item of LocalData){
         inventory.push(item);
       };
     };
-
   });
 
 

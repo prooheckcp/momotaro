@@ -83,6 +83,9 @@ router.get('/music/KnifeChoping', (req, res, next) =>{
 //Images\\
 
 //UI
+router.get('/image/ChatBalloon', (req, res, next) =>{
+    res.sendFile(ImagesPathUI('ChatBalloon.png'));
+});
 
 router.get('/image/StorageFrame', (req, res, next) =>{
     res.sendFile(ImagesPathUI('StorageFrame.png'));

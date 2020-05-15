@@ -3,6 +3,7 @@ let backgroundMusic;
 let clickingSound;
 
 //UI elements\\
+let ChatBalloon;
 let DefaultRedButton;
 let Logo;
 let backgroundImage;
@@ -162,6 +163,7 @@ RightYellowArrow = loadImage('get/images/right_yellow_arrow');
 LeftYellowArrow = loadImage('get/images/left_yellow_arrow');
 CircleButton = loadImage('/get/image/circlebutton');
 
+ChatBalloon = loadImage('/get/image/ChatBalloon');
 CircleButtonCheck = loadImage('/get/image/circlebuttonCheck');
 CircleButtonCooking = loadImage('/get/image/circlebuttonCooking');
 CircleButtonDecoration = loadImage('/get/image/circlebuttonDecoration');

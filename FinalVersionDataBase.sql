@@ -39,6 +39,7 @@ CREATE TABLE dec_market(
 	item_price INT DEFAULT 0 NOT NULL,
     PRIMARY KEY(item_id)
 );
+
 /*Here we write the decorations we want in the game*/
 INSERT INTO dec_market(item_id, item_price) VALUES('ro_ta', 100); #Add the round table with the set price of 100 yen
 INSERT INTO dec_market(item_id, item_price) VALUES('ch_fr', 100); #Add a front chair
@@ -74,14 +75,17 @@ CREATE TABLE recipes_types(
     recipe_level INT NOT NULL DEFAULT 0,
     recipe_name VARCHAR(255),
     dish_id VARCHAR(8),
+    dish_price INT,
+    exp_value INT,
     PRIMARY KEY(recipe_id)
 );
+
 /* Add the recipes here */
-INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id) VALUES('rcp_1', 1, 'Bread Omelete', 'br_om');
-INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id) VALUES('rcp_2', 2, 'Tuna Sushi', 'tu_su');
-INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id) VALUES('rcp_3', 3, 'Shimp Sushi', 'sh_su');
-INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id) VALUES('rcp_4', 4, 'Chocolate Cake', 'ch_ca');
-INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id) VALUES('rcp_5', 5, 'Cherry Pie', 'ch_pi');
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_1', 1, 'Bread Omelete', 'br_om', 300, 1);
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_2', 2, 'Tuna Sushi', 'tu_su', 450, 2);
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_3', 3, 'Shimp Sushi', 'sh_su', 500, 4);
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_4', 4, 'Chocolate Cake', 'ch_ca', 600, 8);
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_5', 5, 'Cherry Pie', 'ch_pi', 700, 10);
 /*----------------------*/
 
 
@@ -131,4 +135,77 @@ CREATE TABLE ingredients_inventory(
     FOREIGN KEY(user_id) REFERENCES users(user_id),
     FOREIGN KEY(ingredient_id) REFERENCES ingredients_market(ingredient_id)
 );
+
+
+/*Triggers*/
+DELIMITER $$
+
+CREATE TRIGGER add_default_recipes
+BEFORE INSERT ON restaurant
+FOR EACH ROW
+BEGIN
+
+	INSERT INTO recipes_inventory(dish_id, user_id, recipe_id)
+    VALUES('br_om', new.user_id, 'rcp_1');
+
+END$$
+
+
+
+/*Procedures*/
+
+CREATE PROCEDURE purchaseDish(IN input_dish_id VARCHAR(8), IN input_id INT)
+BEGIN
+	
+	SET @AmoutOfCash = (
+		SELECT 
+			dish_price 
+		FROM
+			recipes_types
+		WHERE
+			dish_id = input_dish_id
+    );
+
+	SET @AmountOfEXP = (
+		SELECT
+			exp_value
+		FROM
+			recipes_types
+		WHERE
+			dish_id = input_dish_id
+    );
+
+	SET @AmountOfDishes = (
+		SELECT
+			dishes_amount
+		FROM
+			dishes_inventory
+		WHERE 
+			user_id = input_id AND dish_id = input_dish_id
+    );
+
+IF @AmountOfDishes > 0 THEN
+	UPDATE restaurant 
+    SET
+		res_money = res_money + @AmoutOfCash,
+        res_exp = res_exp + @AmountOfEXP
+    WHERE 
+		user_id = input_id;
+    
+    UPDATE dishes_inventory
+    SET 
+		dishes_amount = dishes_amount - 1
+    WHERE
+		user_id = input_id;
+        
+        
+	SELECT user_id AS ID, res_money AS money, res_exp AS EXP
+    FROM restaurant WHERE
+    user_id = input_id;
+END IF;
+
+END$$
+
+DELIMITER ; 
+
 
