@@ -145,7 +145,7 @@ router.post('/CreateNewDish', (req, res, next) => {
         };
 
 
-        dbase.query('SELECT * FROM dishes_inventory WHERE user_id = ' + UserInfo.userID + ' AND dish_id = "br_om";', (err, results, fields) =>{
+        dbase.query('SELECT * FROM dishes_inventory WHERE user_id = ' + UserInfo.userID + ' AND dish_id = "' + UserInfo.dishID + '";', (err, results, fields) =>{
             if(err){console.log(err)};
 
             if(results[0] == undefined){

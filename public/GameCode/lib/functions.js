@@ -92,7 +92,6 @@ const CheckIfMouseInRect = (button, mx, my) =>{
 //Adds a black outline to the text instead of the default looking one
 const BetterText = (string, x, y, color) => {
 
-
     fill(0);
     text(string, x + 2, y);
     text(string, x + 2, y + 2);

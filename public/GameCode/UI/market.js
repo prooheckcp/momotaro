@@ -95,8 +95,12 @@ const DrawMarketWindow = () =>{
 
     textSize(30);
     textAlign(CENTER, CENTER);
-    BetterText('Decoration', windowWidth/2 - 400, windowHeight/2 - 337.5);
 
+    if(MarketWindowSection){
+      BetterText('Decoration', windowWidth/2 - 400, windowHeight/2 - 337.5, {r: 255, g: 231, b: 100});
+    }else{
+        BetterText('Decoration', windowWidth/2 - 400, windowHeight/2 - 337.5);
+    };
 
     //Market button for the ingredients\\
     MarketButtonIngredients.x = windowWidth/2 - 280;
@@ -112,7 +116,12 @@ const DrawMarketWindow = () =>{
 
     textSize(30);
     textAlign(CENTER, CENTER);
-    BetterText('Ingredients', windowWidth/2 - 180, windowHeight/2 - 337.5);
+
+    if(!MarketWindowSection){
+        BetterText('Ingredients', windowWidth/2 - 180, windowHeight/2 - 337.5, {r: 255, g: 231, b: 100});
+    }else{
+        BetterText('Ingredients', windowWidth/2 - 180, windowHeight/2 - 337.5);
+    };
 
     noTint();
 

@@ -27,7 +27,7 @@ const DrawLeaderboardsWindow = () =>{
     //Text
     textSize(30);
     textAlign(CENTER, CENTER)
-    BetterText('Top Levels', LocalLeaderboardX + 100, LocalLeaderboardY - 37.5);
+    BetterText('Top Levels', LocalLeaderboardX + 100, LocalLeaderboardY - 37.5, {r: 255, g: 231, b: 100});
 
     //Left arrow
     leaderboardLeftArrow.x = LocalLeaderboardX + 50;

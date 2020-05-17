@@ -446,7 +446,12 @@ const StorageWindowHeader = StorageMainFrameDetails =>{
     IngredientsStorageTab.hovered(()=>{tint(150)});
     IngredientsStorageTab.draw();
     noTint();
-    BetterText('Ingredients', StorageMainFrameDetails.x + 100, StorageMainFrameDetails.y - 37.5);
+    if(CurrentStoragePage == 'ingredients'){
+        BetterText('Ingredients', StorageMainFrameDetails.x + 100, StorageMainFrameDetails.y - 37.5, {r: 255, g: 231, b: 100});
+    }else{
+        BetterText('Ingredients', StorageMainFrameDetails.x + 100, StorageMainFrameDetails.y - 37.5);
+    };
+    
     //Dishes 
     DishesStorageTab.x = StorageMainFrameDetails.x + 220;
     DishesStorageTab.y = StorageMainFrameDetails.y - 75;
@@ -454,7 +459,12 @@ const StorageWindowHeader = StorageMainFrameDetails =>{
     DishesStorageTab.hovered(()=>{tint(150)});
     DishesStorageTab.draw();
     noTint();
-    BetterText('Dishes', StorageMainFrameDetails.x + 320, StorageMainFrameDetails.y - 37.5);
+    if(CurrentStoragePage == 'dishes'){
+        BetterText('Dishes', StorageMainFrameDetails.x + 320, StorageMainFrameDetails.y - 37.5, {r: 255, g: 231, b: 100});
+    }else{
+        BetterText('Dishes', StorageMainFrameDetails.x + 320, StorageMainFrameDetails.y - 37.5);
+    };
+    
     //Decoration
     DecorationStorageTab.x = StorageMainFrameDetails.x + 440;
     DecorationStorageTab.y = StorageMainFrameDetails.y - 75;
@@ -462,7 +472,12 @@ const StorageWindowHeader = StorageMainFrameDetails =>{
     DecorationStorageTab.hovered(()=>{tint(150)});
     DecorationStorageTab.draw();
     noTint();
-    BetterText('Decoration', StorageMainFrameDetails.x + 540, StorageMainFrameDetails.y - 37.5);
+    if(CurrentStoragePage == 'decoration'){
+        BetterText('Decoration', StorageMainFrameDetails.x + 540, StorageMainFrameDetails.y - 37.5, {r: 255, g: 231, b: 100});
+    }else{
+        BetterText('Decoration', StorageMainFrameDetails.x + 540, StorageMainFrameDetails.y - 37.5);
+    };
+    
     //--------\\
 
 };

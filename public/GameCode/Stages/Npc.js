@@ -251,6 +251,11 @@ const CheckObjectOnTile = mousePositions =>{
   mouseOnTileFun();
   //The item on that tile
   let LocalTileItem = 'Nothing';
+
+  if(PlayerRestaurantFurniture == undefined || PlayerRestaurantFurniture == null){
+    return;
+  }
+
   for(let item of PlayerRestaurantFurniture){
 
     if(item.item_x == MouseOnTile.x && item.item_y == MouseOnTile.y){

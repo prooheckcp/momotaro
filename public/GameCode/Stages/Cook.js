@@ -7,7 +7,7 @@ let dishesLevels = []; //The level each recipe requires
 let dishesInventory = []; //The inventory of the player when it comes to dishes
 
 let ingredientsInventory = []; //The inventory of the player when it comes to ingredients
-let recipesInventory = []; //The inventory of the player when it comes to recipes
+
 
 
 let ItemsToBeCrafted = {slot1: '', slot2: '', slot3: ''}; //The currents items within the 3 slots
@@ -24,6 +24,11 @@ let CookingTabButton;
 let RecipesTabButton;
 
 const CookSetUp = () => {
+
+    //Recipes Arrow buttons\\
+    RecipesLeftArrow = new NewButton(0, 0, 0, 0, LeftYellowArrow);
+    RecipesRightArrow = new NewButton(0, 0, 0, 0, RightYellowArrow);
+    //----------------------\\
 
     //The tabs buttons\\
 
