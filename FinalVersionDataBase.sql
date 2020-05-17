@@ -81,7 +81,7 @@ CREATE TABLE recipes_types(
 );
 
 /* Add the recipes here */
-INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_1', 1, 'Bread Omelete', 'br_om', 300, 10);
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_1', 1, 'Bread Omelete', 'br_om', 300, 1);
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_2', 2, 'Tuna Sushi', 'tu_su', 450, 2);
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_3', 3, 'Shimp Sushi', 'sh_su', 500, 4);
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_4', 4, 'Chocolate Cake', 'ch_ca', 600, 8);

@@ -307,6 +307,7 @@ const UImousePressed = () =>{
             inventory = null;
             PlayerRestaurantFurniture = null;
             Stage = '';
+            NPCsInTheRestaurant = [];
         });
         //Go to the cooking menu
         CookingUIbutton.pressed(() => {Stage = 'Cook';

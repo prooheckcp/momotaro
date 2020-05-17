@@ -1,8 +1,8 @@
 //Variables\\
 let NPCconfiguration = {
   npcSize : {x: 50, y: 50},
-  defaultTime: 15,
-  MaxWaitingTime: 30
+  defaultTime: 120,
+  MaxWaitingTime: 100
 };
 
 //Objects on which NPCs can sit
