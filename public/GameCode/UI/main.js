@@ -302,6 +302,7 @@ const UImousePressed = () =>{
     if(UIoptionsOpen){
         //Log u off from the game
         LogOffUIbutton.pressed(()=>{
+            UserID = 0;
             Logged = false;
             inventory = null;
             PlayerRestaurantFurniture = null;

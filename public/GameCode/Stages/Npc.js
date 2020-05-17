@@ -160,6 +160,10 @@ const CreateNewNPC = () => {
 
 function NpcPressed(){
   
+  if(UserID == 0){
+    return;
+  }
+
   //Select a NPC
   for(let NPC of NPCsInTheRestaurant){
     if(NPC.beingHovered){

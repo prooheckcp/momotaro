@@ -8,7 +8,7 @@ CREATE TABLE users(
     user_id         INT NOT NULL AUTO_INCREMENT,
     user_password     	VARCHAR(40) NOT NULL,
     user_name         	VARCHAR(40) NOT NULL,
-    user_email 			VARCHAR(40) NOT NULL,
+    user_email 			VARCHAR(255) NOT NULL,
     PRIMARY KEY (user_id)
 );
 
@@ -81,7 +81,7 @@ CREATE TABLE recipes_types(
 );
 
 /* Add the recipes here */
-INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_1', 1, 'Bread Omelete', 'br_om', 300, 1);
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_1', 1, 'Bread Omelete', 'br_om', 300, 10);
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_2', 2, 'Tuna Sushi', 'tu_su', 450, 2);
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_3', 3, 'Shimp Sushi', 'sh_su', 500, 4);
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_4', 4, 'Chocolate Cake', 'ch_ca', 600, 8);
@@ -100,7 +100,7 @@ CREATE TABLE recipes_inventory(
 CREATE TABLE dishes_inventory(
 	user_id INT NOT NULL,
     dishes_amount INT NOT NULL,
-    dish_id VARCHAR(8) NOT NULL UNIQUE,
+    dish_id VARCHAR(8) NOT NULL,
     FOREIGN KEY(user_id) REFERENCES recipes_inventory(user_id)
 );
 
@@ -118,9 +118,9 @@ CREATE TABLE ingredients_market(
 INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('tu', 50, 1); #Tuna
 INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('wa', 20, 1); #Water
 INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('ri', 50, 1); #Rice
-INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('br', 75, 1); #Bread
+INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('br', 65, 1); #Bread
 INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('fl', 100, 2); #Flour
-INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('eg', 120, 4); #Eggs
+INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('eg', 90, 4); #Eggs
 INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('ol_oi', 250, 6); #Olivia oil
 INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('co', 85, 8); #Cocoa
 INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('ch', 100, 10); #Cherry
@@ -130,7 +130,7 @@ INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level
 /*---------------------------------*/
 CREATE TABLE ingredients_inventory(
 	user_id INT NOT NULL,
-    ingredient_id VARCHAR(8) NOT NULL UNIQUE,
+    ingredient_id VARCHAR(8) NOT NULL,
     ingredient_amount INT NOT NULL,
     FOREIGN KEY(user_id) REFERENCES users(user_id),
     FOREIGN KEY(ingredient_id) REFERENCES ingredients_market(ingredient_id)
@@ -141,13 +141,29 @@ CREATE TABLE ingredients_inventory(
 DELIMITER $$
 
 CREATE TRIGGER add_default_recipes
-BEFORE INSERT ON restaurant
+AFTER INSERT ON restaurant
 FOR EACH ROW
 BEGIN
 
 	INSERT INTO recipes_inventory(dish_id, user_id, recipe_id)
     VALUES('br_om', new.user_id, 'rcp_1');
+	
+    #Give the player a starting chair
+    INSERT INTO dec_in_inventory(item_id, user_id, item_amount)
+    VALUES('ch_fr', new.user_id, 1);
+    
+    #Give the player a starting round table
+    INSERT INTO dec_in_inventory(item_id, user_id, item_amount)
+    VALUES('ro_ta', new.user_id, 1);
+    
+    #Give some eggs
+    INSERT INTO ingredients_inventory(ingredient_id, user_id, ingredient_amount)
+    VALUES('eg', new.user_id, 3);
 
+    #Give some bread
+    INSERT INTO ingredients_inventory(ingredient_id, user_id, ingredient_amount)
+    VALUES('br', new.user_id, 3);
+    
 END$$
 
 

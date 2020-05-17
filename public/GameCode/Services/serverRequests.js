@@ -8,7 +8,7 @@ const NPCbuyDish = (dishID, NPC) =>{
       //Remove the NPC and update the stats
       UpdateIngredientsInventory();
       UpdateRestaurantStats();
-
+      CheckIfLevelUp();
       
       setTimeout(() => {
         NPCsInTheRestaurant.remove(NPC);
