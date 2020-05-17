@@ -106,8 +106,11 @@ const LeaderboardsMousePressed = () =>{
         LeaderboardsWindow = false;
     });
 
-    leaderboardLeftArrow.pressed(()=>{LeaderboardPage--});
+    if(LeaderboardPage > 0){
+        leaderboardLeftArrow.pressed(()=>{LeaderboardPage--});
+    };
 
-    leaderboardRightArrow.pressed(()=>{LeaderboardPage++});
-
+    if((LeaderboardPage + 1) * 5 < TopLevelPlayers.length){
+        leaderboardRightArrow.pressed(()=>{LeaderboardPage++});
+    };
 };
