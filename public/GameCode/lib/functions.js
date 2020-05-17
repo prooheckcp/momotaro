@@ -90,7 +90,8 @@ const CheckIfMouseInRect = (button, mx, my) =>{
 }
 
 //Adds a black outline to the text instead of the default looking one
-const BetterText = (string, x, y) => {
+const BetterText = (string, x, y, color) => {
+
 
     fill(0);
     text(string, x + 2, y);
@@ -102,9 +103,15 @@ const BetterText = (string, x, y) => {
     text(string, x, y + 2);
     text(string, x, y - 2);
 
-    fill(255);
+    if(typeof(color) == typeof({})){
+        fill(color.r, color.g, color.b)
+    }else{
+       fill(255); 
+    }
+    
     text(string, x, y);
 
+    fill(255);
 }
 
 const LowerTheAmountOfIngredients = ing_id =>{

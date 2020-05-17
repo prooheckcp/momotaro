@@ -20,9 +20,18 @@ let ResultOfTheCrafting = null; //The item that is ready to be collected from th
 let BackToTheRestaurantButton;
 let CookingRightArrow;
 let CookingLeftArrow;
-
+let CookingTabButton;
+let RecipesTabButton;
 
 const CookSetUp = () => {
+
+    //The tabs buttons\\
+
+    //Cooking
+    CookingTabButton = new NewButton(0, 0, 0, 0, MarketButton); 
+    //Recipes
+    RecipesTabButton = new NewButton(0, 0, 0, 0, MarketButton);
+    //-----------------\\
 
     /*Buttons*/
     BackToTheRestaurantButton = new NewButton(0, 0, 0, 0, CloseMark);
@@ -64,13 +73,84 @@ const CookDraw = ()=>{
 
     //Frame background\\
     background(45);
-    image(LeaderboardsFrame, LocalBackgroundFrameX, LocalBackgroundFrameY, 1000, 600);
-    image(MarketButton, LocalBackgroundFrameX, LocalBackgroundFrameY - 75, 200, 75);
+    image(MarketFrame, LocalBackgroundFrameX, LocalBackgroundFrameY, 1000, 600);
 
+    //The tabs buttons\\
+
+    //Cooking
+    CookingTabButton.x = LocalBackgroundFrameX;
+    CookingTabButton.y = LocalBackgroundFrameY - 75;
+    CookingTabButton.w = 200;
+    CookingTabButton.h = 75; 
+    CookingTabButton.hovered(()=>{
+        tint(190, 190, 59);
+    });
+
+    CookingTabButton.draw();
+    noTint();
+    //Recipes
+    RecipesTabButton.x = LocalBackgroundFrameX + 220; 
+    RecipesTabButton.y = LocalBackgroundFrameY - 75;
+    RecipesTabButton.w = 200;
+    RecipesTabButton.h = 75;
+    RecipesTabButton.hovered(()=>{
+        tint(190, 190, 59);
+    });
+
+    RecipesTabButton.draw();
+    noTint();
+    //-----------------\\
+
+    //Cooking Text
     textSize(35);
     textAlign(CENTER, CENTER);
-    BetterText('Cooking', LocalBackgroundFrameX + 100, LocalBackgroundFrameY - 37.5);
+    if(!RecipesWindowOpen){
+        BetterText('Cooking', LocalBackgroundFrameX + 100, LocalBackgroundFrameY - 37.5, {r: 255, g: 231, b: 100});
+    }else{
+        BetterText('Cooking', LocalBackgroundFrameX + 100, LocalBackgroundFrameY - 37.5);
+    };
+    //Recipes Text
+    textSize(35);
+    textAlign(CENTER, CENTER);
+    if(RecipesWindowOpen){
+        BetterText('Recipes', LocalBackgroundFrameX + 320, LocalBackgroundFrameY - 37.5, {r: 255, g: 231, b: 100});
+    }else{
+      BetterText('Recipes', LocalBackgroundFrameX + 320, LocalBackgroundFrameY - 37.5);  
+    }
+    
+
     //-----------------\\
+
+    //Go back button\\
+    BackToTheRestaurantButton.x = LocalBackgroundFrameX + 940;
+    BackToTheRestaurantButton.y = LocalBackgroundFrameY + 10;
+    BackToTheRestaurantButton.w = 50;
+    BackToTheRestaurantButton.h = 50;
+
+    BackToTheRestaurantButton.hovered(()=>{
+        BackToTheRestaurantButton.x -= 5;
+        BackToTheRestaurantButton.y -= 5;
+        BackToTheRestaurantButton.w += 10;
+        BackToTheRestaurantButton.h += 10;
+        tint(190, 190, 59);
+    });
+
+    BackToTheRestaurantButton.draw();
+    noTint();
+    //---------------\\
+    
+    if(RecipesWindowOpen){
+        //Call the recipes inventory frame 
+        DrawRecipesWindow(LocalBackgroundFrameX, LocalBackgroundFrameY);
+    }else{
+        //Call the crafting cooking frame
+        DrawCookingCraftingTable(LocalBackgroundFrameX, LocalBackgroundFrameY);
+    }
+    
+
+}
+
+const DrawCookingCraftingTable = (LocalBackgroundFrameX, LocalBackgroundFrameY) => {
 
 
  //Arrow Buttons\\
@@ -102,23 +182,6 @@ const CookDraw = ()=>{
     }
     //--------------\\
 
-    //Go back button\\
-    BackToTheRestaurantButton.x = LocalBackgroundFrameX + 940;
-    BackToTheRestaurantButton.y = LocalBackgroundFrameY + 10;
-    BackToTheRestaurantButton.w = 50;
-    BackToTheRestaurantButton.h = 50;
-
-    BackToTheRestaurantButton.hovered(()=>{
-        BackToTheRestaurantButton.x -= 5;
-        BackToTheRestaurantButton.y -= 5;
-        BackToTheRestaurantButton.w += 10;
-        BackToTheRestaurantButton.h += 10;
-        tint(190, 190, 59);
-    })
-
-    BackToTheRestaurantButton.draw();
-    noTint();
-    //---------------\\
     
     //Crafting bench\\
 
@@ -129,7 +192,7 @@ const CookDraw = ()=>{
         let LocalSquareX = LocalBackgroundFrameX + 150 + 200 * i;
         let LocalSquareY = LocalBackgroundFrameY;
 
-        if(mouseX > LocalSquareX && mouseY > LocalSquareY && mouseX < LocalSquareX + 100 && mouseY < LocalSquareY + 200){
+        if(mouseX > LocalSquareX && mouseY > LocalSquareY + 100 && mouseX < LocalSquareX + 100 && mouseY < LocalSquareY + 200){
             //The mouse is hovering this slot
             fill(242, 255, 0, 150); 
 
@@ -222,16 +285,42 @@ const CookDraw = ()=>{
 
     //----------------\\
 
-}
-
-
+};
 
 
 
 const CookMousePressed = () =>{ 
 
-    //Pressed one of the crafting place slots
-    for(let i = 0; i < 4; i++){
+    //Pressed the cross to go back to the restaurant
+    BackToTheRestaurantButton.pressed(()=>{
+        Stage = 'Default';
+        ItemsToBeCrafted.slot1 = '';
+        ItemsToBeCrafted.slot2 = '';
+        ItemsToBeCrafted.slot3 = '';
+    });
+
+    //The tab buttons to move between each window
+    CookingTabButton.pressed(()=>{
+        RecipesWindowOpen = false;
+    });
+    RecipesTabButton.pressed(()=>{
+        RecipesWindowOpen = true;
+    });
+
+    if(RecipesWindowOpen){
+        //In the case the recipes tab is open then only detecte mouse on recipes
+        RecipeWindowMousePressed();
+    }else{
+        //The reversed situatiaon from above
+        CookingCraftingMousePressed();
+    }
+
+}
+
+const CookingCraftingMousePressed = () =>{
+
+     //Pressed one of the crafting place slots
+     for(let i = 0; i < 4; i++){
 
         //Variables\\
         let LocalBackgroundFrameX = windowWidth/2 - 500;
@@ -322,20 +411,17 @@ const CookMousePressed = () =>{
         CookingLeftArrow.pressed(()=>{
             if(CurrentPageInCooking > 0){
                 CurrentPageInCooking--;
-            }
+            };
         });
-    }
+    };
 
-    //Pressed the cross to go back to the restaurant
-    BackToTheRestaurantButton.pressed(()=>{
-        Stage = 'Default';
-        ItemsToBeCrafted.slot1 = '';
-        ItemsToBeCrafted.slot2 = '';
-        ItemsToBeCrafted.slot3 = '';
-    });
 }
 
 const CookMouseReleased = () =>{
+
+    if(RecipesWindowOpen){
+        return;
+    }
 
     //Released the key button
     for(let i = (CurrentPageInCooking * 6); i < (CurrentPageInCooking + 1) * 6  ; i++){
@@ -347,8 +433,7 @@ const CookMouseReleased = () =>{
 
     };
 
-
-}
+};
 
 
 const CheckIfAdishIsFullFilled = () =>{

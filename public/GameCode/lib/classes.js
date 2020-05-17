@@ -150,7 +150,7 @@ class ingredients {
                 let LocalSquareX = LocalBackgroundFrameX + 150 + 200 * i;
                 let LocalSquareY = LocalBackgroundFrameY;
 
-                if(mouseX > LocalSquareX && mouseY > LocalSquareY && mouseX < LocalSquareX + 100 && mouseY < LocalSquareY + 200 && this.dragged){
+                if(mouseX > LocalSquareX && mouseY > LocalSquareY + 100 && mouseX < LocalSquareX + 100 && mouseY < LocalSquareY + 200 && this.dragged){
                 
                     if(i == 0){
                         //Hovering the first slot
