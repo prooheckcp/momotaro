@@ -97,6 +97,8 @@ const LoadGame = () => {
     }else{
       //Draw the user interface
       DrawUI();
+      //Show a pop up window if the user levels up
+      LevelUpAnimation();
     }
 
     

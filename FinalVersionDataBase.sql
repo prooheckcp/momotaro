@@ -81,9 +81,9 @@ CREATE TABLE recipes_types(
 );
 
 /* Add the recipes here */
-INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_1', 1, 'Bread Omelete', 'br_om', 300, 10);
-INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_2', 2, 'Tuna Sushi', 'tu_su', 450, 2);
-INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_3', 3, 'Shimp Sushi', 'sh_su', 500, 4);
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_1', 1, 'Bread Omelete', 'br_om', 300, 2);
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_2', 2, 'Tuna Sushi', 'tu_su', 450, 4);
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_3', 3, 'Shimp Sushi', 'sh_su', 500, 6);
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_4', 4, 'Chocolate Cake', 'ch_ca', 600, 8);
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_5', 5, 'Cherry Pie', 'ch_pi', 700, 10);
 /*----------------------*/
@@ -241,6 +241,27 @@ WHERE
 	user_id = inp_user_id
 );
 
+#In case the guy levels up he needs this variables
+SET @recipeID = (
+SELECT
+	recipe_id
+FROM
+	recipes_types
+WHERE
+	recipe_level = (@restaurantLevel + 1)
+);
+
+SET @recipeDishID = (
+SELECT
+	dish_id
+FROM
+	recipes_types
+WHERE
+	recipe_level = (@restaurantLevel + 1)	
+);
+
+
+
 SET @restaurantExp = (
 SELECT
 	res_exp
@@ -268,6 +289,11 @@ IF @ReqEXP <= @restaurantExp THEN
 	SELECT @restaurantLevel + 1 AS "yes";
 	UPDATE restaurant SET res_level = res_level + 1 WHERE user_id = inp_user_id;
     UPDATE restaurant SET res_exp = res_exp - @ReqEXP WHERE user_id = inp_user_id;
+    
+    IF @recipeID IS NOT NULL THEN
+		INSERT INTO recipes_inventory(dish_id, user_id, recipe_id)VALUES(@recipeDishID, inp_user_id, @recipeID);
+    END IF;
+    
 ELSE
 
 	SELECT @restaurantLevel AS "no";

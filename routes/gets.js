@@ -7,7 +7,6 @@ const dbase = require('./../services/database');
 //Data\\
 const restaurant = require(path.join(entryPoint, 'static_data', 'restaurant.js'));
 
-
 router.get('/getRecipesTypes', (req, res, next) =>{
     dbase.query('SELECT * FROM recipes_types;', (err, results, fields) =>{
         res.send(results);

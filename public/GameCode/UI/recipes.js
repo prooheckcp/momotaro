@@ -1,4 +1,4 @@
-let RecipesWindowOpen = true; //Wether the recipes window is open or not (false -> cooking crafting; true -> recipes inventory)
+let RecipesWindowOpen = false; //Wether the recipes window is open or not (false -> cooking crafting; true -> recipes inventory)
 let RecipesWindowPage = 0; //The current page of the inventory
 
 //UI Elements\\
@@ -6,6 +6,7 @@ let RecipesLeftArrow;
 let RecipesRightArrow;
 //------------\\
 
+let recipesTypes = []; //The types of recipes
 let recipesInventory = []; //The inventory of the player when it comes to recipes
 
 const DrawRecipesWindow = (LocalBackgroundFrameX, LocalBackgroundFrameY) => {
