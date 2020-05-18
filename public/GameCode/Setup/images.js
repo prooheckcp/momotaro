@@ -13,6 +13,7 @@ let RightYellowArrow;
 let LeftYellowArrow;
 let middleFrame;
 let StorageFrame;
+let LoginSignupButton;
 
 let JapanMap;
 let JapanCityRestaurant;
@@ -186,6 +187,8 @@ CloseMark = loadImage('/get/image/CloseMarket');
 MarketFrame = loadImage('/get/image/MarketFrame');
 MarketButton = loadImage('/get/image/MarketButton');
 StorageFrame = loadImage('/get/image/StorageFrame');
+
+LoginSignupButton = loadImage('/get/image/LoginSignupButton');
 
 ReturnButtonCook = loadImage('/get/image/ReturnButtonCook');
 };

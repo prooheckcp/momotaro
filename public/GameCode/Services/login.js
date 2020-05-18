@@ -1,5 +1,5 @@
-let logginIn = false; //SignUp or LogIn - True: Login, False: Signup
-let Logged = true; //Login/Signup screen or in-game
+let logginIn = true; //SignUp or LogIn - True: Login, False: Signup
+let Logged = false; //Login/Signup screen or in-game
 
 //USER DATA\\
 let UserID = 2; //The user id on client side in case the player is in game
@@ -32,18 +32,39 @@ const LoggingProcess = () =>{
     //Main menu logo
     image(Logo, windowWidth/2 - 343.75/2, windowHeight/2 - 355, 343.75, 242.25);
 
-    //Buttons
-    GoBackToLoginOptionButton.draw();
+    //Buttons\\
+    
+    //Login
     GoBackToLoginOptionButton.x = windowWidth/2 - 225;
     GoBackToLoginOptionButton.y = windowHeight/2 - 100;
-    GoBackToSignupOptionButton.draw();
+    GoBackToLoginOptionButton.hovered(()=>{
+        tint(190, 190, 59);
+    });
+
+    GoBackToLoginOptionButton.draw();
+    noTint();
+    //Sign-up 
     GoBackToSignupOptionButton.x = windowWidth/2;
     GoBackToSignupOptionButton.y = windowHeight/2 - 100;
+    GoBackToSignupOptionButton.hovered(()=>{
+        tint(190, 190, 59);
+    });
+
+    GoBackToSignupOptionButton.draw();
+    noTint();
+    //--------\\
 
     textAlign(CENTER, CENTER);
     textSize(30);
-    BetterText('Login', windowWidth/2 - 225 + 112.5, windowHeight/2 - 100 + 25)
-    BetterText('Signup', windowWidth/2 + 112.5, windowHeight/2 - 100 + 25)
+
+    if(logginIn){
+        BetterText('Login', windowWidth/2 - 225 + 112.5, windowHeight/2 - 100 + 25, {r: 255, g: 231, b: 100});
+        BetterText('Signup', windowWidth/2 + 112.5, windowHeight/2 - 100 + 25);
+    }else{
+        BetterText('Login', windowWidth/2 - 225 + 112.5, windowHeight/2 - 100 + 25);
+        BetterText('Signup', windowWidth/2 + 112.5, windowHeight/2 - 100 + 25, {r: 255, g: 231, b: 100});
+    }
+    
 
 
     //Check if user is on the login window or the signup one :3
@@ -77,17 +98,30 @@ const loginWindow = () => {
 
     //Build the UI buttons
 
-        LoginButton.x = windowWidth/2 - LoginButton.w/2;
-        LoginButton.y = windowHeight/2 - LoginButton.h + 325;
-        LoginButton.draw();  
+        LoginButton.x = windowWidth/2 - 100;
+        LoginButton.y = windowHeight/2 - 50 + 325;
+        LoginButton.w = 200;
+        LoginButton.h = 50;
 
+        LoginButton.hovered(()=>{
+            LoginButton.x -= 2.5;
+            LoginButton.y -= 2.5;
+            LoginButton.w += 5;
+            LoginButton.h += 5;
+    
+            tint(190, 190, 59);
+        });
+
+        LoginButton.draw();  
+        noTint();
     //Build the UI texts
     textAlign(LEFT);
     textSize(25);
     BetterText('UserName:', windowWidth/2 - 200, windowHeight/2 - 30);
     BetterText('Password:', windowWidth/2 - 200, windowHeight/2 + 40);
-    textAlign(CENTER, BOTTOM);
-    BetterText('Login', windowWidth/2, windowHeight/2 + 310);
+    textSize(30);
+    textAlign(CENTER, CENTER);
+    BetterText('Login', windowWidth/2, windowHeight/2 - 50 + 350);
     //Build the input UI part
     if (UserNameinp_login == null || Passwordinp_login == null){
         CreateLoginButton(windowWidth/2 - 200, windowHeight/2 + 60, 200, 30);
@@ -105,6 +139,7 @@ const CreateLoginButton = (x, y, w, h) => {
     UserNameinp_login.position(x, y);
     UserNameinp_login.input(WrittingUserName);
     UserNameinp_login.size(w, h);
+    UserNameinp_login.style('font-size', '20px');
 };
 
 const CreateLoginButton2 = (x, y, w, h) =>{
@@ -113,6 +148,7 @@ const CreateLoginButton2 = (x, y, w, h) =>{
     Passwordinp_login.position(x, y);
     Passwordinp_login.input(WrittingPassword);
     Passwordinp_login.size(w, h);
+    Passwordinp_login.style('font-size', '20px');
 };
 
 

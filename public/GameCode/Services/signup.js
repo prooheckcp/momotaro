@@ -51,13 +51,26 @@ const signupWindow = () => {
     BetterText('Repeat Password:', windowWidth/2 - 200, windowHeight/2 + 180);
 
     //Sign up button
-    SignUpButton.x = windowWidth/2 - LoginButton.w/2;
-    SignUpButton.y = windowHeight/2 - LoginButton.h + 325;    
+    SignUpButton.x = windowWidth/2 - 100;
+    SignUpButton.y = windowHeight/2 - 50 + 325;  
+    SignUpButton.w = 200;
+    SignUpButton.h = 50;
+
+    SignUpButton.hovered(()=>{
+        SignUpButton.x -= 2.5;
+        SignUpButton.y -= 2.5;
+        SignUpButton.w += 5;
+        SignUpButton.h += 5;
+
+        tint(190, 190, 59);
+    });
+    
     SignUpButton.draw();
+    noTint();
     //Sing up button text
-    textSize(25);
-    textAlign(CENTER, BOTTOM);
-    BetterText('Sign up', windowWidth/2, windowHeight/2 + 310);
+    textSize(30);
+    textAlign(CENTER, CENTER);
+    BetterText('Sign up', windowWidth/2, windowHeight/2 - 50 + 350);
 };
 
 //Create the inputs\\
@@ -66,6 +79,7 @@ const CreateSignupInput = (x, y, w, h) =>{
     UserNameinp_signup.position(x, y);
     UserNameinp_signup.input(WrittingSignupInput);
     UserNameinp_signup.size(w, h);
+    UserNameinp_signup.style('font-size', '20px');
 };
 
 const CreateSignupInput2 = (x, y, w, h) =>{
@@ -73,6 +87,7 @@ const CreateSignupInput2 = (x, y, w, h) =>{
     Emailinp_signup.position(x, y);
     Emailinp_signup.input(WrittingSignupInput2);
     Emailinp_signup.size(w, h);
+    Emailinp_signup.style('font-size', '20px');
 };
 
 const CreateSignupInput3 = (x, y, w, h) =>{
@@ -80,6 +95,7 @@ const CreateSignupInput3 = (x, y, w, h) =>{
     Passwordinp_signup.position(x, y);
     Passwordinp_signup.input(WrittingSignupInput3);
     Passwordinp_signup.size(w, h);
+    Passwordinp_signup.style('font-size', '20px');
 };
 
 const CreateSignupInput4 = (x, y, w, h) =>{
@@ -87,6 +103,7 @@ const CreateSignupInput4 = (x, y, w, h) =>{
     Passwordinp_signup2.position(x, y);
     Passwordinp_signup2.input(WrittingSignupInput4);
     Passwordinp_signup2.size(w, h);
+    Passwordinp_signup2.style('font-size', '20px');
 };
 
 function WrittingSignupInput(){

@@ -1,7 +1,7 @@
 //Arrays
 let particles = []; //Particles showing behind the start
 let ArrayOfTheMessage = []; //The level up message but in array format
-let UnlockedBonusLevel = ['Unlocked pee', 'Unlocked fortnite']; //The things u unlocked uppon level up
+let UnlockedBonusLevel = []; //The things u unlocked uppon level up
 
 //Variables
 let StarX = 0;

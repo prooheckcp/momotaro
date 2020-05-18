@@ -1,6 +1,6 @@
 const SetUpLogin = () =>{
-    GoBackToLoginOptionButton = new NewButton(windowWidth/2 - 225, windowHeight/2 - 75, 225, 50);
-    GoBackToSignupOptionButton = new NewButton(windowWidth/2, windowHeight/2 - 75, 225, 50);
+    GoBackToLoginOptionButton = new NewButton(windowWidth/2 - 225, windowHeight/2 - 75, 225, 50, LoginSignupButton);
+    GoBackToSignupOptionButton = new NewButton(windowWidth/2, windowHeight/2 - 75, 225, 50, LoginSignupButton);
     LoginButton = new NewButton(300, 200, 200, 50, DefaultRedButton); //The button to login the player
     
 };
