@@ -11,13 +11,25 @@ const CalculateRequiredEXP = level =>{
 
 const CheckIfLevelUp = () =>{
 
-    httpPost('/post/levelUp', {id: UserID, Nexp: CalculateRequiredEXP(restaurantStats.level)}, data =>{
+    httpPost('/post/levelUp', {id: UserID}, data =>{
 
-        if(data == 'yes'){
+        let LocalData = eval(data)[0];
+        print(LocalData);
+
+        if(LocalData.no != undefined){
+            print('Did not level up');
+        }else if(LocalData.yes != undefined){
+            //The player leveled up!
+            LevelUpAnimation(LocalData.yes);
             UpdateRestaurantStats();
         }
         
 
     });
 
+};
+
+
+const LevelUpAnimation = level =>{
+    print('leveld up to: ' + level);
 };

@@ -215,18 +215,9 @@ router.post('/levelUp', (req, res, next) => {
 
     const UserInfo = req.body;
 
-    dbase.query('SELECT res_exp FROM restaurant WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) => {
-
-        if(results[0].res_exp >= UserInfo.Nexp){
-
-        dbase.query('UPDATE restaurant SET res_level = res_level + 1, res_exp = res_exp - ' + UserInfo.Nexp + ' WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
-            res.send('yes');
-        });
-
-        }else{
-            res.send('no');
-        }
-
+    dbase.query('CALL CheckLevel(' + UserInfo.id + ');', (err, results, fields) =>{
+        if(err){console.log(err)}
+        res.send(results[0]);
     });
 
 

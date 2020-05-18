@@ -92,7 +92,7 @@ const DrawStorageWindow = () =>{
         //Display the current page
         textAlign(CENTER, CENTER)
         textSize(50);
-        BetterText('Page: '+(IngredientsPages + 1)+ '/' + (int(ingredientsInventory.length/(LocalSlotInformation.slotLengthX * LocalSlotInformation.slotLengthY) + 0.99)), StorageMainFrameDetails.x + 235, StorageMainFrameDetails.y + 525);
+        BetterText('Page: '+(IngredientsPages + 1)+ '/' + (int(ingredientsInventory.length/(LocalSlotInformation.slotLengthX * LocalSlotInformation.slotLengthY) + 1)), StorageMainFrameDetails.x + 235, StorageMainFrameDetails.y + 525);
         //Diplay the items
         StorageWindowIngredients(StorageMainFrameDetails);
 
@@ -115,7 +115,7 @@ const DrawStorageWindow = () =>{
         //Display the current page
         textAlign(CENTER, CENTER)
         textSize(50);
-        BetterText('Page: '+(DishesPages + 1)+ '/' + (int(dishesInventory.length/(LocalSlotInformation.slotLengthX * LocalSlotInformation.slotLengthY) + 0.99)), StorageMainFrameDetails.x + 235, StorageMainFrameDetails.y + 525);
+        BetterText('Page: '+(DishesPages + 1)+ '/' + (int(dishesInventory.length/(LocalSlotInformation.slotLengthX * LocalSlotInformation.slotLengthY) + 1)), StorageMainFrameDetails.x + 235, StorageMainFrameDetails.y + 525);
         //Diplay the items
         StorageWindowDishes(StorageMainFrameDetails);
 
@@ -138,7 +138,7 @@ const DrawStorageWindow = () =>{
         //Display the current page
         textAlign(CENTER, CENTER)
         textSize(50);
-        BetterText('Page: '+(DecorationPages + 1)+ '/' + (int(inventory.length/(LocalSlotInformation.slotLengthX * LocalSlotInformation.slotLengthY) + 0.99)), StorageMainFrameDetails.x + 235, StorageMainFrameDetails.y + 525);
+        BetterText('Page: '+(DecorationPages + 1)+ '/' + (int(inventory.length/(LocalSlotInformation.slotLengthX * LocalSlotInformation.slotLengthY) + 1)), StorageMainFrameDetails.x + 235, StorageMainFrameDetails.y + 525);
         //Diplay the items
         StorageWindowDecoration(StorageMainFrameDetails);
 

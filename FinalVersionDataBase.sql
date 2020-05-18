@@ -81,7 +81,7 @@ CREATE TABLE recipes_types(
 );
 
 /* Add the recipes here */
-INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_1', 1, 'Bread Omelete', 'br_om', 300, 1);
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_1', 1, 'Bread Omelete', 'br_om', 300, 10);
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_2', 2, 'Tuna Sushi', 'tu_su', 450, 2);
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_3', 3, 'Shimp Sushi', 'sh_su', 500, 4);
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_4', 4, 'Chocolate Cake', 'ch_ca', 600, 8);
@@ -170,6 +170,7 @@ END$$
 
 /*Procedures*/
 
+#Add a dish into the player inventory
 CREATE PROCEDURE purchaseDish(IN input_dish_id VARCHAR(8), IN input_id INT)
 BEGIN
 	
@@ -224,4 +225,56 @@ END$$
 
 DELIMITER ; 
 
+#Check if the player should level up and if yes level up
+DELIMITER $$
+
+CREATE PROCEDURE CheckLevel(IN inp_user_id INT)
+BEGIN
+
+
+SET @restaurantLevel = (
+SELECT 
+	res_level
+FROM
+	restaurant
+WHERE
+	user_id = inp_user_id
+);
+
+SET @restaurantExp = (
+SELECT
+	res_exp
+FROM
+	restaurant
+WHERE
+	user_id = inp_user_id
+);
+
+SET @ReqEXP = 0;
+
+IF @restaurantLevel = 1 THEN
+
+	SET @ReqEXP = 10 * @restaurantLevel;
+
+ELSE
+
+	SET @ReqEXP = 10 + (10 * @restaurantLevel) + (10 * (@restaurantLevel - 1));
+
+END IF;
+
+
+IF @ReqEXP <= @restaurantExp THEN
+	
+	SELECT @restaurantLevel + 1 AS "yes";
+	UPDATE restaurant SET res_level = res_level + 1 WHERE user_id = inp_user_id;
+    UPDATE restaurant SET res_exp = res_exp - @ReqEXP WHERE user_id = inp_user_id;
+ELSE
+
+	SELECT @restaurantLevel AS "no";
+
+END IF;
+
+END$$
+
+DELIMITER ;
 

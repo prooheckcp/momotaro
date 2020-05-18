@@ -187,15 +187,28 @@ const DrawCookingCraftingTable = (LocalBackgroundFrameX, LocalBackgroundFrameY) 
     }
     //--------------\\
 
-    
+    //Random hint
+    fill(0, 50);
+    rect(LocalBackgroundFrameX + 100, LocalBackgroundFrameY + 300, 800, 75, 10);
+    textAlign(CENTER, CENTER)
+    textSize(20);
+    BetterText( 'Drag and drop the ingredients into the slots above in order to cook.\nDo not forget to check the recipes tab in order to keep on track!', LocalBackgroundFrameX + 500, LocalBackgroundFrameY + 337.5);
+
     //Crafting bench\\
-
-
     for(let i = 0; i < 4; i++){
 
         //Variables\\
         let LocalSquareX = LocalBackgroundFrameX + 150 + 200 * i;
         let LocalSquareY = LocalBackgroundFrameY;
+
+        //The symbols in between the slots
+        textAlign(CENTER, CENTER);
+        textSize(40);
+        if(i == 2){
+            BetterText('=', LocalSquareX + 150, LocalSquareY + 150); 
+        }else if(i < 3){
+            BetterText('+', LocalSquareX + 150, LocalSquareY + 150);
+        }
 
         if(mouseX > LocalSquareX && mouseY > LocalSquareY + 100 && mouseX < LocalSquareX + 100 && mouseY < LocalSquareY + 200){
             //The mouse is hovering this slot
