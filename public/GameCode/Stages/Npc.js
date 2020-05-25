@@ -1,8 +1,8 @@
 //Variables\\
 let NPCconfiguration = {
   npcSize : {x: 50, y: 50},
-  defaultTime: 90,
-  MaxWaitingTime: 70
+  defaultTime: 10,
+  MaxWaitingTime: 25
 };
 
 //Objects on which NPCs can sit
@@ -126,7 +126,6 @@ function DrawNpc() {
 //Creates a new random NPC
 const CreateNewNPC = () => {
 
-  print('A new NPC was created');
 
   //Update the dishes inventory
   UpdateDishesInventory();

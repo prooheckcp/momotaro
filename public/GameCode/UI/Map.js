@@ -81,6 +81,11 @@ const DrawMapUI = () =>{
         DrawMarketWindow();
     };
 
+    //Call the friends window
+    if(FriendsWindow){
+        DrawFriendsWindow();
+    };
+
 };
 
 
@@ -89,9 +94,14 @@ const DrawMapUI = () =>{
 //Mouse pressed function part
 const UImapMousePressed = () =>{
 
-    //Take you back to the restaurant
-    if(!MarketWindow){
-        JapanCityRestaurantButton.pressed(()=>{Stage = 'Default'});
+    
+    if(!MarketWindow && !FriendsWindow){
+
+        //Take you back to the restaurant
+        JapanCityRestaurantButton.pressed(()=>{Stage = 'Default'
+        });
+
+        //Open the market window
         JapanCityMarketButton.pressed(()=>{MarketWindow = true;
             //Update the shop items
 
@@ -99,7 +109,14 @@ const UImapMousePressed = () =>{
             UpdateDecorationMarketPlace();
             UpdateIngredientsMarketPlace();
         });
-    }else{
+
+        //Open your friends window
+        JapanCityFriendsButton.pressed(()=>{
+            FriendsWindow = true;
+        
+        })
+
+    }else if(MarketWindow){
         if(MarketWindowSection){
             //Decoration part
 
@@ -182,5 +199,7 @@ const UImapMousePressed = () =>{
         CloseTheMarketButton.pressed(()=>{MarketWindow = false})
         MarketButtonIngredients.pressed(()=>{MarketWindowSection = false;});
         MarketButtonDecoration.pressed(()=>{MarketWindowSection = true;});
+    }else if(FriendsWindow){
+        FriendsWindowPressed();
     };
 };

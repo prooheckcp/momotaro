@@ -1,5 +1,5 @@
 let logginIn = true; //SignUp or LogIn - True: Login, False: Signup
-let Logged = false; //Login/Signup screen or in-game
+let Logged = true; //Login/Signup screen or in-game
 
 //USER DATA\\
 let UserID = 2; //The user id on client side in case the player is in game
