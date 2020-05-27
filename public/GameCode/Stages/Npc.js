@@ -128,8 +128,8 @@ const CreateNewNPC = () => {
   UpdateDishesInventory();
 
   let LocalToBeSentData = {
-    NPCskinUp: npcF1,
-    NPCskinSit: npcF2,
+    NPCskinUp: npcUp,
+    NPCskinSit: npcSit,
     x: 0,
     y: 0,
     enteredTime: TimePassed,
