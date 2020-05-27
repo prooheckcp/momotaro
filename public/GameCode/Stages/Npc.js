@@ -84,14 +84,11 @@ function DrawNpc() {
 
 
     //Draw the NPC\\
-    if(NPC.NPCskin == null){
-
-      if(NPC.selected){fill(250, 233, 0)}else{fill(255)}; //Change the color if being hovered
-
-      rect(LocalNPCpos.x, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
-    }else{
-      image(NPC.NPCskin, LocalNPCpos.x, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
-    };
+    if(NPC.sit == false){
+      image(NPC.NPCskinUp, LocalNPCpos.x+10, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
+    } else if(NPC.sit == true){
+      image(NPC.NPCskinSit, LocalNPCpos.x+10, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
+    }
     //-------------\\
 
 
@@ -131,7 +128,8 @@ const CreateNewNPC = () => {
   UpdateDishesInventory();
 
   let LocalToBeSentData = {
-    NPCskin: null,
+    NPCskinUp: npcF1,
+    NPCskinSit: npcF2,
     x: 0,
     y: 0,
     enteredTime: TimePassed,
