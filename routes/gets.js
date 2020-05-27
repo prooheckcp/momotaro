@@ -70,6 +70,17 @@ const ImagesPathRes = (ImageName) => path.join(entryPoint, 'Game_Images', 'Resta
 const ImagesPathDec = (ImageName) => path.join(entryPoint, 'Game_Images', 'Furniture', ImageName);
 const ImagesPathCooK = (ImageName) => path.join(entryPoint, 'Game_Images', 'Food', ImageName);
 const SoundPath = (MusicName) => path.join(entryPoint, 'Game_Images', 'Music', MusicName);
+const NpcPath = (NpcName) => path.join(entryPoint, 'Game_Images', 'Npc', NpcName);
+
+//Npc\\
+router.get('/Npc/npcFemalebakerUP', (req, res, next) =>{
+    res.sendFile(NpcPath('npcFemalebakerUP.png'));
+});
+
+router.get('/Npc/npcFemalebakerSit', (req, res, next) =>{
+    res.sendFile(NpcPath('npcFemalebakerSit.png'));
+});
+
 
 //Music\\
 
@@ -79,11 +90,9 @@ router.get('/music/background_music', (req, res, next) =>{
 router.get('/music/KnifeChoping', (req, res, next) =>{
     res.sendFile(SoundPath('KnifeChoping.ogg'));
 });
+
 //Images\\
-
 //UI
-
-
 
 router.get('/image/LoginSignupButton', (req, res, next) =>{
     res.sendFile(ImagesPathUI('LoginSignupButton.png'));
