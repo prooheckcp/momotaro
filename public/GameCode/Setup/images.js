@@ -90,6 +90,10 @@ let leftEntranceTile;
 let rightEntranceTile;
 let blueWallTile;
 
+//Npc
+let npcF1;
+let npcF2;
+
 const SetupImages = () =>{
 
 DefaultRedButton = loadImage('/get/image/buttonImage');
@@ -98,6 +102,8 @@ lake = loadImage('get/image/lake');
 FramePortrait = loadImage('get/image/frame');
 middleFrame = loadImage('get/image/middleframe')
 
+npcF1 = loadImage('/get/npc/npcFemalebakerUP');
+npcF2 = loadImage('/get/npc/npcFemalebakerSit');
 
 //Music\\
 //backgorundMusic 
@@ -191,4 +197,5 @@ StorageFrame = loadImage('/get/image/StorageFrame');
 LoginSignupButton = loadImage('/get/image/LoginSignupButton');
 
 ReturnButtonCook = loadImage('/get/image/ReturnButtonCook');
+
 };
