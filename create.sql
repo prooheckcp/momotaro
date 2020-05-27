@@ -21,6 +21,13 @@ CREATE TABLE friend_list(
     FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
 
+CREATE TABLE friend_requests(
+	user_id INT NOT NULL,
+    other_user_id INT NOT NULL,
+    sent_date DATE,
+    FOREIGN KEY(user_id) REFERENCES users(user_id)
+
+);
 
 /*This are the tables related to the restaurant */
 
