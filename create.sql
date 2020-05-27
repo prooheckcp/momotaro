@@ -81,7 +81,7 @@ CREATE TABLE recipes_types(
 );
 
 /* Add the recipes here */
-INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_1', 1, 'Bread Omelete', 'br_om', 350, 2);
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_1', 1, 'Bread Omelete', 'br_om', 250, 2);
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_2', 2, 'Tuna Sushi', 'tu_su', 550, 4);
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_3', 3, 'Shimp Sushi', 'sh_su', 700, 6);
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_4', 4, 'Chocolate Cake', 'ch_ca', 397, 8);
@@ -118,15 +118,15 @@ CREATE TABLE ingredients_market(
 /* Write down the ingredients here */
 INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('tu', 50, 1); #Tuna
 INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('wa', 20, 1); #Water
-INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('ri', 56, 1); #Rice
-INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('br', 21, 1); #Bread
-INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('fl', 15, 2); #Flour
-INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('eg', 78, 4); #Eggs
-INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('ol_oi', 220, 6); #Olivia oil
-INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('co', 77, 8); #Cocoa
-INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('ch', 39, 10); #Cherry
-INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('pa', 66, 12); #Water
-INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('sh', 280, 14); #Shrimp
+INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('ri', 50, 1); #Rice
+INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('br', 65, 1); #Bread
+INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('fl', 100, 2); #Flour
+INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('eg', 90, 4); #Eggs
+INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('ol_oi', 250, 6); #Olivia oil
+INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('co', 85, 8); #Cocoa
+INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('ch', 100, 10); #Cherry
+INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('pa', 200, 12); #Water
+INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('sh', 500, 14); #Shrimp
 
 /*---------------------------------*/
 CREATE TABLE ingredients_inventory(
@@ -304,3 +304,4 @@ END IF;
 END$$
 
 DELIMITER ;
+
