@@ -87,9 +87,25 @@ function DrawNpc() {
     if(NPC.sit == false){
       image(NPC.NPCskinUp, LocalNPCpos.x+10, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
     } else if(NPC.sit == true){
-      image(NPC.NPCskinSit, LocalNPCpos.x+10, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
+      image(NPC.NPCskinSit, LocalNPCpos.x+7, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
+          /*
+          if(ro_ta.x = npc.x + 1){
+            image(NPC.NPCskinSitLeft, LocalNPCpos.x+10, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
+          }
+          if(ro_ta.x = npc.x - 1){
+            image(NPC.NPCskinSitRigth, LocalNPCpos.x+10, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
+          }
+          if(ro_ta.y = npc.y + 1){
+            image(NPC.NPCskinSitBack, LocalNPCpos.x+10, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
+          }
+          if(ro_ta.y = npc.y - 1){
+            image(NPC.NPCskinSitFront, LocalNPCpos.x+10, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
+          }
+
+          */
+    
     }
-    //-------------\\
+  
 
 
     //Check if the user has the dish the NPC wants\\
@@ -114,8 +130,6 @@ function DrawNpc() {
     };
     //----------------------------------------\\
 
-
-
   };
 
 };
@@ -130,6 +144,12 @@ const CreateNewNPC = () => {
   let LocalToBeSentData = {
     NPCskinUp: npcUp,
     NPCskinSit: npcSit,
+    /*
+    NPCskinSitFront: npcSit,
+    NPCskinSitBack: npcSit,
+    NPCskinSitLeft: npcSit,
+    NPCskinSitRight: npcSit,
+    */
     x: 0,
     y: 0,
     enteredTime: TimePassed,
