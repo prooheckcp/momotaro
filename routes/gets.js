@@ -80,7 +80,23 @@ router.get('/Npc/npcFemalebakerUP', (req, res, next) =>{
 router.get('/Npc/npcFemalebakerSit', (req, res, next) =>{
     res.sendFile(NpcPath('npcFemalebakerSit.png'));
 });
+/*
+router.get('/Npc/npcFemalebakerSitRight', (req, res, next) =>{
+    res.sendFile(NpcPath('npcFemalebakerSitRight.png'));
+});
 
+router.get('/Npc/npcFemalebakerSitLeft', (req, res, next) =>{
+    res.sendFile(NpcPath('npcFemalebakerSitLeft.png'));
+});
+
+router.get('/Npc/npcFemalebakerSitBack', (req, res, next) =>{
+    res.sendFile(NpcPath('npcFemalebakerSitBack.png'));
+});
+
+router.get('/Npc/npcFemalebakerSitFront', (req, res, next) =>{
+    res.sendFile(NpcPath('npcFemalebakerSitFront.png'));
+});
+*/
 
 //Music\\
 
