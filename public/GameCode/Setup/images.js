@@ -102,8 +102,8 @@ lake = loadImage('get/image/lake');
 FramePortrait = loadImage('get/image/frame');
 middleFrame = loadImage('get/image/middleframe')
 
-npcF1 = loadImage('/get/npc/npcFemalebakerUP');
-npcF2 = loadImage('/get/npc/npcFemalebakerSit');
+npcUp = loadImage('/get/npc/npcFemalebakerUP');
+npcSit = loadImage('/get/npc/npcFemalebakerSit');
 
 //Music\\
 //backgorundMusic 
