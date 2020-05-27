@@ -91,8 +91,13 @@ let rightEntranceTile;
 let blueWallTile;
 
 //Npc
-let npcF1;
-let npcF2;
+let npcUp;
+let npcSit;
+
+let npcSitRight;
+let npcSitLeft;
+let npcSitDown;
+let npcSitUp;
 
 const SetupImages = () =>{
 
@@ -104,7 +109,12 @@ middleFrame = loadImage('get/image/middleframe')
 
 npcUp = loadImage('/get/npc/npcFemalebakerUP');
 npcSit = loadImage('/get/npc/npcFemalebakerSit');
-
+/*
+npcSitRight = loadImage('/get/npc/npcFemalebakerSitRight');
+npcSitLeft = loadImage('/get/npc/npcFemalebakerSitLeft');
+npcSitBack = loadImage('/get/npc/npcFemalebakerSitBack');
+npcSitFront = loadImage('/get/npc/npcFemalebakerSitFront');
+*/
 //Music\\
 //backgorundMusic 
 backgroundMusic = loadSound('/get/music/background_music');
