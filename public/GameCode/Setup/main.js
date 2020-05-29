@@ -7,6 +7,9 @@ const SetupGame = () => {
     SetUpLogin();
     SetUpSignup();
 
+    //For the decoration that is currently placed in the restaurant
+    DecorationSetUp();
+
     //For the storage window
     setupStorageWindow();
     
@@ -21,5 +24,6 @@ const SetupGame = () => {
     
     //NPC
     Npcsetup();
+    
 };
 

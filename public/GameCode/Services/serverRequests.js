@@ -242,4 +242,27 @@ const UpdateDishesInventory = () =>{
     };
 
   });
-}
+};
+
+
+const CheckIfRestaurantExists = () =>{
+
+  httpPost('/post/RestaurantName', {id: UserID}, data => {
+
+    let LocalResponse = eval(data)[0];
+
+
+    if (LocalResponse.status == 'no'){
+
+      Stage = 'RestaurantName';
+
+    }else{
+
+      restaurantName = LocalResponse.resName;
+      Stage = 'default';
+
+    };
+
+  });
+  
+};

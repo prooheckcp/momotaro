@@ -3,6 +3,16 @@ let JapanCityFriendsButton;
 let JapanCityMarketButton;
 let JapanCityRestaurantButton;
 
+const SetupMapUI = () =>{
+    //Map buttons
+    CloseTheMarketButton = new NewButton(0, 0, 0, 0, CloseMark);
+    JapanCityFriendsButton = new NewButton(0, 0, 0, 0, JapanCityFriends);
+    JapanCityMarketButton = new NewButton(0, 0, 0, 0, JapanCityMarket);
+    JapanCityRestaurantButton = new NewButton(0, 0, 0, 0, JapanCityRestaurant);
+    MarketButtonDecoration = new NewButton(0, 0, 0, 0, MarketButton);
+    MarketButtonIngredients = new NewButton(0, 0, 0, 0, MarketButton);
+};
+
 //Draws the map UI
 const DrawMapUI = () =>{
     rect(0, 0, windowWidth, windowHeight);
