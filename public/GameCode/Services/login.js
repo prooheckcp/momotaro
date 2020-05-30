@@ -1,24 +1,41 @@
-let logginIn = true; //SignUp or LogIn - True: Login, False: Signup
-let Logged = true; //Login/Signup screen or in-game
+//Variables\\
 
-//USER DATA\\
-let UserID = 2; //The user id on client side in case the player is in game
-let restaurantName = '';
+
+    //The current tab within the login (True -> Login tab; False -> Signup tab)
+    let logginIn = true; 
+
+    //The current scene (True -> in-game scene; Flase -> Login scene)
+    let Logged = true; 
+
+    //The ID of the user that is playing the game
+    let UserID = 2; 
+
+    //The name of the restarant
+    let restaurantName = '';
+//----------\\
+
+
 //User inputs\\
-let UserNameinp_login;
-let Passwordinp_login;
-/////////////////////
+
+    let UserNameinp_login;
+    let Passwordinp_login;
+//------------\\
 
 //The texts within the inputs\\
-let Login_Username = '';
-let Login_Password = '';
-///////////////////////////
+
+    //Username
+    let Login_Username = '';
+
+    //Password
+    let Login_Password = '';
+//----------------------------\\
 
 //UI elements\\
-let LoginButton;
-let GoBackToLoginOptionButton;
-let GoBackToSignupOptionButton;
-/////////////////////
+
+    let LoginButton;
+    let GoBackToLoginOptionButton;
+    let GoBackToSignupOptionButton;
+//------------\\
 
 const LoggingProcess = () =>{
 
@@ -34,40 +51,41 @@ const LoggingProcess = () =>{
 
     //Buttons\\
     
-    //Login
-    GoBackToLoginOptionButton.x = windowWidth/2 - 225;
-    GoBackToLoginOptionButton.y = windowHeight/2 - 100;
-    GoBackToLoginOptionButton.hovered(()=>{
-        tint(190, 190, 59);
-    });
+        //Login
+        GoBackToLoginOptionButton.x = windowWidth/2 - 225;
+        GoBackToLoginOptionButton.y = windowHeight/2 - 100;
+        GoBackToLoginOptionButton.hovered(()=>{
+            tint(190, 190, 59);
+        });
+        GoBackToLoginOptionButton.draw();
+        noTint();
 
-    GoBackToLoginOptionButton.draw();
-    noTint();
-    //Sign-up 
-    GoBackToSignupOptionButton.x = windowWidth/2;
-    GoBackToSignupOptionButton.y = windowHeight/2 - 100;
-    GoBackToSignupOptionButton.hovered(()=>{
-        tint(190, 190, 59);
-    });
-
-    GoBackToSignupOptionButton.draw();
-    noTint();
+        //Sign-up 
+        GoBackToSignupOptionButton.x = windowWidth/2;
+        GoBackToSignupOptionButton.y = windowHeight/2 - 100;
+        GoBackToSignupOptionButton.hovered(()=>{
+            tint(190, 190, 59);
+        });
+        GoBackToSignupOptionButton.draw();
+        noTint();
     //--------\\
-
-    textAlign(CENTER, CENTER);
-    textSize(30);
-
-    if(logginIn){
-        BetterText('Login', windowWidth/2 - 225 + 112.5, windowHeight/2 - 100 + 25, {r: 255, g: 231, b: 100});
-        BetterText('Signup', windowWidth/2 + 112.5, windowHeight/2 - 100 + 25);
-    }else{
-        BetterText('Login', windowWidth/2 - 225 + 112.5, windowHeight/2 - 100 + 25);
-        BetterText('Signup', windowWidth/2 + 112.5, windowHeight/2 - 100 + 25, {r: 255, g: 231, b: 100});
-    }
     
+    //Display the tabs text\\
+
+        textAlign(CENTER, CENTER);
+        textSize(30);
+
+        if(logginIn){
+            BetterText('Login', windowWidth/2 - 225 + 112.5, windowHeight/2 - 100 + 25, {r: 255, g: 231, b: 100});
+            BetterText('Signup', windowWidth/2 + 112.5, windowHeight/2 - 100 + 25);
+        }else{
+            BetterText('Login', windowWidth/2 - 225 + 112.5, windowHeight/2 - 100 + 25);
+            BetterText('Signup', windowWidth/2 + 112.5, windowHeight/2 - 100 + 25, {r: 255, g: 231, b: 100});
+        };
+    //----------------------\\    
 
 
-    //Check if user is on the login window or the signup one :3
+    //Check the current tab on which is user is
     logginIn ? loginWindow():signupWindow();
 
 };
@@ -75,66 +93,82 @@ const LoggingProcess = () =>{
 
 const loginWindow = () => {
 
-    //Remove the input windows
-    if(UserNameinp_signup != null){
-        UserNameinp_signup.remove();
-        UserNameinp_signup = null;
-    }
+    //Remove the signup input boxes\\
 
-    if(Emailinp_signup != null){
-        Emailinp_signup.remove();
-        Emailinp_signup = null;
-    }
+        //username
+        if(UserNameinp_signup != null){
+            UserNameinp_signup.remove();
+            UserNameinp_signup = null;
+        };
 
-    if(Passwordinp_signup != null){
-        Passwordinp_signup.remove();
-        Passwordinp_signup = null;
-    }
+        //email
+        if(Emailinp_signup != null){
+            Emailinp_signup.remove();
+            Emailinp_signup = null;
+        };
 
-    if(Passwordinp_signup2 != null){
-        Passwordinp_signup2.remove();
-        Passwordinp_signup2 = null;
-    }
+        //password
+        if(Passwordinp_signup != null){
+            Passwordinp_signup.remove();
+            Passwordinp_signup = null;
+        };
 
-    //Build the UI buttons
+        //repeat password
+        if(Passwordinp_signup2 != null){
+            Passwordinp_signup2.remove();
+            Passwordinp_signup2 = null;
+        };
+    //------------------------------\\
 
-        LoginButton.x = windowWidth/2 - 100;
-        LoginButton.y = windowHeight/2 - 50 + 325;
-        LoginButton.w = 200;
-        LoginButton.h = 50;
+    //Create the signup input boxes\\
 
-        LoginButton.hovered(()=>{
-            LoginButton.x -= 2.5;
-            LoginButton.y -= 2.5;
-            LoginButton.w += 5;
-            LoginButton.h += 5;
-    
-            tint(190, 190, 59);
-        });
+        if (UserNameinp_login == null || Passwordinp_login == null){
 
-        LoginButton.draw();  
-        noTint();
-    //Build the UI texts
-    textAlign(LEFT);
-    textSize(25);
-    BetterText('UserName:', windowWidth/2 - 200, windowHeight/2 - 30);
-    BetterText('Password:', windowWidth/2 - 200, windowHeight/2 + 40);
-    textSize(30);
-    textAlign(CENTER, CENTER);
-    BetterText('Login', windowWidth/2, windowHeight/2 - 50 + 350);
-    //Build the input UI part
-    if (UserNameinp_login == null || Passwordinp_login == null){
-        CreateLoginButton(windowWidth/2 - 200, windowHeight/2 + 60, 200, 30);
-        CreateLoginButton2(windowWidth/2 - 200, windowHeight/2 + 150, 200, 30);
-    }else{
-        UserNameinp_login.position(windowWidth/2 - 200, windowHeight/2 - 20);
-        Passwordinp_login.position(windowWidth/2 - 200, windowHeight/2 + 50); 
-    };
+            //Create the input boxes
+            CreateLoginButton(windowWidth/2 - 200, windowHeight/2 + 60, 200, 30);
+            CreateLoginButton2(windowWidth/2 - 200, windowHeight/2 + 150, 200, 30);
+        }else{
+
+            //Set the boxes position
+            UserNameinp_login.position(windowWidth/2 - 200, windowHeight/2 - 20);
+            Passwordinp_login.position(windowWidth/2 - 200, windowHeight/2 + 50); 
+        };
+    //------------------------------\\
+
+    //Build login button\\
+
+            LoginButton.x = windowWidth/2 - 100;
+            LoginButton.y = windowHeight/2 - 50 + 325;
+            LoginButton.w = 200;
+            LoginButton.h = 50;
+            LoginButton.hovered(()=>{
+                LoginButton.x -= 2.5;
+                LoginButton.y -= 2.5;
+                LoginButton.w += 5;
+                LoginButton.h += 5;
+        
+                tint(190, 190, 59);
+            });
+            LoginButton.draw();  
+            noTint();
+    //-------------------\\
+
+    //Build the UI texts\\
+
+        textAlign(LEFT);
+        textSize(25);
+        BetterText('UserName:', windowWidth/2 - 200, windowHeight/2 - 30);
+        BetterText('Password:', windowWidth/2 - 200, windowHeight/2 + 40);
+        textSize(30);
+        textAlign(CENTER, CENTER);
+        BetterText('Login', windowWidth/2, windowHeight/2 - 50 + 350);
+    //-------------------\\    
 
 };
 
 const CreateLoginButton = (x, y, w, h) => {
-    //Login boxes
+
+    //Username input 
     UserNameinp_login = createInput('Insert username');
     UserNameinp_login.position(x, y);
     UserNameinp_login.input(WrittingUserName);
@@ -143,7 +177,8 @@ const CreateLoginButton = (x, y, w, h) => {
 };
 
 const CreateLoginButton2 = (x, y, w, h) =>{
-    //Login box2
+
+    //Password input
     Passwordinp_login = createInput('', 'password');
     Passwordinp_login.position(x, y);
     Passwordinp_login.input(WrittingPassword);
@@ -152,12 +187,12 @@ const CreateLoginButton2 = (x, y, w, h) =>{
 };
 
 
-//This didn't work with an arrow function...
+//Update the username variable to the current input
 function WrittingUserName(){
     Login_Username = this.value();
 }; 
 
-//This didn't work with an arrow function...
+//Update the password variable to the current input
 function WrittingPassword(){
     Login_Password = this.value();
 }; 
@@ -165,6 +200,7 @@ function WrittingPassword(){
 const LogginClick = () => {
 
     if(logginIn){
+
     //Check if the user exists
     LoginButton.pressed(()=>{
         
@@ -176,9 +212,12 @@ const LogginClick = () => {
                 alert(ResultInJson.message);
             }else{
 
-                //Log in the player in case the login was a success!
+                //Log in the player in case the login was a success
                 Logged = true;
+
+                //Store the user ID on the client side
                 UserID = ResultInJson.id;
+
                 //Load the player restaurant and inventory
                 UpdateRestaurantRequest();
                 UpdateInventoryRequest();
@@ -200,6 +239,7 @@ const LogginClick = () => {
 
     })};
 
+    //Going to the login tab
     GoBackToLoginOptionButton.pressed(()=>{
         logginIn = true;
     });

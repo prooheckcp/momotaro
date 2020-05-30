@@ -1,4 +1,4 @@
-//The purchase of a dish
+//Consume a dish
 const NPCbuyDish = (dishID, NPC) =>{
 
   httpPost('/post/ConsumeDish', 'json', {id: UserID, DishID: dishID}, data =>{
@@ -23,6 +23,7 @@ const NPCbuyDish = (dishID, NPC) =>{
 
 };
 
+//Get the decoration of the restaurant
 const UpdateRestaurantRequest = () => {
 
     httpPost('/post/getDecoration', {id: UserID}, data =>{
@@ -42,7 +43,7 @@ const UpdateRestaurantRequest = () => {
 
 };
 
-//Updates the user inventory
+//Updates the user inventory (furniture on the user inventory)
 const UpdateInventoryRequest = () =>{
     httpPost('/post/getInventory', {id : UserID}, data =>{
       let LocalData = eval(data);
@@ -57,6 +58,7 @@ const UpdateInventoryRequest = () =>{
     });
   };
 
+//Update the EXP, level and money
 const UpdateRestaurantStats = () =>{
   httpPost('/post/getRestaurantStats', {id: UserID}, data => {
     let LocalData = eval(data)[0];
@@ -68,6 +70,7 @@ const UpdateRestaurantStats = () =>{
   })
 }
 
+//Give exp function
 const GiveExp = amount => {
   httpPost('/post/giveExp', {id : UserID, exp : amount}, data =>{
     UpdateRestaurantStats();
@@ -75,13 +78,14 @@ const GiveExp = amount => {
   });
 };
 
+//Give money function
 const GiveMoney = amount =>{
   httpPost('/post/giveMoney', {id : UserID, money: amount}, data =>{
     UpdateRestaurantStats();
   });
 };
 
-
+//Update the top 50 players of the leaderboard
 const UpdateLeaderBoard = () =>{
   loadJSON('/get/top50players', data =>{
     let LocalDataPlayers = eval(data);
@@ -92,14 +96,14 @@ const UpdateLeaderBoard = () =>{
   });
 };
 
-
+//Update the dishes amount
 const UpdateDish = () =>{
   httpPost('/post/UpdateDishAm', {id : UserID, dishes: amount}, data =>{
     UpdateDishAmount();
   });
 };
 
-
+//Get the decoration market place
 const UpdateDecorationMarketPlace = () =>{
   loadJSON('/get/DecorationMarket' , data =>{
 
@@ -112,7 +116,7 @@ const UpdateDecorationMarketPlace = () =>{
   });
 };
 
-
+//Get the ingredients market place
 const UpdateIngredientsMarketPlace = () =>{
   loadJSON('/get/IngredientMarket', data =>{
     
@@ -198,7 +202,8 @@ const UpdateIngredientsInventory = () =>{
 
   });
 
-  httpPost('/post/getRecipesInventory', {userID: UserID}, data =>{
+//Get the recipes inventory
+httpPost('/post/getRecipesInventory', {userID: UserID}, data =>{
 
     let LocalData = eval(data);
     recipesInventory = [];
@@ -211,6 +216,7 @@ const UpdateIngredientsInventory = () =>{
 
 };
 
+//Get the dish required level
 const GetDishLevel = dish_id =>{
   for(let recipe of dishesLevels){
 
@@ -221,6 +227,7 @@ const GetDishLevel = dish_id =>{
   };
 };
 
+//NPC consume the dish
 const NpcConsume = () =>{
   
   httpPost('/post/NpcConsume', {id : UserID, dishes: amount}, data =>{
@@ -229,7 +236,7 @@ const NpcConsume = () =>{
   
 };
 
-
+//Update the dishes inventory
 const UpdateDishesInventory = () =>{
   httpPost('/post/getInventoryDishes', {id: UserID}, data => {
     
@@ -244,7 +251,7 @@ const UpdateDishesInventory = () =>{
   });
 };
 
-
+//Check if the user has a restaurant or not
 const CheckIfRestaurantExists = () =>{
 
   httpPost('/post/RestaurantName', {id: UserID}, data => {

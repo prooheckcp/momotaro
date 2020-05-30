@@ -1,3 +1,4 @@
+//Adds a new functionality to the arrays in javascript
 Array.prototype.remove = function() {
     var what, a = arguments, L = a.length, ax;
     while (L && this.length) {
@@ -113,6 +114,7 @@ const BetterText = (string, x, y, color) => {
     fill(255);
 }
 
+//Lower the amount of ingredients
 const LowerTheAmountOfIngredients = ing_id =>{
     for(let ingredient of ingredientsInventory){
         if(ingredient.ingredient_id == ing_id){
@@ -121,6 +123,7 @@ const LowerTheAmountOfIngredients = ing_id =>{
     };
 };
 
+//Raise the amount of ingredients
 const RaiseTheAmountOfIngredients = ing_id =>{
     for(let ingredient of ingredientsInventory){
         if(ingredient.ingredient_id == ing_id){

@@ -1,45 +1,51 @@
-//Music
-let backgroundMusic;
-let clickingSound;
+// Login/Signup art\\
 
-//UI elements\\
-let ChatBalloon;
-let DefaultRedButton;
 let Logo;
-let backgroundImage;
 let lake;
 let FramePortrait;
-let RightYellowArrow;
-let LeftYellowArrow;
-let middleFrame;
-let StorageFrame;
 let LoginSignupButton;
+//------------------\\
 
-let JapanMap;
-let JapanCityRestaurant;
-let JapanCityMarket;
-let JapanCityFriends;
-let CloseMark;
-let MarketFrame;
-let MarketButton;
 
-let CircleButton;
-let CircleButtonCheck;
-let CircleButtonCooking;
-let CircleButtonDecoration;
-let CircleButtonGear;
-let CircleButtonGeneral;
-let CircleButtonLeaderboards;
-let CircleButtonLogOut;
-let CircleButtonMap;
-let CircleButtonStorage;
+//NPCs Art\\
 
-let ReturnButtonCook;
+//Standing up
+let npcUp;
 
-let levelStar;
-let MoneyFrame;
+//Sitting
+let npcSit;
+
+//Chat ballon for the required dish
+let ChatBalloon;
+//---------\\
+
+//Music\\
+
+//Background music
+let backgroundMusic;
+
+//Cooking sound
+let clickingSound;
+//------\\
+
+//Restaurant parts\\
+
+let woodFloorTile;
+let brickWallTile;
+let leftWallTile;
+let rightWallTile;
+let rightCornerTile;
+let leftCornerTile;
+let rightEntranceTile;
+let leftEntranceTile;
+let blueWallTile;
+//-----------------\\
+
 //Decoration Variables\\
-let BottomFrame;
+
+let animated_crow2;
+let animated_crow;
+let animated_plant;
 let bar_left_Image;
 let bar_mid_Image;
 let bar_rig_Image;
@@ -47,6 +53,7 @@ let bej_pla_Image;
 let pur_pla_Image;
 let cha_bac_Image;
 let cha_fro_Image;
+
 let cha_cus_Image;
 let lon_tab_Image;
 let sim_tab_Image;
@@ -55,10 +62,10 @@ let tel_pla_Image;
 let tel_cor_Image;
 let mac_kar_Image;
 let oven_Image;
-let animated_plant;
-let animated_crow;
-let animated_crow2;
-//Ingredients Variables\\
+//---------------------\\
+
+//Food Variables\\
+
 let tu_Image;
 let sh_Image;
 let ca_Image;
@@ -70,142 +77,186 @@ let wa_Image;
 let ol_oi_Image;
 let br_Image;
 let fl_Image;
-
-//Food Variables\\
 let noo_Image;
 let bre_ome_Image;
 let tun_sus_Image;
 let shi_sus_Image;
 let cho_cak_Image;
 let che_pie_Image;
+//---------------\\
 
-//Default restaurant parts\\
-let woodFloorTile;
-let brickWallTile;
-let leftWallTile;
-let rightWallTile;
-let rightCornerTile;
-let leftCornerTile;
-let leftEntranceTile;
-let rightEntranceTile;
-let blueWallTile;
 
-//Npc
-let npcUp;
-let npcSit;
+//Main UI buttons\\
 
-let npcSitRight;
-let npcSitLeft;
-let npcSitDown;
-let npcSitUp;
+let CircleButtonCheck;
+let CircleButtonCooking;
+let CircleButtonDecoration;
+let CircleButtonGear;
+let CircleButtonGeneral;
+let CircleButtonLeaderboards;
+let CircleButtonLogOut;
+let CircleButtonMap;
+let CircleButtonStorage;
+//----------------\\
+
+//UI elements\\
+
+let BottomFrame;
+let RightYellowArrow;
+let LeftYellowArrow;
+let CircleButton;
+let levelStar;
+let MoneyFrame;
+let LeaderboardsFrame;
+let CloseMark;
+let MarketFrame;
+let MarketButton;
+let StorageFrame;
+let LeaderboardTab;
+let ReturnButtonCook;
+let middleFrame;
+let DefaultRedButton;
+//------------\\
+
+//Map elements\\
+
+let JapanCityRestaurant;
+let JapanMap;
+let JapanCityMarket;
+let JapanCityFriends;
+//-------------\\
 
 const SetupImages = () =>{
 
-DefaultRedButton = loadImage('/get/image/buttonImage');
-Logo = loadImage('get/image/logo');
-lake = loadImage('get/image/lake');
-FramePortrait = loadImage('get/image/frame');
-middleFrame = loadImage('get/image/middleframe')
 
-npcUp = loadImage('/get/npc/npcFemalebakerUP');
-npcSit = loadImage('/get/npc/npcFemalebakerSit');
-/*
-npcSitRight = loadImage('/get/npc/npcFemalebakerSitRight');
-npcSitLeft = loadImage('/get/npc/npcFemalebakerSitLeft');
-npcSitBack = loadImage('/get/npc/npcFemalebakerSitBack');
-npcSitFront = loadImage('/get/npc/npcFemalebakerSitFront');
-*/
+// Login/Signup art\\
+
+    Logo = loadImage('get/image/logo');
+    lake = loadImage('get/image/lake');
+    FramePortrait = loadImage('get/image/frame');
+    LoginSignupButton = loadImage('/get/image/LoginSignupButton');
+//------------------\\
+
+
+//NPCs Art\\
+
+    //Standing up
+    npcUp = loadImage('/get/npc/npcFemalebakerUP');
+
+    //Sitting
+    npcSit = loadImage('/get/npc/npcFemalebakerSit');
+
+    //Chat ballon for the required dish
+    ChatBalloon = loadImage('/get/image/ChatBalloon');
+//---------\\
+
 //Music\\
-//backgorundMusic 
-backgroundMusic = loadSound('/get/music/background_music');
-//clicking sound
-clickingSound = loadSound('/get/music/KnifeChoping');
+
+    //Background music
+    backgroundMusic = loadSound('/get/music/background_music');
+
+    //Cooking sound
+    clickingSound = loadSound('/get/music/KnifeChoping');
+//------\\
 
 //Restaurant parts\\
-woodFloorTile = loadImage('get/image/floor_tile');
-brickWallTile = loadImage('get/image/wall_tile');
-leftWallTile = loadImage('get/image/left_wall_tile');
-rightWallTile = loadImage('get/image/right_wall_tile');
-rightCornerTile = loadImage('get/image/right_corner_tile');
-leftCornerTile = loadImage('get/image/left_corner_tile');
-rightEntranceTile = loadImage('get/image/right_entrance_tile');
-leftEntranceTile = loadImage('get/image/left_entrance_tile');
-blueWallTile = loadImage('get/image/blue_wall_tile');
 
+    woodFloorTile = loadImage('get/image/floor_tile');
+    brickWallTile = loadImage('get/image/wall_tile');
+    leftWallTile = loadImage('get/image/left_wall_tile');
+    rightWallTile = loadImage('get/image/right_wall_tile');
+    rightCornerTile = loadImage('get/image/right_corner_tile');
+    leftCornerTile = loadImage('get/image/left_corner_tile');
+    rightEntranceTile = loadImage('get/image/right_entrance_tile');
+    leftEntranceTile = loadImage('get/image/left_entrance_tile');
+    blueWallTile = loadImage('get/image/blue_wall_tile');
+//-----------------\\
 
 //Decoration Variables\\
 
-animated_crow2 = loadImage('get/image/AnimatedCrow2');
-animated_crow = loadImage('get/image/AnimatedCrow');
-animated_plant = loadImage('get/image/AnimatedPlant');
-bar_left_Image = loadImage('get/image/Bar_Left');
-bar_mid_Image  = loadImage('get/image/Bar_Middle');
-bar_rig_Image  = loadImage('get/image/Bar_Right');
-bej_pla_Image  = loadImage('get/image/Beje_Plant');
-pur_pla_Image  = loadImage('get/image/Purple_Plant');
-cha_bac_Image  = loadImage('get/image/Chair_Back');
-cha_fro_Image  = loadImage('get/image/Chair_Front');
+    animated_crow2 = loadImage('get/image/AnimatedCrow2');
+    animated_crow = loadImage('get/image/AnimatedCrow');
+    animated_plant = loadImage('get/image/AnimatedPlant');
+    bar_left_Image = loadImage('get/image/Bar_Left');
+    bar_mid_Image  = loadImage('get/image/Bar_Middle');
+    bar_rig_Image  = loadImage('get/image/Bar_Right');
+    bej_pla_Image  = loadImage('get/image/Beje_Plant');
+    pur_pla_Image  = loadImage('get/image/Purple_Plant');
+    cha_bac_Image  = loadImage('get/image/Chair_Back');
+    cha_fro_Image  = loadImage('get/image/Chair_Front');
 
-cha_cus_Image  = loadImage('get/image/Cushion_Chair');
-lon_tab_Image  = loadImage('get/image/Long_Table');
-sim_tab_Image  = loadImage('get/image/Simple_Table');
-rou_tab_Image  = loadImage('get/image/Round_Table');
-tel_pla_Image  = loadImage('get/image/Machine_Karaoke');
-tel_cor_Image  = loadImage('get/image/Television');
-mac_kar_Image  = loadImage('get/image/Television_Corner');
-oven_Image     = loadImage('get/image/Oven');
+    cha_cus_Image  = loadImage('get/image/Cushion_Chair');
+    lon_tab_Image  = loadImage('get/image/Long_Table');
+    sim_tab_Image  = loadImage('get/image/Simple_Table');
+    rou_tab_Image  = loadImage('get/image/Round_Table');
+    tel_pla_Image  = loadImage('get/image/Machine_Karaoke');
+    tel_cor_Image  = loadImage('get/image/Television');
+    mac_kar_Image  = loadImage('get/image/Television_Corner');
+    oven_Image     = loadImage('get/image/Oven');
+//---------------------\\
 
 //Food Variables\\
-tu_Image = loadImage('get/image/Tuna');
-sh_Image = loadImage('get/image/Shrimp');
-ca_Image = loadImage('get/image/Cacoa');
-ch_Image = loadImage('get/image/Cherry');
-eg_Image = loadImage('get/image/Eggs');
-pa_Image = loadImage('get/image/Pasta');
-ri_Image = loadImage('get/image/Rice');
-wa_Image = loadImage('get/image/Water');
-ol_oi_Image = loadImage('get/image/Oliva_Oil');
-br_Image = loadImage('get/image/Bread');
-fl_Image = loadImage('get/image/Flour');
-noo_Image  = loadImage('get/image/Noodles');
-bre_ome_Image = loadImage('get/image/Bread_Omelet');
-tun_sus_Image = loadImage('get/image/Tuna_Sushi');
-shi_sus_Image = loadImage('get/image/Shrimp_Sushi');
-cho_cak_Image = loadImage('get/image/Chocolate_Cake');
-che_pie_Image = loadImage('get/image/Cherry_Pie');
 
-//UI parts
-BottomFrame = loadImage('get/images/bottom_frame');
-RightYellowArrow = loadImage('get/images/right_yellow_arrow');
-LeftYellowArrow = loadImage('get/images/left_yellow_arrow');
-CircleButton = loadImage('/get/image/circlebutton');
+    tu_Image = loadImage('get/image/Tuna');
+    sh_Image = loadImage('get/image/Shrimp');
+    ca_Image = loadImage('get/image/Cacoa');
+    ch_Image = loadImage('get/image/Cherry');
+    eg_Image = loadImage('get/image/Eggs');
+    pa_Image = loadImage('get/image/Pasta');
+    ri_Image = loadImage('get/image/Rice');
+    wa_Image = loadImage('get/image/Water');
+    ol_oi_Image = loadImage('get/image/Oliva_Oil');
+    br_Image = loadImage('get/image/Bread');
+    fl_Image = loadImage('get/image/Flour');
+    noo_Image  = loadImage('get/image/Noodles');
+    bre_ome_Image = loadImage('get/image/Bread_Omelet');
+    tun_sus_Image = loadImage('get/image/Tuna_Sushi');
+    shi_sus_Image = loadImage('get/image/Shrimp_Sushi');
+    cho_cak_Image = loadImage('get/image/Chocolate_Cake');
+    che_pie_Image = loadImage('get/image/Cherry_Pie');
+//---------------\\
 
-ChatBalloon = loadImage('/get/image/ChatBalloon');
-CircleButtonCheck = loadImage('/get/image/circlebuttonCheck');
-CircleButtonCooking = loadImage('/get/image/circlebuttonCooking');
-CircleButtonDecoration = loadImage('/get/image/circlebuttonDecoration');
-CircleButtonGear = loadImage('/get/image/circlebuttonGear');
-CircleButtonGeneral = loadImage('/get/image/circlebuttonGeneral');
-CircleButtonLeaderboards = loadImage('/get/image/circlebuttonLeaderboards');
-CircleButtonLogOut = loadImage('/get/image/circlebuttonLogOut');
-CircleButtonMap = loadImage('/get/image/circlebuttonMap');
-CircleButtonStorage = loadImage('/get/image/circlebuttonStorage');
-levelStar = loadImage('/get/image/levelstar');
-MoneyFrame = loadImage('/get/image/MoneyDisplayer');
-LeaderboardsFrame = loadImage('/get/image/LeaderboardsFrame');
-LeaderboardTab = loadImage('get/image/LeaderboardTab');
 
-JapanCityRestaurant = loadImage('/get/image/JapanCityRestaurant');
-JapanMap = loadImage('/get/image/JapanMap');
-JapanCityMarket = loadImage('/get/image/JapanCityMarket');
-JapanCityFriends = loadImage('/get/image/JapanCityFriends');
-CloseMark = loadImage('/get/image/CloseMarket');
-MarketFrame = loadImage('/get/image/MarketFrame');
-MarketButton = loadImage('/get/image/MarketButton');
-StorageFrame = loadImage('/get/image/StorageFrame');
+//Main UI buttons\\
 
-LoginSignupButton = loadImage('/get/image/LoginSignupButton');
+    CircleButtonCheck = loadImage('/get/image/circlebuttonCheck');
+    CircleButtonCooking = loadImage('/get/image/circlebuttonCooking');
+    CircleButtonDecoration = loadImage('/get/image/circlebuttonDecoration');
+    CircleButtonGear = loadImage('/get/image/circlebuttonGear');
+    CircleButtonGeneral = loadImage('/get/image/circlebuttonGeneral');
+    CircleButtonLeaderboards = loadImage('/get/image/circlebuttonLeaderboards');
+    CircleButtonLogOut = loadImage('/get/image/circlebuttonLogOut');
+    CircleButtonMap = loadImage('/get/image/circlebuttonMap');
+    CircleButtonStorage = loadImage('/get/image/circlebuttonStorage');
+//----------------\\
 
-ReturnButtonCook = loadImage('/get/image/ReturnButtonCook');
+//UI elements\\
+
+    BottomFrame = loadImage('get/images/bottom_frame');
+    RightYellowArrow = loadImage('get/images/right_yellow_arrow');
+    LeftYellowArrow = loadImage('get/images/left_yellow_arrow');
+    CircleButton = loadImage('/get/image/circlebutton');
+    levelStar = loadImage('/get/image/levelstar');
+    MoneyFrame = loadImage('/get/image/MoneyDisplayer');
+    LeaderboardsFrame = loadImage('/get/image/LeaderboardsFrame');
+    CloseMark = loadImage('/get/image/CloseMarket');
+    MarketFrame = loadImage('/get/image/MarketFrame');
+    MarketButton = loadImage('/get/image/MarketButton');
+    StorageFrame = loadImage('/get/image/StorageFrame');
+    LeaderboardTab = loadImage('get/image/LeaderboardTab');
+    ReturnButtonCook = loadImage('/get/image/ReturnButtonCook');
+    middleFrame = loadImage('get/image/middleframe');
+    DefaultRedButton = loadImage('/get/image/buttonImage');
+//------------\\
+
+//Map elements\\
+
+    JapanCityRestaurant = loadImage('/get/image/JapanCityRestaurant');
+    JapanMap = loadImage('/get/image/JapanMap');
+    JapanCityMarket = loadImage('/get/image/JapanCityMarket');
+    JapanCityFriends = loadImage('/get/image/JapanCityFriends');
+//-------------\\
+
+
 
 };

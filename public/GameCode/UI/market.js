@@ -1,67 +1,81 @@
 /////////////////////Arrays\\\\\\\\\\\\\\\\\\\\\
-let DecorationList = []; //This is the decoration market items
-let LastSelectedDecoration = {}; //The last decoration item that you hovered
 
+    //This is the decoration market items
+    let DecorationList = []; 
 
-let IgredientsList = []; //This is the ingredients market items
-let LastSelectedIngredient = {};
+    //The last decoration item that you hovered
+    let LastSelectedDecoration = {}; 
+
+    //This is the ingredients market items
+    let IgredientsList = []; 
+
+    //The last ingredient item that you hovered
+    let LastSelectedIngredient = {};
 /////////////////////-------\\\\\\\\\\\\\\\\\\\\\
 
 //Ingredients SECTION\\
 
-//Variables
-let MarketIngredientPurchaseAmount = 0;
-let MarketWindowIngredientsPage = 0;
-//Buttons
-let MarketWindowIngredientsLeftArrow;
-let MarketWindowIngredientsRightArrow;
-let MarketIngredientPurchaseAdd;
-let MarketIngredientPurchaseSub;
-let MarketIngredientPurchaseButton;
+    //Variables
+    let MarketIngredientPurchaseAmount = 0;
+    let MarketWindowIngredientsPage = 0;
+
+    //Buttons
+    let MarketWindowIngredientsLeftArrow;
+    let MarketWindowIngredientsRightArrow;
+    let MarketIngredientPurchaseAdd;
+    let MarketIngredientPurchaseSub;
+    let MarketIngredientPurchaseButton;
 //--------------------\\
 
 
 
 //DEC SECTION\\
 
-//Variables
-let MarketDecorationPurchaseAmount = 0;
-let MarketWindowDecorationPage = 0;
-//Buttons
-let MarketWindowDecorationLeftArrow;
-let MarketWindowDecorationRightArrow;
-let MarketDecorationPurchaseAdd;
-let MarketDecorationPurchaseSub;
-let MarketDecorationPurchaseButton;
+    //Variables
+    let MarketDecorationPurchaseAmount = 0;
+    let MarketWindowDecorationPage = 0;
+
+    //Buttons
+    let MarketWindowDecorationLeftArrow;
+    let MarketWindowDecorationRightArrow;
+    let MarketDecorationPurchaseAdd;
+    let MarketDecorationPurchaseSub;
+    let MarketDecorationPurchaseButton;
 //------------\\
 
 //Market Main window buttons\\
-let MarketButtonDecoration;
-let MarketButtonIngredients;
-let CloseTheMarketButton;
+    let MarketButtonDecoration;
+    let MarketButtonIngredients;
+    let CloseTheMarketButton;
 //---------------\\
 
 const setupMarketUI = () =>{
 
+    //Main UI\\
 
-    CloseTheMarketButton = new NewButton(0, 0, 0, 0, CloseMark);
-    MarketButtonDecoration = new NewButton(0, 0, 0, 0, MarketButton);
-    MarketButtonIngredients = new NewButton(0, 0, 0, 0, MarketButton);
+        CloseTheMarketButton = new NewButton(0, 0, 0, 0, CloseMark);
+        MarketButtonDecoration = new NewButton(0, 0, 0, 0, MarketButton);
+        MarketButtonIngredients = new NewButton(0, 0, 0, 0, MarketButton);
+    //--------\\
 
-    //Decoration UI
-    MarketDecorationPurchaseButton = new NewButton(0, 0, 0, 0);
-    MarketDecorationPurchaseAdd = new NewButton(0, 0, 0, 0);
-    MarketDecorationPurchaseSub = new NewButton(0, 0, 0, 0);
-    MarketIngredientPurchaseSub = new NewButton(0, 0, 0, 0);
-    MarketWindowDecorationLeftArrow = new NewButton(0, 0, 0, 0, LeftYellowArrow);
-    MarketWindowDecorationRightArrow = new NewButton(0, 0, 0, 0, RightYellowArrow);
+    //Decoration UI\\
 
-    //Ingredients UI
-    MarketIngredientPurchaseAdd = new NewButton(0, 0, 0, 0);
-    MarketIngredientPurchaseSub = new NewButton(0, 0, 0, 0);
-    MarketIngredientPurchaseButton = new NewButton(0, 0, 0, 0);
-    MarketWindowIngredientsLeftArrow = new NewButton(0, 0, 0, 0, LeftYellowArrow);
-    MarketWindowIngredientsRightArrow = new NewButton(0, 0, 0, 0, RightYellowArrow);
+        MarketDecorationPurchaseButton = new NewButton(0, 0, 0, 0);
+        MarketDecorationPurchaseAdd = new NewButton(0, 0, 0, 0);
+        MarketDecorationPurchaseSub = new NewButton(0, 0, 0, 0);
+        MarketIngredientPurchaseSub = new NewButton(0, 0, 0, 0);
+        MarketWindowDecorationLeftArrow = new NewButton(0, 0, 0, 0, LeftYellowArrow);
+        MarketWindowDecorationRightArrow = new NewButton(0, 0, 0, 0, RightYellowArrow);
+    //--------------\\
+
+    //Ingredients UI\\
+
+        MarketIngredientPurchaseAdd = new NewButton(0, 0, 0, 0);
+        MarketIngredientPurchaseSub = new NewButton(0, 0, 0, 0);
+        MarketIngredientPurchaseButton = new NewButton(0, 0, 0, 0);
+        MarketWindowIngredientsLeftArrow = new NewButton(0, 0, 0, 0, LeftYellowArrow);
+        MarketWindowIngredientsRightArrow = new NewButton(0, 0, 0, 0, RightYellowArrow);
+    //---------------\\    
 };
 
 
@@ -73,63 +87,59 @@ const DrawMarketWindow = () =>{
 
     //Display the amount of money u own
     YenDisplayer.draw();
-    //CloseMark
-    CloseTheMarketButton.x = windowWidth/2 + 430;
-    CloseTheMarketButton.y = windowHeight/2 - 280;
-    CloseTheMarketButton.w = 50;
-    CloseTheMarketButton.h = 50;
 
-    CloseTheMarketButton.hovered(()=>{
-        tint(190, 190, 59);
-    });
+    //Close The market button\\
 
-    CloseTheMarketButton.draw();
-    noTint();
-    //Market button for the decoration tab\\
-    MarketButtonDecoration.x = windowWidth/2 - 500;
-    MarketButtonDecoration.y = windowHeight/2 - 375;
-    MarketButtonDecoration.w = 200;
-    MarketButtonDecoration.h = 75;
+        CloseTheMarketButton.x = windowWidth/2 + 430;
+        CloseTheMarketButton.y = windowHeight/2 - 280;
+        CloseTheMarketButton.w = 50;
+        CloseTheMarketButton.h = 50;
+        CloseTheMarketButton.hovered(()=>{
+            tint(190, 190, 59);
+        });
+        CloseTheMarketButton.draw();
+        noTint();
+    //------------------------\\
 
-    MarketButtonDecoration.hovered(()=>{
-        tint(190, 190, 59);
-    });
+    //The decoration tab button\\
 
-    MarketButtonDecoration.draw();
-    noTint();
+        MarketButtonDecoration.x = windowWidth/2 - 500;
+        MarketButtonDecoration.y = windowHeight/2 - 375;
+        MarketButtonDecoration.w = 200;
+        MarketButtonDecoration.h = 75;
+        MarketButtonDecoration.hovered(()=>{
+            tint(190, 190, 59);
+        });
+        MarketButtonDecoration.draw();
+        noTint();
+        textSize(30);
+        textAlign(CENTER, CENTER);
+        if(MarketWindowSection){
+        BetterText('Decoration', windowWidth/2 - 400, windowHeight/2 - 337.5, {r: 255, g: 231, b: 100});
+        }else{
+            BetterText('Decoration', windowWidth/2 - 400, windowHeight/2 - 337.5);
+        };
+    //--------------------------\\
 
-    textSize(30);
-    textAlign(CENTER, CENTER);
+    //The ingredients tab button\\
 
-    if(MarketWindowSection){
-      BetterText('Decoration', windowWidth/2 - 400, windowHeight/2 - 337.5, {r: 255, g: 231, b: 100});
-    }else{
-        BetterText('Decoration', windowWidth/2 - 400, windowHeight/2 - 337.5);
-    };
-
-    //Market button for the ingredients\\
-    MarketButtonIngredients.x = windowWidth/2 - 280;
-    MarketButtonIngredients.y = windowHeight/2 - 375;
-    MarketButtonIngredients.w = 200;
-    MarketButtonIngredients.h = 75;
-
-    MarketButtonIngredients.hovered(()=>{
-        tint(190, 190, 59);
-    });
-
-    MarketButtonIngredients.draw();
-
-    textSize(30);
-    textAlign(CENTER, CENTER);
-
-    if(!MarketWindowSection){
-        BetterText('Ingredients', windowWidth/2 - 180, windowHeight/2 - 337.5, {r: 255, g: 231, b: 100});
-    }else{
-        BetterText('Ingredients', windowWidth/2 - 180, windowHeight/2 - 337.5);
-    };
-
-    noTint();
-
+        MarketButtonIngredients.x = windowWidth/2 - 280;
+        MarketButtonIngredients.y = windowHeight/2 - 375;
+        MarketButtonIngredients.w = 200;
+        MarketButtonIngredients.h = 75;
+        MarketButtonIngredients.hovered(()=>{
+            tint(190, 190, 59);
+        });
+        MarketButtonIngredients.draw();
+        noTint();
+        textSize(30);
+        textAlign(CENTER, CENTER);
+        if(!MarketWindowSection){
+            BetterText('Ingredients', windowWidth/2 - 180, windowHeight/2 - 337.5, {r: 255, g: 231, b: 100});
+        }else{
+            BetterText('Ingredients', windowWidth/2 - 180, windowHeight/2 - 337.5);
+        };
+    //---------------------------\\
 
 
     //Items displayed

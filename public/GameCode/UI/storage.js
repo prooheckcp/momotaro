@@ -1,56 +1,70 @@
 //Variables\\
-let CurrentStoragePage = 'ingredients';
 
-//Default stats of the window 
-let StorageMainFrameDetails;
+    //The tab to be displayed
+    let CurrentStoragePage = 'ingredients';
 
-//The info about the slots displayed on each tab
-let LocalSlotInformation;
+    //Default stats of the window 
+    let StorageMainFrameDetails;
+
+    //The info about the slots displayed on each tab
+    let LocalSlotInformation;
 
 //----------\\
 
 
 //UI Elements\\
-let IngredientsStorageTab;
-let DishesStorageTab;
-let DecorationStorageTab;
-let CloseStorageWindow;
-let StorageLeftArrow;
-let StorageRightArrow;
+
+    let IngredientsStorageTab;
+    let DishesStorageTab;
+    let DecorationStorageTab;
+    let CloseStorageWindow;
+    let StorageLeftArrow;
+    let StorageRightArrow;
 //------------\\
 
 //Storage Pages\\
-let IngredientsPages = 0;
-let DishesPages = 0;
-let DecorationPages = 0;
+
+    let IngredientsPages = 0;
+    let DishesPages = 0;
+    let DecorationPages = 0;
 //--------------\\
 
 const setupStorageWindow = () =>{
 
-    //Default stats of the window 
-    StorageMainFrameDetails = {
-        x: windowWidth/2 - 500,
-        y: windowHeight/2 - 300
-    };
+    //Default stats of the window\\
 
-    //The info about the slots displayed on each tab
-    LocalSlotInformation = {
-        x: StorageMainFrameDetails.x + 10,
-        y: StorageMainFrameDetails.y + 10,
-        w: 100,
-        h: 100,
-        slotLengthX: 9,
-        slotLengthY: 4
-    };
+        StorageMainFrameDetails = {
+            x: windowWidth/2 - 500,
+            y: windowHeight/2 - 300
+        };
+    //----------------------------\\
+
+
+    //The info about the slots displayed on each tab\\
+
+        LocalSlotInformation = {
+            x: StorageMainFrameDetails.x + 10,
+            y: StorageMainFrameDetails.y + 10,
+            w: 100,
+            h: 100,
+            slotLengthX: 9,
+            slotLengthY: 4
+        };
+    //-----------------------------------------------\\
 
     //Buttons\\
-    IngredientsStorageTab = new NewButton(0, 0, 200, 75, MarketButton);
-    DishesStorageTab = new NewButton(0, 0, 200, 75, MarketButton);
-    DecorationStorageTab = new NewButton(0, 0, 200, 75, MarketButton);
-    CloseStorageWindow = new NewButton(0, 0, 50, 50, CloseMark);
-    //Arrow buttons
-    StorageLeftArrow = new NewButton(0, 0, 50, 100, LeftYellowArrow);
-    StorageRightArrow = new NewButton(0, 0, 50, 100, RightYellowArrow);
+
+        //Tab buttons
+        IngredientsStorageTab = new NewButton(0, 0, 200, 75, MarketButton);
+        DishesStorageTab = new NewButton(0, 0, 200, 75, MarketButton);
+        DecorationStorageTab = new NewButton(0, 0, 200, 75, MarketButton);
+
+        //Close the window button
+        CloseStorageWindow = new NewButton(0, 0, 50, 50, CloseMark);
+
+        //Arrow buttons
+        StorageLeftArrow = new NewButton(0, 0, 50, 100, LeftYellowArrow);
+        StorageRightArrow = new NewButton(0, 0, 50, 100, RightYellowArrow);
     //--------\\
 
 
@@ -59,32 +73,40 @@ const setupStorageWindow = () =>{
 const DrawStorageWindow = () =>{
 
 
-    //Default stats of the window 
-    StorageMainFrameDetails = {
-        x: windowWidth/2 - 500,
-        y: windowHeight/2 - 300
-    };
+    //Default stats of the window\\
 
-    //The info about the slots displayed on each tab
-    LocalSlotInformation = {
-        x: StorageMainFrameDetails.x + 10,
-        y: StorageMainFrameDetails.y + 10,
-        w: 100,
-        h: 100,
-        slotLengthX: 9,
-        slotLengthY: 4
-    };
+        StorageMainFrameDetails = {
+            x: windowWidth/2 - 500,
+            y: windowHeight/2 - 300
+        };
+    //----------------------------\\
 
-    //Left arrow
-    StorageLeftArrow.x = StorageMainFrameDetails.x + 20;
-    StorageLeftArrow.y = StorageMainFrameDetails.y + 475;
+    //The info about the slots displayed on each tab\\
 
-    //Right arrow
-    StorageRightArrow.x = StorageMainFrameDetails.x + 400;
-    StorageRightArrow.y = StorageMainFrameDetails.y + 475;
+        LocalSlotInformation = {
+            x: StorageMainFrameDetails.x + 10,
+            y: StorageMainFrameDetails.y + 10,
+            w: 100,
+            h: 100,
+            slotLengthX: 9,
+            slotLengthY: 4
+        };
+    //-----------------------------------------------\\
+
+    //Arrows\\
+
+        //Left arrow
+        StorageLeftArrow.x = StorageMainFrameDetails.x + 20;
+        StorageLeftArrow.y = StorageMainFrameDetails.y + 475;
+
+        //Right arrow
+        StorageRightArrow.x = StorageMainFrameDetails.x + 400;
+        StorageRightArrow.y = StorageMainFrameDetails.y + 475;
+    //-------\\
 
     //Header\\
-    StorageWindowHeader(StorageMainFrameDetails);
+
+        StorageWindowHeader(StorageMainFrameDetails);
     //-------\\
 
     if(CurrentStoragePage == 'ingredients'){
@@ -93,6 +115,7 @@ const DrawStorageWindow = () =>{
         textAlign(CENTER, CENTER)
         textSize(50);
         BetterText('Page: '+(IngredientsPages + 1)+ '/' + (int(ingredientsInventory.length/(LocalSlotInformation.slotLengthX * LocalSlotInformation.slotLengthY) + 1)), StorageMainFrameDetails.x + 235, StorageMainFrameDetails.y + 525);
+        
         //Diplay the items
         StorageWindowIngredients(StorageMainFrameDetails);
 
@@ -156,15 +179,6 @@ const DrawStorageWindow = () =>{
             noTint();
         };
     };
-    
-
-
-
-
-    
-
-
-    
 };
 
 const StorageWindowIngredients = () =>{

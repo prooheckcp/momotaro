@@ -1,44 +1,59 @@
-let RecipesWindowOpen = false; //Wether the recipes window is open or not (false -> cooking crafting; true -> recipes inventory)
-let RecipesWindowPage = 0; //The current page of the inventory
+//Variables\\
+
+    //Wether the recipes window is open or not (false -> cooking crafting; true -> recipes inventory)
+    let RecipesWindowOpen = false;
+
+    //The current page of the inventory
+    let RecipesWindowPage = 0; 
+
+    //The types of recipes
+    let recipesTypes = []; 
+
+    //The inventory of the player when it comes to recipes
+    let recipesInventory = []; 
+//----------\\
+
+
 
 //UI Elements\\
-let RecipesLeftArrow;
-let RecipesRightArrow;
+
+    let RecipesLeftArrow;
+    let RecipesRightArrow;
 //------------\\
 
-let recipesTypes = []; //The types of recipes
-let recipesInventory = []; //The inventory of the player when it comes to recipes
+
 
 const DrawRecipesWindow = (LocalBackgroundFrameX, LocalBackgroundFrameY) => {
 
     //Arrows\\
 
-    //Left arrow
-    if(RecipesWindowPage > 0){
-        RecipesLeftArrow.x = LocalBackgroundFrameX + 20;
-        RecipesLeftArrow.y = LocalBackgroundFrameY + 250;
-        RecipesLeftArrow.w = 50;
-        RecipesLeftArrow.h = 100;
-        RecipesLeftArrow.hovered(()=>{
-            tint(125, 123, 0);
-        });
+        //Left arrow
+        if(RecipesWindowPage > 0){
+            RecipesLeftArrow.x = LocalBackgroundFrameX + 20;
+            RecipesLeftArrow.y = LocalBackgroundFrameY + 250;
+            RecipesLeftArrow.w = 50;
+            RecipesLeftArrow.h = 100;
+            RecipesLeftArrow.hovered(()=>{
+                tint(125, 123, 0);
+            });
 
-        RecipesLeftArrow.draw();
-        noTint()
-    };
-    //Right arrow
-    if(RecipesWindowPage + 1 < recipesInventory.length/3){
-        RecipesRightArrow.x = LocalBackgroundFrameX + 930;
-        RecipesRightArrow.y = LocalBackgroundFrameY + 250;
-        RecipesRightArrow.w = 50;
-        RecipesRightArrow.h = 100;
-        RecipesRightArrow.hovered(()=>{
-            tint(125, 123, 0);
-        });
+            RecipesLeftArrow.draw();
+            noTint()
+        };
+        
+        //Right arrow
+        if(RecipesWindowPage + 1 < recipesInventory.length/3){
+            RecipesRightArrow.x = LocalBackgroundFrameX + 930;
+            RecipesRightArrow.y = LocalBackgroundFrameY + 250;
+            RecipesRightArrow.w = 50;
+            RecipesRightArrow.h = 100;
+            RecipesRightArrow.hovered(()=>{
+                tint(125, 123, 0);
+            });
 
-        RecipesRightArrow.draw(); 
-        noTint();
-    };
+            RecipesRightArrow.draw(); 
+            noTint();
+        };
     //-------\\
 
 
@@ -106,6 +121,7 @@ const DrawRecipeSlot = (x, y, dish) =>{
 
 const RecipeWindowMousePressed = () =>{
 
+    //Move to the previous page
     if(RecipesWindowPage > 0){
         RecipesLeftArrow.pressed(()=>{
             RecipesWindowPage--;
@@ -113,9 +129,11 @@ const RecipeWindowMousePressed = () =>{
 
     };
 
+    //Move to the next page
     if(RecipesWindowPage + 1 < recipesInventory.length/3){
         RecipesRightArrow.pressed(()=>{
             RecipesWindowPage++;
         });
     };
-}
+
+};

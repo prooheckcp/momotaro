@@ -1,4 +1,4 @@
-//A simple button with the generic type of info u need\\
+//A simple button class
 class NewButton{
 
     constructor(x, y, w, h, image){
@@ -58,6 +58,7 @@ class NewButton{
 
 //Food related classes\\
 
+//Creates an ingredient class, this includes interections within the inventories
 class ingredients {
     /*id, image, name*/
     constructor( id, image, name) {
@@ -186,6 +187,7 @@ class ingredients {
     }
 };
    
+//Creates a dish class
 class dishes {
     /*id, image, name, recipes*/
     constructor(id, image, name, recipes){
@@ -312,85 +314,95 @@ class NewFurniture {
 };
 
 
-class ReputationPointsDisplayer{
-    constructor(){
-        this.x = 0;
-        this.y = 0;
-        this.w = 0;
-        this.h = 0;
-    }
-
-    draw(){
-        image(MoneyFrame, this.x, this.y, this.w, this.h);
-        textAlign(CENTER, CENTER);
-        textSize(20)
-
-        let LocalPolishedNumber = numberWithCommas(CurrentPrestigePoints)
-
-        BetterText('Rep. points: ' + LocalPolishedNumber + '', this.x + this.w/2, this.y + this.h/2);
-    }
-}
 
 //UI elements for the main part of the game\\
 
-class MoneyDisplayer{
-    constructor(){
-        this.x = 0;
-        this.y = 0;
-        this.w = 0;
-        this.h = 0;
-    }
+    //Create a reputation point displayer
+    class ReputationPointsDisplayer{
+        constructor(){
+            this.x = 0;
+            this.y = 0;
+            this.w = 0;
+            this.h = 0;
+        }
 
-    draw(){
-        image(MoneyFrame, this.x, this.y, this.w, this.h);
-        textAlign(CENTER, CENTER);
-        textSize(25)
-
-        let LocalPolishedNumber = numberWithCommas(restaurantStats.money)
-
-        BetterText('' + LocalPolishedNumber + ' ¥', this.x + this.w/2, this.y + this.h/2);
-    }
-}
-
-class XPbar{
-    constructor(){
-        this.x = 0;
-        this.y = 0;
-        this.w = 0;
-        this.h = 0;
-    };
-
-    draw(){
-
-
-
-        //Background of the bar
-        fill(0);  
-        rect(this.x, this.y, this.w, this.h, 10);
-
-        //Fill part
-        fill(186, 7, 222);
-        rect(this.x, this.y, (restaurantStats.exp * this.w)/CalculateRequiredEXP(restaurantStats.level), this.h, 10);
-        fill(255);
-        //Star
-        image(levelStar, this.x - 50, this.y - 50 + this.h/2, 100, 100);
-        textAlign(CENTER, CENTER);
-        textSize(30);
-        BetterText('' + restaurantStats.level + '', this.x, this.y + 7 +this.h/2 );
-
-    };
-
-    
-    hovered(){
-        if(CheckIfMouseInRect(this, mouseX, mouseY)){
-            textSize(28);
+        draw(){
+            image(MoneyFrame, this.x, this.y, this.w, this.h);
             textAlign(CENTER, CENTER);
-            BetterText('Exp: ' + restaurantStats.exp + '/' + CalculateRequiredEXP(restaurantStats.level), this.x + this.w/2, this.y + this.h/2);
+            textSize(20)
+
+            let LocalPolishedNumber = numberWithCommas(CurrentPrestigePoints)
+
+            BetterText('Rep. points: ' + LocalPolishedNumber + '', this.x + this.w/2, this.y + this.h/2);
+        }
+    }
+
+    //Create a yen displayere bar
+    class MoneyDisplayer{
+        constructor(){
+            this.x = 0;
+            this.y = 0;
+            this.w = 0;
+            this.h = 0;
+        }
+
+        draw(){
+            image(MoneyFrame, this.x, this.y, this.w, this.h);
+            textAlign(CENTER, CENTER);
+            textSize(25)
+
+            let LocalPolishedNumber = numberWithCommas(restaurantStats.money)
+
+            BetterText('' + LocalPolishedNumber + ' ¥', this.x + this.w/2, this.y + this.h/2);
+        }
+    }
+
+    //Create an EXP bar displayer
+    class XPbar{
+        constructor(){
+            this.x = 0;
+            this.y = 0;
+            this.w = 0;
+            this.h = 0;
         };
+
+        draw(){
+
+
+
+            //Background of the bar
+            fill(0);  
+            rect(this.x, this.y, this.w, this.h, 10);
+
+            //Fill part
+            fill(186, 7, 222);
+            rect(this.x, this.y, (restaurantStats.exp * this.w)/CalculateRequiredEXP(restaurantStats.level), this.h, 10);
+            fill(255);
+            //Star
+            image(levelStar, this.x - 50, this.y - 50 + this.h/2, 100, 100);
+            textAlign(CENTER, CENTER);
+            textSize(30);
+            BetterText('' + restaurantStats.level + '', this.x, this.y + 7 +this.h/2 );
+
+        };
+
+        
+        hovered(){
+            if(CheckIfMouseInRect(this, mouseX, mouseY)){
+                textSize(28);
+                textAlign(CENTER, CENTER);
+                BetterText('Exp: ' + restaurantStats.exp + '/' + CalculateRequiredEXP(restaurantStats.level), this.x + this.w/2, this.y + this.h/2);
+            };
+        };
+
     };
+//------------------------------------------\\
 
-};
 
+
+
+//Not sure if needed, may delete later
+//Create a NPC
 class npc {
     constructor(posX, posY, img) {
       this.posX = posX;
