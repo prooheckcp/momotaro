@@ -4,6 +4,7 @@ const UpdateRestaurantRequest = () => {
         PlayerRestaurantFurniture = [];
         if(typeof(LocalData) == typeof([])){
           for(let LocalF of LocalData){
+              print(LocalF);
               PlayerRestaurantFurniture.push(LocalF);
           };
         }

@@ -43,6 +43,11 @@ let CloseTheMarketButton;
 
 const setupMarketUI = () =>{
 
+
+    CloseTheMarketButton = new NewButton(0, 0, 0, 0, CloseMark);
+    MarketButtonDecoration = new NewButton(0, 0, 0, 0, MarketButton);
+    MarketButtonIngredients = new NewButton(0, 0, 0, 0, MarketButton);
+
     //Decoration UI
     MarketDecorationPurchaseButton = new NewButton(0, 0, 0, 0);
     MarketDecorationPurchaseAdd = new NewButton(0, 0, 0, 0);

@@ -1,25 +1,34 @@
 //Variables\\
-let inventory = null; //The player inventory, if null it will auto update to the current inventory, else it will just be updated when called
-let furniture = []; //All the classes of the furniture
-let LocalBottomFramePage = 1; //The page of items that is currently being displayed
-let LocalBottomFrameOffSet = 0; //The offset in case I wanna polish this
-let MouseOnTile = {x: null, y: null}; //If the mouse is on a restaurant tile the x and y will change to its number, else they will be kept as null
+
+  //The player inventory (furniture to be placed not the one currently placed)
+  let inventory = null;
+  //All the classes of the furniture
+  let furniture = []; 
+  //The page of items that is currently being displayed
+  let LocalBottomFramePage = 1; 
+  //The current tile on which the mouse is located
+  let MouseOnTile = {x: null, y: null};
+//----------\\
 
 //UI elements\\
-let ReputationDisplayer;
 
-//Buttons\\
-let LeftYellowArrowButton;
-let RightYellowArrowButton;
-let AcceptDecorationButton;
+  //Displays current reputation points
+  let ReputationDisplayer;
+
+  //Buttons
+  let LeftYellowArrowButton;
+  let RightYellowArrowButton;
+  let AcceptDecorationButton;
+//------------\\
 
 const DecorationSetUp = () => {
-  /////////////////UI\\\\\\\\\\\\\\\\\
-  LeftYellowArrowButton =  new NewButton(windowWidth/2 - 400, windowHeight - 137.5 + LocalBottomFrameOffSet, 50, 100, LeftYellowArrow);
-  RightYellowArrowButton =  new NewButton(windowWidth/2 + 350, windowHeight - 137.5 + LocalBottomFrameOffSet, 50, 100, RightYellowArrow);
-  AcceptDecorationButton = new NewButton(windowWidth/2 + 400, windowHeight - 75 , 75, 75, CircleButtonCheck);
-  ReputationDisplayer = new ReputationPointsDisplayer();
-  //////////////////\\\\\\\\\\\\\\\\\\
+  
+  //UI elements\\
+    LeftYellowArrowButton =  new NewButton(windowWidth/2 - 400, windowHeight - 137.5, 50, 100, LeftYellowArrow);
+    RightYellowArrowButton =  new NewButton(windowWidth/2 + 350, windowHeight - 137.5, 50, 100, RightYellowArrow);
+    AcceptDecorationButton = new NewButton(windowWidth/2 + 400, windowHeight - 75 , 75, 75, CircleButtonCheck);
+    ReputationDisplayer = new ReputationPointsDisplayer();
+  //------------\\
   
   ////////////Actual Decoration\\\\\\\\\\\\
   //Round Table
@@ -47,91 +56,81 @@ const DecorationDraw = () =>{
   ReputationDisplayer.draw();
 
   //Check where the mouse is
-  mouseOnTileFun();
-  //The green tile to place items :3
-  for(let i = 0;  i < RestaurantDefaultData.TilesX ;i++){
-    for(let j = 0; j < RestaurantDefaultData.TilesY; j++){
-
-      let LocalPositions = CalculateRestaurantTile(i, j);
-
-      if(i == MouseOnTile.x && j == MouseOnTile.y){
-      //Yellow
-      fill(203, 214, 0, 150);
-      }else{
-      //Green
-      fill(43, 232, 0, 25);
-      };
-      rect(LocalPositions.x, LocalPositions.y, RestaurantDefaultData.TilesSize, RestaurantDefaultData.TilesSize);
-      fill(255, 255, 255, 255);
-      textAlign(CENTER, CENTER);
-      textSize(20);
-      text(i + ', ' +  j , LocalPositions.x + RestaurantDefaultData.TilesSize/2, LocalPositions.y + RestaurantDefaultData.TilesSize/2);
-    };
-  };
-
+  mouseOnTileFun();  
 
   
-
-  //Update the inventory
   if (inventory == null){
+
+    //Debounce for the inventory
     inventory = [];
+    //Update the inventory
     UpdateInventoryRequest();
     
   }else if(typeof(inventory) == typeof([])){
 
+  //The bottom frame
+  image(BottomFrame, windowWidth/2 - 400 , windowHeight - 150, 800, 125);
 
-  //The bottom frame\\
-  image(BottomFrame, windowWidth/2 - 400 , windowHeight - 150 + LocalBottomFrameOffSet, 800, 125);
-  //Accept changes button\\
+  //Accept changes button
   let AcceptDecorationButtonBeingHovered = false;
   AcceptDecorationButton.w = 75;
   AcceptDecorationButton.h = 75;
   AcceptDecorationButton.x = windowWidth/2 + 425;
-  AcceptDecorationButton.y = windowHeight - 125 + LocalBottomFrameOffSet
+  AcceptDecorationButton.y = windowHeight - 125;
   AcceptDecorationButton.hovered(()=>{
     AcceptDecorationButton.w = 90;
     AcceptDecorationButton.h = 90;
     AcceptDecorationButton.x = windowWidth/2 + 417.5;
-    AcceptDecorationButton.y = windowHeight - 132.5 + LocalBottomFrameOffSet;
+    AcceptDecorationButton.y = windowHeight - 132.5;
     AcceptDecorationButtonBeingHovered = true;
     tint(190, 190, 59);
   });
   AcceptDecorationButton.draw();
+  noTint();
 
+  //Hovering button message
   if(AcceptDecorationButtonBeingHovered){
     UIinfo('Accept');
   };
 
-  noTint();
   //Arrow buttons\\
-  LeftYellowArrowButton.hovered(() => {tint(125, 123, 0);});
   
-  if(LocalBottomFramePage > 1){
+    //Left arrow
+    if(LocalBottomFramePage > 1){
 
-    LeftYellowArrowButton.x = windowWidth/2 - 400;
-    LeftYellowArrowButton.y = windowHeight - 137.5 + LocalBottomFrameOffSet;
+      LeftYellowArrowButton.hovered(() => {tint(125, 123, 0);});
+      LeftYellowArrowButton.x = windowWidth/2 - 400;
+      LeftYellowArrowButton.y = windowHeight - 137.5;
+      LeftYellowArrowButton.draw();
+      noTint();
+    };
+    
+    
+    //Right Arrow
+    if(inventory.length > LocalBottomFramePage * 6){
 
-    LeftYellowArrowButton.draw();
-  }
-  noTint();
-  RightYellowArrowButton.hovered(() => {tint(125, 123, 0);});
-  
-  if(inventory.length > LocalBottomFramePage * 6){
+      RightYellowArrowButton.hovered(() => {tint(125, 123, 0);});
+      RightYellowArrowButton.x = windowWidth/2 + 350;
+      RightYellowArrowButton.y = windowHeight - 137.5;
+      RightYellowArrowButton.draw();
+      noTint();
+    };
+  //--------------\\
 
-    RightYellowArrowButton.x = windowWidth/2 + 350;
-    RightYellowArrowButton.y = windowHeight - 137.5 + LocalBottomFrameOffSet;
-
-    RightYellowArrowButton.draw();
-  }
-  noTint();
-
-    //Show the items
+    //Display the items
     for(let i = 0 + (LocalBottomFramePage - 1) * 6; i < 6 + (LocalBottomFramePage - 1) * 6; i++){
+
+      //The item
       let LocalItem = inventory[i];
-      let j = i - 6 * (LocalBottomFramePage - 1);
+
+
       
       if(LocalItem != null){
-        //DRAW THE ITEM SLOT UwU
+
+        //Calculate variable for slot position
+        let j = i - 6 * (LocalBottomFramePage - 1);
+
+        //The item slot
         let LocalFurniture = FilterFurnitureByID(LocalItem.item_id);
         LocalFurniture.x = windowWidth/2 - 350 + (j * (100 + 100/7)) + (100/7);
         LocalFurniture.y = windowHeight - 137.5;
@@ -145,6 +144,7 @@ const DecorationDraw = () =>{
 
 };
 
+//Calculate on which tile is the mouse at
 const mouseOnTileFun = () => {
 
   let LocalMouseIsOnTile = false;
@@ -182,6 +182,7 @@ const DecorationMousePressed = () =>{
         PlayerRestaurantFurniture.splice(PlayerRestaurantFurniture.indexOf(LocalF), 1)
 
         httpPost('/post/removeFromRestaurant', {item : LocalF, id : UserID}, data =>{
+
           UpdateInventoryRequest();
           UpdateRestaurantRequest();
           
@@ -191,25 +192,26 @@ const DecorationMousePressed = () =>{
 
   }
 
-  RightYellowArrowButton.pressed(() =>{
-    if(inventory.length > LocalBottomFramePage * 6){
-      LocalBottomFramePage += 1
-    };
-  });
+  //Arrow buttons\\
+  
+    RightYellowArrowButton.pressed(() =>{
+      if(inventory.length > LocalBottomFramePage * 6){
+        LocalBottomFramePage += 1
+      };
+    });
 
-  LeftYellowArrowButton.pressed(() =>{
-    if(LocalBottomFramePage > 1){
-      LocalBottomFramePage -= 1
-    };
-  });
-
+    LeftYellowArrowButton.pressed(() =>{
+      if(LocalBottomFramePage > 1){
+        LocalBottomFramePage -= 1
+      };
+    });
+  //--------------\\
 
 
   //The accept button which changes the stage
   AcceptDecorationButton.pressed(()=>{
     Stage = 'Default';
   });
-
 
   //The click event of the items displayed on the inventory
   for(let i = 0; i < inventory.length; i++) {
@@ -229,6 +231,7 @@ const DecorationMousePressed = () =>{
 
 const DecorationMouseReleased = () =>{     
 
+  //The released event of all items
   for(let localF of furniture){
     localF.released();
   };

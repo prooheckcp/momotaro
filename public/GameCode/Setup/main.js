@@ -19,9 +19,15 @@ const SetupGame = () => {
     //Load the game interface
     setupUI();
 
+    //Load the map UI
+    SetupMapUI();
+
     //Loads the stages
     CookSetUp();
     
+    //Friends
+    SetupFriendsWindow();
+
     //NPC
     Npcsetup();
     

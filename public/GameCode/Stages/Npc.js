@@ -1,17 +1,19 @@
 //Variables\\
-let NPCconfiguration = {
-  npcSize : {x: 50, y: 50},
-  defaultTime: 10,
-  MaxWaitingTime: 25
-};
 
-//Objects on which NPCs can sit
+  //NPC default settings
+  let NPCconfiguration = {
+    npcSize : {x: 50, y: 50},
+    defaultTime: 10,
+    MaxWaitingTime: 25
+  };
 
-const ObjectsThatAreSittable = ['ch_fr', 'ch_ba', 'cu_ch'];
+  //Objects on which NPCs can sit
 
-//Prestige Points
-let CurrentPrestigePoints = 0;
-let TimeBetweenEachNPC = 1000;
+  const ObjectsThatAreSittable = ['ch_fr', 'ch_ba', 'cu_ch'];
+
+  //Prestige Points
+  let CurrentPrestigePoints = 0;
+  let TimeBetweenEachNPC = 1000;
 //----------\\
 
 //Debounces\\
@@ -27,7 +29,7 @@ let NPCsInTheRestaurant = [];
 
 
 function Npcsetup() {
-  
+  //Add the different skins
 }
 
 function DrawNpc() {
@@ -84,50 +86,35 @@ function DrawNpc() {
 
 
     //Draw the NPC\\
-    if(NPC.sit == false){
+    if(NPC.sit == false && NPC.selected){
+      tint(234, 255, 0);
       image(NPC.NPCskinUp, LocalNPCpos.x+10, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
-    } else if(NPC.sit == true){
+      noTint();
+    }else if(NPC.sit == false && !NPC.selected){
+      image(NPC.NPCskinUp, LocalNPCpos.x+10, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
+    }else if(NPC.sit == true){
       image(NPC.NPCskinSit, LocalNPCpos.x+7, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
-          /*
-          if(ro_ta.x = npc.x + 1){
-            image(NPC.NPCskinSitLeft, LocalNPCpos.x+10, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
-          }
-          if(ro_ta.x = npc.x - 1){
-            image(NPC.NPCskinSitRigth, LocalNPCpos.x+10, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
-          }
-          if(ro_ta.y = npc.y + 1){
-            image(NPC.NPCskinSitBack, LocalNPCpos.x+10, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
-          }
-          if(ro_ta.y = npc.y - 1){
-            image(NPC.NPCskinSitFront, LocalNPCpos.x+10, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
-          }
-
-          */
-    
-    }
-  
-
+    };
 
     //Check if the user has the dish the NPC wants\\
-    for(let dish of dishesInventory){
-      if(dish.dish_id == NPC.dish.dish_id && NPC.sit && dish.dishes_amount > 0 && !NPC.fed){
+      for(let dish of dishesInventory){
+        if(dish.dish_id == NPC.dish.dish_id && NPC.sit && dish.dishes_amount > 0 && !NPC.fed){
 
-        NPC.fed = true; 
-        //Buy the dish proccess
-        let LocalInterval = setTimeout(() => {
-          NPCbuyDish(dish.dish_id, NPC);
-        }, 1000);
+          NPC.fed = true; 
+          //Buy the dish proccess
+          let LocalInterval = setTimeout(() => {
+            NPCbuyDish(dish.dish_id, NPC);
+          }, 1000);
 
 
+        };
       };
-    };
     //---------------------------------------------\\
 
     //If the time ran out then delete the NPC\\
-    if(NPC.enteredTime + NPCconfiguration.MaxWaitingTime < TimePassed && !NPC.fed){
-      let LocalNPCindex = NPCsInTheRestaurant.indexOf(NPC);
-      NPCsInTheRestaurant.remove(NPC);
-    };
+      if(NPC.enteredTime + NPCconfiguration.MaxWaitingTime < TimePassed && !NPC.fed){
+        NPCsInTheRestaurant.remove(NPC);
+      };
     //----------------------------------------\\
 
   };
@@ -144,12 +131,6 @@ const CreateNewNPC = () => {
   let LocalToBeSentData = {
     NPCskinUp: npcUp,
     NPCskinSit: npcSit,
-    /*
-    NPCskinSitFront: npcSit,
-    NPCskinSitBack: npcSit,
-    NPCskinSitLeft: npcSit,
-    NPCskinSitRight: npcSit,
-    */
     x: 0,
     y: 0,
     enteredTime: TimePassed,

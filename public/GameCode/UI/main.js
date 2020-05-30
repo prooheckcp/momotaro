@@ -1,10 +1,16 @@
 /////////////////Variables\\\\\\\\\\\\\\\\\
-let UIoptionsOpen = false; //Show the left and top side buttons around the general button
-let ConfigWindowOpen = false; //Show the configuration window
-let LeaderboardsWindow = false; //Show the leaderboard window
-let StorageWindow = false; //Show the storage window
-let MarketWindow = false; //Displays the market window while in the map
-let MarketWindowSection = true; //True -> Decoration; False -> Ingredients
+    //Show the left and top side buttons around the general button
+    let UIoptionsOpen = false; 
+    //Show the configuration window
+    let ConfigWindowOpen = false; 
+    //Show the leaderboard window
+    let LeaderboardsWindow = false; 
+    //Show the storage window
+    let StorageWindow = false; 
+    //Displays the market window while in the map
+    let MarketWindow = false; 
+    //True -> Decoration; False -> Ingredients
+    let MarketWindowSection = true; 
 /////////////////----------\\\\\\\\\\\\\\\\\
 
 
@@ -95,21 +101,21 @@ const DrawUI = () =>{
 
 
     //Main UI button\\
-    MainUIbuttonBeingHovered = false;
-    MainUIbutton.x = windowWidth - 125;
-    MainUIbutton.y = windowHeight - 125;
-    MainUIbutton.w = 75;
-    MainUIbutton.h = 75;
-    MainUIbutton.hovered(()=>{
-        MainUIbutton.w = 90;
-        MainUIbutton.h = 90;
-        MainUIbutton.x = windowWidth - 132.5;
-        MainUIbutton.y = windowHeight - 132.5;
-        tint(190, 190, 59);
-        MainUIbuttonBeingHovered = true;
-    });
-    MainUIbutton.draw();
-    noTint();
+        MainUIbuttonBeingHovered = false;
+        MainUIbutton.x = windowWidth - 125;
+        MainUIbutton.y = windowHeight - 125;
+        MainUIbutton.w = 75;
+        MainUIbutton.h = 75;
+        MainUIbutton.hovered(()=>{
+            MainUIbutton.w = 90;
+            MainUIbutton.h = 90;
+            MainUIbutton.x = windowWidth - 132.5;
+            MainUIbutton.y = windowHeight - 132.5;
+            tint(190, 190, 59);
+            MainUIbuttonBeingHovered = true;
+        });
+        MainUIbutton.draw();
+        noTint();
     //---------------\\
 
     //Check if the other buttons are open or not

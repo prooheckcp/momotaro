@@ -108,6 +108,17 @@ const LoadGame = () => {
       //Draw the map scene
       DrawMapUI();
 
+    }else if(Stage == 'Decoration'){
+
+      //Background color
+      background(45);
+
+      //Draw the restaurant floor and walls
+      DrawRestaurant();
+
+      //Draw the decoration (or building) scene
+      DecorationDraw();
+
     }else if(Stage != 'N/A'){
 
       //Background color
@@ -125,12 +136,6 @@ const LoadGame = () => {
       //Show a pop up window if the user levels up
       LevelUpAnimation();
 
-      if (Stage == 'Decoration'){
-
-        //Draw the decoration (or building) scene
-        DecorationDraw();
-
-      };
 
       
     };
