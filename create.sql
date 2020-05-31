@@ -178,6 +178,7 @@ END$$
 
 /*Procedures*/
 
+/*---------------------------------------------------------------------------------------------------------------------------------*/
 #Add a dish into the player inventory
 CREATE PROCEDURE purchaseDish(IN input_dish_id VARCHAR(8), IN input_id INT)
 BEGIN
@@ -232,7 +233,7 @@ END IF;
 END$$
 
 DELIMITER ; 
-
+/*---------------------------------------------------------------------------------------------------------------------------------*/
 #Check if the player should level up and if yes level up
 DELIMITER $$
 
@@ -311,4 +312,42 @@ END IF;
 END$$
 
 DELIMITER ;
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+#Send friend request
+DELIMITER $$
 
+CREATE PROCEDURE CreateRequestInvite(IN inp_user_id INT, IN invited_user_id INT)
+BEGIN
+	
+	SET @CheckIfInviteExists = (
+		SELECT 
+			COUNT(1)
+		FROM 
+			friend_requests 
+		WHERE (user_id = inp_user_id AND other_user_id = invited_user_id)
+    );
+    
+    SET @CheckIfInviteReceived = (
+		SELECT 
+			COUNT(1)
+		FROM 
+			friend_requests 
+		WHERE (user_id = invited_user_id AND other_user_id = inp_user_id)
+    );
+    
+    IF inp_user_id != invited_user_id AND @CheckIfInviteExists = 0 AND @CheckIfInviteReceived = 0 THEN
+    
+		INSERT INTO friend_requests(user_id, other_user_id, sent_date)
+		VALUES(inp_user_id, invited_user_id, CURDATE());
+        
+	ELSEIF @CheckIfInviteExists > 0 THEN
+		SELECT user_id as 'Already sent the invite!' FROM users WHERE user_id = inp_user_id;
+    ELSEIF @CheckIfInviteExists = 0 AND @CheckIfInviteReceived = 0 THEN
+        SELECT user_id as 'Cannot Send friend request to yourself' FROM users WHERE user_id = inp_user_id;
+    ELSE    
+        SELECT user_id as 'You already have a pendent invite from this user' FROM users WHERE user_id = inp_user_id;
+	END IF;
+    
+END$$
+
+DELIMITER ;
