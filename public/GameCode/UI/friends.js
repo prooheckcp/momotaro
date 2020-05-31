@@ -220,7 +220,7 @@ const DrawFriendsWindow = () => {
             AddFriendInput.input(UpdateAddFriendInput);
             AddFriendInput.size(500, 50);
             AddFriendInput.style('font-size', '40px');
-            AddFriendInput.style('background-color', 'rgba(0,0,0,0.1)');
+            AddFriendInput.style('background-color', 'rgba(0,0,0,0.7)');
             AddFriendInput.style('color', 'white');
         };
 
@@ -321,7 +321,26 @@ const FriendsWindowPressed = () =>{
 
         });
 
-    }
+    };
+
+
+    if(FriendsWindowTab == 'friends'){
+
+        //Pressed event on the friendlist tab
+        PressedFriendList();
+    }else if(FriendsWindowTab == 'requests'){
+
+        //Pressed event on the requests tab
+        PressedRequestsList();
+    }else if(FriendsWindowTab == 'pending'){
+
+        //Pressed event on the pending tab
+        PressedPendingList();
+    };
+
+    
+
+    
 
     //Closing window button
     FriendsWindowCloseButton.pressed(()=>{

@@ -1,3 +1,8 @@
 const DrawFriendList = () =>{
 
 };
+
+
+const PressedFriendList = () =>{
+
+};
