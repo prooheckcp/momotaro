@@ -2,10 +2,13 @@
 
   //The player inventory (furniture to be placed not the one currently placed)
   let inventory = null;
+
   //All the classes of the furniture
   let furniture = []; 
+
   //The page of items that is currently being displayed
   let LocalBottomFramePage = 1; 
+  
   //The current tile on which the mouse is located
   let MouseOnTile = {x: null, y: null};
 //----------\\

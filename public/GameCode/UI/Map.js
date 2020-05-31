@@ -19,22 +19,22 @@ const SetupMapUI = () =>{
 const DrawMapUI = () =>{
 
     //Draws the japanese flag with the country in pixel art
-    rect(0, 0, windowWidth, windowHeight);
-    image(JapanMap, windowWidth/2 - 541/2, windowHeight/2 - 536/2, 541, 536);
+        rect(0, 0, windowWidth, windowHeight);
+        image(JapanMap, windowWidth/2 - 541/2, windowHeight/2 - 536/2, 541, 536);
 
-    //Choose the window to be displayed\\
-    
-        //Call the market window
-        if(MarketWindow){
-            DrawMarketWindow();
-            return;
-        };
+        //Choose the window to be displayed\\
+        
+            //Call the market window
+            if(MarketWindow){
+                DrawMarketWindow();
+                return;
+            };
 
-        //Call the friends window
-        if(FriendsWindow){
-            DrawFriendsWindow();
-            return;
-        };
+            //Call the friends window
+            if(FriendsWindow){
+                DrawFriendsWindow();
+                return;
+            };
     //----------------------------------\\
 
     //The tokyo button that sends you back to the restaurant
