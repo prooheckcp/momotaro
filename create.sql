@@ -316,37 +316,67 @@ DELIMITER ;
 #Send friend request
 DELIMITER $$
 
-CREATE PROCEDURE CreateRequestInvite(IN inp_user_id INT, IN invited_user_id INT)
+CREATE PROCEDURE CreateRequestInvite(IN inp_user_id INT, IN invited_user_name VARCHAR(255))
 BEGIN
 	
-	SET @CheckIfInviteExists = (
-		SELECT 
-			COUNT(1)
-		FROM 
-			friend_requests 
-		WHERE (user_id = inp_user_id AND other_user_id = invited_user_id)
+    #invited_user_id
+    
+    SET @GetUserID = (
+		SELECT
+			user_id
+		FROM
+			users
+		WHERE
+			user_name = invited_user_name
     );
     
-    SET @CheckIfInviteReceived = (
-		SELECT 
+    SET @GetUserExists = (
+		SELECT
 			COUNT(1)
-		FROM 
-			friend_requests 
-		WHERE (user_id = invited_user_id AND other_user_id = inp_user_id)
+		FROM
+			users
+		WHERE
+			user_name = invited_user_name
     );
     
-    IF inp_user_id != invited_user_id AND @CheckIfInviteExists = 0 AND @CheckIfInviteReceived = 0 THEN
-    
-		INSERT INTO friend_requests(user_id, other_user_id, sent_date)
-		VALUES(inp_user_id, invited_user_id, CURDATE());
+    IF @GetUserExists > 0 THEN
+		
+			SET @CheckIfInviteExists = (
+				SELECT 
+					COUNT(1)
+				FROM 
+					friend_requests 
+				WHERE (user_id = inp_user_id AND other_user_id = @GetUserID)
+			);
+			
+			SET @CheckIfInviteReceived = (
+				SELECT 
+					COUNT(1)
+				FROM 
+					friend_requests 
+				WHERE (user_id = @GetUserID AND other_user_id = inp_user_id)
+			);
+			
+			IF inp_user_id != @GetUserID AND @CheckIfInviteExists = 0 AND @CheckIfInviteReceived = 0 THEN
+			
+				INSERT INTO friend_requests(user_id, other_user_id, sent_date)
+				VALUES(inp_user_id, @GetUserID, CURDATE());
+				
+			ELSEIF @CheckIfInviteExists > 0 THEN
+				SELECT user_id as 'Already sent the invite!' FROM users WHERE user_id = inp_user_id;
+			ELSEIF @CheckIfInviteExists = 0 AND @CheckIfInviteReceived = 0 THEN
+				SELECT user_id as 'Cannot Send friend request to yourself' FROM users WHERE user_id = inp_user_id;
+			ELSE    
+				SELECT user_id as 'You already have a pendent invite from this user' FROM users WHERE user_id = inp_user_id;
+			END IF;
         
-	ELSEIF @CheckIfInviteExists > 0 THEN
-		SELECT user_id as 'Already sent the invite!' FROM users WHERE user_id = inp_user_id;
-    ELSEIF @CheckIfInviteExists = 0 AND @CheckIfInviteReceived = 0 THEN
-        SELECT user_id as 'Cannot Send friend request to yourself' FROM users WHERE user_id = inp_user_id;
-    ELSE    
-        SELECT user_id as 'You already have a pendent invite from this user' FROM users WHERE user_id = inp_user_id;
-	END IF;
+    ELSE
+    
+		SELECT user_id as 'User not found' FROM users WHERE user_id = inp_user_id;
+    
+    END IF;
+    
+	
     
 END$$
 

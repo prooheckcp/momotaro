@@ -433,4 +433,19 @@ router.post('/signup', (req, res, next) => {
     });
 });
 
+//Send a friend request to the user
+router.post('/sendFriendRequest', (req, res, next) => {
+
+    let LocalInfo = req.body;
+
+    console.log('called');
+
+    dbase.query('CALL CreateRequestInvite(' + LocalInfo.id + ', "' + LocalInfo.name + '");', (err, results, fields) =>{
+        if(err) throw err;
+        console.log(results[0]);
+        res.send(results[0]);
+    });
+
+});
+
 module.exports = router;
