@@ -128,15 +128,16 @@ const UImapMousePressed = () =>{
 
         //Open the market window
         JapanCityMarketButton.pressed(()=>{
-            
-            //Open the market window
-            MarketWindow = true;
-
+        
             //Update the decoration
             UpdateDecorationMarketPlace();
 
             //Update the ingredients
             UpdateIngredientsMarketPlace();
+
+            //Open the market window
+            MarketWindow = true;
+
         });
 
         //Open your friends window

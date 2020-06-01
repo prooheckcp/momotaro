@@ -24,12 +24,10 @@ const SetupGame = () => {
 
     //Loads the stages
     CookSetUp();
-    
-    //Friends
-    SetupFriendsWindow();
 
     //NPC
     Npcsetup();
     
+
 };
 
