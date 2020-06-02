@@ -131,7 +131,6 @@ class ingredients {
 
 
             if(this.amount > 0){
-                LowerTheAmountOfIngredients(this.id);
                 this.dragged = true;
             };
         }
@@ -172,14 +171,6 @@ class ingredients {
                 }
 
 
-            }
-
-            //Released the mouse putting the item back to its place
-            
-            if(LocalFoundAslot){
-                
-            }else{
-                RaiseTheAmountOfIngredients(this.id);
             }
 
             this.dragged = false;
