@@ -448,4 +448,43 @@ router.post('/sendFriendRequest', (req, res, next) => {
 
 });
 
+//Get the friends data
+router.post('/getUserFriendsData',(req, res, next) =>{
+
+    //Front-end data
+    let LocalInfo = req.body;
+
+    console
+
+    let DataToBeSent = {
+        friendlist: undefined,
+        received: undefined,
+        sent: undefined
+    };
+
+    //Get friend list
+    dbase.query('CALL GetFriendList(' + LocalInfo.id + ')', (err, results, fields) =>{
+        if(err)throw err;
+        
+    });
+
+    //Get received requests
+    dbase.query('CALL GetReceivedRequests(' + LocalInfo.id + ')', (err, results, fields) =>{
+        if(err)throw err;
+
+    });
+
+    //Get sent requests
+    dbase.query('CALL GetSentRequests(' + LocalInfo.id + ')', (err, results, fields) =>{
+        if(err)throw err;
+
+        console.log(results[0]);
+
+    });
+
+    //Send the front data 
+    res.send(DataToBeSent);
+
+});
+
 module.exports = router;

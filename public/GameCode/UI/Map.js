@@ -144,8 +144,11 @@ const UImapMousePressed = () =>{
         JapanCityFriendsButton.pressed(()=>{
 
             FriendsWindow = true;
-        
-        })
+
+            //Call the back end
+            UpdateFriendsData();
+            
+        });
 
     }else if(MarketWindow){
 

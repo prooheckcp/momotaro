@@ -381,3 +381,56 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+#Get a users friend list by ID
+DELIMITER $$
+CREATE PROCEDURE GetFriendList(IN inp_user_id INT)
+BEGIN
+
+SELECT 
+	f.friend_id as 'id', r.res_name as 'resname', res_money as 'money', res_level as 'level', res_exp as 'exp'
+FROM 
+	friend_list f
+INNER JOIN
+		restaurant r ON r.user_id = f.friend_id
+WHERE 
+	f.user_id = inp_user_id;
+    
+END$$
+DELIMITER ;
+
+#Get a users received requests
+DELIMITER $$
+CREATE PROCEDURE GetReceivedRequests(IN inp_user_id INT)
+BEGIN
+
+SELECT
+	r.user_id as 'id', r.res_name as 'resname',r.res_money as 'money', r.res_level as 'level', r.res_exp as 'exp'  
+FROM
+	friend_requests fr
+INNER JOIN
+	restaurant r ON r.user_id = fr.user_id
+WHERE
+	fr.other_user_id = inp_user_id;
+    
+END$$
+DELIMITER ;
+
+#Get a users sent requests
+DELIMITER $$
+CREATE PROCEDURE GetSentRequests(IN inp_user_id INT)
+BEGIN
+SELECT
+	r.user_id as 'id',  u.user_name,r.res_name as 'resname',r.res_money as 'money', r.res_level as 'level', r.res_exp as 'exp', TIMESTAMPDIFF(day, fr.sent_date, CURDATE()) as 'days'  
+FROM
+	friend_requests fr
+INNER JOIN
+	restaurant r ON r.user_id = fr.other_user_id
+INNER JOIN
+	users u ON u.user_id = fr.other_user_id
+WHERE
+	fr.user_id = 2;
+END$$
+DELIMITER ;
+

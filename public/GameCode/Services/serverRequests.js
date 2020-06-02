@@ -273,3 +273,14 @@ const CheckIfRestaurantExists = () =>{
   });
   
 };
+
+//Update the friend related data
+
+const UpdateFriendsData = () =>{
+
+  //Ask the backend for the database data
+  httpPost('/post/getUserFriendsData', {id : UserID}, data=>{
+
+  });
+
+};
