@@ -51,9 +51,11 @@ class NewButton{
     pressed(func){
         if(CheckIfMouseInRect(this, mouseX, mouseY)){
             func();
+
+        //Open window sound\\
+        ClickingSound.play();
+        
         };
-            //Open window sound\\
-            ClickingSound.play();
     }
 
 }
