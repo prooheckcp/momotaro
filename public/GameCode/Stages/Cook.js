@@ -461,7 +461,7 @@ const CookingCraftingMousePressed = () =>{
                             //Collect the cooked item
                             httpPost('/post/CreateNewDish', {dishID: LocalDishToBeCooked.id, userID: UserID, ingredients: LocalItemsToBeCrafted}, data =>{
                                 alert(data);
-                                clickingSound.play();
+                                Choping.play();
                                 UpdateIngredientsInventory();
                                 UpdateDishesInventory();
                             });
