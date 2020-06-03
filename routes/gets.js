@@ -92,7 +92,7 @@ router.get('/music/click', (req, res, next) =>{
 });
 
 router.get('/music/background_music', (req, res, next) =>{
-    res.sendFile(SoundPath('background_music.ogg'));
+    res.sendFile(SoundPath('PerituneMaterial_Shizima.mp3'));
 });
 router.get('/music/KnifeChoping', (req, res, next) =>{
     res.sendFile(SoundPath('KnifeChoping.ogg'));

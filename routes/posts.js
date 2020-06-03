@@ -496,4 +496,8 @@ router.post('/getUserFriendsData',(req, res, next) =>{
 
 });
 
+router.post('/cancelFriendRequest', (req, res, next) =>{
+
+});
+
 module.exports = router;

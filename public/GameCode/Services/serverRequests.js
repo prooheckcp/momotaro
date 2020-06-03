@@ -301,3 +301,12 @@ const UpdateFriendsData = () =>{
   });
 
 };
+
+
+const RemovePendingRequest = () =>{
+
+  httpPost('/post/cancelFriendRequest', {id: UserID}, data =>{
+
+  });
+
+};

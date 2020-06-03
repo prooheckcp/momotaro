@@ -27,7 +27,7 @@ const SetupGame = () => {
 
     //NPC
     Npcsetup();
-    
+
 
 };
 

@@ -23,13 +23,6 @@
 
 const SetupPendingList = () =>{
 
-    //Temporary
-    PendingRequests.push({name: 'test', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-    PendingRequests.push({name: 'test2', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-    PendingRequests.push({name: 'test3', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-    PendingRequests.push({name: 'test4', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-    PendingRequests.push({name: 'test5', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-
     //Arrows\\
 
         //Left arrow
@@ -153,7 +146,7 @@ const PressedPendingList = () =>{
             PendingRequests[i].button.pressed(()=>{
 
                 //Cancel the invite here
-                print('gdasg');
+                RemovePendingRequest();
             });
         };
     };
@@ -170,5 +163,5 @@ const PressedPendingList = () =>{
         friendPendingRightArrow.pressed(()=>{
             PendingCurrentPage++;
         });
-    }
+    };
 };

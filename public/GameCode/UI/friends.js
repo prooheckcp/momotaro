@@ -75,6 +75,7 @@ const SetupFriendsWindow = () =>{
     //The friends list setup
 
     //The requests setup
+    SetupRequestsList();
 
 };
 
@@ -91,7 +92,7 @@ const DrawFriendsWindow = () => {
 
         //Text details
         textAlign(CENTER, CENTER);
-        textSize(30);
+        textSize(22);
     //-----------------------\\
     
     //Background image
@@ -155,9 +156,9 @@ const DrawFriendsWindow = () => {
         noTint();
 
         if(IsFriendsTabHovered){
-            BetterText('Friends', LocalFriendListWindow.x + FriendsTab.w/2, LocalFriendListWindow.y - 75 + FriendsTab.h/2, {r: 255, g: 231, b: 100});
+            BetterText('Friend\nList', LocalFriendListWindow.x + FriendsTab.w/2, LocalFriendListWindow.y - 75 + FriendsTab.h/2, {r: 255, g: 231, b: 100});
         }else{
-            BetterText('Friends', LocalFriendListWindow.x + FriendsTab.w/2, LocalFriendListWindow.y - 75 + FriendsTab.h/2);
+            BetterText('Friend\nList', LocalFriendListWindow.x + FriendsTab.w/2, LocalFriendListWindow.y - 75 + FriendsTab.h/2);
         };
 
         //Requests tab
@@ -175,9 +176,9 @@ const DrawFriendsWindow = () => {
         RequestsTab.draw();
         noTint();
         if(IsRequestsTabHovered){
-            BetterText('Requests', RequestsTab.x + RequestsTab.w/2, RequestsTab.y + RequestsTab.h/2, {r: 255, g: 231, b: 100});
+            BetterText('Received\nRequests', RequestsTab.x + RequestsTab.w/2, RequestsTab.y + RequestsTab.h/2, {r: 255, g: 231, b: 100});
         }else{
-            BetterText('Requests', RequestsTab.x + RequestsTab.w/2, RequestsTab.y + RequestsTab.h/2);
+            BetterText('Received\nRequests', RequestsTab.x + RequestsTab.w/2, RequestsTab.y + RequestsTab.h/2);
         }
 
         //Pending tab
@@ -194,9 +195,9 @@ const DrawFriendsWindow = () => {
         PendingTab.draw();
         noTint();
         if(IsPendingTabHovered){
-            BetterText('Pending', PendingTab.x + PendingTab.w/2, PendingTab.y + PendingTab.h/2, {r: 255, g: 231, b: 100});
+            BetterText('Sent\nRequests', PendingTab.x + PendingTab.w/2, PendingTab.y + PendingTab.h/2, {r: 255, g: 231, b: 100});
         }else{
-            BetterText('Pending', PendingTab.x + PendingTab.w/2, PendingTab.y + PendingTab.h/2); 
+            BetterText('Sent\nRequests', PendingTab.x + PendingTab.w/2, PendingTab.y + PendingTab.h/2); 
         }     
     //--------------\\
 
