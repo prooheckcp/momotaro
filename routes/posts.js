@@ -462,28 +462,37 @@ router.post('/getUserFriendsData',(req, res, next) =>{
         sent: undefined
     };
 
+    let Debounce = false;
+
     //Get friend list
     dbase.query('CALL GetFriendList(' + LocalInfo.id + ')', (err, results, fields) =>{
         if(err)throw err;
-        
+
+        //Update the array
+        DataToBeSent.friendlist = results[0];
+
+        //Get received requests
+        dbase.query('CALL GetReceivedRequests(' + LocalInfo.id + ')', (err, results, fields) =>{
+            if(err)throw err;
+
+            //Update the array
+            DataToBeSent.received = results[0];
+
+            //Get sent requests
+            dbase.query('CALL GetSentRequests(' + LocalInfo.id + ')', (err, results, fields) =>{
+                if(err)throw err;
+                
+                //Update the array
+                DataToBeSent.sent = results[0];
+
+                    //Send the front data 
+                    res.send(DataToBeSent);
+
+            });
+
+        });
+
     });
-
-    //Get received requests
-    dbase.query('CALL GetReceivedRequests(' + LocalInfo.id + ')', (err, results, fields) =>{
-        if(err)throw err;
-
-    });
-
-    //Get sent requests
-    dbase.query('CALL GetSentRequests(' + LocalInfo.id + ')', (err, results, fields) =>{
-        if(err)throw err;
-
-        console.log(results[0]);
-
-    });
-
-    //Send the front data 
-    res.send(DataToBeSent);
 
 });
 

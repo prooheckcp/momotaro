@@ -422,7 +422,7 @@ DELIMITER $$
 CREATE PROCEDURE GetSentRequests(IN inp_user_id INT)
 BEGIN
 SELECT
-	r.user_id as 'id',  u.user_name,r.res_name as 'resname',r.res_money as 'money', r.res_level as 'level', r.res_exp as 'exp', TIMESTAMPDIFF(day, fr.sent_date, CURDATE()) as 'days'  
+	r.user_id as 'id',  u.user_name as 'name',r.res_name as 'resname',r.res_money as 'money', r.res_level as 'level', r.res_exp as 'exp', TIMESTAMPDIFF(day, fr.sent_date, CURDATE()) as 'days'  
 FROM
 	friend_requests fr
 INNER JOIN
@@ -430,7 +430,9 @@ INNER JOIN
 INNER JOIN
 	users u ON u.user_id = fr.other_user_id
 WHERE
-	fr.user_id = 2;
+	fr.user_id = 2
+ORDER BY
+	r.res_level DESC;
 END$$
 DELIMITER ;
 

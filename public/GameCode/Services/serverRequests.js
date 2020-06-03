@@ -280,6 +280,23 @@ const UpdateFriendsData = () =>{
 
   //Ask the backend for the database data
   httpPost('/post/getUserFriendsData', {id : UserID}, data=>{
+    let LocalData = JSON.parse(data);
+
+      PendingRequests = [];
+      for(row of LocalData.sent){
+
+        let LocalObject = {
+          name: row.name,
+          resname: row.resname,
+          level: row.level,
+          exp: row.exp,
+          date: row.days,
+          id: row.id,
+          button: new NewButton(0, 0, 0, 0, DefaultRedButton)
+        };
+
+        PendingRequests.push(LocalObject);
+      };
 
   });
 

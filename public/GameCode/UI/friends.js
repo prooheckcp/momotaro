@@ -311,12 +311,16 @@ const FriendsWindowPressed = () =>{
             //Call the back end
             httpPost('/post/sendFriendRequest', {id: UserID, name: AddFriendCurrentInput}, data =>{
 
-                if(data == undefined){
+                if(data == undefined || data == ''){
+                    
+                    //Update the data
+                    UpdateFriendsData();
 
                     //Display the feedback from the database
                     alert('Sent the invite!');
 
                 }else{
+                    
 
                     //Display the feedback from the database
                     for(feedback in eval(data)[0]){
