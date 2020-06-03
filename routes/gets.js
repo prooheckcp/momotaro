@@ -80,25 +80,16 @@ router.get('/Npc/npcFemalebakerUP', (req, res, next) =>{
 router.get('/Npc/npcFemalebakerSit', (req, res, next) =>{
     res.sendFile(NpcPath('npcFemalebakerSit.png'));
 });
-/*
-router.get('/Npc/npcFemalebakerSitRight', (req, res, next) =>{
-    res.sendFile(NpcPath('npcFemalebakerSitRight.png'));
-});
-
-router.get('/Npc/npcFemalebakerSitLeft', (req, res, next) =>{
-    res.sendFile(NpcPath('npcFemalebakerSitLeft.png'));
-});
-
-router.get('/Npc/npcFemalebakerSitBack', (req, res, next) =>{
-    res.sendFile(NpcPath('npcFemalebakerSitBack.png'));
-});
-
-router.get('/Npc/npcFemalebakerSitFront', (req, res, next) =>{
-    res.sendFile(NpcPath('npcFemalebakerSitFront.png'));
-});
-*/
 
 //Music\\
+
+router.get('/music/money', (req, res, next) =>{
+    res.sendFile(SoundPath('money.ogg'));
+});
+
+router.get('/music/click', (req, res, next) =>{
+    res.sendFile(SoundPath('Click.ogg'));
+});
 
 router.get('/music/background_music', (req, res, next) =>{
     res.sendFile(SoundPath('background_music.ogg'));
