@@ -24,8 +24,16 @@ let ChatBalloon;
 //Background music
 let backgroundMusic;
 
+//Choping sound
+let ChopingSound;
+
 //Cooking sound
-let clickingSound;
+let ClickingSound;
+
+//money sound
+let NpcPaySound;
+
+//
 //------\\
 
 //Restaurant parts\\
@@ -156,7 +164,14 @@ const SetupImages = () =>{
     backgroundMusic = loadSound('/get/music/background_music');
 
     //Cooking sound
-    clickingSound = loadSound('/get/music/KnifeChoping');
+    Choping = loadSound('/get/music/KnifeChoping');
+
+    //Cooking sound
+    ClickingSound = loadSound('/get/music/click');
+    //money sound
+    NpcPaySound = loadSound('/get/music/money');
+
+
 //------\\
 
 //Restaurant parts\\
