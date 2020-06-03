@@ -9,6 +9,7 @@ function setup() {
 
   //Set the game frame rate
   frameRate(30);
+  backgroundMusic.play();
 
 };
 
