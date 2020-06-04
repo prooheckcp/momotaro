@@ -378,16 +378,19 @@ const FriendsWindowPressed = () =>{
     //Swap to friends tab
     FriendsTab.pressed(()=>{
         FriendsWindowTab = 'friends';
+        UpdateFriendsData();
     });
 
     //Swap to requests tab
     RequestsTab.pressed(()=>{
         FriendsWindowTab = 'requests';
+        UpdateFriendsData();
     });
 
     //Swap to pending tab
     PendingTab.pressed(()=>{
         FriendsWindowTab = 'pending';
+        UpdateFriendsData();
     });
 
     FriendsWindowAddFriend.pressed(()=>{

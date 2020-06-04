@@ -282,9 +282,11 @@ const UpdateFriendsData = () =>{
   httpPost('/post/getUserFriendsData', {id : UserID}, data=>{
     let LocalData = JSON.parse(data);
 
+      //Sent friend requests
       PendingRequests = [];
       for(row of LocalData.sent){
 
+        //The row
         let LocalObject = {
           name: row.name,
           resname: row.resname,
@@ -295,7 +297,29 @@ const UpdateFriendsData = () =>{
           button: new NewButton(0, 0, 0, 0, DefaultRedButton)
         };
 
+        //Add a new row on the array
         PendingRequests.push(LocalObject);
+      };
+
+      //Received friend requests
+      friendRequests = [];
+      for(row of LocalData.received){
+
+        //The row
+        let LocalObject = {
+          name: row.name,
+          resname: row.resname,
+          level: row.level,
+          exp: row.exp,
+          date: row.days,
+          id: row.id,
+          button: new NewButton(0, 0, 0, 0, DefaultRedButton),
+          button2: new NewButton(0, 0, 0, 0, DefaultRedButton)
+        };
+
+        //Add a new row on the array
+        friendRequests.push(LocalObject);
+        
       };
 
   });
@@ -303,9 +327,24 @@ const UpdateFriendsData = () =>{
 };
 
 
-const RemovePendingRequest = () =>{
+const RemovePendingRequest = (yourid, otherID) =>{
 
-  httpPost('/post/cancelFriendRequest', {id: UserID}, data =>{
+  httpPost('/post/cancelFriendRequest', {id: yourid, other: otherID}, data =>{
+    
+    let LocalResult = eval(data)[0].Output;
+
+    print(LocalResult);
+
+    if(LocalResult == 'deleted'){
+
+      UpdateFriendsData();
+      alert(LocalResult);
+
+    }else{
+
+      alert(LocalResult);
+
+    };
 
   });
 

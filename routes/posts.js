@@ -454,15 +454,11 @@ router.post('/getUserFriendsData',(req, res, next) =>{
     //Front-end data
     let LocalInfo = req.body;
 
-    console
-
     let DataToBeSent = {
         friendlist: undefined,
         received: undefined,
         sent: undefined
     };
-
-    let Debounce = false;
 
     //Get friend list
     dbase.query('CALL GetFriendList(' + LocalInfo.id + ')', (err, results, fields) =>{
@@ -497,6 +493,12 @@ router.post('/getUserFriendsData',(req, res, next) =>{
 });
 
 router.post('/cancelFriendRequest', (req, res, next) =>{
+
+    let LocalInfo = req.body;
+
+    dbase.query('CALL CancelSentRequest(' + LocalInfo.id + ',' + LocalInfo.other + ')', (err, results, fields) =>{
+        res.send(results[0]);
+    });
 
 });
 

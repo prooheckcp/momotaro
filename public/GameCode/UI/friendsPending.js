@@ -146,7 +146,7 @@ const PressedPendingList = () =>{
             PendingRequests[i].button.pressed(()=>{
 
                 //Cancel the invite here
-                RemovePendingRequest();
+                RemovePendingRequest(UserID ,PendingRequests[i].id);
             });
         };
     };

@@ -17,6 +17,7 @@ CREATE TABLE users(
 CREATE TABLE friend_list(
 	user_id INT NOT NULL,
     friend_id INT NOT NULL,
+    friendship_date date NOT NULL,
     PRIMARY KEY(user_id),
     FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
@@ -406,11 +407,13 @@ CREATE PROCEDURE GetReceivedRequests(IN inp_user_id INT)
 BEGIN
 
 SELECT
-	r.user_id as 'id', r.res_name as 'resname',r.res_money as 'money', r.res_level as 'level', r.res_exp as 'exp'  
+	r.user_id as 'id', u.user_name as 'name',r.res_name as 'resname',r.res_money as 'money', r.res_level as 'level', r.res_exp as 'exp', TIMESTAMPDIFF(day, fr.sent_date, CURDATE()) as 'days'    
 FROM
 	friend_requests fr
 INNER JOIN
 	restaurant r ON r.user_id = fr.user_id
+INNER JOIN
+	users u ON u.user_id = fr.user_id
 WHERE
 	fr.other_user_id = inp_user_id;
     
@@ -430,9 +433,56 @@ INNER JOIN
 INNER JOIN
 	users u ON u.user_id = fr.other_user_id
 WHERE
-	fr.user_id = 2
+	fr.user_id = inp_user_id
 ORDER BY
 	r.res_level DESC;
+END$$
+DELIMITER ;
+
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+
+#Cancel a friend request that was sent
+DELIMITER $$
+CREATE PROCEDURE CancelSentRequest(IN inp_user_id INT, IN other_user_id INT)
+BEGIN
+
+SET @CheckIfRequestExists = (
+
+SELECT
+	COUNT(1)
+FROM
+	friend_requests
+WHERE
+	user_id = inp_user_id AND other_user_id = other_user_id
+
+);
+
+IF @CheckIfRequestExists != 0 THEN
+
+	DELETE FROM friend_requests 
+	WHERE 
+		user_id = inp_user_id AND other_user_id = other_user_id;
+		
+	SELECT 'deleted' as 'Output';
+    
+ELSE
+	
+    SELECT 'Error: did not find the user' as 'Output';
+
+END IF;
+
+
+END$$
+DELIMITER ;
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+
+#Accept a friend request that was sent
+DELIMITER $$
+CREATE PROCEDURE AcceptFriendRequest(IN inp_user_id INT, IN other_user_id INT)
+BEGIN
+
+
+
 END$$
 DELIMITER ;
 

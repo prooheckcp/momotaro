@@ -24,11 +24,11 @@
 const SetupRequestsList = () =>{
 
     //Temporary
-    friendRequests.push({name: 'test', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-    friendRequests.push({name: 'test2', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-    friendRequests.push({name: 'test3', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-    friendRequests.push({name: 'test4', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-    friendRequests.push({name: 'test5', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton)});
+    friendRequests.push({name: 'test', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton), button2: new NewButton(0, 0, 0, 0, DefaultRedButton)});
+    friendRequests.push({name: 'test2', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton), button2: new NewButton(0, 0, 0, 0, DefaultRedButton)});
+    friendRequests.push({name: 'test3', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton), button2: new NewButton(0, 0, 0, 0, DefaultRedButton)});
+    friendRequests.push({name: 'test4', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton), button2: new NewButton(0, 0, 0, 0, DefaultRedButton)});
+    friendRequests.push({name: 'test5', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton), button2: new NewButton(0, 0, 0, 0, DefaultRedButton)});
 
     //Arrows\\
 
@@ -137,6 +137,29 @@ BetterText('Current Page: ' + (requestsCurrentPage + 1), LocalFriendListWindow.x
                     BetterText('Cancel', LocalFriendListWindow.x + 780, LocalFriendListWindow.y + 140 + (LocalJ * 100))
                 //--------------\\
 
+                //Accept button\\
+                    
+                let LocalAcceptButton = friendRequests[i].button2;
+
+                LocalAcceptButton.x = LocalFriendListWindow.x + 525;
+                LocalAcceptButton.y = LocalFriendListWindow.y + 120 + (LocalJ * 100);
+                LocalAcceptButton.w = 160;
+                LocalAcceptButton.h = 40;
+                LocalAcceptButton.hovered(()=>{
+                    LocalAcceptButton.x -= 2.5;
+                    LocalAcceptButton.y -= 2.5;
+                    LocalAcceptButton.w += 5;
+                    LocalAcceptButton.h += 5;
+                    tint(150);
+                });
+                LocalAcceptButton.draw();
+                noTint();
+
+                textAlign(CENTER, CENTER);
+                textSize(25);
+                BetterText('Accept', LocalFriendListWindow.x + 605, LocalFriendListWindow.y + 140 + (LocalJ * 100))
+            //--------------\\
+
             //------\\            
 
         };
@@ -146,6 +169,30 @@ BetterText('Current Page: ' + (requestsCurrentPage + 1), LocalFriendListWindow.x
 
 const PressedRequestsList = () =>{
 
+
+    //Cancel buttons
+    for(let i = requestsCurrentPage * 4; i < (requestsCurrentPage * 4) + 4; i++){
+
+        if(friendRequests[i] != undefined){
+            friendRequests[i].button.pressed(()=>{
+
+                //Cancel the invite here
+                RemovePendingRequest(friendRequests[i].id, UserID);
+            });
+        };
+    };
+
+    //Accept buttons
+    for(let i = requestsCurrentPage * 4; i < (requestsCurrentPage * 4) + 4; i++){
+
+        if(friendRequests[i] != undefined){
+            friendRequests[i].button2.pressed(()=>{
+
+                //Cancel the invite here
+                RemovePendingRequest(friendRequests[i].id, UserID);
+            });
+        };
+    };
 
     //Left Arrow
     if(requestsCurrentPage > 0){
