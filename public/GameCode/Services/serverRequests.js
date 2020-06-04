@@ -349,3 +349,25 @@ const RemovePendingRequest = (yourid, otherID) =>{
   });
 
 };
+
+
+const AcceptFriendRequest = (yourid, otherid) =>{
+
+  httpPost('/post/acceptFriendRequest', {id: yourid, other: otherid}, data =>{
+
+    //From string to json object
+    let LocalData = eval(data)[0];
+
+    //Update the windows data
+    UpdateFriendsData();
+
+    //Alert the user with some feedback
+    if(LocalData.Output == 'added'){
+      alert('Added new friend!')
+    }else{
+      alert(LocalData.Output)
+    };
+
+  });
+
+};

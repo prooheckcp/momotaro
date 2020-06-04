@@ -438,11 +438,9 @@ router.post('/sendFriendRequest', (req, res, next) => {
 
     let LocalInfo = req.body;
 
-    console.log('called');
-
     dbase.query('CALL CreateRequestInvite(' + LocalInfo.id + ', "' + LocalInfo.name + '");', (err, results, fields) =>{
         if(err) throw err;
-        console.log(results[0]);
+
         res.send(results[0]);
     });
 
@@ -497,7 +495,26 @@ router.post('/cancelFriendRequest', (req, res, next) =>{
     let LocalInfo = req.body;
 
     dbase.query('CALL CancelSentRequest(' + LocalInfo.id + ',' + LocalInfo.other + ')', (err, results, fields) =>{
+        if(err)throw err;
         res.send(results[0]);
+    });
+
+});
+
+router.post('/acceptFriendRequest', (req, res, next) =>{
+
+    let LocalInfo = req.body;
+
+    //Tell the database to add the user
+    dbase.query('CALL AcceptFriendRequest(' + LocalInfo.id + ',' + LocalInfo.other + ')', (err, results, fields) =>{
+        if(err)throw err;
+        
+       dbase.query('CALL CancelSentRequest(' + LocalInfo.other + ',' + LocalInfo.id + ')', (err, results2, fields) =>{
+            if(err)throw err;
+            res.send(results[0]);
+        });
+
+
     });
 
 });

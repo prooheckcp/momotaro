@@ -5,7 +5,7 @@ CREATE DATABASE IF NOT EXISTS momotaro;
 USE momotaro;
 
 CREATE TABLE users(
-    user_id         INT NOT NULL AUTO_INCREMENT,
+    user_id         	INT NOT NULL AUTO_INCREMENT,
     user_password     	VARCHAR(40) NOT NULL,
     user_name         	VARCHAR(40) NOT NULL,
     user_email 			VARCHAR(255) NOT NULL,
@@ -15,10 +15,9 @@ CREATE TABLE users(
 /*This are the tables related to the friends list*/
 
 CREATE TABLE friend_list(
-	user_id INT NOT NULL,
-    friend_id INT NOT NULL,
-    friendship_date date NOT NULL,
-    PRIMARY KEY(user_id),
+	user_id 			INT NOT NULL,
+    friend_id 			INT NOT NULL,
+    friendship_date 	date NOT NULL,
     FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
 
@@ -33,18 +32,18 @@ CREATE TABLE friend_requests(
 /*This are the tables related to the restaurant */
 
 CREATE TABLE restaurant(
-    user_id INT NOT NULL,
-    res_name VARCHAR(40),
-    res_money INT DEFAULT 0,
-    res_level INT DEFAULT 1,
-    res_exp INT DEFAULT 0,
+    user_id 	INT NOT NULL,
+    res_name 	VARCHAR(40),
+    res_money 	INT DEFAULT 0,
+    res_level 	INT DEFAULT 1,
+    res_exp 	INT DEFAULT 0,
     PRIMARY KEY(user_id),
     FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE dec_market(
-	item_id VARCHAR(8) NOT NULL,
-	item_price INT DEFAULT 0 NOT NULL,
+	item_id 	VARCHAR(8) NOT NULL,
+	item_price 	INT DEFAULT 0 NOT NULL,
     PRIMARY KEY(item_id)
 );
 
@@ -358,11 +357,23 @@ BEGIN
 				WHERE (user_id = @GetUserID AND other_user_id = inp_user_id)
 			);
 			
-			IF inp_user_id != @GetUserID AND @CheckIfInviteExists = 0 AND @CheckIfInviteReceived = 0 THEN
+            SET @CheckIfFriends = (
+            
+				SELECT
+					COUNT(1)
+				FROM
+					friend_list
+                WHERE
+					user_id = @GetUserID AND friend_id = inp_user_id
+            );
+            
+			IF inp_user_id != @GetUserID AND @CheckIfInviteExists = 0 AND @CheckIfInviteReceived = 0 AND @CheckIfFriends = 0 THEN
 			
 				INSERT INTO friend_requests(user_id, other_user_id, sent_date)
 				VALUES(inp_user_id, @GetUserID, CURDATE());
-				
+                
+			ELSEIF @CheckIfFriends != 0 THEN
+				SELECT user_id as 'You are already friends with this user!' FROM users WHERE user_id = inp_user_id;
 			ELSEIF @CheckIfInviteExists > 0 THEN
 				SELECT user_id as 'Already sent the invite!' FROM users WHERE user_id = inp_user_id;
 			ELSEIF @CheckIfInviteExists = 0 AND @CheckIfInviteReceived = 0 THEN
@@ -481,7 +492,31 @@ DELIMITER $$
 CREATE PROCEDURE AcceptFriendRequest(IN inp_user_id INT, IN other_user_id INT)
 BEGIN
 
+SET @CheckIfFriends = (
 
+SELECT
+	COUNT(1)
+FROM
+	friend_list
+WHERE
+	(inp_user_id = user_id AND other_user_id = friend_id) OR (other_user_id = user_id AND inp_user_id = friend_id)
+
+);
+
+IF @CheckIfFriends = 0 THEN
+	INSERT INTO friend_list(user_id, friend_id, friendship_date)
+	VALUES(inp_user_id, other_user_id, CURDATE());
+
+	INSERT INTO friend_list(user_id, friend_id, friendship_date)
+	VALUES(other_user_id, inp_user_id, CURDATE());
+		
+	SELECT 'added' as 'Output';
+        
+ELSE
+
+    SELECT 'Users are already friends' as 'Output';
+    
+END IF;
 
 END$$
 DELIMITER ;

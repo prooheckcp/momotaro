@@ -188,8 +188,8 @@ const PressedRequestsList = () =>{
         if(friendRequests[i] != undefined){
             friendRequests[i].button2.pressed(()=>{
 
-                //Cancel the invite here
-                RemovePendingRequest(friendRequests[i].id, UserID);
+                //Accept the invite here
+                AcceptFriendRequest(UserID,friendRequests[i].id);
             });
         };
     };
