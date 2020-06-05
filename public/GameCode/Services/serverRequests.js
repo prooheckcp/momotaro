@@ -4,7 +4,9 @@ const NPCbuyDish = (dishID, NPC) =>{
   httpPost('/post/ConsumeDish', 'json', {id: UserID, DishID: dishID}, data =>{
 
     if(data.status == 'ok'){
-      print('yummi :)')
+      print('yummi :)');
+      NpcPaySound.volume = VolEffectsValue;
+      NpcPaySound.play();
       //Remove the NPC and update the stats
       UpdateIngredientsInventory();
       UpdateRestaurantStats();
