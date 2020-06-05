@@ -4,7 +4,7 @@ const NPCbuyDish = (dishID, NPC) =>{
   httpPost('/post/ConsumeDish', 'json', {id: UserID, DishID: dishID}, data =>{
 
     if(data.status == 'ok'){
-      print('yummi :)');
+
       NpcPaySound.volume = VolEffectsValue;
       NpcPaySound.play();
       //Remove the NPC and update the stats
@@ -357,7 +357,6 @@ const RemovePendingRequest = (yourid, otherID) =>{
     
     let LocalResult = eval(data)[0].Output;
 
-    print(LocalResult);
 
     if(LocalResult == 'deleted'){
 
@@ -423,8 +422,6 @@ const GetFriendRestaurant = friendID => {
 
     //Decode the server output
     let LocalData = eval(data)[0];
-
-    print(LocalData.userStats);
 
     //Swap the data from each part of the restaurant
     FriendFurniture = LocalData.furniture;

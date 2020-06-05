@@ -16,6 +16,19 @@
     let FriendFurniture = [];
 //----------\\
 
+//UI elements\\
+
+    //Button that sets you back to the friend list
+    let GoBackButton;
+
+//------------\\
+
+const SetupFriendRestaurant = () =>{
+
+    GoBackButton = new NewButton( 0, 0, 0, 0, DefaultRedButton);
+
+};
+
 const DrawFriendRestaraunt = () =>{
 
 
@@ -111,18 +124,57 @@ const DrawFriendUI = () =>{
 
 
     //Name displayer\\
-    let RestaurantNameDisplayer = FriendStats.name + "'s restaurant";
-    let LocalW = textWidth(RestaurantNameDisplayer);
 
-    image(MoneyFrame, windowWidth - (LocalW + 60), 30, LocalW, 50);
-    textAlign(CENTER, CENTER);
-    textSize(25)
-    BetterText(RestaurantNameDisplayer, windowWidth - (LocalW + 60) + LocalW/2, 30 + 50/2);
+        let OwnerNameDisplayer = FriendStats.name + "'s restaurant";
+        let LocalW = textWidth(OwnerNameDisplayer) + 30;
 
+        image(MoneyFrame, windowWidth - (LocalW + 60), 30, LocalW, 50);
+        textAlign(CENTER, CENTER);
+        textSize(25);
+        BetterText(OwnerNameDisplayer, windowWidth - (LocalW + 60) + LocalW/2, 30 + 50/2);
+    //---------------\\
+
+    //Restaurant Name\\
+
+        let RestaurantNameDisplayer = FriendStats.resname;
+        let LocalW2 = textWidth(RestaurantNameDisplayer) + 30;
+
+        image(MoneyFrame, windowWidth - (LocalW2 + 60), 80, LocalW2, 30);
+        textAlign(CENTER, CENTER);
+        textSize(18);
+        BetterText(RestaurantNameDisplayer, windowWidth - (LocalW2 + 60) + LocalW2/2, 80 + 30/2);   
+    //----------------\\
+
+    //Go back button\\
+
+        //Button
+        GoBackButton.x = windowWidth - 250;
+        GoBackButton.y = windowHeight - 100;
+        GoBackButton.w = 200;
+        GoBackButton.h = 50;
+        GoBackButton.hovered(()=>{
+
+            tint(150);
+            GoBackButton.w += 5;
+            GoBackButton.h += 5;
+            GoBackButton.x -= 2.5;
+            GoBackButton.y -= 2.5;
+        });
+        GoBackButton.draw();
+        noTint();
+
+        //Text
+        textAlign(CENTER, CENTER);
+        textSize(26);
+        BetterText('Go back', GoBackButton.x + GoBackButton.w/2, GoBackButton.y + GoBackButton.h/2);
     //---------------\\
 
 };
 
 const PressedFriendRestauranat = () =>{
+    GoBackButton.pressed(()=>{
 
+        Stage = 'Map';
+
+    });
 };

@@ -30,9 +30,6 @@ const SetupFriendList = () =>{
         friendListRightArrow = new NewButton(0, 0, 50, 100, RightYellowArrow); 
     //-------\\
 
-    //Temporary
-    friendlist.push({name: 'test', resname: 'restaurant', level: 5, date: 2, id: 1, button: new NewButton(0, 0, 0, 0, DefaultRedButton), button2: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-
 };
 
 

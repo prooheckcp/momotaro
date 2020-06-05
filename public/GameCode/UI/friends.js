@@ -1,7 +1,7 @@
 //Variables\\
 
     //Wether this window is open or not
-    let FriendsWindow = true;
+    let FriendsWindow = false;
 
     //Wether this window is open or not
     let AddFriendWindow = false;

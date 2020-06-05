@@ -30,5 +30,9 @@ const SetupGame = () => {
 
     //NPC
     Npcsetup();
+
+    //Friend restaurant drawing
+    SetupFriendRestaurant();
+
 };
 

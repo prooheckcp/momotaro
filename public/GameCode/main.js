@@ -1,5 +1,5 @@
 //Stage of the game scene
-let Stage = 'Map'; 
+let Stage = ''; 
 
 function setup() {
 
