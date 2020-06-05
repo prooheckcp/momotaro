@@ -394,6 +394,36 @@ class NewFurniture {
 //------------------------------------------\\
 
 
+//Create an Volume bar displayer
+class Volume{
+    constructor(){
+        this.x = 0;
+        this.y = 0;
+        this.w = 0;
+        this.h = 0;
+        this.WVolume = 0;
+    };
+
+    draw(){
+
+        //Background of the bar
+            fill(117, 0, 0);  
+            rect(this.x, this.y, this.w, this.h);
+
+        //Fill part
+            fill(0, 128, 0);
+            rect(this.x, this.y, this.WVolume, this.h);
+    };
+
+    pressed(){
+        if(mouseX > this.x && mouseX < this.x + 344 && mouseY > this.y && mouseY < this.y + 50){
+            this.WVolume = mouseX;
+        }
+    };
+    
+};
+//------------------------------------------\\
+
 
 
 //Not sure if needed, may delete later
