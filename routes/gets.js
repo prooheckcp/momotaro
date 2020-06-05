@@ -121,6 +121,10 @@ router.get('/image/SoundOff', (req, res, next) =>{
     res.sendFile(ImagesPathUI('SoundOff.png'));
 });
 
+router.get('/image/Invisible', (req, res, next) =>{
+    res.sendFile(ImagesPathUI('Invisible.png'));
+});
+
 router.get('/image/ConfigFrame', (req, res, next) =>{
     res.sendFile(ImagesPathUI('ConfigFrame.png'));
 });
@@ -132,7 +136,6 @@ router.get('/image/LeaderboardTab', (req, res, next) =>{
 router.get('/image/LeaderboardsFrame', (req, res, next) =>{
     res.sendFile(ImagesPathUI('LeaderboardsFrame.png'));
 });
-
 
 router.get('/image/MarketButton', (req, res, next) =>{
     res.sendFile(ImagesPathUI('MarketButton.png'));
