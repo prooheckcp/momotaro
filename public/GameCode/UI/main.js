@@ -324,7 +324,7 @@ const UImousePressed = () =>{
             BuildingUIbutton.pressed(() => {Stage = 'Decoration'});
 
             //Open and close the configuration window 
-            ConfigurationUIbutton.pressed(()=>{ConfigWindowOpen = !ConfigWindowOpen});
+            ConfigurationUIbutton.pressed(()=>{Stage = 'Config'});
 
             //Open and close the leaderboards window
             LeaderboardsUIbutton.pressed(()=>{
