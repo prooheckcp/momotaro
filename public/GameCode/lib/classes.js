@@ -52,8 +52,9 @@ class NewButton{
         if(CheckIfMouseInRect(this, mouseX, mouseY)){
             func();
 
-        //Open window sound\\
-        ClickingSound.play();
+            //Open window sound\\
+            ClickingSound.volume = VolEffectsValue
+            ClickingSound.play();
         
         };
     }
@@ -401,7 +402,7 @@ class Volume{
         this.y = 0;
         this.w = 0;
         this.h = 0;
-        this.WVolume = 0;
+        this.WVolume = 344;
     };
 
     draw(){
@@ -413,11 +414,17 @@ class Volume{
         //Fill part
             fill(0, 128, 0);
             rect(this.x, this.y, this.WVolume, this.h);
+        if(this.WVolume < 0){
+            this.WVolume = 0;
+        }
+        if(this.WVolume >= 344){
+            this.WVolume = 344;
+        }
     };
 
     pressed(){
         if(mouseX > this.x && mouseX < this.x + 344 && mouseY > this.y && mouseY < this.y + 50){
-            this.WVolume = mouseX;
+            this.WVolume = mouseX - this.x;
         }
     };
     
