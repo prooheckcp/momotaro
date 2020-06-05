@@ -92,7 +92,7 @@ router.get('/music/click', (req, res, next) =>{
 });
 
 router.get('/music/background_music', (req, res, next) =>{
-    res.sendFile(SoundPath('PerituneMaterial_Shizima.mp3'));
+    res.sendFile(SoundPath('PerituneMaterial_Shizima.ogg'));
 });
 router.get('/music/KnifeChoping', (req, res, next) =>{
     res.sendFile(SoundPath('KnifeChoping.ogg'));
@@ -111,6 +111,18 @@ router.get('/image/ChatBalloon', (req, res, next) =>{
 
 router.get('/image/StorageFrame', (req, res, next) =>{
     res.sendFile(ImagesPathUI('StorageFrame.png'));
+});
+
+router.get('/image/SoundOn', (req, res, next) =>{
+    res.sendFile(ImagesPathUI('SoundOn.png'));
+});
+
+router.get('/image/SoundOff', (req, res, next) =>{
+    res.sendFile(ImagesPathUI('SoundOff.png'));
+});
+
+router.get('/image/ConfigFrame', (req, res, next) =>{
+    res.sendFile(ImagesPathUI('ConfigFrame.png'));
 });
 
 router.get('/image/LeaderboardTab', (req, res, next) =>{
