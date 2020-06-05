@@ -162,10 +162,8 @@ const SetupImages = () =>{
 
     //Background music
     backgroundMusic = loadSound('/get/music/background_music');
-
     //Cooking sound
     Choping = loadSound('/get/music/KnifeChoping');
-
     //Cooking sound
     ClickingSound = loadSound('/get/music/click');
     //money sound
@@ -265,6 +263,7 @@ const SetupImages = () =>{
     ConfigFrame = loadImage('get/image/ConfigFrame');
     SoundOn = loadImage('get/image/SoundOn');
     SoundOff = loadImage('get/image/SoundOff');
+    Invisible = loadImage('get/image/Invisible');
 
 //------------\\
 
