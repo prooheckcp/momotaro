@@ -262,6 +262,10 @@ const SetupImages = () =>{
     ReturnButtonCook = loadImage('/get/image/ReturnButtonCook');
     middleFrame = loadImage('get/image/middleframe');
     DefaultRedButton = loadImage('/get/image/buttonImage');
+    ConfigFrame = loadImage('get/image/ConfigFrame');
+    SoundOn = loadImage('get/image/SoundOn');
+    SoundOff = loadImage('get/image/SoundOff');
+
 //------------\\
 
 //Map elements\\
