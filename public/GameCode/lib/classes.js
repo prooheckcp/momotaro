@@ -412,7 +412,7 @@ class Volume{
             rect(this.x, this.y, this.w, this.h);
 
         //Fill part
-            fill(0, 128, 0);
+            fill(36, 209, 17);
             rect(this.x, this.y, this.WVolume, this.h);
         if(this.WVolume < 0){
             this.WVolume = 0;
