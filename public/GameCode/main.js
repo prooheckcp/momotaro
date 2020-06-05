@@ -1,5 +1,5 @@
 //Stage of the game scene
-let Stage = ''; 
+let Stage = 'Map'; 
 
 function setup() {
 
@@ -75,7 +75,11 @@ function mousePressed(){
       //Pressed event on the map scene
       UIConfigMousePressed();
 
-    }else {
+    }else if(Stage == 'friendRestaurant'){
+
+      PressedFriendRestauranat();
+
+    }else{  
 
       //Pressed event on the main scene (restaurant)
       UImousePressed();
@@ -132,6 +136,12 @@ const LoadGame = () => {
       
       //Draw Config
       DrawConfigurationWindow();
+
+    }else if(Stage == 'friendRestaurant'){
+
+      background(45);
+
+      DrawFriendRestaraunt();
 
     }else if(Stage != 'N/A'){
 

@@ -31,11 +31,7 @@ const SetupFriendList = () =>{
     //-------\\
 
     //Temporary
-    friendlist.push({name: 'test', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton), button2: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-    friendlist.push({name: 'test2', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton), button2: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-    friendlist.push({name: 'test3', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton), button2: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-    friendlist.push({name: 'test4', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton), button2: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-    friendlist.push({name: 'test5', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton), button2: new NewButton(0, 0, 0, 0, DefaultRedButton)});
+    friendlist.push({name: 'test', resname: 'restaurant', level: 5, date: 2, id: 1, button: new NewButton(0, 0, 0, 0, DefaultRedButton), button2: new NewButton(0, 0, 0, 0, DefaultRedButton)});
 
 };
 
@@ -187,9 +183,10 @@ const PressedFriendList = () =>{
         if(friendlist[i] != undefined){
             friendlist[i].button2.pressed(()=>{
 
-                //Accept the invite here
-                //AcceptFriendRequest(UserID,friendlist[i].id);
-
+                //Move you to the scene with the friend restaurant
+                Stage = 'friendRestaurant';
+                FriendID = friendlist[i].id;
+                GetFriendRestaurant(friendlist[i].id);
             });
         };
     };

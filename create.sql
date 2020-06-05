@@ -557,5 +557,33 @@ END IF;
 END$$
 DELIMITER ;
 
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+DELIMITER $$
+CREATE PROCEDURE getRestaurantData(IN inp_user_id INT)
+BEGIN
+
+SELECT
+	u.user_name as 'name', r.res_name as 'resname', r.res_level as 'level', r.res_exp as 'exp'
+FROM
+	users u
+INNER JOIN
+	restaurant r ON r.user_id = u.user_id
+WHERE
+	u.user_id = inp_user_id;
+
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE getRestaurantFurniture(IN inp_user_id INT)
+BEGIN
+SELECT
+	*
+FROM
+	dec_in_restaurant
+WHERE
+	user_id = inp_user_id;
 
 
+END$$
+DELIMITER ;

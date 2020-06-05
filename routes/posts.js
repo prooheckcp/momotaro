@@ -525,4 +525,27 @@ router.post('/endFriendship', (req, res, next) => {
 
 });
 
+router.post('/getFriendRestaurant', (req, res, next) =>{
+
+    let LocalInfo = req.body;
+    let Result = {
+        furniture: [],
+        userStats: undefined
+    };
+
+    dbase.query( 'CALL getRestaurantData(' + LocalInfo.id + ')', (err, results, fields) =>{
+
+        Result.userStats = results[0][0];
+
+        dbase.query('CALL getRestaurantFurniture(' + LocalInfo.id + ')', (err, results, fields) =>{
+
+            Result.furniture = results[0];
+
+            res.send([Result]);
+
+        });
+    });
+
+});
+
 module.exports = router;
