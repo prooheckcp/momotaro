@@ -3,32 +3,42 @@ let VolEffectsValue;
 
 const SetupConfigUI = () =>{
     //Close Config Button\\
-    CloseConfigButton = new NewButton(0,0,0,0, CloseMark);
+    CloseConfigButton = new NewButton( 0, 0, 0, 0, CloseMark);
     //------------\\
+
     //Music Frame Button\\
-        MusicButton = new NewButton(0,0,0,0, SoundOn);
-    //------------\\
-    //Sound Effects Button\\
-        SoundEffectButton = new NewButton(0,0,0,0, SoundOn);
+        MusicButton = new NewButton( 0, 0, 0, 0,SoundOn);
     //------------\\
 
     //Sound Effects Button\\
-        MusicVolBar = new Volume(0,0,0,0);
-        SoundEffectVolBar = new Volume(0,0,0,0);
+        SoundEffectButton = new NewButton( 0, 0, 0, 0,SoundOn);
+    //------------\\
+
+    //Aditional buttons for music volume\\
+        HighVolMusic = new NewButton( 0, 0, 0, 0,RightYellowArrow);
+        LowVolMusic = new NewButton( 0, 0, 0, 0,LeftYellowArrow);
+    //------------\\
+
+    //Aditional buttons for Sound Effect volume\\
+        HighVolEffect = new NewButton( 0, 0, 0, 0,RightYellowArrow);
+        LowVolEffect = new NewButton( 0, 0, 0, 0,LeftYellowArrow);
+    //------------\\
+
+    //Barras para controle dos sons\\
+        MusicVolBar = new Volume( 0, 0, 0, 0);
+        SoundEffectVolBar = new Volume( 0,0,0,0);
     //------------\\
 
 };
 
 const DrawConfigurationWindow = () =>{
-    //MusicVolume.position(windowWidth/2, windowHeight/2);
+    //background(45, 45, 45);
+
     // main frame \\
-    image(ConfigFrame, windowWidth/2-400, windowHeight/2-150);
+        image(ConfigFrame, windowWidth/2-400, windowHeight/2-150);
+    //------------\\
 
-    //rect(windowWidth/2-200, windowHeight/2-200, 200, 100)
-    //backgroundMusic.setVolume(MusicVolume.value());
-    //backgroundMusic.setVolume(SoundEffectsVolume.value());
-
-    //Music Botton\\
+    //Sound Effect Botton\\
         SoundEffectButton.x = windowWidth/2+72;
         SoundEffectButton.y = windowHeight/2+60;
         SoundEffectButton.w = 227;
@@ -52,6 +62,54 @@ const DrawConfigurationWindow = () =>{
         noTint();
     //---------------\\
 
+    // Aditional 1 Music Botton\\
+        HighVolMusic.x = windowWidth/2+190;
+        HighVolMusic.y = windowHeight/2-110;
+        HighVolMusic.w = 40;
+        HighVolMusic.h = 49;
+        HighVolMusic.hovered(()=>{
+            tint(190, 190, 59);
+        });
+        HighVolMusic.draw();
+        noTint();
+    //---------------\\
+
+    // Aditional 2 Music Botton\\
+        LowVolMusic.x = windowWidth/2-205;
+        LowVolMusic.y = windowHeight/2-110;
+        LowVolMusic.w = 40;
+        LowVolMusic.h = 49;
+        LowVolMusic.hovered(()=>{
+            tint(190, 190, 59);
+        });
+        LowVolMusic.draw();
+        noTint();
+    //---------------\\
+
+    // Aditional 1 Effect Botton\\
+        HighVolEffect.x = windowWidth/2+190;
+        HighVolEffect.y = windowHeight/2-30;
+        HighVolEffect.w = 40;
+        HighVolEffect.h = 49;
+        HighVolEffect.hovered(()=>{
+            tint(190, 190, 59);
+        });
+        HighVolEffect.draw();
+        noTint();
+    //---------------\\
+
+    // Aditional 2 Effect Botton\\
+        LowVolEffect.x = windowWidth/2-205;
+        LowVolEffect.y = windowHeight/2-30;
+        LowVolEffect.w = 40;
+        LowVolEffect.h = 49;
+        LowVolEffect.hovered(()=>{
+            tint(190, 190, 59);
+        });
+        LowVolEffect.draw();
+        noTint();
+    //---------------\\
+
     //Close Config\\
         CloseConfigButton.x = windowWidth/2 + 330;
         CloseConfigButton.y = windowHeight/2 - 145;
@@ -69,21 +127,23 @@ const DrawConfigurationWindow = () =>{
         MusicVolBar.y = windowHeight/2 - 110;
         MusicVolBar.w = 344;
         MusicVolBar.h = 50;
-        MusicVolBar.WVolume = 70;
+        MusicVolBar.WVolume = MusicVolBar.WVolume;
         MusicVolBar.draw();
 
         VolMusicValue = MusicVolBar.WVolume/344
     //---------------\\
+
+
     
     //Sound Effect Bar
         SoundEffectVolBar.x = windowWidth/2 - 160;
         SoundEffectVolBar.y = windowHeight/2 - 30;
         SoundEffectVolBar.w = 344;
         SoundEffectVolBar.h = 50;
-        SoundEffectVolBar.WVolume = 50;
+        SoundEffectVolBar.WVolume = SoundEffectVolBar.WVolume;
         SoundEffectVolBar.draw();
 
-        VolEffectsValue = MusicVolBar.WVolume/344
+        VolEffectsValue = SoundEffectVolBar.WVolume/344
     //---------------\\
 
 
@@ -96,18 +156,48 @@ const DrawConfigurationWindow = () =>{
         BetterText('Music:', windowWidth/2-124, windowHeight/2-120);
         BetterText('Sound Effects', windowWidth/2-81, windowHeight/2-40);
     //---------------\\
+
+    /*
+    if(VolMusicValue = 0){
+        image(SoundOff, windowWidth/2 - 160, windowHeight/2 - 110);
+    }
+    if(VolMusicValue > 0){
+        image(SoundOn, windowWidth/2 - 160, windowHeight/2 - 110);
+    }
+    */
 };
 
 const UIConfigMousePressed = () =>{
 
-    if(CloseConfigButton.pressed()){
-        //Get back to the main restaurant scene
-        Stage ==  '';
-    }
+    CloseConfigButton.pressed(()=>{
+        Stage = 'Default';
+    });
 
+    MusicButton.pressed(()=>{
+            MusicVolBar.WVolume = 0;
+    });
 
-    MusicButton.pressed();
-    SoundEffectButton.pressed();
+    SoundEffectButton.pressed(()=>{
+        SoundEffectVolBar.WVolume = 0;
+        
+    });
+
+    HighVolMusic.pressed(()=>{
+        MusicVolBar.WVolume = MusicVolBar.WVolume + 10,75;
+    });
+
+    LowVolMusic.pressed(()=>{
+        MusicVolBar.WVolume = MusicVolBar.WVolume - 10,75;
+    });
+
+    HighVolEffect.pressed(()=>{
+        SoundEffectVolBar.WVolume = SoundEffectVolBar.WVolume + 10,75;
+    });
+
+    LowVolEffect.pressed(()=>{
+        SoundEffectVolBar.WVolume = SoundEffectVolBar.WVolume - 10,75;
+    });
+
     MusicVolBar.pressed();
     SoundEffectVolBar.pressed();
 };
