@@ -1,7 +1,6 @@
 //Stage of the game scene
 let Stage = ''; 
 
-
 function setup() {
 
   //Set the game window size
@@ -11,7 +10,8 @@ function setup() {
   frameRate(30);
 
   //Set background music to play
-  masterVolume(0.5);
+
+  backgroundMusic.volume = VolMusicValue;
   backgroundMusic.play();
   backgroundMusic.loop();
 
@@ -30,7 +30,7 @@ function draw() {
 
     //Check if the user is logged in or not
     Logged ? LoadGame():LoggingProcess();
-
+  
 };
 
 function windowResized() {
@@ -41,7 +41,6 @@ function windowResized() {
 };
 
 function mousePressed(){
-
     //Check if the user is logged in
     if(!Logged){
 
@@ -72,7 +71,7 @@ function mousePressed(){
       UImapMousePressed();
 
     }else if(Stage == 'Config'){
-
+      
       //Pressed event on the map scene
       UIConfigMousePressed();
 
@@ -83,7 +82,7 @@ function mousePressed(){
 
       //Pressed event for the NPCs
       NpcPressed();
-
+      
     }
 };
 
@@ -130,10 +129,7 @@ const LoadGame = () => {
       DecorationDraw();
 
     }else if(Stage == 'Config'){
-
-      //Draw the restaurant floor and walls
-      DrawTheRestaurantSetup();
-
+      
       //Draw Config
       DrawConfigurationWindow();
 
