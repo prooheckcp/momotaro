@@ -413,3 +413,21 @@ const EndFriendShip = (yourid, otherid) =>{
   });
 
 };
+
+
+const GetFriendRestaurant = friendID => {
+
+  httpPost('/post/getFriendRestaurant', {id: friendID}, data =>{
+
+    //Decode the server output
+    let LocalData = eval(data)[0];
+
+    print(LocalData.userStats);
+
+    //Swap the data from each part of the restaurant
+    FriendFurniture = LocalData.furniture;
+    FriendStats = LocalData.userStats;
+
+  });
+
+};
