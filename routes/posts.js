@@ -512,4 +512,17 @@ router.post('/acceptFriendRequest', (req, res, next) =>{
 
 });
 
+router.post('/endFriendship', (req, res, next) => {
+
+    let LocalInfo = req.body;
+
+    //Tell the database to end the friendship
+    dbase.query('CALL EndFriendship(' + LocalInfo.id + ', ' + LocalInfo.other + ')', (err, results, fields) =>{
+        if(err)throw err;
+
+        res.send(results[0]);
+    });
+
+});
+
 module.exports = router;

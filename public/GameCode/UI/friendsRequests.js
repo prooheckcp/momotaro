@@ -23,13 +23,6 @@
 
 const SetupRequestsList = () =>{
 
-    //Temporary
-    friendRequests.push({name: 'test', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton), button2: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-    friendRequests.push({name: 'test2', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton), button2: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-    friendRequests.push({name: 'test3', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton), button2: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-    friendRequests.push({name: 'test4', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton), button2: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-    friendRequests.push({name: 'test5', resname: 'restaurant', level: 5, date: 2, id: 3, button: new NewButton(0, 0, 0, 0, DefaultRedButton), button2: new NewButton(0, 0, 0, 0, DefaultRedButton)});
-
     //Arrows\\
 
         //Left arrow
@@ -203,7 +196,7 @@ const PressedRequestsList = () =>{
 
     //Right Arrow
     if(requestsCurrentPage + 1 < (friendRequests.length/4)){
-        friendRequestRightArrow .pressed(()=>{
+        friendRequestRightArrow.pressed(()=>{
             requestsCurrentPage++;
         });
     };

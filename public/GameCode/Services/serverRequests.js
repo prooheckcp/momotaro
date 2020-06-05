@@ -322,6 +322,28 @@ const UpdateFriendsData = () =>{
         
       };
 
+
+      //Friend list
+      friendlist = [];
+      for(row of LocalData.friendlist){
+
+        //The row
+        let LocalObject = {
+          name: row.name,
+          resname: row.resname,
+          level: row.level,
+          exp: row.exp,
+          date: row.days,
+          id: row.id,
+          button: new NewButton(0, 0, 0, 0, DefaultRedButton),
+          button2: new NewButton(0, 0, 0, 0, DefaultRedButton)
+        };
+
+        //Add a new row on the array
+        friendlist.push(LocalObject);
+
+      };
+
   });
 
 };
@@ -367,6 +389,26 @@ const AcceptFriendRequest = (yourid, otherid) =>{
     }else{
       alert(LocalData.Output)
     };
+
+  });
+
+};
+
+const EndFriendShip = (yourid, otherid) =>{
+
+  httpPost('/post/endFriendship', {id: yourid, other: otherid}, data =>{
+
+    let LocalData = eval(data)[0];
+
+    //Update the windows data
+    UpdateFriendsData();
+
+    //Alert the user with some feedback
+    if(LocalData.Output == 'done'){
+      alert('Removed friend!')
+    }else{
+      alert(LocalData.Output)
+    };    
 
   });
 

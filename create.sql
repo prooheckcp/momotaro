@@ -401,11 +401,13 @@ CREATE PROCEDURE GetFriendList(IN inp_user_id INT)
 BEGIN
 
 SELECT 
-	f.friend_id as 'id', r.res_name as 'resname', res_money as 'money', res_level as 'level', res_exp as 'exp'
+	f.friend_id as 'id', u.user_name as 'name', r.res_name as 'resname', res_money as 'money', res_level as 'level', res_exp as 'exp', TIMESTAMPDIFF(day, f.friendship_date, CURDATE()) as 'days' 
 FROM 
 	friend_list f
 INNER JOIN
-		restaurant r ON r.user_id = f.friend_id
+	restaurant r ON r.user_id = f.friend_id
+INNER JOIN
+	users u ON u.user_id = f.user_id
 WHERE 
 	f.user_id = inp_user_id;
     
@@ -520,4 +522,40 @@ END IF;
 
 END$$
 DELIMITER ;
+
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+DELIMITER $$
+CREATE PROCEDURE EndFriendship(IN inp_user_id INT, IN other_user_id INT)
+BEGIN
+
+SET @CheckIfFriends = (
+
+SELECT
+	COUNT(1)
+FROM
+	friend_list
+WHERE
+	(inp_user_id = user_id AND other_user_id = friend_id) OR (other_user_id = user_id AND inp_user_id = friend_id)
+
+);
+
+IF @CheckIfFriends != 0 THEN
+	
+    DELETE FROM friend_list
+    WHERE
+		(friend_id = other_user_id AND user_id = inp_user_id) OR (friend_id = inp_user_id AND user_id = other_user_id);
+    
+    SELECT 'done' AS 'Output';
+    
+ELSE
+
+	SELECT 'ERROR: Did not find friend' AS 'Output';
+
+END IF;
+
+
+END$$
+DELIMITER ;
+
+
 

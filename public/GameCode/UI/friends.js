@@ -10,7 +10,7 @@
     let LocalFriendListWindow;
 
     //Current tab
-    let FriendsWindowTab = 'pending';
+    let FriendsWindowTab = 'friends';
 //----------\\
 
 //UI elements\\
@@ -73,6 +73,7 @@ const SetupFriendsWindow = () =>{
     SetupPendingList();
 
     //The friends list setup
+    SetupFriendList();
 
     //The requests setup
     SetupRequestsList();
