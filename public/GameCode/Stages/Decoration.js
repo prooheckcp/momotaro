@@ -33,16 +33,9 @@ const DecorationSetUp = () => {
     ReputationDisplayer = new ReputationPointsDisplayer();
   //------------\\
   
-  ////////////Actual Decoration\\\\\\\\\\\\
-  //Round Table
-  furniture.push(new NewFurniture('ro_ta' /*ID*/, rou_tab_Image /*Img*/, 10 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 69/*price*/, 'Round table' /*name*/));
-  furniture.push(new NewFurniture('ch_fr' /*ID*/, cha_fro_Image /*Img*/, 10 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 100/*price*/, 'Front Chair' /*name*/));
-  furniture.push(new NewFurniture('ch_ba' /*ID*/, cha_bac_Image /*Img*/, 10 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 100/*price*/, 'Back Chair' /*name*/));
-  furniture.push(new NewFurniture('cu_ch' /*ID*/, cha_cus_Image /*Img*/, 20 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 200/*price*/, 'Cushion Chair' /*name*/));
-  furniture.push(new NewFurniture('mi_po' /*ID*/, animated_plant /*Img*/, 30 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 300/*price*/, 'Potted plant' /*name*/));
-  furniture.push(new NewFurniture('an_cr' /*ID*/, animated_crow /*Img*/, 100 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 1000/*price*/, 'Crow' /*name*/));
-  furniture.push(new NewFurniture('an_cr2' /*ID*/, animated_crow2 /*Img*/, 100 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 1000/*price*/, 'Sitting Crow' /*name*/));
-  ////////////////////\\\\\\\\\\\\\\\\\\\\\
+  //The furniture classes\\
+    MarketFurnitureClasses();
+  //----------------------\\
   
  
 };
