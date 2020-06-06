@@ -103,18 +103,22 @@ const DrawMarketWindow = () =>{
 
     //The decoration tab button\\
 
+        let MarketTabDisHovered = false;
         MarketButtonDecoration.x = windowWidth/2 - 500;
         MarketButtonDecoration.y = windowHeight/2 - 375;
         MarketButtonDecoration.w = 200;
         MarketButtonDecoration.h = 75;
         MarketButtonDecoration.hovered(()=>{
-            tint(190, 190, 59);
+            MarketTabDisHovered = true;
         });
+        if(!MarketWindowSection){
+            tint(150);
+        };
         MarketButtonDecoration.draw();
         noTint();
         textSize(30);
         textAlign(CENTER, CENTER);
-        if(MarketWindowSection){
+        if(MarketWindowSection || MarketTabDisHovered){
         BetterText('Decoration', windowWidth/2 - 400, windowHeight/2 - 337.5, {r: 255, g: 231, b: 100});
         }else{
             BetterText('Decoration', windowWidth/2 - 400, windowHeight/2 - 337.5);
@@ -123,18 +127,25 @@ const DrawMarketWindow = () =>{
 
     //The ingredients tab button\\
 
+        let MarketTabIsHovered = false;
         MarketButtonIngredients.x = windowWidth/2 - 280;
         MarketButtonIngredients.y = windowHeight/2 - 375;
         MarketButtonIngredients.w = 200;
         MarketButtonIngredients.h = 75;
         MarketButtonIngredients.hovered(()=>{
-            tint(190, 190, 59);
+            MarketTabIsHovered = true;
         });
+
+        if(MarketWindowSection){
+            tint(150);
+        };
+
         MarketButtonIngredients.draw();
         noTint();
         textSize(30);
         textAlign(CENTER, CENTER);
-        if(!MarketWindowSection){
+
+        if(!MarketWindowSection || MarketTabIsHovered){
             BetterText('Ingredients', windowWidth/2 - 180, windowHeight/2 - 337.5, {r: 255, g: 231, b: 100});
         }else{
             BetterText('Ingredients', windowWidth/2 - 180, windowHeight/2 - 337.5);

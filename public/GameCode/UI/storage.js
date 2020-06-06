@@ -454,13 +454,21 @@ const StorageWindowHeader = StorageMainFrameDetails =>{
     noTint();
 
     //Ingredients
+    let IngredientsTabIsHovered = false;
     IngredientsStorageTab.x = StorageMainFrameDetails.x;
     IngredientsStorageTab.y = StorageMainFrameDetails.y - 75;
 
-    IngredientsStorageTab.hovered(()=>{tint(150)});
+    IngredientsStorageTab.hovered(()=>{
+        IngredientsTabIsHovered = true;
+    });
+
+    if(!(CurrentStoragePage == 'ingredients')){
+        tint(150);
+    };
+
     IngredientsStorageTab.draw();
     noTint();
-    if(CurrentStoragePage == 'ingredients'){
+    if(CurrentStoragePage == 'ingredients' || IngredientsTabIsHovered){
         BetterText('Ingredients', StorageMainFrameDetails.x + 100, StorageMainFrameDetails.y - 37.5, {r: 255, g: 231, b: 100});
     }else{
         BetterText('Ingredients', StorageMainFrameDetails.x + 100, StorageMainFrameDetails.y - 37.5);
@@ -470,10 +478,17 @@ const StorageWindowHeader = StorageMainFrameDetails =>{
     DishesStorageTab.x = StorageMainFrameDetails.x + 220;
     DishesStorageTab.y = StorageMainFrameDetails.y - 75;
 
-    DishesStorageTab.hovered(()=>{tint(150)});
+    let DishesTabIsHovered = false;
+    DishesStorageTab.hovered(()=>{
+        DishesTabIsHovered = true;
+    });
+
+    if(!(CurrentStoragePage == 'dishes')){
+        tint(150);
+    };
     DishesStorageTab.draw();
     noTint();
-    if(CurrentStoragePage == 'dishes'){
+    if(CurrentStoragePage == 'dishes' || DishesTabIsHovered){
         BetterText('Dishes', StorageMainFrameDetails.x + 320, StorageMainFrameDetails.y - 37.5, {r: 255, g: 231, b: 100});
     }else{
         BetterText('Dishes', StorageMainFrameDetails.x + 320, StorageMainFrameDetails.y - 37.5);
@@ -483,10 +498,16 @@ const StorageWindowHeader = StorageMainFrameDetails =>{
     DecorationStorageTab.x = StorageMainFrameDetails.x + 440;
     DecorationStorageTab.y = StorageMainFrameDetails.y - 75;
 
-    DecorationStorageTab.hovered(()=>{tint(150)});
+    let DecorationTabIsHovered = false;
+    DecorationStorageTab.hovered(()=>{
+        DecorationTabIsHovered = true;
+    });
+    if(!(CurrentStoragePage == 'decoration')){
+        tint(150);
+    };
     DecorationStorageTab.draw();
     noTint();
-    if(CurrentStoragePage == 'decoration'){
+    if(CurrentStoragePage == 'decoration' || DecorationTabIsHovered){
         BetterText('Decoration', StorageMainFrameDetails.x + 540, StorageMainFrameDetails.y - 37.5, {r: 255, g: 231, b: 100});
     }else{
         BetterText('Decoration', StorageMainFrameDetails.x + 540, StorageMainFrameDetails.y - 37.5);

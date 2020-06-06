@@ -104,24 +104,32 @@ const CookDraw = ()=>{
     //The tabs buttons\\
 
         //Cooking
+        let CookingTabIsHovered = false;
         CookingTabButton.x = LocalBackgroundFrameX;
         CookingTabButton.y = LocalBackgroundFrameY - 75;
         CookingTabButton.w = 200;
         CookingTabButton.h = 75; 
         CookingTabButton.hovered(()=>{
-            tint(190, 190, 59);
+            CookingTabIsHovered = true;
         });
+        if(RecipesWindowOpen){
+            tint(150);
+        };
         CookingTabButton.draw();
         noTint();
 
         //Recipes
+        let RecipesTabIsHovered = false;
         RecipesTabButton.x = LocalBackgroundFrameX + 220; 
         RecipesTabButton.y = LocalBackgroundFrameY - 75;
         RecipesTabButton.w = 200;
         RecipesTabButton.h = 75;
         RecipesTabButton.hovered(()=>{
-            tint(190, 190, 59);
+            RecipesTabIsHovered = true;
         });
+        if(!RecipesWindowOpen){
+            tint(150);
+        };
         RecipesTabButton.draw();
         noTint();
     //-----------------\\
@@ -131,7 +139,8 @@ const CookDraw = ()=>{
         //Cooking Text
         textSize(35);
         textAlign(CENTER, CENTER);
-        if(!RecipesWindowOpen){
+
+        if(!RecipesWindowOpen || CookingTabIsHovered){
             BetterText('Cooking', LocalBackgroundFrameX + 100, LocalBackgroundFrameY - 37.5, {r: 255, g: 231, b: 100});
         }else{
             BetterText('Cooking', LocalBackgroundFrameX + 100, LocalBackgroundFrameY - 37.5);
@@ -140,7 +149,8 @@ const CookDraw = ()=>{
         //Recipes Text
         textSize(35);
         textAlign(CENTER, CENTER);
-        if(RecipesWindowOpen){
+
+        if(RecipesWindowOpen || RecipesTabIsHovered){
             BetterText('Recipes', LocalBackgroundFrameX + 320, LocalBackgroundFrameY - 37.5, {r: 255, g: 231, b: 100});
         }else{
         BetterText('Recipes', LocalBackgroundFrameX + 320, LocalBackgroundFrameY - 37.5);  
