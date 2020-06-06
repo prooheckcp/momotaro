@@ -413,16 +413,19 @@ const CookingCraftingMousePressed = () =>{
             if(i == 0){
 
                 //Reset the first slot
+                RaiseTheAmountOfIngredients(ItemsToBeCrafted.slot1);
                 ItemsToBeCrafted.slot1 = '';
 
             }else if(i == 1){
 
                 //Reset the second slot
+                RaiseTheAmountOfIngredients(ItemsToBeCrafted.slot2);
                 ItemsToBeCrafted.slot2 = '';
 
             }else if(i == 2){
 
                 //Reset the third slot
+                RaiseTheAmountOfIngredients(ItemsToBeCrafted.slot3);
                 ItemsToBeCrafted.slot3 = '';
 
             }else if(i == 3){

@@ -123,7 +123,6 @@ const LowerTheAmountOfIngredients = ing_id =>{
     };
 };
 
-/*
 //Raise the amount of ingredients
 const RaiseTheAmountOfIngredients = ing_id =>{
     for(let ingredient of ingredientsInventory){
@@ -132,4 +131,3 @@ const RaiseTheAmountOfIngredients = ing_id =>{
         }
     };
 };
-*/

@@ -136,6 +136,7 @@ class ingredients {
 
 
             if(this.amount > 0){
+                LowerTheAmountOfIngredients(this.id);
                 this.dragged = true;
             };
         }
@@ -155,21 +156,28 @@ class ingredients {
                 let LocalSquareX = LocalBackgroundFrameX + 150 + 200 * i;
                 let LocalSquareY = LocalBackgroundFrameY;
 
+                
                 if(mouseX > LocalSquareX && mouseY > LocalSquareY + 100 && mouseX < LocalSquareX + 100 && mouseY < LocalSquareY + 200 && this.dragged){
                 
                     if(i == 0){
                         //Hovering the first slot
-                        print('slot 1: ' + this.name);
+                        if(ItemsToBeCrafted.slot1 != ''){
+                            RaiseTheAmountOfIngredients(ItemsToBeCrafted.slot1);
+                        };
                         ItemsToBeCrafted.slot1 = this.id;
                         LocalFoundAslot = true;
                     }else if(i == 1){
                         //Hovering the second slot
-                        print('slot 2: ' + this.name);
+                        if(ItemsToBeCrafted.slot2 != ''){
+                            RaiseTheAmountOfIngredients(ItemsToBeCrafted.slot2);
+                        };
                         ItemsToBeCrafted.slot2 = this.id;
                         LocalFoundAslot = true; 
                     }else if(i == 2){
                         //Hover the third slot
-                        print('slot 3: ' + this.name);
+                        if(ItemsToBeCrafted.slot3 != ''){
+                            RaiseTheAmountOfIngredients(ItemsToBeCrafted.slot3);
+                        };
                         ItemsToBeCrafted.slot3 = this.id;
                         LocalFoundAslot = true;
                     }
@@ -177,6 +185,14 @@ class ingredients {
 
 
             }
+
+            //Released the mouse putting the item back to its place
+            
+            if(LocalFoundAslot){
+                
+            }else{
+                RaiseTheAmountOfIngredients(this.id);
+            };
 
             this.dragged = false;
         };
