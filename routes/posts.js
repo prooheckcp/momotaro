@@ -533,7 +533,7 @@ router.post('/getFriendRestaurant', (req, res, next) =>{
         userStats: undefined
     };
 
-    dbase.query( 'CALL getRestaurantData(' + LocalInfo.id + ')', (err, results, fields) =>{
+    dbase.query('CALL getRestaurantData(' + LocalInfo.id + ')', (err, results, fields) =>{
 
         Result.userStats = results[0][0];
 

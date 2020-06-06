@@ -456,7 +456,7 @@ DELIMITER ;
 
 #Cancel a friend request that was sent
 DELIMITER $$
-CREATE PROCEDURE CancelSentRequest(IN inp_user_id INT, IN other_user_id INT)
+CREATE PROCEDURE CancelSentRequest(IN inp_user_id INT, IN inp_other_user_id INT)
 BEGIN
 
 SET @CheckIfRequestExists = (
@@ -466,7 +466,7 @@ SELECT
 FROM
 	friend_requests
 WHERE
-	user_id = inp_user_id AND other_user_id = other_user_id
+	user_id = inp_user_id AND other_user_id = inp_other_user_id
 
 );
 
@@ -474,7 +474,7 @@ IF @CheckIfRequestExists != 0 THEN
 
 	DELETE FROM friend_requests 
 	WHERE 
-		user_id = inp_user_id AND other_user_id = other_user_id;
+		user_id = inp_user_id AND other_user_id = inp_other_user_id;
 		
 	SELECT 'deleted' as 'Output';
     

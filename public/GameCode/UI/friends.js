@@ -319,6 +319,9 @@ const FriendsWindowPressed = () =>{
                     UpdateFriendsData();
 
                     //Display the feedback from the database
+
+                    //Reset the text box
+                    AddFriendInput.elt.value = '';
                     alert('Sent the invite!');
 
                 }else{
@@ -338,15 +341,15 @@ const FriendsWindowPressed = () =>{
     };
 
 
-    if(FriendsWindowTab == 'friends'){
+    if(FriendsWindowTab == 'friends' && !AddFriendWindow){
 
         //Pressed event on the friendlist tab
         PressedFriendList();
-    }else if(FriendsWindowTab == 'requests'){
+    }else if(FriendsWindowTab == 'requests' && !AddFriendWindow){
 
         //Pressed event on the requests tab
         PressedRequestsList();
-    }else if(FriendsWindowTab == 'pending'){
+    }else if(FriendsWindowTab == 'pending' && !AddFriendWindow){
 
         //Pressed event on the pending tab
         PressedPendingList();
