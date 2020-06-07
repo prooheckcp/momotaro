@@ -131,3 +131,85 @@ const RaiseTheAmountOfIngredients = ing_id =>{
         }
     };
 };
+
+
+
+const AlertsToBeShown = [];
+let RectOffPosition = 0;
+let DebounceTimeout = false;
+const DrawAlert = () =>{
+
+    //Variables\\
+
+        //The notification frame size
+        let LocalFrame = {
+            w: 400,
+            h: 50
+        };    
+
+        //Time to display the message (in seconds)
+        let LocalTime = 3;
+    //----------\\
+
+
+
+    if(AlertsToBeShown.length != 0){
+
+        //Draw the notification
+        image(NotificationFrame, windowWidth/2 - LocalFrame.w/2, -LocalFrame.h + RectOffPosition, LocalFrame.w, LocalFrame.h);
+        
+        //Text\\
+
+            //Text details
+            textSize(20);
+            textAlign(CENTER, CENTER);
+
+            //Display the text
+            BetterText(AlertsToBeShown[0].msg, windowWidth/2, -LocalFrame.h + RectOffPosition + LocalFrame.h/2);        
+        //-----\\
+
+
+        if(AlertsToBeShown.length != 0 && LocalFrame.h > RectOffPosition && AlertsToBeShown[0].shown){
+
+            RectOffPosition += (deltaTime/1000) * 140; 
+
+            if(RectOffPosition > LocalFrame.h){
+                RectOffPosition = LocalFrame.h;
+            };
+
+
+        }else if(RectOffPosition > 0 && AlertsToBeShown[0].shown && !DebounceTimeout){
+
+            DebounceTimeout = true;
+
+            let CancelTimeOut = setTimeout(()=>{
+                AlertsToBeShown[0].shown = false;
+                DebounceTimeout = false;
+
+            }, LocalTime * 1000);
+
+        }else if(RectOffPosition > 0 && !(AlertsToBeShown[0].shown)){
+
+            RectOffPosition -= (deltaTime/1000) * 140;
+
+        }else if(RectOffPosition < 0){
+
+            AlertsToBeShown.remove(AlertsToBeShown[0]);
+
+        };
+
+    };
+
+};
+
+async function BetterAlert(text){
+
+    if(typeof(text) != typeof('string')){
+        text = 'N/A';
+    };
+
+    AlertsToBeShown.push({
+        msg : text,
+        shown : true
+    });
+};

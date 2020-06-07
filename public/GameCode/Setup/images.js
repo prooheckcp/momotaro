@@ -109,6 +109,7 @@ let CircleButtonStorage;
 
 //UI elements\\
 
+let NotificationFrame;
 let BottomFrame;
 let RightYellowArrow;
 let LeftYellowArrow;
@@ -245,6 +246,7 @@ const SetupImages = () =>{
 
 //UI elements\\
 
+    NotificationFrame = loadImage('get/image/notificationFrame');
     BottomFrame = loadImage('get/images/bottom_frame');
     RightYellowArrow = loadImage('get/images/right_yellow_arrow');
     LeftYellowArrow = loadImage('get/images/left_yellow_arrow');

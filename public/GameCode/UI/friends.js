@@ -322,14 +322,14 @@ const FriendsWindowPressed = () =>{
 
                     //Reset the text box
                     AddFriendInput.elt.value = '';
-                    alert('Sent the invite!');
+                    BetterAlert('Sent the invite!');
 
                 }else{
                     
 
                     //Display the feedback from the database
                     for(feedback in eval(data)[0]){
-                        alert(feedback);
+                        BetterAlert(feedback);
                     };
                     
                 };

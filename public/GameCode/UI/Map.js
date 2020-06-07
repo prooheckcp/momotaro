@@ -178,7 +178,7 @@ const UImapMousePressed = () =>{
                         //Check if the user has at least 1 to be purchased
                         if(MarketDecorationPurchaseAmount <= 0){
 
-                            alert('You need to select at least 1!');
+                            BetterAlert('You need to select at least 1!');
 
                         }else{
 
@@ -187,7 +187,7 @@ const UImapMousePressed = () =>{
                                 
                                 let LocalData = eval(data)[0];
                                 
-                                alert(LocalData.status);
+                                BetterAlert(LocalData.status);
 
                                 UpdateRestaurantStats();
                                 UpdateInventoryRequest();
@@ -238,14 +238,14 @@ const UImapMousePressed = () =>{
                         //Check if you have at least one on the purchase amount
                         if(MarketIngredientPurchaseAmount <= 0){
 
-                            alert('You need to select at least 1!');
+                            BetterAlert('You need to select at least 1!');
 
                         }else{
 
                             //Purchase the ingredient(s)
                             httpPost('/post/buyIngredient', {amount: MarketIngredientPurchaseAmount, price: LastSelectedIngredient.ingredient_price * MarketIngredientPurchaseAmount, id: UserID, itemid: LastSelectedIngredient.ingredient_id}, data =>{
                                 
-                                alert(data);
+                                BetterAlert(data);
 
                                 UpdateRestaurantStats();
                                 UpdateInventoryRequest();

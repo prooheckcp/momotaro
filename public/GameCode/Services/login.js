@@ -209,7 +209,7 @@ const LogginClick = () => {
             let ResultInJson = eval(result)[0];
 
             if(!ResultInJson.status){
-                alert(ResultInJson.message);
+                BetterAlert(ResultInJson.message);
             }else{
 
                 //Log in the player in case the login was a success

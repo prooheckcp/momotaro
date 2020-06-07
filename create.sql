@@ -6,7 +6,7 @@ USE momotaro;
 
 CREATE TABLE users(
     user_id         	INT NOT NULL AUTO_INCREMENT,
-    user_password     	VARCHAR(40) NOT NULL,
+    user_password     	VARCHAR(255) NOT NULL,
     user_name         	VARCHAR(40) NOT NULL,
     user_email 			VARCHAR(255) NOT NULL,
     PRIMARY KEY (user_id)
@@ -90,7 +90,7 @@ CREATE TABLE recipes_types(
 /* Add the recipes here */
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_1', 1, 'Bread Omelete', 'br_om', 450, 2);
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_2', 2, 'Tuna Sushi', 'tu_su', 650, 4);
-INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_3', 3, 'Shimp Sushi', 'sh_su', 800, 6);
+INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_3', 3, 'Shrimp Sushi', 'sh_su', 800, 6);
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_4', 4, 'Chocolate Cake', 'ch_ca', 497, 8);
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_5', 5, 'Cherry Pie', 'ch_pi', 490, 10);
 INSERT INTO recipes_types(recipe_id, recipe_level, recipe_name, dish_id, dish_price, exp_value) VALUES('rcp_6', 6, 'Noodles', 'no', 698, 10);
@@ -476,7 +476,7 @@ IF @CheckIfRequestExists != 0 THEN
 	WHERE 
 		user_id = inp_user_id AND other_user_id = inp_other_user_id;
 		
-	SELECT 'deleted' as 'Output';
+	SELECT 'Deleted Friend request' as 'Output';
     
 ELSE
 	
@@ -512,7 +512,7 @@ IF @CheckIfFriends = 0 THEN
 	INSERT INTO friend_list(user_id, friend_id, friendship_date)
 	VALUES(other_user_id, inp_user_id, CURDATE());
 		
-	SELECT 'added' as 'Output';
+	SELECT 'Added new friend' as 'Output';
         
 ELSE
 

@@ -172,7 +172,7 @@ const SignupClick = () => {
     if(!logginIn){
         SignUpButton.pressed(()=>{
             if(Signup_Password != Signup_Password2){
-                alert('The passwords do not match!');
+                BetterAlert('The passwords do not match!');
             }else{
                 httpPost('/post/signup', {  email: Signup_Email ,
                                             password: Signup_Password,
@@ -182,7 +182,7 @@ const SignupClick = () => {
                                                 if(!ResultInJsonFormate.accepted){
 
                                                     //In case the signup was rejected alert the user with the reason
-                                                    alert(ResultInJsonFormate.status);
+                                                    BetterAlert(ResultInJsonFormate.status);
                                                 }else{
 
                                                     //In case the sigup was succefull

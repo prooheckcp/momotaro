@@ -358,14 +358,14 @@ const RemovePendingRequest = (yourid, otherID) =>{
     let LocalResult = eval(data)[0].Output;
 
 
-    if(LocalResult == 'deleted'){
+    if(LocalResult == 'Deleted Friend request'){
 
       UpdateFriendsData();
-      alert(LocalResult);
+      BetterAlert(LocalResult);
 
     }else{
 
-      alert(LocalResult);
+      BetterAlert(LocalResult);
 
     };
 
@@ -385,10 +385,10 @@ const AcceptFriendRequest = (yourid, otherid) =>{
     UpdateFriendsData();
 
     //Alert the user with some feedback
-    if(LocalData.Output == 'added'){
-      alert('Added new friend!')
+    if(LocalData.Output == 'Added new friend'){
+      BetterAlert('Added new friend!')
     }else{
-      alert(LocalData.Output)
+      BetterAlert(LocalData.Output)
     };
 
   });
@@ -406,9 +406,9 @@ const EndFriendShip = (yourid, otherid) =>{
 
     //Alert the user with some feedback
     if(LocalData.Output == 'done'){
-      alert('Removed friend!')
+      BetterAlert('Removed friend!')
     }else{
-      alert(LocalData.Output)
+      BetterAlert(LocalData.Output)
     };    
 
   });

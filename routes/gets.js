@@ -101,6 +101,10 @@ router.get('/music/KnifeChoping', (req, res, next) =>{
 //Images\\
 //UI
 
+router.get('/image/notificationFrame', (req, res, next) =>{
+    res.sendFile(ImagesPathUI('NotificationFrame.png'));
+});
+
 router.get('/image/LoginSignupButton', (req, res, next) =>{
     res.sendFile(ImagesPathUI('LoginSignupButton.png'));
 });

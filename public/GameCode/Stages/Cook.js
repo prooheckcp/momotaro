@@ -438,12 +438,12 @@ const CookingCraftingMousePressed = () =>{
                         if(restaurantStats.level < GetDishLevel(LocalDishToBeCooked.id)){
 
                             //In case the user level is too low
-                            alert('Your level is too low!');
+                            BetterAlert('Your level is too low!');
 
                         }else if(!TheUserHasTheRecipe){
 
                             //In case the user is lacking the recipe
-                            alert('You do not own the correct recipe!');
+                            BetterAlert('You do not own the correct recipe!');
 
                         }else{
 
@@ -457,7 +457,7 @@ const CookingCraftingMousePressed = () =>{
 
                             //Collect the cooked item
                             httpPost('/post/CreateNewDish', {dishID: LocalDishToBeCooked.id, userID: UserID, ingredients: LocalItemsToBeCrafted}, data =>{
-                                alert(data);
+                                BetterAlert(data);
                                 Choping.volume = VolEffectsValue;
                                 Choping.play();
                                 UpdateIngredientsInventory();

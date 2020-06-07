@@ -2,6 +2,13 @@ const express = require('express');
 const router = express.Router();
 const dbase = require('./../services/database');
 
+//Password encryption\\
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const someOtherPlaintextPassword = 'not_bacon';
+//--------------------\\
+
 ////////////////////////////////////////////ERROR - res.send([{money : results[0].res_money, level: results[0].res_level, exp: results[0].res_exp}]); ////////////////////////////////////////////
 
 

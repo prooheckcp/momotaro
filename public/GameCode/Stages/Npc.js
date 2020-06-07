@@ -204,7 +204,7 @@ function NpcPressed(){
 
             let LocalMousePos = CalculateRestaurantTile(MouseOnTile.x, MouseOnTile.y);
             if(NPC.chairPos.x  == LocalMousePos.x && NPC.chairPos.y == LocalMousePos.y){
-              alert('There is already a NPC in this chair');
+              BetterAlert('There is already an NPC in this chair');
               SomeoneIsSittingThere = false;
             };
 

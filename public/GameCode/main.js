@@ -31,6 +31,9 @@ function draw() {
     //Check if the user is logged in or not
     Logged ? LoadGame():LoggingProcess();
   
+    //Draw alert
+    DrawAlert();
+
 };
 
 function windowResized() {
