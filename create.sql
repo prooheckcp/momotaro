@@ -587,3 +587,100 @@ WHERE
 
 END$$
 DELIMITER ;
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+DELIMITER $$
+CREATE PROCEDURE CreateAccount(IN inp_username VARCHAR(255), IN inp_email VARCHAR(255), IN inp_password VARCHAR(255))
+BEGIN
+
+SET @CheckIfUsernameExists = (
+
+SELECT
+	COUNT(1)
+FROM
+	users
+WHERE
+	user_name = inp_username
+
+);
+
+SET @CheckIfEmailExists = (
+
+SELECT
+	COUNT(1)
+FROM
+	users
+WHERE
+	user_email = inp_email
+
+);
+
+#First check if username already exists
+IF @CheckIfUsernameExists > 0 THEN
+	
+    SELECT 'Username already exists!' as 'output';
+
+#Check if the email already exists		
+ELSEIF @CheckIfEmailExists > 0 THEN
+		
+	SELECT 'Email already exists!' as 'output';
+    
+ELSE
+	
+    #Add into the database
+	INSERT INTO momotaro.users(user_password, user_name, user_email)
+    VALUES(inp_password, inp_username, inp_email);
+    SELECT 'done' as 'output', user_id as 'id'
+    FROM users WHERE user_name = inp_username;
+    
+END IF;
+
+END$$
+DELIMITER ;
+
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+DELIMITER $$
+CREATE PROCEDURE LoginAccount(IN inp_username VARCHAR(255), IN inp_password VARCHAR(255))
+BEGIN
+
+SET @CheckIfUsernameExists = (
+
+SELECT
+	COUNT(1)
+FROM
+	users
+WHERE
+	inp_username = user_name
+
+);
+
+SET @CheckIfPasswordCorrect = (
+
+SELECT
+	COUNT(1)
+FROM
+	users
+WHERE
+	inp_username = user_name AND inp_password = user_password
+
+);
+
+IF @CheckIfUsernameExists = 0 THEN
+
+SELECT 'Username not found!' AS 'output';
+
+ELSEIF @CheckIfPasswordCorrect = 0 THEN
+
+SELECT 'The password is incorrect!' AS 'output';
+
+ELSE
+
+SELECT user_id AS 'output'
+FROM 
+	users
+WHERE
+	inp_username = user_name AND inp_password = user_password;
+
+END IF;
+
+END$$
+DELIMITER ;

@@ -208,10 +208,7 @@ const LogginClick = () => {
             
             let ResultInJson = eval(result)[0];
 
-            if(!ResultInJson.status){
-                BetterAlert(ResultInJson.message);
-            }else{
-
+            if(ResultInJson.output == 'Success'){
                 //Log in the player in case the login was a success
                 Logged = true;
 
@@ -222,16 +219,20 @@ const LogginClick = () => {
                 UpdateRestaurantRequest();
                 UpdateInventoryRequest();
                 UpdateRestaurantStats();
+
                     //Remove the input windows
                     if(UserNameinp_login != null){
                         UserNameinp_login.remove();
                         UserNameinp_login = null;
-                    }
+                    };
                     
                     if(Passwordinp_login != null){
                         Passwordinp_login.remove();
                         Passwordinp_login = null;
-                    }
+                    };
+            }else{
+
+                BetterAlert(ResultInJson.output);
 
             };
 

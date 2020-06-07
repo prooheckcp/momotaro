@@ -174,46 +174,21 @@ const SignupClick = () => {
             if(Signup_Password != Signup_Password2){
                 BetterAlert('The passwords do not match!');
             }else{
-                httpPost('/post/signup', {  email: Signup_Email ,
-                                            password: Signup_Password,
-                                            username: Signup_Username},
-                                            (result)=>{
-                                                let ResultInJsonFormate = eval(result)[0];
-                                                if(!ResultInJsonFormate.accepted){
-
-                                                    //In case the signup was rejected alert the user with the reason
-                                                    BetterAlert(ResultInJsonFormate.status);
-                                                }else{
-
-                                                    //In case the sigup was succefull
-                                                    Logged = true;
-                                                    UserID = ResultInJsonFormate.userID;
-
-                                                    //Remove the input windows\\
-                                                        if(UserNameinp_signup != null){
-                                                            UserNameinp_signup.remove();
-                                                            UserNameinp_signup = null;
-                                                        };
-
-                                                        if(Emailinp_signup != null){
-                                                            Emailinp_signup.remove();
-                                                            Emailinp_signup = null;
-                                                        };
-
-                                                        if(Passwordinp_signup != null){
-                                                            Passwordinp_signup.remove();
-                                                            Passwordinp_signup = null;
-                                                        };
-
-                                                        if(Passwordinp_signup2 != null){
-                                                            Passwordinp_signup2.remove();
-                                                            Passwordinp_signup2 = null;
-                                                        };
-                                                    //-------------------------\\
-                                                };
-                                            });
-            }
+                httpPost('/post/signup', {email: Signup_Email , password: Signup_Password, username: Signup_Username}, result =>{
+                    let LocalData = eval(result)[0];
+                    if(LocalData.output == 'done'){
+                        UserID = LocalData.id;
+                        Logged = true;
+                        UserNameinp_signup.remove();
+                        Emailinp_signup.remove();
+                        Passwordinp_signup.remove();
+                        Passwordinp_signup2.remove();
+                    }else{
+                        BetterAlert(LocalData.output);
+                    };
+                });
+            };
         });
-    }
+    };
 
 };

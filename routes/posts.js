@@ -3,10 +3,9 @@ const router = express.Router();
 const dbase = require('./../services/database');
 
 //Password encryption\\
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
-const myPlaintextPassword = 's0/\/\P4$$w0rD';
-const someOtherPlaintextPassword = 'not_bacon';
+    const bcrypt = require('bcrypt');
+    const saltRounds = 10;
+    const myPlaintextPassword = 's0/\/\P4$$w0rD';
 //--------------------\\
 
 ////////////////////////////////////////////ERROR - res.send([{money : results[0].res_money, level: results[0].res_level, exp: results[0].res_exp}]); ////////////////////////////////////////////
@@ -360,77 +359,59 @@ router.post('/login', (req, res, next) => {
 
     const UserInfo = req.body;
 
-    dbase.query("SELECT * FROM users WHERE user_name = '"+ UserInfo.user + "';" , (err, results, fields) =>{
+    dbase.query('SELECT user_password AS "pass", user_id AS "id" FROM users WHERE user_name = "' + UserInfo.user + '";', (err, results, fields) =>{
+        if(err)throw err;
 
-        if(results[0] == null){
-            res.send([{status: false, id: null, message : 'Username did not exist!'}]);
+        //Check if the user exists
+        if(results[0] == undefined){
+
+            res.send([{output: 'Username not found!'}]);
+
         }else{
-            if(results[0].user_password == UserInfo.password){
-                res.send([{status: true, id: results[0].user_id}]);
-            }else{
-                res.send([{status: false, id: null, message : 'The password is incorrect!'}]);
-            };
-            
-        }
+            bcrypt.compare(UserInfo.password, results[0].pass, function(err, result) {
 
-    })
+                if(result){
+                    res.send([{output: 'Success', id: results[0].id }]);
+                }else{
+                    res.send([{output: 'The password is incorrect!'}]);
+                };
+
+            });
+        };
+
+
+
+    });
+
+
+
+
     
 });
 
 router.post('/signup', (req, res, next) => {
 
-    dbase.query('SELECT * FROM users' ,(err, results, fields)=>{
+    //Received information
+    let LocalInfo = req.body;
 
-        let EmailAlreadyExists = false;
-        let UserNameAlreadyExists = false;
+    //Encrypt the password
+    bcrypt.genSalt(saltRounds, function(err, salt) {
+        bcrypt.hash(LocalInfo.password, salt, function(err, hash) {
 
-        for(account of results){
-            
-            if(req.body.email == account.user_email){
-                EmailAlreadyExists = true;
-            };
-            if(req.body.username == account.user_name){
-                UserNameAlreadyExists = true;
-            }
-
-        }
-
-
-        if(EmailAlreadyExists){
-            //status: 'Email Already Exists!', accepted: false
-            res.send([{status: 'Email Already Exists!', accepted: false}]);
-        }else if(UserNameAlreadyExists){
-            res.send([{status: 'Username Already Exists!', accepted: false}]);
-        }else{
-
-            let SQLqueryInsert = "INSERT INTO `momotaro`.`users` (`user_password`, `user_name`, `user_email`) VALUES ('"+ req.body.password +"', '"+ req.body.username +"', '"+ req.body.email +"');";
-
-            dbase.query(SQLqueryInsert ,(err, results, fields) => {
+            //Call the database
+            dbase.query('CALL CreateAccount("' + LocalInfo.username + '", "' + LocalInfo.email + '", "' + hash  + '");' ,(err, results, fields)=>{
                 
+                //Send feedback to the client
+                res.send(results[0]);
 
-                //Check if there is any sql error
-                if(err)throw err;
-                
-                dbase.query("SELECT user_id FROM users WHERE user_name = '" + req.body.username + "';", (err, results2, fields) =>{
-                    
-                    if(err)throw err;
-                
-                    res.send([{status: 'Success!', accepted: true, userID : results2[0].user_id, username: req.body.username}]);
-                });
+            });
 
-
-            }
-            
-            );
-
-            
-        };
-
-
-
-        
-
+        });
     });
+
+
+
+       
 });
 
 //Send a friend request to the user
