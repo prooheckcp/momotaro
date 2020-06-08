@@ -185,9 +185,8 @@ const UImapMousePressed = () =>{
                             //Send the purchase request
                             httpPost('/post/buyDecoration', {amount: MarketDecorationPurchaseAmount, price: LastSelectedDecoration.item_price * MarketDecorationPurchaseAmount, id: UserID, itemid: LastSelectedDecoration.item_id}, data =>{
                                 
-                                let LocalData = eval(data)[0];
                                 
-                                BetterAlert(LocalData.status);
+                                BetterAlert(data);
 
                                 UpdateRestaurantStats();
                                 UpdateInventoryRequest();

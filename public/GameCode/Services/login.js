@@ -232,16 +232,14 @@ const LogginClick = () => {
             let ResultInJson = eval(result)[0];
 
             if(ResultInJson.output == 'Success'){
-                //Log in the player in case the login was a success
-                Logged = true;
 
                 //Store the user ID on the client side
                 UserID = ResultInJson.id;
+                
+                CheckIfRestaurantExists();
 
-                //Load the player restaurant and inventory
-                UpdateRestaurantRequest();
-                UpdateInventoryRequest();
-                UpdateRestaurantStats();
+                //Log in the player in case the login was a success
+                Logged = true;
 
                     //Remove the input windows
                     if(UserNameinp_login != null){

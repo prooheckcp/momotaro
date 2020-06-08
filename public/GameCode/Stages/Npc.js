@@ -224,7 +224,6 @@ function NpcPressed(){
 
               //The position of the chair
               NPC.chairPos = CalculateRestaurantTile(MouseOnTile.x, MouseOnTile.y);
-              print('Sitted a NPC')
             }
           }
         }

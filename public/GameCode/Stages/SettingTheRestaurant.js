@@ -96,7 +96,7 @@ const SettingTheRestaurantMousePressed = () =>{
             UpdateInventoryRequest();
             UpdateRestaurantStats();
             inp.remove();
-            
+            inp = null;
         })});
 
 };

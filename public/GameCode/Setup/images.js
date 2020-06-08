@@ -150,10 +150,10 @@ const SetupImages = () =>{
 //NPCs Art\\
 
     //Standing up
-    npcUp = loadImage('/get/npc/npcFemalebakerUP');
+    npcUp = loadImage('/get/image/npcFemalebakerUP');
 
     //Sitting
-    npcSit = loadImage('/get/npc/npcFemalebakerSit');
+    npcSit = loadImage('/get/image/npcFemalebakerSit');
 
     //Chat ballon for the required dish
     ChatBalloon = loadImage('/get/image/ChatBalloon');
@@ -247,9 +247,9 @@ const SetupImages = () =>{
 //UI elements\\
 
     NotificationFrame = loadImage('get/image/notificationFrame');
-    BottomFrame = loadImage('get/images/bottom_frame');
-    RightYellowArrow = loadImage('get/images/right_yellow_arrow');
-    LeftYellowArrow = loadImage('get/images/left_yellow_arrow');
+    BottomFrame = loadImage('get/image/bottom_frame');
+    RightYellowArrow = loadImage('get/image/right_yellow_arrow');
+    LeftYellowArrow = loadImage('get/image/left_yellow_arrow');
     CircleButton = loadImage('/get/image/circlebutton');
     levelStar = loadImage('/get/image/levelstar');
     MoneyFrame = loadImage('/get/image/MoneyDisplayer');

@@ -232,10 +232,8 @@ END IF;
 
 END$$
 
-DELIMITER ; 
 /*---------------------------------------------------------------------------------------------------------------------------------*/
 #Check if the player should level up and if yes level up
-DELIMITER $$
 
 CREATE PROCEDURE CheckLevel(IN inp_user_id INT)
 BEGIN
@@ -311,11 +309,8 @@ END IF;
 
 END$$
 
-DELIMITER ;
 /*---------------------------------------------------------------------------------------------------------------------------------*/
 #Send friend request
-DELIMITER $$
-
 CREATE PROCEDURE CreateRequestInvite(IN inp_user_id INT, IN invited_user_name VARCHAR(255))
 BEGIN
 	
@@ -391,12 +386,8 @@ BEGIN
 	
     
 END$$
-
-DELIMITER ;
-
 /*---------------------------------------------------------------------------------------------------------------------------------*/
 #Get a users friend list by ID
-DELIMITER $$
 CREATE PROCEDURE GetFriendList(IN inp_user_id INT)
 BEGIN
 
@@ -412,10 +403,7 @@ WHERE
 	f.user_id = inp_user_id;
     
 END$$
-DELIMITER ;
-
 #Get a users received requests
-DELIMITER $$
 CREATE PROCEDURE GetReceivedRequests(IN inp_user_id INT)
 BEGIN
 
@@ -431,10 +419,8 @@ WHERE
 	fr.other_user_id = inp_user_id;
     
 END$$
-DELIMITER ;
 
 #Get a users sent requests
-DELIMITER $$
 CREATE PROCEDURE GetSentRequests(IN inp_user_id INT)
 BEGIN
 SELECT
@@ -450,12 +436,9 @@ WHERE
 ORDER BY
 	r.res_level DESC;
 END$$
-DELIMITER ;
-
 /*---------------------------------------------------------------------------------------------------------------------------------*/
 
 #Cancel a friend request that was sent
-DELIMITER $$
 CREATE PROCEDURE CancelSentRequest(IN inp_user_id INT, IN inp_other_user_id INT)
 BEGIN
 
@@ -486,11 +469,9 @@ END IF;
 
 
 END$$
-DELIMITER ;
 /*---------------------------------------------------------------------------------------------------------------------------------*/
 
 #Accept a friend request that was sent
-DELIMITER $$
 CREATE PROCEDURE AcceptFriendRequest(IN inp_user_id INT, IN other_user_id INT)
 BEGIN
 
@@ -521,10 +502,8 @@ ELSE
 END IF;
 
 END$$
-DELIMITER ;
-
 /*---------------------------------------------------------------------------------------------------------------------------------*/
-DELIMITER $$
+#End a friendship
 CREATE PROCEDURE EndFriendship(IN inp_user_id INT, IN other_user_id INT)
 BEGIN
 
@@ -555,10 +534,8 @@ END IF;
 
 
 END$$
-DELIMITER ;
-
 /*---------------------------------------------------------------------------------------------------------------------------------*/
-DELIMITER $$
+#Gets the name, restaurant name, level and exp of a certain user by ID
 CREATE PROCEDURE getRestaurantData(IN inp_user_id INT)
 BEGIN
 
@@ -572,9 +549,8 @@ WHERE
 	u.user_id = inp_user_id;
 
 END$$
-DELIMITER ;
 
-DELIMITER $$
+#Gets the furniture of a restaurant by ID
 CREATE PROCEDURE getRestaurantFurniture(IN inp_user_id INT)
 BEGIN
 SELECT
@@ -586,9 +562,8 @@ WHERE
 
 
 END$$
-DELIMITER ;
 /*---------------------------------------------------------------------------------------------------------------------------------*/
-DELIMITER $$
+#Creates a new account
 CREATE PROCEDURE CreateAccount(IN inp_username VARCHAR(255), IN inp_email VARCHAR(255), IN inp_password VARCHAR(255))
 BEGIN
 
@@ -635,10 +610,9 @@ ELSE
 END IF;
 
 END$$
-DELIMITER ;
 
 /*---------------------------------------------------------------------------------------------------------------------------------*/
-DELIMITER $$
+#Login the user into his account
 CREATE PROCEDURE LoginAccount(IN inp_username VARCHAR(255), IN inp_password VARCHAR(255))
 BEGIN
 
@@ -685,4 +659,322 @@ WHERE
 END IF;
 
 END$$
+
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+#Get the top players sorted by level
+CREATE PROCEDURE GetTopPlayers(IN inp_amount INT)
+BEGIN
+
+SELECT
+	* 
+FROM 
+	restaurant 
+GROUP BY 
+	res_level, res_exp, res_name 
+ORDER BY 
+	res_level DESC LIMIT inp_amount;
+
+END$$
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+CREATE PROCEDURE GetRecipes()
+BEGIN
+	SELECT
+		* 
+	FROM 
+		recipes_types;
+
+END$$
+
+
+
+CREATE PROCEDURE GetIngredients()
+BEGIN
+
+SELECT 
+	* 
+FROM 
+	ingredients_market;
+
+END$$
+
+CREATE PROCEDURE GetDecoration()
+BEGIN
+
+SELECT
+	* 
+FROM 
+	dec_market 
+ORDER BY 
+	item_price;
+
+END$$
+
+CREATE PROCEDURE GetUserHashPass(IN name_inp VARCHAR(255))
+BEGIN
+
+SELECT 
+	user_password AS "pass", user_id AS "id" 
+FROM 
+	users 
+WHERE 
+	user_name = name_inp;
+
+END$$
+
+CREATE PROCEDURE CreateRestaurant(IN inp_userid INT, IN inp_resname VARCHAR(255))
+BEGIN
+
+INSERT INTO restaurant(user_id, res_name) 
+VALUES(inp_userid, inp_resname);
+
+END$$
+
+#Check if the restaurant exists
+CREATE PROCEDURE CheckIfRestaurant(IN inp_userid INT)
+BEGIN
+
+SET @CheckIfResExists = (
+SELECT
+	COUNT(1) 
+FROM 
+	restaurant 
+WHERE 
+	user_id = inp_userid
+);
+
+IF @CheckIfResExists > 0 THEN
+
+SELECT 'yes' as 'status', res_name as 'res_name'
+FROM
+	restaurant
+WHERE
+	user_id = inp_userid;
+
+ELSE
+
+SELECT 'no' as 'status';
+
+END IF;
+
+END$$
+
+#Get the player dishes by ID
+CREATE PROCEDURE GetPlayerDishes(IN inp_userid INT)
+BEGIN
+
+SELECT 
+	* 
+FROM 
+	dishes_inventory 
+WHERE 
+	user_id = inp_userid;
+
+END$$
+
+#Get the player recipes by ID
+CREATE PROCEDURE GetPlayerRecipes(IN inp_userid INT)
+BEGIN
+
+SELECT 
+	* 
+FROM 
+	recipes_inventory 
+WHERE 
+	user_id = inp_userid;
+
+END$$
+
+#Get the player ingredients inventory
+CREATE PROCEDURE GetPlayerIngredients(IN inp_userid INT)
+BEGIN
+
+SELECT 
+	* 
+FROM 
+	ingredients_inventory 
+WHERE 
+	user_id = inp_userid;
+
+END$$
+
+#Get the player inventory by ID
+CREATE PROCEDURE GetPlayerInventory(IN inp_userid INT)
+BEGIN
+
+SELECT 
+	* 
+FROM 
+	dec_in_inventory 
+WHERE 
+	user_id = inp_userid;
+
+END$$
+
+#Get the player placed furniture
+
+#Get the recipes details
+CREATE PROCEDURE GetRecipesTypes(IN inp_userid INT)
+BEGIN
+
+SELECT 
+	recipes_types.recipe_id, recipe_level, recipe_name, recipes_inventory.dish_id 
+FROM 
+	recipes_types 
+INNER JOIN recipes_inventory ON recipes_inventory.recipe_id = recipes_types.recipe_id 
+WHERE 
+	user_id = inp_userid;
+
+END$$
+
+#Get the restaurant stats
+CREATE PROCEDURE LoadRestaurantStats(IN inp_userid INT)
+BEGIN
+
+SELECT
+	res_money, res_level, res_exp
+FROM
+	restaurant
+WHERE
+	user_id = inp_userid;
+
+END$$
+
+#Buy ingredient(s)
+CREATE PROCEDURE BuyIngredient(IN inp_userid INT, IN inp_price INT, IN ingrdt_id VARCHAR(8), IN purchaseAmount INT)
+BEGIN
+
+SET @CheckIfEnoughMoney = (
+
+SELECT COUNT(1)
+FROM restaurant
+WHERE user_id = inp_userid AND inp_price <= res_money
+    
+);
+
+#Check if the user has enough money
+IF @CheckIfEnoughMoney > 0 THEN
+	
+	SET @CheckIfHasIngredient = (
+    
+    SELECT COUNT(1) 
+    FROM ingredients_inventory 
+    WHERE user_id = inp_userid AND ingredient_id = ingrdt_id
+    
+    );
+	
+    #Decrease the money
+    UPDATE restaurant SET res_money = res_money - inp_price WHERE user_id = inp_userid;
+    
+    #Check if he has the ingredient
+    IF @CheckIfHasIngredient > 0 THEN
+		
+        #Increase the amount
+        UPDATE ingredients_inventory SET ingredient_amount = ingredient_amount + purchaseAmount 
+        WHERE user_id = inp_userid AND ingredient_id = ingrdt_id;
+        
+        #Throw some feedback to the user
+		SELECT CONCAT('You now have: ', ingredient_amount) AS 'output'
+        FROM ingredients_inventory
+        WHERE user_id = inp_userid AND ingredient_id = ingrdt_id;
+	
+    #In case he does not own the ingredient
+	ELSE
+    
+		#Create the ingredient and add the amount
+		INSERT INTO ingredients_inventory (user_id, ingredient_id, ingredient_amount) 
+        VALUES (inp_userid, ingrdt_id, purchaseAmount);
+        
+        #Throw some feedback to the user
+		SELECT CONCAT('You now have: ', ingredient_amount) AS 'output'
+        FROM ingredients_inventory
+        WHERE user_id = inp_userid AND ingredient_id = ingrdt_id;		
+        
+    END IF;
+	
+ELSE
+
+	#In case the user doesnt have eneough money
+	SELECT 'Not eneough money!' AS 'output';
+
+END IF;
+
+END$$
+
+
+
+
+#Buy decoration(s)
+CREATE PROCEDURE BuyDecoration(IN inp_userid INT, IN inp_price INT, IN dec_id VARCHAR(8), IN purchaseAmount INT)
+BEGIN
+
+SET @CheckIfEnoughMoney = (
+
+SELECT COUNT(1)
+FROM restaurant
+WHERE user_id = inp_userid AND inp_price <= res_money
+    
+);
+
+#Check if the user has enough money
+IF @CheckIfEnoughMoney > 0 THEN
+	
+	SET @CheckIfHasDecoration = (
+    
+    SELECT COUNT(1) 
+    FROM dec_in_inventory 
+    WHERE user_id = inp_userid AND item_id = dec_id
+    
+    );
+	
+    #Decrease the money
+    UPDATE restaurant SET res_money = res_money - inp_price WHERE user_id = inp_userid;
+    
+    #Check if he has the ingredient
+    IF @CheckIfHasDecoration > 0 THEN
+		
+        #Increase the amount
+        UPDATE dec_in_inventory SET item_amount = item_amount + purchaseAmount 
+        WHERE user_id = inp_userid AND item_id = dec_id;
+        
+        #Throw some feedback to the user
+		SELECT CONCAT('You now have: ', item_amount) AS 'output'
+        FROM dec_in_inventory
+        WHERE user_id = inp_userid AND item_id = dec_id;
+	
+    #In case he does not own the decoration
+	ELSE
+    
+		#Create the ingredient and add the amount
+		INSERT INTO dec_in_inventory (user_id, item_id, item_amount) 
+        VALUES (inp_userid, dec_id, purchaseAmount);
+        
+        #Throw some feedback to the user
+		SELECT CONCAT('You now have: ', item_amount) AS 'output'
+        FROM dec_in_inventory
+        WHERE user_id = inp_userid AND item_id = dec_id;		
+        
+    END IF;
+	
+ELSE
+
+	#In case the user doesnt have eneough money
+	SELECT 'Not eneough money!' AS 'output';
+
+END IF;
+
+END$$
+
+#Give money to the player
+CREATE PROCEDURE GiveMoneyPlayer(IN inp_money INT, IN inp_id INT)
+BEGIN
+
+UPDATE restaurant SET res_money = res_money + inp_money
+WHERE user_id = inp_id;
+
+SELECT CONCAT('Current money: ',res_money) AS 'output'
+FROM restaurant
+WHERE user_id = inp_id;
+
+END$$
+
 DELIMITER ;

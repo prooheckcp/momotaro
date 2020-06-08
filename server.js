@@ -14,10 +14,6 @@ const Game = require('./routes/momotaro');
 const GetsRoute = require('./routes/gets'); 
 const PostsRoute = require('./routes/posts');
 
-
-//////////CODE FOR CONNECTION TO DATABASE\\\\\\\\\\\
-
-
 //General Settings\\
 const DefaultPort = 3000;
 

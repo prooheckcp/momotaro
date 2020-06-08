@@ -18,7 +18,7 @@ const NPCbuyDish = (dishID, NPC) =>{
 
     }else{
       //Alert the console
-      print(LocalStatusResult.status);
+
     };          
 
   });
@@ -256,10 +256,10 @@ const UpdateDishesInventory = () =>{
 //Check if the user has a restaurant or not
 const CheckIfRestaurantExists = () =>{
 
+
   httpPost('/post/RestaurantName', {id: UserID}, data => {
 
     let LocalResponse = eval(data)[0];
-
 
     if (LocalResponse.status == 'no'){
 
@@ -269,6 +269,10 @@ const CheckIfRestaurantExists = () =>{
 
       restaurantName = LocalResponse.resName;
       Stage = 'default';
+      //Load the player restaurant and inventory
+      UpdateRestaurantRequest();
+      UpdateInventoryRequest();
+      UpdateRestaurantStats();
 
     };
 

@@ -1,15 +1,18 @@
-const express = require('express');
-const router = express.Router();
-const dbase = require('./../services/database');
+//Variables\\
 
-//Password encryption\\
-    const bcrypt = require('bcrypt');
-    const saltRounds = 10;
-    const myPlaintextPassword = 's0/\/\P4$$w0rD';
-//--------------------\\
+    const express = require('express');
+    const router = express.Router();
+    const dbase = require('./../services/database');
+    const path = require('path');
+    const accountServicesRouter = require('./posts_folder/accountServices');
+    const restarauntServicesRouter = require('./posts_folder/getAccountDetails');
+//----------\\
 
-////////////////////////////////////////////ERROR - res.send([{money : results[0].res_money, level: results[0].res_level, exp: results[0].res_exp}]); ////////////////////////////////////////////
+//Middleware\\
 
+    router.use(accountServicesRouter);
+    router.use(restarauntServicesRouter);
+//-----------\\
 
 //Decrease the dish, give the money and the exp
 router.post('/ConsumeDish', (req, res, next) => {
@@ -23,101 +26,25 @@ router.post('/ConsumeDish', (req, res, next) => {
 
 });
 
-router.post('/getInventoryDishes', (req, res, next) => {
-
-    const UserInfo = req.body;
-
-    dbase.query('SELECT * FROM dishes_inventory WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
-        
-        res.send(results);
-
-    });
-
-});
 
 //Buy ingredient
-
 router.post('/buyIngredient', (req, res, next) =>{
-    const UserInfo = req.body;
 
-    dbase.query('SELECT res_money FROM restaurant WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
-        
+    let LocalInfo = req.body;
+
+    //Call the database
+    dbase.query('CALL BuyIngredient( ' + LocalInfo.id + ', ' + LocalInfo.price + ', "' + LocalInfo.itemid + '", ' + LocalInfo.amount + ')', (err, results, fields) =>{
         if(err)throw err;
 
-        if(results[0].res_money < UserInfo.price){
-            res.send('Error: Not enough money')
-        }else{
-
-            dbase.query('SELECT * FROM ingredients_inventory WHERE user_id = ' + UserInfo.id + ' AND ingredient_id = "' + UserInfo.itemid + '";', (err, results, fields) =>{
-                if(err)throw err;
-
-                if(results[0] != undefined){
-
-                    //Increase the amount
-                    dbase.query('UPDATE ingredients_inventory SET ingredient_amount = ingredient_amount + '+UserInfo.amount+' WHERE user_id = '+UserInfo.id+' AND ingredient_id = "'+UserInfo.itemid+'" ;', (err, results, fields) =>{
-                        if(err)throw err;
-
-                        //Decrease the cash
-                        dbase.query('UPDATE restaurant SET res_money = res_money - ' + UserInfo.price + ' WHERE user_id = '+UserInfo.id+';')
-                        res.send('A new item was added');
-                    });
-
-                }else{
-                    //There was no item before
-                    dbase.query('INSERT INTO ingredients_inventory (user_id, ingredient_id, ingredient_amount) VALUES ('+UserInfo.id+', "'+UserInfo.itemid+'", '+UserInfo.amount+');', (err, results, fields) =>{
-                        if(err)throw err;
-                        //Decrease the cash
-                        dbase.query('UPDATE restaurant SET res_money = res_money - ' + UserInfo.price + ' WHERE user_id = '+UserInfo.id+';')
-                        res.send('A new item was added');
-                    });
-                };
-
-
-
-
-            });
-
-        }
-    });
-});
-
-
-//Get the recipes inventory
-
-router.post('/getRecipesInventory', (req, res, next) => {
-    const UserInfo = req.body;
-
-    dbase.query('SELECT * FROM recipes_inventory WHERE user_id = ' + UserInfo.userID + ';', (err, results, fields) =>{
-        if(err)throw err;
-
-        res.send(results);
-    });
-
-});
-
-
-//Get the recipes types
-
-router.post('/getRecipesTypes', (req, res, next) =>{
-
-    const UserInfo = req.body;
-
-    dbase.query('SELECT recipes_types.recipe_id, recipe_level, recipe_name, recipes_inventory.dish_id FROM recipes_types INNER JOIN recipes_inventory ON recipes_inventory.recipe_id = recipes_types.recipe_id WHERE user_id = '+ UserInfo.id +';', (err, results, fields) => {
-        res.send(results);
-    });
-
-});
-
-router.post('/getIngredientsInventory', (req, res, next) =>{
-    const UserInfo = req.body;
-
-    dbase.query('SELECT * FROM momotaro.ingredients_inventory WHERE user_id = ' + UserInfo.id + ';', (err, results, fielnds) =>{
-        
-        res.send(results);
+        //Give feedback to the client
+        res.send(results[0][0].output);
 
     });
 
 });
+
+
+
 
 router.post('/CreateNewDish', (req, res, next) => {
 
@@ -177,43 +104,12 @@ router.post('/CreateNewDish', (req, res, next) => {
 router.post('/buyDecoration', (req, res, next)=>{
     const UserInfo = req.body;
 
-
-    dbase.query('SELECT res_money FROM restaurant WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
+    dbase.query('CALL BuyDecoration( ' + UserInfo.id + ', ' + UserInfo.price + ', "' + UserInfo.itemid + '", ' + UserInfo.amount + ')', (err, results, fields) =>{
         if(err)throw err;
 
-        if(results[0].res_money < UserInfo.price){
-            res.send([{status: 'error, not enough cash'}])
-        }else{
-
-            dbase.query('UPDATE restaurant SET res_money = res_money - ' + UserInfo.price + ' WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
-
-
-                dbase.query('SELECT * FROM dec_in_inventory WHERE user_id = ' + UserInfo.id + ' AND item_id = "' + UserInfo.itemid + '";', (err, results2, fields)=>{
-                    
-                    if(typeof(results2) != typeof([]) || results2.length == 0){
-                        //There was still no item of this kind
-                        dbase.query('INSERT INTO dec_in_inventory(item_id, user_id, item_amount)VALUES( "'+ UserInfo.itemid + '", ' + UserInfo.id + ', ' + UserInfo.amount + ');', (err, results, fields) =>{
-                            if(err)throw err;
-                            res.send([{status: UserInfo.amount + ' new item(s) were added to your inventory!'}]);
-                        })
-                    }else{
-                        //There was already 1 item of this kind
-                        dbase.query('UPDATE dec_in_inventory SET item_amount = item_amount + ' + UserInfo.amount + ' WHERE user_id = ' + UserInfo.id + ' AND item_id = "' + UserInfo.itemid + '";', (err, results, fields) =>{
-                            if(err)throw err;
-                            res.send([{status: UserInfo.amount + ' new items were added to your inventory!'}]);
-                        })
-                    };
-
-
-                });
-                   
-
-            });
-
-        };
+        res.send(results[0][0].output);
 
     });
-    
 
 });
 
@@ -230,98 +126,18 @@ router.post('/levelUp', (req, res, next) => {
 
 });
 
-
-router.post('/giveExp', (req, res, next) => {
-
-    const UserInfo = req.body;
-
-    dbase.query('UPDATE restaurant SET res_exp = res_exp + ' + UserInfo.exp + ' WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
-
-        if(err)throw err;
-        res.send('done!')
-
-    });
-});
-
-
 router.post('/giveMoney', (req, res, next) => {
 
     const UserInfo = req.body;
 
-    dbase.query('UPDATE restaurant SET res_money = res_money + ' + UserInfo.money + ' WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) => {
+    dbase.query('CALL GiveMoneyPlayer(' + UserInfo.money + ' , ' + UserInfo.id + ');', (err, results, fields) => {
         if(err)throw err;
         res.send('done');
     });
 
 });
 
-//Get the restaurant stats by id :3
-router.post('/getRestaurantStats', (req, res, next) =>{
 
-    const UserInfo = req.body;
-
-    dbase.query('SELECT * FROM restaurant WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
-
-        res.send([{money : results[0].res_money, level: results[0].res_level, exp: results[0].res_exp}]);
-
-    });
-
-});
-
-
-//Check if the restaurant exists
-router.post('/RestaurantName', (req, res, next) =>{
-
-    const UserInfo = req.body;
-
-    dbase.query('SELECT * FROM restaurant WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
-        if(results == undefined || results[0] == undefined){
-            res.send([{status: "no"}]);
-        }else{
-            res.send([{status: "yes", resName: results[0].res_name}])
-        };
-    });
-
-});
-
-router.post('/CreateRestaurant', (req, res, next) => {
-
-    const UserInfo = req.body;
-    dbase.query('INSERT INTO momotaro.restaurant(user_id, res_name) VALUES(' + UserInfo.id + ', "' + UserInfo.resName + '");', (err, results, fields) =>{
-        if(err)throw err;
-        res.send('Done!')
-    });
-
-});
-
-
-//Send the current inventory
-router.post('/getInventory', (req, res, next) => {
-
-    const UserInfo = req.body;
-
-    dbase.query('SELECT * FROM dec_in_inventory WHERE user_id = ' + UserInfo.id + ';', (err, results, fields) =>{
-
-        if(err)throw err;
-        
-        res.send(results);
-    });
-
-});
-
-router.post('/getDecoration', (req, res, next) =>{
-
-    const UserInfo = req.body;
-
-    dbase.query('SELECT * FROM dec_in_restaurant WHERE user_id = '+ UserInfo.id +';', (err, results, fields) => {
-
-        if(err)throw err;
-
-        res.send(results);
-
-    });
-
-});
 
 router.post('/removeFromRestaurant', (req, res, next) =>{
     const ItemInfo = req.body;
@@ -355,185 +171,5 @@ router.post('/addToRestaurant', (req, res, next) =>{
     res.send('The item has been added!');
 });
 
-router.post('/login', (req, res, next) => {
-
-    const UserInfo = req.body;
-
-    dbase.query('SELECT user_password AS "pass", user_id AS "id" FROM users WHERE user_name = "' + UserInfo.user + '";', (err, results, fields) =>{
-        if(err)throw err;
-
-        //Check if the user exists
-        if(results[0] == undefined){
-
-            res.send([{output: 'Username not found!'}]);
-
-        }else{
-            bcrypt.compare(UserInfo.password, results[0].pass, function(err, result) {
-
-                if(result){
-                    res.send([{output: 'Success', id: results[0].id }]);
-                }else{
-                    res.send([{output: 'The password is incorrect!'}]);
-                };
-
-            });
-        };
-
-
-
-    });
-
-
-
-
-    
-});
-
-router.post('/signup', (req, res, next) => {
-
-    //Received information
-    let LocalInfo = req.body;
-
-    //Encrypt the password
-    bcrypt.genSalt(saltRounds, function(err, salt) {
-        bcrypt.hash(LocalInfo.password, salt, function(err, hash) {
-
-            //Call the database
-            dbase.query('CALL CreateAccount("' + LocalInfo.username + '", "' + LocalInfo.email + '", "' + hash  + '");' ,(err, results, fields)=>{
-                
-                //Send feedback to the client
-                res.send(results[0]);
-
-            });
-
-        });
-    });
-
-
-
-       
-});
-
-//Send a friend request to the user
-router.post('/sendFriendRequest', (req, res, next) => {
-
-    let LocalInfo = req.body;
-
-    dbase.query('CALL CreateRequestInvite(' + LocalInfo.id + ', "' + LocalInfo.name + '");', (err, results, fields) =>{
-        if(err) throw err;
-
-        res.send(results[0]);
-    });
-
-});
-
-//Get the friends data
-router.post('/getUserFriendsData',(req, res, next) =>{
-
-    //Front-end data
-    let LocalInfo = req.body;
-
-    let DataToBeSent = {
-        friendlist: undefined,
-        received: undefined,
-        sent: undefined
-    };
-
-    //Get friend list
-    dbase.query('CALL GetFriendList(' + LocalInfo.id + ')', (err, results, fields) =>{
-        if(err)throw err;
-
-        //Update the array
-        DataToBeSent.friendlist = results[0];
-
-        //Get received requests
-        dbase.query('CALL GetReceivedRequests(' + LocalInfo.id + ')', (err, results, fields) =>{
-            if(err)throw err;
-
-            //Update the array
-            DataToBeSent.received = results[0];
-
-            //Get sent requests
-            dbase.query('CALL GetSentRequests(' + LocalInfo.id + ')', (err, results, fields) =>{
-                if(err)throw err;
-                
-                //Update the array
-                DataToBeSent.sent = results[0];
-
-                    //Send the front data 
-                    res.send(DataToBeSent);
-
-            });
-
-        });
-
-    });
-
-});
-
-router.post('/cancelFriendRequest', (req, res, next) =>{
-
-    let LocalInfo = req.body;
-
-    dbase.query('CALL CancelSentRequest(' + LocalInfo.id + ',' + LocalInfo.other + ')', (err, results, fields) =>{
-        if(err)throw err;
-        res.send(results[0]);
-    });
-
-});
-
-router.post('/acceptFriendRequest', (req, res, next) =>{
-
-    let LocalInfo = req.body;
-
-    //Tell the database to add the user
-    dbase.query('CALL AcceptFriendRequest(' + LocalInfo.id + ',' + LocalInfo.other + ')', (err, results, fields) =>{
-        if(err)throw err;
-        
-       dbase.query('CALL CancelSentRequest(' + LocalInfo.other + ',' + LocalInfo.id + ')', (err, results2, fields) =>{
-            if(err)throw err;
-            res.send(results[0]);
-        });
-
-
-    });
-
-});
-
-router.post('/endFriendship', (req, res, next) => {
-
-    let LocalInfo = req.body;
-
-    //Tell the database to end the friendship
-    dbase.query('CALL EndFriendship(' + LocalInfo.id + ', ' + LocalInfo.other + ')', (err, results, fields) =>{
-        if(err)throw err;
-
-        res.send(results[0]);
-    });
-
-});
-
-router.post('/getFriendRestaurant', (req, res, next) =>{
-
-    let LocalInfo = req.body;
-    let Result = {
-        furniture: [],
-        userStats: undefined
-    };
-
-    dbase.query('CALL getRestaurantData(' + LocalInfo.id + ')', (err, results, fields) =>{
-
-        Result.userStats = results[0][0];
-
-        dbase.query('CALL getRestaurantFurniture(' + LocalInfo.id + ')', (err, results, fields) =>{
-
-            Result.furniture = results[0];
-
-            res.send([Result]);
-
-        });
-    });
-
-});
 
 module.exports = router;
