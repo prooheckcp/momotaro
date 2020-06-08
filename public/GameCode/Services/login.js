@@ -52,20 +52,32 @@ const LoggingProcess = () =>{
     //Buttons\\
     
         //Login
+        let LoginTabIsHovered = false;
         GoBackToLoginOptionButton.x = windowWidth/2 - 225;
         GoBackToLoginOptionButton.y = windowHeight/2 - 100;
         GoBackToLoginOptionButton.hovered(()=>{
-            tint(190, 190, 59);
+            LoginTabIsHovered = true;
         });
+
+        if(!logginIn){
+            tint(150);
+        };
+
         GoBackToLoginOptionButton.draw();
         noTint();
 
         //Sign-up 
+        let SignupTabIsHovered = false;
         GoBackToSignupOptionButton.x = windowWidth/2;
         GoBackToSignupOptionButton.y = windowHeight/2 - 100;
         GoBackToSignupOptionButton.hovered(()=>{
-            tint(190, 190, 59);
+            SignupTabIsHovered = true;
         });
+
+        if(logginIn){
+            tint(150);
+        };
+
         GoBackToSignupOptionButton.draw();
         noTint();
     //--------\\
@@ -74,13 +86,20 @@ const LoggingProcess = () =>{
 
         textAlign(CENTER, CENTER);
         textSize(30);
+                  
 
-        if(logginIn){
+            
+
+        if(!logginIn || SignupTabIsHovered){
+            BetterText('Signup', windowWidth/2 + 112.5, windowHeight/2 - 100 + 25, {r: 255, g: 231, b: 100});
+        }else{
+            BetterText('Signup', windowWidth/2 + 112.5, windowHeight/2 - 100 + 25);  
+        };
+
+        if(logginIn || LoginTabIsHovered){
             BetterText('Login', windowWidth/2 - 225 + 112.5, windowHeight/2 - 100 + 25, {r: 255, g: 231, b: 100});
-            BetterText('Signup', windowWidth/2 + 112.5, windowHeight/2 - 100 + 25);
         }else{
             BetterText('Login', windowWidth/2 - 225 + 112.5, windowHeight/2 - 100 + 25);
-            BetterText('Signup', windowWidth/2 + 112.5, windowHeight/2 - 100 + 25, {r: 255, g: 231, b: 100});
         };
     //----------------------\\    
 
@@ -157,7 +176,7 @@ const loginWindow = () => {
 
         textAlign(LEFT);
         textSize(25);
-        BetterText('UserName:', windowWidth/2 - 200, windowHeight/2 - 30);
+        BetterText('Username:', windowWidth/2 - 200, windowHeight/2 - 30);
         BetterText('Password:', windowWidth/2 - 200, windowHeight/2 + 40);
         textSize(30);
         textAlign(CENTER, CENTER);
@@ -174,6 +193,8 @@ const CreateLoginButton = (x, y, w, h) => {
     UserNameinp_login.input(WrittingUserName);
     UserNameinp_login.size(w, h);
     UserNameinp_login.style('font-size', '20px');
+    UserNameinp_login.style('background-color', 'rgba(0,0,0,0.7)');
+    UserNameinp_login.style('color', 'white');
 };
 
 const CreateLoginButton2 = (x, y, w, h) =>{
@@ -184,6 +205,8 @@ const CreateLoginButton2 = (x, y, w, h) =>{
     Passwordinp_login.input(WrittingPassword);
     Passwordinp_login.size(w, h);
     Passwordinp_login.style('font-size', '20px');
+    Passwordinp_login.style('background-color', 'rgba(0,0,0,0.7)');
+    Passwordinp_login.style('color', 'white');
 };
 
 

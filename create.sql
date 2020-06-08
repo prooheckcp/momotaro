@@ -664,10 +664,12 @@ WHERE
 
 );
 
+#Check if the user exists
 IF @CheckIfUsernameExists = 0 THEN
 
 SELECT 'Username not found!' AS 'output';
 
+#Check if the password is correct
 ELSEIF @CheckIfPasswordCorrect = 0 THEN
 
 SELECT 'The password is incorrect!' AS 'output';

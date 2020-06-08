@@ -75,7 +75,7 @@ const signupWindow = () => {
     
         textAlign(LEFT);
         textSize(25);
-        BetterText('UserName:', windowWidth/2 - 200, windowHeight/2 - 30);
+        BetterText('Username:', windowWidth/2 - 200, windowHeight/2 - 30);
         BetterText('Email:', windowWidth/2 - 200, windowHeight/2 + 40);
         BetterText('Password:', windowWidth/2 - 200, windowHeight/2 + 110);
         BetterText('Repeat Password:', windowWidth/2 - 200, windowHeight/2 + 180);
@@ -118,6 +118,8 @@ const signupWindow = () => {
         UserNameinp_signup.input(WrittingSignupInput);
         UserNameinp_signup.size(w, h);
         UserNameinp_signup.style('font-size', '20px');
+        UserNameinp_signup.style('background-color', 'rgba(0,0,0,0.7)');
+        UserNameinp_signup.style('color', 'white');
     };
 
     const CreateSignupInput2 = (x, y, w, h) =>{
@@ -126,6 +128,8 @@ const signupWindow = () => {
         Emailinp_signup.input(WrittingSignupInput2);
         Emailinp_signup.size(w, h);
         Emailinp_signup.style('font-size', '20px');
+        Emailinp_signup.style('background-color', 'rgba(0,0,0,0.7)');
+        Emailinp_signup.style('color', 'white');
     };
 
     const CreateSignupInput3 = (x, y, w, h) =>{
@@ -134,6 +138,8 @@ const signupWindow = () => {
         Passwordinp_signup.input(WrittingSignupInput3);
         Passwordinp_signup.size(w, h);
         Passwordinp_signup.style('font-size', '20px');
+        Passwordinp_signup.style('background-color', 'rgba(0,0,0,0.7)');
+        Passwordinp_signup.style('color', 'white');
     };
 
     const CreateSignupInput4 = (x, y, w, h) =>{
@@ -142,6 +148,8 @@ const signupWindow = () => {
         Passwordinp_signup2.input(WrittingSignupInput4);
         Passwordinp_signup2.size(w, h);
         Passwordinp_signup2.style('font-size', '20px');
+        Passwordinp_signup2.style('background-color', 'rgba(0,0,0,0.7)');
+        Passwordinp_signup2.style('color', 'white');
     };
 
     function WrittingSignupInput(){
@@ -177,6 +185,7 @@ const SignupClick = () => {
                 httpPost('/post/signup', {email: Signup_Email , password: Signup_Password, username: Signup_Username}, result =>{
                     let LocalData = eval(result)[0];
                     if(LocalData.output == 'done'){
+                        logginIn = true;
                         UserID = LocalData.id;
                         Logged = true;
                         UserNameinp_signup.remove();

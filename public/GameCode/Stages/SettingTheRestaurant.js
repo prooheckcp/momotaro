@@ -60,6 +60,8 @@ const DrawTheRestaurantSetup = () =>{
         inp.position(windowWidth/2 - 250, windowHeight/2 - 25);
         inp.size(500, 75);
         inp.style('font-size', '40px');
+        inp.style('background-color', 'rgba(0,0,0,0.7)');
+        inp.style('color', 'white');
     //----------\\    
 
     //Draw the input box\\

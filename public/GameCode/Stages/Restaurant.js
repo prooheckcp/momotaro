@@ -48,7 +48,7 @@ const DrawRestaurant = () => {
                 fill(255, 255, 255, 120);
                 textAlign(CENTER, CENTER);
                 textSize(20);
-                text(i + ', ' +  j , LocalPositions.x + RestaurantDefaultData.TilesSize/2, LocalPositions.y + RestaurantDefaultData.TilesSize/2);
+                //text(i + ', ' +  j , LocalPositions.x + RestaurantDefaultData.TilesSize/2, LocalPositions.y + RestaurantDefaultData.TilesSize/2);
                 };
             };
         };
