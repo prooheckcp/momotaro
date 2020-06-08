@@ -8,7 +8,7 @@ const SetupConfigUI = () =>{
     //------------\\
 
     //Music Frame Button\\
-        MusicButton = new NewButton( 0, 0, 0, 0,SoundOn);
+        MusicButton = new NewButton( 0, 0, 0, 0,SoundOff);
     //------------\\
 
     //Sound Effects Button\\
@@ -33,7 +33,6 @@ const SetupConfigUI = () =>{
 };
 
 const DrawConfigurationWindow = () =>{
-    //background(45, 45, 45);
 
     // main frame \\
         image(ConfigFrame, windowWidth/2-400, windowHeight/2-150);
@@ -170,9 +169,7 @@ const DrawConfigurationWindow = () =>{
 
 const UIConfigMousePressed = () =>{
 
-    CloseConfigButton.pressed(()=>{
-        Stage = 'Default';
-    });
+    CloseConfigButton.pressed(()=>{ConfigWindow = false});
 
     MusicButton.pressed(()=>{
             MusicVolBar.WVolume = 0;
@@ -184,19 +181,19 @@ const UIConfigMousePressed = () =>{
     });
 
     HighVolMusic.pressed(()=>{
-        MusicVolBar.WVolume = MusicVolBar.WVolume + 10,75;
+        MusicVolBar.WVolume = MusicVolBar.WVolume + 43;
     });
 
     LowVolMusic.pressed(()=>{
-        MusicVolBar.WVolume = MusicVolBar.WVolume - 10,75;
+        MusicVolBar.WVolume = MusicVolBar.WVolume - 43;
     });
 
     HighVolEffect.pressed(()=>{
-        SoundEffectVolBar.WVolume = SoundEffectVolBar.WVolume + 10,75;
+        SoundEffectVolBar.WVolume = SoundEffectVolBar.WVolume + 43;
     });
 
     LowVolEffect.pressed(()=>{
-        SoundEffectVolBar.WVolume = SoundEffectVolBar.WVolume - 10,75;
+        SoundEffectVolBar.WVolume = SoundEffectVolBar.WVolume - 43;
     });
 
     MusicVolBar.pressed();

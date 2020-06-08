@@ -11,6 +11,8 @@
     let MarketWindow = false; 
     //True -> Decoration; False -> Ingredients
     let MarketWindowSection = true; 
+    //Show the config window
+    let ConfigWindow = false; 
 /////////////////----------\\\\\\\\\\\\\\\\\
 
 
@@ -55,6 +57,8 @@ const setupUI = () =>{
 
     //Calling the setup of the map UI
     SetupMapUI();
+
+    
 
     //The main screen UI elements\\
         //Screen displayers
@@ -288,9 +292,12 @@ const DrawUI = () =>{
             DrawLeaderboardsWindow();
         };
 
-
         if(StorageWindow){
             DrawStorageWindow();
+        };
+
+        if(ConfigWindow){
+            DrawConfigurationWindow();
         };
     //---------------------------------------\\
 };
@@ -325,13 +332,16 @@ const UImousePressed = () =>{
 
             //Open and close the configuration window 
             ConfigurationUIbutton.pressed(()=>{Stage = 'Config'});
+            
+            ConfigurationUIbutton.pressed(()=>{
+                ConfigWindow = !ConfigWindow;
+            });
 
             //Open and close the leaderboards window
             LeaderboardsUIbutton.pressed(()=>{
                 if(!LeaderboardsWindow){UpdateLeaderBoard()};
-                LeaderboardsWindow = !LeaderboardsWindow});
-
-            
+                LeaderboardsWindow = !LeaderboardsWindow
+            });
 
             //Open and close the storage window
             StorageUIbutton.pressed(()=>{
@@ -355,6 +365,11 @@ const UImousePressed = () =>{
         StorageWindowMousePressed();
     };
 
+    //Pressed event for the storage
+    if(ConfigWindow){
+        UIConfigMousePressed();
+    };
+    
 };
 
 
