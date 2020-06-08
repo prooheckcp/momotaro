@@ -11,7 +11,6 @@ function setup() {
 
   //Set background music to play
 
-  backgroundMusic.volume = VolMusicValue;
   backgroundMusic.play();
   backgroundMusic.loop();
 
@@ -30,7 +29,7 @@ function draw() {
 
     //Check if the user is logged in or not
     Logged ? LoadGame():LoggingProcess();
-  
+    backgroundMusic.volume = VolMusicValue;
     //Draw alert
     DrawAlert();
 
@@ -72,11 +71,6 @@ function mousePressed(){
 
       //Pressed event on the map scene
       UImapMousePressed();
-
-    }else if(Stage == 'Config'){
-      
-      //Pressed event on the map scene
-      UIConfigMousePressed();
 
     }else if(Stage == 'friendRestaurant'){
 
@@ -134,11 +128,6 @@ const LoadGame = () => {
 
       //Draw the decoration (or building) scene
       DecorationDraw();
-
-    }else if(Stage == 'Config'){
-      
-      //Draw Config
-      DrawConfigurationWindow();
 
     }else if(Stage == 'friendRestaurant'){
 
