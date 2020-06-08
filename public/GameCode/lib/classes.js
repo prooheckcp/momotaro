@@ -365,7 +365,7 @@ class NewFurniture {
 
             let LocalPolishedNumber = numberWithCommas(restaurantStats.money)
 
-            BetterText('' + LocalPolishedNumber + ' ¥', this.x + this.w/2, this.y + this.h/2);
+            BetterText('¥' + LocalPolishedNumber + '', this.x + this.w/2, this.y + this.h/2);
         }
     }
 

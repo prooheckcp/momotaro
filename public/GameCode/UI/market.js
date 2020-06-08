@@ -217,7 +217,7 @@ const DrawMarketWindow = () =>{
             //The total price
             fill(0, 50);
             rect(LocalItemDisplayX, LocalItemDisplayY + 350, 425, 50);
-            BetterText('Total price: ' + numberWithCommas(LastSelectedDecoration.item_price * MarketDecorationPurchaseAmount) + ' ¥', LocalItemDisplayX + 212.5, LocalItemDisplayY + 375);
+            BetterText('Total price: ¥' + numberWithCommas(LastSelectedDecoration.item_price * MarketDecorationPurchaseAmount) + '', LocalItemDisplayX + 212.5, LocalItemDisplayY + 375);
 
             MarketDecorationPurchaseButton.x = LocalItemDisplayX;
             MarketDecorationPurchaseButton.y = LocalItemDisplayY + 400;
@@ -255,7 +255,7 @@ const DrawMarketWindow = () =>{
                     rect(LocalX, LocalY, 400, 75, 10);
                     textAlign(LEFT, CENTER);
                     textSize(20);
-                    BetterText(' ' + LocalFurniture.name + ' - ' + numberWithCommas(DecorationList[i].item_price) + '¥', LocalX, LocalY + 37.5) 
+                    BetterText(' ' + LocalFurniture.name + ' - ¥' + numberWithCommas(DecorationList[i].item_price) + '', LocalX, LocalY + 37.5) 
                     image(LocalFurniture.image, LocalX + 325, LocalY, 75, 75);
                 };
             };  
@@ -358,7 +358,7 @@ const DrawMarketWindow = () =>{
                     //The total price
                     fill(0, 50);
                     rect(LocalItemDisplayX, LocalItemDisplayY + 350, 425, 50);
-                    BetterText('Total price: ' + numberWithCommas(LastSelectedIngredient.ingredient_price * MarketIngredientPurchaseAmount) + ' ¥', LocalItemDisplayX + 212.5, LocalItemDisplayY + 375);
+                    BetterText('Total price: ¥' + numberWithCommas(LastSelectedIngredient.ingredient_price * MarketIngredientPurchaseAmount) + '', LocalItemDisplayX + 212.5, LocalItemDisplayY + 375);
         
                     MarketIngredientPurchaseButton.x = LocalItemDisplayX;
                     MarketIngredientPurchaseButton.y = LocalItemDisplayY + 400;
@@ -399,7 +399,7 @@ const DrawMarketWindow = () =>{
                             rect(LocalX, LocalY, 400, 75, 10);
                             textAlign(LEFT, CENTER);
                             textSize(20);
-                            BetterText(' ' + LocalFurniture.name + ' - ' + numberWithCommas(IgredientsList[i].ingredient_price) + '¥', LocalX, LocalY + 37.5) 
+                            BetterText(' ' + LocalFurniture.name + ' - ¥' + numberWithCommas(IgredientsList[i].ingredient_price) + '', LocalX, LocalY + 37.5) 
                             image(LocalFurniture.image, LocalX + 325, LocalY, 75, 75);
                         };
                     };  
