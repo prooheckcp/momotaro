@@ -977,4 +977,38 @@ WHERE user_id = inp_id;
 
 END$$
 
+#Clean the player iventory
+CREATE PROCEDURE CleanInventory(IN inp_userid INT)
+BEGIN
+
+DELETE FROM dec_in_restaurant
+WHERE user_id = inp_userid;
+
+DELETE FROM dec_in_inventory
+WHERE user_id = inp_userid;
+
+SELECT CONCAT('The inventory is now empty! ID:', inp_userid) as 'output';
+
+END$$
+
+#Add item into the restaurant
+CREATE PROCEDURE PlaceInRestaurantItem(IN inp_itemid VARCHAR(8), IN inp_id INT, IN inp_itemx INT, IN inp_itemy INT)
+BEGIN
+
+INSERT INTO dec_in_restaurant(item_id, user_id, item_x, item_y)
+VALUES(inp_itemid, inp_id, inp_itemx, inp_itemy);
+
+END$$
+
+#Add item into inventory
+CREATE PROCEDURE AddItemInventory(IN inp_itemid VARCHAR(8), IN inp_userid INT, IN inp_itemamount INT)
+BEGIN
+
+INSERT INTO dec_in_inventory(item_id, user_id, item_amount)
+VALUES(inp_itemid, inp_userid, inp_itemamount);
+
+END$$ 
+
 DELIMITER ;
+
+

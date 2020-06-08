@@ -176,13 +176,17 @@ const DecorationMousePressed = () =>{
       if(MouseOnTile.x == LocalF.item_x && MouseOnTile.y == LocalF.item_y){
         
         PlayerRestaurantFurniture.splice(PlayerRestaurantFurniture.indexOf(LocalF), 1)
+        let LocalFurniture = FilterFurnitureByID(LocalF.item_id);
+        LocalFurniture.amount++;
 
-        httpPost('/post/removeFromRestaurant', {item : LocalF, id : UserID}, data =>{
+        for(let j = 0; j < inventory.length; j++){
 
-          UpdateInventoryRequest();
-          UpdateRestaurantRequest();
-          
-        });
+          if(inventory[j].item_id == LocalF.item_id){
+            inventory[j].item_amount++;
+          };
+
+        };
+
       };
     }
 
@@ -206,7 +210,14 @@ const DecorationMousePressed = () =>{
 
   //The accept button which changes the stage
   AcceptDecorationButton.pressed(()=>{
+
     Stage = 'Default';
+    //Send the
+    httpPost('/post/UpdateDecoration', {inv: inventory, dec: PlayerRestaurantFurniture,  id: UserID}, data =>{
+
+    });
+
+    
   });
 
   //The click event of the items displayed on the inventory

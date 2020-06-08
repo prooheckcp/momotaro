@@ -137,38 +137,47 @@ router.post('/giveMoney', (req, res, next) => {
 
 });
 
+router.post('/UpdateDecoration', (req, res, next) =>{
 
+    const UserInfo = req.body;
 
-router.post('/removeFromRestaurant', (req, res, next) =>{
-    const ItemInfo = req.body;
-    dbase.query('DELETE FROM dec_in_restaurant WHERE item_id = "' + ItemInfo.item.item_id + '" AND user_id = ' + ItemInfo.id + ' AND item_x = ' + ItemInfo.item.item_x + ' AND item_y = ' + ItemInfo.item.item_y + ';', (err, results, fields) =>{
+    dbase.query('CALL CleanInventory(' + UserInfo.id + ')', (err, results, fields) =>{
         if(err)throw err;
 
-        if(results.affectedRows > 0){
-                dbase.query('UPDATE dec_in_inventory SET item_amount = item_amount + 1 WHERE item_id = "' + ItemInfo.item.item_id + '" AND user_id = ' + ItemInfo.id + ';', (err, results, fields) =>{
-                    if(err)throw err;
-                });  
-        };
+
+
+        for(let i = 0; UserInfo.inv.length > i ; i++){
+            dbase.query('CALL AddItemInventory( "'+ UserInfo.inv[i].item_id +'", ' + UserInfo.id + ', ' + UserInfo.inv[i].item_amount + ')', (err, results, fields) => {
+                if(err)throw err;
+
+                if(i == (UserInfo.inv.length - 1)){
+
+                    for(let j = 0; UserInfo.dec.length > j; j++ ){
+                        dbase.query('CALL PlaceInRestaurantItem( "' + UserInfo.dec[j].item_id + '", ' + UserInfo.id + ', ' + UserInfo.dec[j].item_x + ', ' + UserInfo.dec[j].item_y + ')', (err, results, fields) =>{
+                            if(err)throw err;
+                            
+                            if(j == (UserInfo.dec.length -1)){
+                                res.send('done');
+                            };
+
+                        });
+            
+                    };
+
+                };
+
+            });
+        };       
+
+
+
     });
 
+    //Loop through the player inventory
 
 
-    res.send('data was removed!');
 
-});
 
-router.post('/addToRestaurant', (req, res, next) =>{
-    const ItemInfo = req.body;
-    
-    dbase.query('INSERT INTO dec_in_restaurant(item_id, user_id, item_x, item_y) VALUES("' + ItemInfo.item_id + '", ' + ItemInfo.id + ', ' + ItemInfo.x + ', ' + ItemInfo.y + ')', (err, results, fields) => {
-        if(err)throw err;
-    });
-
-    dbase.query('UPDATE dec_in_inventory SET item_amount = item_amount - 1 WHERE item_id = "' + ItemInfo.item_id + '" AND user_id = ' + ItemInfo.id + ';', (err, results, fields) =>{
-        if(err)throw err;
-    });
-
-    res.send('The item has been added!');
 });
 
 

@@ -239,7 +239,7 @@ class NewFurniture {
         this.sizeY = sizeY;
         this.price = price;
 
-        this.amount = 0;
+        this.amount = null;
 
         //Related to drawing
         this.x = 0;
@@ -250,11 +250,9 @@ class NewFurniture {
     };
 
     drawSlot(amount){
-        
-        this.amount = amount;
 
-        if(this.dragged == true){
-            amount -= 1;
+        if(this.amount == null){
+            this.amount = amount;
         };
 
         fill(0, 0, 0, 50);
@@ -263,8 +261,8 @@ class NewFurniture {
         fill(255);
         image(this.image, this.x + 18, this.y + 18, 64, 64);
         textSize(20);
-        BetterText(amount, this.x + 90, this.y + 90);
-        if(amount == 0){
+        BetterText(this.amount, this.x + 90, this.y + 90);
+        if(this.amount == 0){
             fill(0, 0, 0, 50);
             rect(this.x, this.y, 100, 100);
         };
@@ -288,6 +286,7 @@ class NewFurniture {
             this.dragged = true;
             this.mouseOffSet.x = this.x - mouseX;
             this.mouseOffSet.y = this.y - mouseY;
+            this.amount -= 1;
         };
     };
 
@@ -306,13 +305,23 @@ class NewFurniture {
                 
                 if(!LocalExists){
                     PlayerRestaurantFurniture.push({item_id: this.id, user_id : UserID, item_x : MouseOnTile.x, item_y : MouseOnTile.y});
-                    httpPost('/post/addToRestaurant', {item_id: this.id, id : UserID, x: MouseOnTile.x, y: MouseOnTile.y}, data =>{
+
+                    //Reduce the inventory amount
+                    for(let i = 0; inventory.length > i; i++){
+                        if(inventory[i].item_id == this.id){
+
+                            print('reduced ')
+                            inventory[i].item_amount -= 1;
+
+                        };
+                    };
+
                     this.dragged = false;
-                    UpdateInventoryRequest();
-                    UpdateRestaurantRequest();
-                    });
-                    }else{
+
+                }else{
+                        this.amount += 1;
                         this.dragged = false;
+                        
                 };
             };
 
@@ -320,6 +329,7 @@ class NewFurniture {
 
             }else if(this.dragged){
                 this.dragged = false;
+                this.amount += 1;
             }
     };
 
