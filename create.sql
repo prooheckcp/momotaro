@@ -1009,6 +1009,50 @@ VALUES(inp_itemid, inp_userid, inp_itemamount);
 
 END$$ 
 
+#Create a new dish
+CREATE PROCEDURE AddAnewDish(IN inp_dishid VARCHAR(8), IN inp_userid INT)
+BEGIN
+
+SET @CheckIfDishExists = (
+SELECT COUNT(1) 
+FROM dishes_inventory
+WHERE dish_id = inp_dishid AND user_id = inp_userid
+);
+
+
+IF @CheckIfDishExists > 0 THEN
+#In case the dish already exists within the player inventory then add it
+
+UPDATE dishes_inventory
+SET dishes_amount = dishes_amount + 1
+WHERE user_id = inp_userid AND dish_id = inp_dishid;
+
+SELECT 'Succssefully added a new dish!' AS 'output';
+
+ELSE
+#In case the dish does not exist in the player inventory
+
+INSERT INTO dishes_inventory(user_id, dishes_amount, dish_id)
+VALUES(inp_userid, 1, inp_dishid);
+
+SELECT 'Succssefully added a new dish!' AS 'output';
+
+END IF;
+
+END$$
+
+CREATE PROCEDURE RemoveIngredient(IN inp_userid INT, IN inp_ingredientID VARCHAR(8))
+BEGIN
+
+UPDATE ingredients_inventory 
+SET ingredient_amount = ingredient_amount - 1
+WHERE user_id = inp_userid AND ingredient_id = inp_ingredientID;
+
+
+SELECT 'Succssefully removed the ingredients!' AS 'output';
+
+END$$
+
 DELIMITER ;
 
 

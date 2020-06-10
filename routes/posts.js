@@ -50,50 +50,20 @@ router.post('/CreateNewDish', (req, res, next) => {
 
     const UserInfo = req.body;
 
-
-    dbase.query('SELECT * FROM ingredients_inventory WHERE user_id = ' + UserInfo.userID + ';', (err, results, fields) =>{
-        
+    //Add the dish onto the player databases
+    dbase.query('CALL AddAnewDish("' + UserInfo.dishID + '", ' + UserInfo.userID + ');', (err, results, fields) =>{
         if(err)throw err;
 
-        let QueryWorked = false;
+        //Remove the ingredients from the player database
         for(let slot in UserInfo.ingredients){
-            for(let row of results){
-            
-            
-                if(row.ingredient_id == UserInfo.ingredients[slot]){
-
-                    //If an ingredient exists then it will decrease it
-                    if(row.ingredient_amount > 0){
-                        dbase.query('UPDATE ingredients_inventory SET ingredient_amount = ingredient_amount - 1 WHERE ingredient_id = "' + row.ingredient_id + '" AND user_id = ' + UserInfo.userID + ';', (err, results, fields) =>{
-                            if(err)throw err;
-                            QueryWorked = true;
-                        });
-                    }else{
-                        res.send('ERROR: there are not enough ingredients');
-                    }
-                }
-
-            };
+            dbase.query('CALL RemoveIngredient( ' + UserInfo.userID + ', "' + UserInfo.ingredients[slot] + '")', (err, results, fields) =>{
+                if(err)throw err;
+                
+            });
         };
 
-
-        dbase.query('SELECT * FROM dishes_inventory WHERE user_id = ' + UserInfo.userID + ' AND dish_id = "' + UserInfo.dishID + '";', (err, results, fields) =>{
-            if(err)throw err;
-
-            if(results[0] == undefined){
-                dbase.query('INSERT INTO dishes_inventory(user_id, dishes_amount, dish_id) VALUES(' + UserInfo.userID + ', 1, "' + UserInfo.dishID + '");', (err, results, fields) =>{
-                    if(err)throw err;
-                    res.send('Added a new dish!');
-                });
-            }else{
-                let InfoFromAmountOfDishes = results[0].dishes_amount + 1;
-                dbase.query('UPDATE dishes_inventory SET dishes_amount = dishes_amount + 1 WHERE user_id = ' + UserInfo.userID + ' AND dish_id = "' + UserInfo.dishID + '";', (err, results, fields) =>{
-                    res.send('You now have ' + InfoFromAmountOfDishes + ' of this kind!');
-                });
-            }
-
-        });
-    
+    //Send feedback to the client
+    res.send('Added a new dish!');
 
     });
 
