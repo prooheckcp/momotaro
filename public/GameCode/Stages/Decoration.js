@@ -22,6 +22,7 @@
   let LeftYellowArrowButton;
   let RightYellowArrowButton;
   let AcceptDecorationButton;
+  let DenyDecorationButton;
 //------------\\
 
 const DecorationSetUp = () => {
@@ -31,6 +32,7 @@ const DecorationSetUp = () => {
     RightYellowArrowButton =  new NewButton(windowWidth/2 + 350, windowHeight - 137.5, 50, 100, RightYellowArrow);
     AcceptDecorationButton = new NewButton(windowWidth/2 + 400, windowHeight - 75 , 75, 75, CircleButtonCheck);
     ReputationDisplayer = new ReputationPointsDisplayer();
+    DenyDecorationButton = new NewButton(0, 0, 0, 0, DenyButtonImage);
   //------------\\
   
   //The furniture classes\\
@@ -84,9 +86,30 @@ const DecorationDraw = () =>{
   AcceptDecorationButton.draw();
   noTint();
 
+  //Deny changes button
+  let DenyDecorationButtonBeingHovered = false;
+  DenyDecorationButton.w = 75;
+  DenyDecorationButton.h = 75;
+  DenyDecorationButton.x = windowWidth/2 + 525;
+  DenyDecorationButton.y = windowHeight - 125;
+  DenyDecorationButton.hovered(()=>{
+    DenyDecorationButton.w = 90;
+    DenyDecorationButton.h = 90;
+    DenyDecorationButton.x = windowWidth/2 + 517.5;
+    DenyDecorationButton.y = windowHeight - 132.5;
+    DenyDecorationButtonBeingHovered = true;
+    tint(190, 190, 59);
+  });
+  DenyDecorationButton.draw();
+  noTint();
+
   //Hovering button message
   if(AcceptDecorationButtonBeingHovered){
-    UIinfo('Accept');
+    UIinfo('Accept changes');
+  };
+
+  if(DenyDecorationButtonBeingHovered){
+    UIinfo('Do not make any changes');
   };
 
   //Arrow buttons\\
@@ -207,6 +230,18 @@ const DecorationMousePressed = () =>{
     });
   //--------------\\
 
+  //Deny the restaurant changes
+  DenyDecorationButton.pressed(()=>{
+    Stage = 'Default';
+    UpdateRestaurantRequest();
+    UpdateInventoryRequest();
+
+    for(let object of furniture){
+      object.amount = null;
+    };
+
+  });
+  //UpdateRestaurantRequest()
 
   //The accept button which changes the stage
   AcceptDecorationButton.pressed(()=>{

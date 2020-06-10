@@ -310,7 +310,6 @@ class NewFurniture {
                     for(let i = 0; inventory.length > i; i++){
                         if(inventory[i].item_id == this.id){
 
-                            print('reduced ')
                             inventory[i].item_amount -= 1;
 
                         };

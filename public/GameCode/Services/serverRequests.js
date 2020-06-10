@@ -49,7 +49,7 @@ const UpdateRestaurantRequest = () => {
 const UpdateInventoryRequest = () =>{
     httpPost('/post/getInventory', {id : UserID}, data =>{
       let LocalData = eval(data);
-  
+
       if(LocalData[0] != null){
         inventory = [];
         for(item of LocalData){

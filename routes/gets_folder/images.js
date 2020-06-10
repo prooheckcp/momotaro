@@ -29,6 +29,10 @@
 //Images\\
 //UI
 
+router.get('/acceptbutton', (req, res, next) =>{
+    res.sendFile(ImagesPathUI('DenyButton.png'));
+});
+
 router.get('/notificationFrame', (req, res, next) =>{
     res.sendFile(ImagesPathUI('NotificationFrame.png'));
 });
