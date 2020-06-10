@@ -45,6 +45,8 @@ const DecorationSetUp = () => {
 
 const DecorationDraw = () =>{
 
+  //Recalculate prestige points
+  UpdatePrestigePoints();
 
   //Draw the reputation displayer
   ReputationDisplayer.x = windowWidth - 260; 
