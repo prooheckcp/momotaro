@@ -254,6 +254,7 @@ const SetupImages = () =>{
     LeftYellowArrow = loadImage('get/image/left_yellow_arrow');
     CircleButton = loadImage('/get/image/circlebutton');
     levelStar = loadImage('/get/image/levelstar');
+    LevelPortal = loadImage('/get/image/LevelPortal');
     MoneyFrame = loadImage('/get/image/MoneyDisplayer');
     LeaderboardsFrame = loadImage('/get/image/LeaderboardsFrame');
     CloseMark = loadImage('/get/image/CloseMarket');
