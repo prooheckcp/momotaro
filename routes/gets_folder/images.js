@@ -110,6 +110,10 @@ router.get('/levelstar', (req, res, next) =>{
     res.sendFile(ImagesPathUI('LevelStar.png'));
 });
 
+router.get('/LevelPortal', (req, res, next) =>{
+    res.sendFile(ImagesPathUI('LevelPortal.png'));
+});
+
 router.get('/circlebutton', (req, res, next) =>{
     res.sendFile(ImagesPathUI('CircleButton.png'));
 });
