@@ -108,11 +108,14 @@ const DrawFriendUI = () =>{
         rect(60, 30, (FriendStats.exp * 325)/CalculateRequiredEXP(FriendStats.level), 50, 10);
         fill(255);
 
-        //Star
-        image(levelStar, 60 - 50, 30 - 50 + 50/2, 100, 100);
+        //Star //LevelMountain // levelStar
+        image(LevelPortal, 60 - 50, 30 - 50 + 50/2, 100, 100);
         textAlign(CENTER, CENTER);
-        textSize(30);
-        BetterText('' + FriendStats.level + '', 60, 30 + 7 +50/2 );    
+        textSize(25);
+        BetterText('' + FriendStats.level + '', 59, 35 + 7 +50/2 );    
+
+        textSize(25);
+        BetterText('' + restaurantStats.level + '', this.x-1, this.y + 10 +this.h/2 );
 
         if(CheckIfMouseInRect({x: 60, y: 30, w: 325, h: 50}, mouseX, mouseY)){
             textSize(28);
