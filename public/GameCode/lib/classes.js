@@ -400,10 +400,12 @@ class NewFurniture {
             rect(this.x, this.y, (restaurantStats.exp * this.w)/CalculateRequiredEXP(restaurantStats.level), this.h, 10);
             fill(255);
             //Star
-            image(levelStar, this.x - 50, this.y - 50 + this.h/2, 100, 100);
+            image(LevelPortal, this.x - 50, this.y - 50 + this.h/2, 100, 100);
             textAlign(CENTER, CENTER);
-            textSize(30);
-            BetterText('' + restaurantStats.level + '', this.x, this.y + 7 +this.h/2 );
+            textSize(25);
+            BetterText('' + restaurantStats.level + '', this.x-1, this.y + 10 +this.h/2 );
+
+
 
         };
 
