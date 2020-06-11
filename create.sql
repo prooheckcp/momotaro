@@ -398,7 +398,7 @@ FROM
 INNER JOIN
 	restaurant r ON r.user_id = f.friend_id
 INNER JOIN
-	users u ON u.user_id = f.user_id
+	users u ON u.user_id = f.friend_id
 WHERE 
 	f.user_id = inp_user_id;
     
