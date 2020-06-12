@@ -55,6 +55,17 @@ INSERT INTO dec_market(item_id, item_price) VALUES('cu_ch', 800); #Add a cushion
 INSERT INTO dec_market(item_id, item_price) VALUES('mi_po', 1500); #Add an animated plant
 INSERT INTO dec_market(item_id, item_price) VALUES('an_cr', 5000); #Add an animated crow
 INSERT INTO dec_market(item_id, item_price) VALUES('an_cr2', 5000); #Add an animated crow2
+INSERT INTO dec_market(item_id, item_price) VALUES('ma_ka', 3000); #Add a karaoke machine
+INSERT INTO dec_market(item_id, item_price) VALUES('be_pl', 400); #Add a beje plant
+INSERT INTO dec_market(item_id, item_price) VALUES('pu_pl', 400); #Add a purple plant
+INSERT INTO dec_market(item_id, item_price) VALUES('ov', 2000); #Add an oven
+INSERT INTO dec_market(item_id, item_price) VALUES('an_ca', 5000); #Add an animated cat
+INSERT INTO dec_market(item_id, item_price) VALUES('ca_ma', 800); #Add a cardbox maid
+INSERT INTO dec_market(item_id, item_price) VALUES('si_ta', 2000); #Add a heart table
+INSERT INTO dec_market(item_id, item_price) VALUES('he', 900); #Add an heater
+INSERT INTO dec_market(item_id, item_price) VALUES('ch_he', 400); #Add chocolates shaped heart
+INSERT INTO dec_market(item_id, item_price) VALUES('st', 800); #Add a stanchion
+INSERT INTO dec_market(item_id, item_price) VALUES('ch_fo', 1500); #Add a chocolate fountain
 
 CREATE TABLE dec_in_inventory(
     item_id VARCHAR(8) NOT NULL,

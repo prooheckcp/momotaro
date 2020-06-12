@@ -328,7 +328,10 @@ const UImousePressed = () =>{
             });
 
             //Go to the decoration menu
-            BuildingUIbutton.pressed(() => {Stage = 'Decoration'});
+            BuildingUIbutton.pressed(() => {
+            Stage = 'Decoration';
+            UpdateStorageInventory();
+            });
 
             //Open and close the configuration window 
             ConfigurationUIbutton.pressed(()=>{Stage = 'Config'});

@@ -189,6 +189,7 @@ const SetupImages = () =>{
 
 //Decoration Variables\\
 
+
     animated_crow2 = loadImage('get/image/AnimatedCrow2');
     animated_crow = loadImage('get/image/AnimatedCrow');
     animated_plant = loadImage('get/image/AnimatedPlant');
@@ -208,6 +209,12 @@ const SetupImages = () =>{
     tel_cor_Image  = loadImage('get/image/Television');
     mac_kar_Image  = loadImage('get/image/Television_Corner');
     oven_Image     = loadImage('get/image/Oven');
+    animated_cat = loadImage('get/image/AnimatedCat');
+    cardbox_maid = loadImage('get/image/CardboxMaid');
+    heater = loadImage('get/image/Heater');
+    ChocolateHeart = loadImage('get/image/ChocolateHeart');
+    Stanchion = loadImage('get/image/Stanchion');
+    ChocolateFountain = loadImage('get/image/ChocolateFountain');
 //---------------------\\
 
 //Food Variables\\
