@@ -5,7 +5,7 @@ const NPCbuyDish = (dishID, NPC) =>{
 
     if(data.status == 'ok'){
 
-      NpcPaySound.volume = VolEffectsValue;
+      NpcPaySound.setVolume(VolEffectsValue);
       NpcPaySound.play();
       //Remove the NPC and update the stats
       UpdateIngredientsInventory();
