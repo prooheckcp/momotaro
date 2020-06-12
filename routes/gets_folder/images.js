@@ -230,6 +230,31 @@ router.get('/right_yellow_arrow', (req, res, next) =>{
 
 //Decorations\\
 
+router.get('/ChocolateFountain', (req, res, next) =>{
+    res.sendFile(ImagesPathDec('Chocolate_Fountain.png'));
+});
+
+router.get('/Stanchion', (req, res, next) =>{
+    res.sendFile(ImagesPathDec('Stanchion.png'));
+});
+
+router.get('/ChocolateHeart', (req, res, next) =>{
+    res.sendFile(ImagesPathDec('Heart_chocolates.png'));
+});
+
+router.get('/Heater', (req, res, next) =>{
+    res.sendFile(ImagesPathDec('Heater.png'));
+});
+
+router.get('/CardboxMaid', (req, res, next) =>{
+    res.sendFile(ImagesPathDec('Cardbox_maid.png'));
+});
+
+router.get('/AnimatedCat', (req, res, next) =>{
+    res.sendFile(ImagesPathDec('animated_cat.gif'));
+});
+
+
 router.get('/AnimatedCrow2', (req, res, next) =>{
     res.sendFile(ImagesPathDec('animated_crow2.gif'));
 });

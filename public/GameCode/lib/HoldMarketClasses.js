@@ -39,5 +39,17 @@ const MarketFurnitureClasses = () =>{
         furniture.push(new NewFurniture('mi_po' /*ID*/, animated_plant /*Img*/, 30 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 300/*price*/, 'Potted Plant' /*name*/));
         furniture.push(new NewFurniture('an_cr' /*ID*/, animated_crow /*Img*/, 100 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 1000/*price*/, 'Crow' /*name*/));
         furniture.push(new NewFurniture('an_cr2' /*ID*/, animated_crow2 /*Img*/, 100 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 1000/*price*/, 'Sitting Crow' /*name*/));
+
+        furniture.push(new NewFurniture('ma_ka' /*ID*/, tel_pla_Image /*Img*/, 100 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 1000/*price*/, 'Karaoke\n Machine' /*name*/));
+        furniture.push(new NewFurniture('be_pl' /*ID*/, bej_pla_Image /*Img*/, 100 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 1000/*price*/, 'Beje Plant' /*name*/));
+        furniture.push(new NewFurniture('pu_pl' /*ID*/, pur_pla_Image /*Img*/, 100 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 1000/*price*/, 'Purple Plant' /*name*/));
+        furniture.push(new NewFurniture('ov' /*ID*/, oven_Image /*Img*/, 100 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 1000/*price*/, 'Oven' /*name*/));
+        furniture.push(new NewFurniture('an_ca' /*ID*/, animated_cat /*Img*/, 100 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 1000/*price*/, 'Cat' /*name*/));
+        furniture.push(new NewFurniture('ca_ma' /*ID*/, cardbox_maid /*Img*/, 100 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 1000/*price*/, 'Cardbox\n Maid' /*name*/));
+        furniture.push(new NewFurniture('si_ta' /*ID*/, sim_tab_Image /*Img*/, 100 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 1000/*price*/, 'Heart\n Table' /*name*/));
+        furniture.push(new NewFurniture('he' /*ID*/, heater /*Img*/, 100 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 1000/*price*/, 'Heater' /*name*/));
+        furniture.push(new NewFurniture('ch_he' /*ID*/, ChocolateHeart /*Img*/, 100 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 1000/*price*/, 'Heart Shapped\n Chocolates' /*name*/));
+        furniture.push(new NewFurniture('st' /*ID*/, Stanchion /*Img*/, 100 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 1000/*price*/, 'Stanchion' /*name*/));
+        furniture.push(new NewFurniture('ch_fo' /*ID*/, ChocolateFountain /*Img*/, 100 /*rep*/, 1 /*sizeX*/, 1 /*sizeY*/, 1000/*price*/, 'Chocolate\n Fountain' /*name*/));
     //----------------------\\
 };

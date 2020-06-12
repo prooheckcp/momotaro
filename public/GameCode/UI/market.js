@@ -175,7 +175,7 @@ const DrawMarketWindow = () =>{
             }
 
             //The item
-            image(LocalFurniture.image, LocalItemDisplayX + 64, LocalItemDisplayY + 64)
+            image(LocalFurniture.image, LocalItemDisplayX + 64, LocalItemDisplayY + 128 - LocalFurniture.image.height)
 
             textAlign(CENTER, TOP);
             textSize(35);
@@ -183,7 +183,7 @@ const DrawMarketWindow = () =>{
             BetterText(LocalFurniture.name, LocalItemDisplayX + 308.5, LocalItemDisplayY + 25);
             textSize(20);
             //Reputation points of the item
-            BetterText('Reputation \nPoints: ' + LocalFurniture.reputation, LocalItemDisplayX + 308.5, LocalItemDisplayY + 80);
+            BetterText('Reputation \nPoints: ' + LocalFurniture.reputation, LocalItemDisplayX + 308.5, LocalItemDisplayY + 140);
             //Select the amount wanted 
 
 
@@ -256,7 +256,8 @@ const DrawMarketWindow = () =>{
                     textAlign(LEFT, CENTER);
                     textSize(20);
                     BetterText(' ' + LocalFurniture.name + ' - ¥' + numberWithCommas(DecorationList[i].item_price) + '', LocalX, LocalY + 37.5) 
-                    image(LocalFurniture.image, LocalX + 325, LocalY, 75, 75);
+                    //1.171875
+                    image(LocalFurniture.image, LocalX + 325, LocalY + 75 - (LocalFurniture.image.height * 1.171875), LocalFurniture.image.width * 1.171875, LocalFurniture.image.height * 1.171875);
                 };
             };  
 
