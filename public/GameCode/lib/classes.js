@@ -53,7 +53,7 @@ class NewButton{
             func();
 
             //Open window sound\\
-            ClickingSound.volume = VolEffectsValue
+            ClickingSound.setVolume(VolEffectsValue);
             ClickingSound.play();
         
         };
@@ -396,7 +396,7 @@ class NewFurniture {
             rect(this.x, this.y, this.w, this.h, 10);
 
             //Fill part
-            fill(186, 7, 222);
+            fill(225, 212, 0);
             rect(this.x, this.y, (restaurantStats.exp * this.w)/CalculateRequiredEXP(restaurantStats.level), this.h, 10);
             fill(255);
             //Star
