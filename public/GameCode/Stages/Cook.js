@@ -458,7 +458,7 @@ const CookingCraftingMousePressed = () =>{
                             //Collect the cooked item
                             httpPost('/post/CreateNewDish', {dishID: LocalDishToBeCooked.id, userID: UserID, ingredients: LocalItemsToBeCrafted}, data =>{
                                 BetterAlert(data);
-                                Choping.volume = VolEffectsValue;
+                                Choping.setVolume(VolEffectsValue);
                                 Choping.play();
                                 UpdateIngredientsInventory();
                                 UpdateDishesInventory();
