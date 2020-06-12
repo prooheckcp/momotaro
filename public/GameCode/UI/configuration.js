@@ -7,12 +7,9 @@ const SetupConfigUI = () =>{
     CloseConfigButton = new NewButton( 0, 0, 0, 0, CloseMark);
     //------------\\
 
-    //Music Frame Button\\
-        MusicButton = new NewButton( 0, 0, 0, 0,SoundOff);
-    //------------\\
-
-    //Sound Effects Button\\
-        SoundEffectButton = new NewButton( 0, 0, 0, 0,SoundOn);
+    //Music & SoundEffect Frame Button\\
+    //    MusicButton = new NewButton( 0, 0, 0, 0,0);
+    //    SoundEffectButton = new NewButton( 0, 0, 0, 0,0);
     //------------\\
 
     //Aditional buttons for music volume\\
@@ -37,7 +34,7 @@ const DrawConfigurationWindow = () =>{
     // main frame \\
         image(ConfigFrame, windowWidth/2-400, windowHeight/2-150);
     //------------\\
-
+    /*
     //Sound Effect Botton\\
         SoundEffectButton.x = windowWidth/2+72;
         SoundEffectButton.y = windowHeight/2+60;
@@ -61,7 +58,7 @@ const DrawConfigurationWindow = () =>{
         MusicButton.draw();
         noTint();
     //---------------\\
-
+    */
     // Aditional 1 Music Botton\\
         HighVolMusic.x = windowWidth/2+190;
         HighVolMusic.y = windowHeight/2-110;
@@ -151,34 +148,58 @@ const DrawConfigurationWindow = () =>{
         textSize(25);
         //On && Off
         BetterText('Music:', windowWidth/2-160, windowHeight/2+50);
-        BetterText('Sound Effects', windowWidth/2+184, windowHeight/2+50);
+        BetterText('Sound Effects:', windowWidth/2+184, windowHeight/2+50);
         //Volume
         BetterText('Music:', windowWidth/2-124, windowHeight/2-120);
-        BetterText('Sound Effects', windowWidth/2-81, windowHeight/2-40);
+        BetterText('Sound Effects:', windowWidth/2-81, windowHeight/2-40);
     //---------------\\
 
-    /*
-    if(VolMusicValue = 0){
-        image(SoundOff, windowWidth/2 - 160, windowHeight/2 - 110);
-    }
+    
     if(VolMusicValue > 0){
-        image(SoundOn, windowWidth/2 - 160, windowHeight/2 - 110);
+        image(SoundOn, windowWidth/2-272, windowHeight/2+60);
     }
-    */
+    if(VolMusicValue == 0){
+        image(SoundOff, windowWidth/2-272, windowHeight/2+60);
+    }
+
+
+    if(VolEffectsValue > 0){
+        image(SoundOn, windowWidth/2+72, windowHeight/2+60);
+    } 
+    
+    if(VolEffectsValue == 0){
+        image(SoundOff, windowWidth/2+72, windowHeight/2+60);
+    }
+
 };
 
 const UIConfigMousePressed = () =>{
 
     CloseConfigButton.pressed(()=>{ConfigWindow = false});
 
-    MusicButton.pressed(()=>{
-            MusicVolBar.WVolume = 0;
-    });
+    if(mouseX > windowWidth/2-272 && mouseX < windowWidth/2-45 && mouseY > windowHeight/2+60 && mouseY < windowHeight/2+109 && VolMusicValue > 0){
+        MusicVolBar.WVolume = 0;
+        ClickingSound.setVolume(VolEffectsValue);
+        ClickingSound.play();
+    }
 
-    SoundEffectButton.pressed(()=>{
+    if(mouseX > windowWidth/2-272 && mouseX < windowWidth/2-45 && mouseY > windowHeight/2+60 && mouseY < windowHeight/2+109 && VolMusicValue == 0){
+        MusicVolBar.WVolume = 344;
+        ClickingSound.setVolume(VolEffectsValue);
+        ClickingSound.play();
+    }
+    
+    if(mouseX > windowWidth/2+72 && mouseX < windowWidth/2+299 && mouseY > windowHeight/2+60 && mouseY < windowHeight/2+109 && VolEffectsValue > 0){
         SoundEffectVolBar.WVolume = 0;
-        
-    });
+        ClickingSound.setVolume(VolEffectsValue);
+        ClickingSound.play();
+    }
+
+    if(mouseX > windowWidth/2+72 && mouseX < windowWidth/2+299 && mouseY > windowHeight/2+60 && mouseY < windowHeight/2+109 && VolEffectsValue == 0){
+        SoundEffectVolBar.WVolume = 344;
+        ClickingSound.setVolume(VolEffectsValue);
+        ClickingSound.play();
+    }
 
     HighVolMusic.pressed(()=>{
         MusicVolBar.WVolume = MusicVolBar.WVolume + 43;
@@ -195,7 +216,4 @@ const UIConfigMousePressed = () =>{
     LowVolEffect.pressed(()=>{
         SoundEffectVolBar.WVolume = SoundEffectVolBar.WVolume - 43;
     });
-
-    MusicVolBar.pressed();
-    SoundEffectVolBar.pressed();
 };
