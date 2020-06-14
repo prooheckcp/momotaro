@@ -51,21 +51,21 @@ CREATE TABLE dec_market(
 INSERT INTO dec_market(item_id, item_price) VALUES('ro_ta', 2000); #Add the round table with the set price of 100 yen
 INSERT INTO dec_market(item_id, item_price) VALUES('ch_fr', 500); #Add a front chair
 INSERT INTO dec_market(item_id, item_price) VALUES('ch_ba', 500); #Add a back chair
-INSERT INTO dec_market(item_id, item_price) VALUES('cu_ch', 800); #Add a cushion chair
-INSERT INTO dec_market(item_id, item_price) VALUES('mi_po', 1500); #Add an animated plant
-INSERT INTO dec_market(item_id, item_price) VALUES('an_cr', 5000); #Add an animated crow
-INSERT INTO dec_market(item_id, item_price) VALUES('an_cr2', 5000); #Add an animated crow2
+INSERT INTO dec_market(item_id, item_price) VALUES('cu_ch', 500); #Add a cushion chair
+INSERT INTO dec_market(item_id, item_price) VALUES('mi_po', 1000); #Add an animated plant
+INSERT INTO dec_market(item_id, item_price) VALUES('an_cr', 4000); #Add an animated crow
+INSERT INTO dec_market(item_id, item_price) VALUES('an_cr2', 4000); #Add an animated crow2
 INSERT INTO dec_market(item_id, item_price) VALUES('ma_ka', 3000); #Add a karaoke machine
-INSERT INTO dec_market(item_id, item_price) VALUES('be_pl', 400); #Add a beje plant
-INSERT INTO dec_market(item_id, item_price) VALUES('pu_pl', 400); #Add a purple plant
-INSERT INTO dec_market(item_id, item_price) VALUES('ov', 2000); #Add an oven
-INSERT INTO dec_market(item_id, item_price) VALUES('an_ca', 5000); #Add an animated cat
-INSERT INTO dec_market(item_id, item_price) VALUES('ca_ma', 800); #Add a cardbox maid
-INSERT INTO dec_market(item_id, item_price) VALUES('si_ta', 2000); #Add a heart table
-INSERT INTO dec_market(item_id, item_price) VALUES('he', 900); #Add an heater
-INSERT INTO dec_market(item_id, item_price) VALUES('ch_he', 400); #Add chocolates shaped heart
-INSERT INTO dec_market(item_id, item_price) VALUES('st', 800); #Add a stanchion
-INSERT INTO dec_market(item_id, item_price) VALUES('ch_fo', 1500); #Add a chocolate fountain
+INSERT INTO dec_market(item_id, item_price) VALUES('be_pl', 499); #Add a beje plant
+INSERT INTO dec_market(item_id, item_price) VALUES('pu_pl', 499); #Add a purple plant
+INSERT INTO dec_market(item_id, item_price) VALUES('ov', 1599); #Add an oven
+INSERT INTO dec_market(item_id, item_price) VALUES('an_ca', 4999); #Add an animated cat
+INSERT INTO dec_market(item_id, item_price) VALUES('ca_ma', 799); #Add a cardbox maid
+INSERT INTO dec_market(item_id, item_price) VALUES('si_ta', 1900); #Add a heart table
+INSERT INTO dec_market(item_id, item_price) VALUES('he', 899); #Add an heater
+INSERT INTO dec_market(item_id, item_price) VALUES('ch_he', 389); #Add chocolates shaped heart
+INSERT INTO dec_market(item_id, item_price) VALUES('st', 699); #Add a stanchion
+INSERT INTO dec_market(item_id, item_price) VALUES('ch_fo', 1489); #Add a chocolate fountain
 
 CREATE TABLE dec_in_inventory(
     item_id VARCHAR(8) NOT NULL,
@@ -140,11 +140,11 @@ INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level
 INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('br', 21, 1); #Bread
 INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('fl', 15, 2); #Flour
 INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('eg', 78, 4); #Eggs
-INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('ol_oi', 220, 6); #Olivia oil
+INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('ol_oi', 119, 6); #Olivia oil
 INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('co', 77, 8); #Cocoa
 INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('ch', 39, 10); #Cherry
 INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('pa', 66, 12); #Water
-INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('sh', 280, 14); #Shrimp
+INSERT INTO ingredients_market(ingredient_id, ingredient_price, ingredient_level) VALUES('sh', 137, 14); #Shrimp
 
 /*---------------------------------*/
 CREATE TABLE ingredients_inventory(
