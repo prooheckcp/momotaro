@@ -4,12 +4,7 @@ let VolEffectsValue;
 
 const SetupConfigUI = () =>{
     //Close Config Button\\
-    CloseConfigButton = new NewButton( 0, 0, 0, 0, CloseMark);
-    //------------\\
-
-    //Music & SoundEffect Frame Button\\
-    //    MusicButton = new NewButton( 0, 0, 0, 0,0);
-    //    SoundEffectButton = new NewButton( 0, 0, 0, 0,0);
+        CloseConfigButton = new NewButton( 0, 0, 0, 0, CloseMark);
     //------------\\
 
     //Aditional buttons for music volume\\
@@ -34,31 +29,7 @@ const DrawConfigurationWindow = () =>{
     // main frame \\
         image(ConfigFrame, windowWidth/2-400, windowHeight/2-150);
     //------------\\
-    /*
-    //Sound Effect Botton\\
-        SoundEffectButton.x = windowWidth/2+72;
-        SoundEffectButton.y = windowHeight/2+60;
-        SoundEffectButton.w = 227;
-        SoundEffectButton.h = 49;
-        SoundEffectButton.hovered(()=>{
-            tint(190, 190, 59);
-        });
-        SoundEffectButton.draw();
-        noTint();
-    //---------------\\
 
-    //Music Botton\\
-        MusicButton.x = windowWidth/2-272;
-        MusicButton.y = windowHeight/2+60;
-        MusicButton.w = 227;
-        MusicButton.h = 49;
-        MusicButton.hovered(()=>{
-            tint(190, 190, 59);
-        });
-        MusicButton.draw();
-        noTint();
-    //---------------\\
-    */
     // Aditional 1 Music Botton\\
         HighVolMusic.x = windowWidth/2+190;
         HighVolMusic.y = windowHeight/2-110;
@@ -108,8 +79,8 @@ const DrawConfigurationWindow = () =>{
     //---------------\\
 
     //Close Config\\
-        CloseConfigButton.x = windowWidth/2 + 330;
-        CloseConfigButton.y = windowHeight/2 - 145;
+        CloseConfigButton.x = windowWidth/2 + 335;
+        CloseConfigButton.y = windowHeight/2 - 137;
         CloseConfigButton.w = 50;
         CloseConfigButton.h = 50;
         CloseConfigButton.hovered(()=>{
@@ -202,19 +173,27 @@ const UIConfigMousePressed = () =>{
     }
 
     HighVolMusic.pressed(()=>{
-        MusicVolBar.WVolume = MusicVolBar.WVolume + 43;
+        if(MusicVolBar.WVolume < 0){
+            MusicVolBar.WVolume = MusicVolBar.WVolume + 43;
+        }
     });
 
     LowVolMusic.pressed(()=>{
-        MusicVolBar.WVolume = MusicVolBar.WVolume - 43;
+        if(MusicVolBar.WVolume > 0){
+            MusicVolBar.WVolume = MusicVolBar.WVolume - 43;
+        }
     });
 
     HighVolEffect.pressed(()=>{
-        SoundEffectVolBar.WVolume = SoundEffectVolBar.WVolume + 43;
+        if(SoundEffectVolBar.WVolume < 0){ 
+            SoundEffectVolBar.WVolume = SoundEffectVolBar.WVolume + 43;
+        }
     });
 
     LowVolEffect.pressed(()=>{
-        SoundEffectVolBar.WVolume = SoundEffectVolBar.WVolume - 43;
+        if(SoundEffectVolBar.WVolume > 0){ 
+            SoundEffectVolBar.WVolume = SoundEffectVolBar.WVolume - 43;
+        }
     });
 
     MusicVolBar.pressed();
