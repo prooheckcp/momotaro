@@ -147,11 +147,11 @@ const DrawConfigurationWindow = () =>{
     //text Config\\
         textSize(25);
         //On && Off
-        BetterText('Music:', windowWidth/2-160, windowHeight/2+50);
-        BetterText('Sound Effects:', windowWidth/2+184, windowHeight/2+50);
+        BetterText('Music', windowWidth/2-160, windowHeight/2+50);
+        BetterText('Sound Effects', windowWidth/2+184, windowHeight/2+50);
         //Volume
-        BetterText('Music:', windowWidth/2-124, windowHeight/2-120);
-        BetterText('Sound Effects:', windowWidth/2-81, windowHeight/2-40);
+        BetterText('Music', windowWidth/2-124, windowHeight/2-120);
+        BetterText('Sound Effects', windowWidth/2-81, windowHeight/2-40);
     //---------------\\
 
     
@@ -216,4 +216,12 @@ const UIConfigMousePressed = () =>{
     LowVolEffect.pressed(()=>{
         SoundEffectVolBar.WVolume = SoundEffectVolBar.WVolume - 43;
     });
+
+    MusicVolBar.pressed();
+    SoundEffectVolBar.pressed();
+};
+
+const UIConfigMouseReleased = () =>{
+    MusicVolBar.released();
+    SoundEffectVolBar.released();
 };
