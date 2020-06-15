@@ -181,6 +181,10 @@ const SignupClick = () => {
         SignUpButton.pressed(()=>{
             if(Signup_Password != Signup_Password2){
                 BetterAlert('The passwords do not match!');
+            }else if(Signup_Password.length < 5){
+                BetterAlert('The password is too short');
+            }else if(Signup_Password.length > 18){
+                BetterAlert('The password is too long');
             }else{
                 httpPost('/post/signup', {email: Signup_Email , password: Signup_Password, username: Signup_Username}, result =>{
                     let LocalData = eval(result)[0];
