@@ -173,7 +173,7 @@ const UIConfigMousePressed = () =>{
     }
 
     HighVolMusic.pressed(()=>{
-        if(MusicVolBar.WVolume < 0){
+        if(MusicVolBar.WVolume < 344){
             MusicVolBar.WVolume = MusicVolBar.WVolume + 43;
         }
     });
@@ -185,7 +185,7 @@ const UIConfigMousePressed = () =>{
     });
 
     HighVolEffect.pressed(()=>{
-        if(SoundEffectVolBar.WVolume < 0){ 
+        if(SoundEffectVolBar.WVolume < 344){ 
             SoundEffectVolBar.WVolume = SoundEffectVolBar.WVolume + 43;
         }
     });
