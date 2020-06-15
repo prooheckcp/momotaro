@@ -150,11 +150,59 @@ const SetupImages = () =>{
 
 //NPCs Art\\
 
-    //Standing up
-    npcUp = loadImage('/get/image/npcFemalebakerUP');
+    //NPC 1
+    NPCsArt.push({
+        sit: loadImage('/get/image/npcFemalebakerSit'),
+        wait: loadImage('/get/image/npcFemalebakerUP')
+    });
 
-    //Sitting
-    npcSit = loadImage('/get/image/npcFemalebakerSit');
+    //NPC 2
+    NPCsArt.push({
+        sit: loadImage('/get/image/npcBusinessManSit'),
+        wait: loadImage('/get/image/npcBusinessManUP')
+    });
+
+    //NPC 3
+    NPCsArt.push({
+        sit: loadImage('/get/image/npcOldBusinessManSit'),
+        wait: loadImage('/get/image/npcOldBusinessManUP')
+    });
+
+    //NPC 4
+    NPCsArt.push({
+        sit: loadImage('/get/image/npcMaleStudentSit'),
+        wait: loadImage('/get/image/npcMaleStudentUP')
+    });
+
+    //NPC 5
+    NPCsArt.push({
+        sit: loadImage('/get/image/npcMalePunkSit'),
+        wait: loadImage('/get/image/npcMalePunktUP')
+    });
+
+    //NPC 6
+    NPCsArt.push({
+        sit: loadImage('/get/image/npcMaleCasualSit'),
+        wait: loadImage('/get/image/npcMaleCasualUP')
+    });
+
+    //NPC 7
+    NPCsArt.push({
+        sit: loadImage('/get/image/npcFemaleYouthSit'),
+        wait: loadImage('/get/image/npcFemaleYouthUP')
+    });
+
+    //NPC 8
+    NPCsArt.push({
+        sit: loadImage('/get/image/npcFemaleTrendySit'),
+        wait: loadImage('/get/image/npcFemaleTrendyUP')
+    });
+
+    //NPC 9
+    NPCsArt.push({
+        sit: loadImage('/get/image/npcFemaleStudentSit'),
+        wait: loadImage('/get/image/npcFemaleStudentUP')
+    });
 
     //Chat ballon for the required dish
     ChatBalloon = loadImage('/get/image/ChatBalloon');

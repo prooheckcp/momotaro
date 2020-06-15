@@ -17,6 +17,7 @@
 
 //Npc art\\
 
+    //NPC 1
     router.get('/npcFemalebakerUP', (req, res, next) =>{
         res.sendFile(NpcPath('npcFemalebakerUP.png'));
     });
@@ -24,6 +25,79 @@
     router.get('/npcFemalebakerSit', (req, res, next) =>{
         res.sendFile(NpcPath('npcFemalebakerSit.png'));
     });
+
+    //NPC 2
+    router.get('/npcBusinessManUP', (req, res, next) =>{
+        res.sendFile(NpcPath('Youngbusinessman4.png'));
+    });
+
+    router.get('/npcBusinessManSit', (req, res, next) =>{
+        res.sendFile(NpcPath('Youngbusinessman1.png'));
+    });
+
+    //NPC 3
+    router.get('/npcOldBusinessManUP', (req, res, next) =>{
+        res.sendFile(NpcPath('Oldbusinessman4.png'));
+    });
+
+    router.get('/npcOldBusinessManSit', (req, res, next) =>{
+        res.sendFile(NpcPath('Oldbusinessman1.png'));
+    });
+
+    //NPC 4
+    router.get('/npcMaleStudentUP', (req, res, next) =>{
+        res.sendFile(NpcPath('Malestudent4.png'));
+    });
+
+    router.get('/npcMaleStudentSit', (req, res, next) =>{
+        res.sendFile(NpcPath('Malestudent1.png'));
+    });
+
+    //NPC 5
+    router.get('/npcMalePunktUP', (req, res, next) =>{
+        res.sendFile(NpcPath('Malepunk4.png'));
+    });
+
+    router.get('/npcMalePunkSit', (req, res, next) =>{
+        res.sendFile(NpcPath('Malepunk1.png'));
+    });
+
+    //NPC 6
+    router.get('/npcMaleCasualUP', (req, res, next) =>{
+        res.sendFile(NpcPath('Malecasual4.png'));
+    });
+
+    router.get('/npcMaleCasualSit', (req, res, next) =>{
+        res.sendFile(NpcPath('Malecasual1.png'));
+    });
+
+    //NPC 7
+    router.get('/npcFemaleYouthUP', (req, res, next) =>{
+        res.sendFile(NpcPath('Femaleyouth4.png'));
+    });
+
+    router.get('/npcFemaleYouthSit', (req, res, next) =>{
+        res.sendFile(NpcPath('Femaleyouth1.png'));
+    });
+
+    //NPC 8
+    router.get('/npcFemaleTrendyUP', (req, res, next) =>{
+        res.sendFile(NpcPath('Femaletrendy4.png'));
+    });
+
+    router.get('/npcFemaleTrendySit', (req, res, next) =>{
+        res.sendFile(NpcPath('Femaletrendy1.png'));
+    });
+
+    //NPC 9
+    router.get('/npcFemaleStudentUP', (req, res, next) =>{
+        res.sendFile(NpcPath('Femalestudent4.png'));
+    });
+
+    router.get('/npcFemaleStudentSit', (req, res, next) =>{
+        res.sendFile(NpcPath('Femalestudent1.png'));
+    });
+
 //--------\\
 
 //Images\\

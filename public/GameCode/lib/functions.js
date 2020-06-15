@@ -213,3 +213,8 @@ async function BetterAlert(text){
         shown : true
     });
 };
+
+
+const RandomNUM = n => {
+    return Math.floor(Math.random(10) * (n + 1));
+};

@@ -14,6 +14,10 @@
   //Prestige Points
   let CurrentPrestigePoints = 0;
   let TimeBetweenEachNPC = 1000;
+
+  //NPCs art
+  const NPCsArt = [];
+
 //----------\\
 
 //Debounces\\
@@ -128,9 +132,11 @@ const CreateNewNPC = () => {
   //Update the dishes inventory
   UpdateDishesInventory();
 
+  let LocalNPCskin = NPCsArt[RandomNUM(NPCsArt.length - 1)];
+
   let LocalToBeSentData = {
-    NPCskinUp: npcUp,
-    NPCskinSit: npcSit,
+    NPCskinUp: LocalNPCskin.wait,
+    NPCskinSit: LocalNPCskin.sit,
     x: 0,
     y: 0,
     enteredTime: TimePassed,
