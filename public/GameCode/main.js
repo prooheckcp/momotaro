@@ -168,9 +168,8 @@ function mouseReleased(){
 
     //Released event on the cooking scene
     CookMouseReleased();
-
   };
-
+  UIConfigMouseReleased();
 };
 
 
