@@ -128,6 +128,7 @@ const DrawFriendUI = () =>{
 
     //Name displayer\\
 
+        textSize(25);
         let OwnerNameDisplayer = FriendStats.name + "'s restaurant";
         let LocalW = textWidth(OwnerNameDisplayer) + 30;
 
