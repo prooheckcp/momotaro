@@ -430,6 +430,8 @@ class Volume{
         this.w = 0;
         this.h = 0;
         this.WVolume = 344;
+        this.dragged = false;
+        this.mouseOffSet = {x: 0, y: 0};
     };
 
     draw(){
@@ -441,6 +443,10 @@ class Volume{
         //Fill part
             fill(36, 209, 17);
             rect(this.x, this.y, this.WVolume, this.h);
+
+        if(this.dragged){
+            this.WVolume = mouseX - this.x;
+        }
         if(this.WVolume < 0){
             this.WVolume = 0;
         }
@@ -451,10 +457,15 @@ class Volume{
 
     pressed(){
         if(mouseX > this.x && mouseX < this.x + 344 && mouseY > this.y && mouseY < this.y + 50){
-            this.WVolume = mouseX - this.x;
+            this.dragged = true;
+
         }
     };
     
+    released(){
+        this.dragged = false;
+    };
+
 };
 //------------------------------------------\\
 
