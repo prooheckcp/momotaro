@@ -507,7 +507,7 @@ VALUES(12, 182, '2019-06-9');
 #User with the ID: 13
 #Unhashed Password: shiversilent
 INSERT INTO users(user_password, user_name, user_email)
-VALUES('$2b$10$SjnbbZ0Zfx.f8.yAX.LYCeqaCGkydvdMFepQZmICYirGjBXfvFZWO', 'vaccumprinter', 'printervaccum@zoho.com');
+VALUES('$2b$10$SjnbbZ0Zfx.f8.yAX.LYCeqaCGkydvdMFepQZmICYirGjBXfvFZWO', 'vaccumprinterswag', 'printervaccum@zoho.com');
 
 #Create the restaurant for: vaccumprinter
 INSERT INTO restaurant(user_id, res_name, res_money, res_level, res_exp)
@@ -3069,7 +3069,7 @@ VALUES(73, 33, '2019-00-4');
 #User with the ID: 74
 #Unhashed Password: silentmycat
 INSERT INTO users(user_password, user_name, user_email)
-VALUES('$2b$10$vtBygffu4m95IuMixcsFL.iLIdxKy4PgnrOIqBQ.PqhhLJ4InTjmu', 'rainprevent', 'preventrain@gmail.com');
+VALUES('$2b$10$vtBygffu4m95IuMixcsFL.iLIdxKy4PgnrOIqBQ.PqhhLJ4InTjmu', 'rainpreventionSwagger', 'preventrain@gmail.com');
 
 #Create the restaurant for: rainprevent
 INSERT INTO restaurant(user_id, res_name, res_money, res_level, res_exp)
@@ -3363,7 +3363,7 @@ VALUES(80, 76, '2019-04-18');
 #User with the ID: 81
 #Unhashed Password: 123admin
 INSERT INTO users(user_password, user_name, user_email)
-VALUES('$2b$10$1EXV3f1Rl9ZjLuzxypZo/eVuE3I0fG3AElqozLoeT861ni1xLrc2q', 'vaccumMLG', 'MLGvaccum@yahoo.com');
+VALUES('$2b$10$1EXV3f1Rl9ZjLuzxypZo/eVuE3I0fG3AElqozLoeT861ni1xLrc2q', 'vaccumMLGPlayer', 'MLGvaccum@yahoo.com');
 
 #Create the restaurant for: vaccumMLG
 INSERT INTO restaurant(user_id, res_name, res_money, res_level, res_exp)
@@ -6975,7 +6975,7 @@ VALUES(166, 51, '2019-01-10');
 #User with the ID: 167
 #Unhashed Password: soggyshiver
 INSERT INTO users(user_password, user_name, user_email)
-VALUES('$2b$10$O0fVTFQtVBWbX3jcz80F5eF3uNH0QXuhUFfnhnSZ8jdB4f8ByekfW', 'preventmichael', 'michaelprevent@outlook.com');
+VALUES('$2b$10$O0fVTFQtVBWbX3jcz80F5eF3uNH0QXuhUFfnhnSZ8jdB4f8ByekfW', 'preventmichaelBoy123', 'michaelprevent@outlook.com');
 
 #Create the restaurant for: preventmichael
 INSERT INTO restaurant(user_id, res_name, res_money, res_level, res_exp)
@@ -7647,7 +7647,7 @@ VALUES(182, 83, '2019-09-2');
 #User with the ID: 183
 #Unhashed Password: shiverharm
 INSERT INTO users(user_password, user_name, user_email)
-VALUES('$2b$10$mLxODLX3HzPlsEuFv9Nx8.uMLO0M59dVnMtRkUCo1QjXDTVREn2lW', 'bearscar', 'carbears@yahoo.com');
+VALUES('$2b$10$mLxODLX3HzPlsEuFv9Nx8.uMLO0M59dVnMtRkUCo1QjXDTVREn2lW', 'bearscaryBeast', 'carbears@yahoo.com');
 
 #Create the restaurant for: bearscar
 INSERT INTO restaurant(user_id, res_name, res_money, res_level, res_exp)
@@ -7941,7 +7941,7 @@ VALUES(189, 136, '2019-01-7');
 #User with the ID: 190
 #Unhashed Password: windows123
 INSERT INTO users(user_password, user_name, user_email)
-VALUES('$2b$10$QtBFg789v67bzts7.ikiIuVKGvNpB3rdkRi7Now0Lh.D23b61GvIe', 'deniershell', 'shelldenier@aol.com');
+VALUES('$2b$10$QtBFg789v67bzts7.ikiIuVKGvNpB3rdkRi7Now0Lh.D23b61GvIe', 'deniershellyOwO', 'shelldenier@aol.com');
 
 #Create the restaurant for: deniershell
 INSERT INTO restaurant(user_id, res_name, res_money, res_level, res_exp)
@@ -8067,7 +8067,7 @@ VALUES(192, 13, '2019-03-17');
 #User with the ID: 193
 #Unhashed Password: linuxuser123
 INSERT INTO users(user_password, user_name, user_email)
-VALUES('$2b$10$AW7vXWoQFbHswJZhGDPMreUZoWPC8Puu8db/56m0U/2bll/YUZc/2', 'trivagoblyet', 'blyettrivago@hotmail.com');
+VALUES('$2b$10$AW7vXWoQFbHswJZhGDPMreUZoWPC8Puu8db/56m0U/2bll/YUZc/2', 'trivagoblyethurvina', 'blyettrivago@hotmail.com');
 
 #Create the restaurant for: trivagoblyet
 INSERT INTO restaurant(user_id, res_name, res_money, res_level, res_exp)
