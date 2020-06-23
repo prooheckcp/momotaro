@@ -36,7 +36,3 @@ app.use(ErrorRoute);
 
 ////Request listener\\\\
 app.listen(DefaultPort);
-
-
-//////////DATABASE INFORMATION\\\\\\\\\\\
-
