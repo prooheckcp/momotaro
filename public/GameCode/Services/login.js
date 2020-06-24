@@ -5,7 +5,7 @@
     let logginIn = true; 
 
     //The current scene (True -> in-game scene; Flase -> Login scene)
-    let Logged = false; 
+    let Logged = true; 
 
     //The ID of the user that is playing the game
     let UserID = 2; 
