@@ -288,7 +288,7 @@ const DrawMarketWindow = () =>{
         //Page number
         textAlign(CENTER, CENTER);
         textSize(25);
-        BetterText('Page: ' + (MarketWindowDecorationPage + 1) + '/' + (int(DecorationList.length/6 + 1)) , windowWidth/2 - 280, windowHeight/2 + 230 + 25);
+        BetterText('Page: ' + (MarketWindowDecorationPage + 1) + '/' + Math.floor((DecorationList.length + 1)/6) , windowWidth/2 - 280, windowHeight/2 + 230 + 25);
 
     }else{
 
@@ -424,7 +424,7 @@ const DrawMarketWindow = () =>{
                 MarketWindowIngredientsRightArrow.h = 50;
         
                 MarketWindowIngredientsRightArrow.hovered(()=>{tint(190, 190, 59);})
-                if(DecorationList.length > (MarketWindowIngredientsPage + 1) * 6){
+                if(IgredientsList.length > (MarketWindowIngredientsPage + 1) * 6){
                     MarketWindowIngredientsRightArrow.draw();
                     
                 }
