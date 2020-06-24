@@ -84,7 +84,13 @@ function DrawNpc() {
 
     //The dish the NPC wants displayed\\
     image(ChatBalloon, LocalNPCpos.x + NPCconfiguration.npcSize.x, LocalNPCpos.y - 80, 80, 80);
+    for(let dish of dishesInventory){
+      if(dish.dish_id == NPC.dish.dish_id && dish.dishes_amount == 0 && !NPC.fed){
+        tint(190, 70, 70);
+      };
+    };
     image(FilterDishesByID(NPC.dish.dish_id).image, LocalNPCpos.x + NPCconfiguration.npcSize.x + 12, LocalNPCpos.y - 72, 64, 64);    
+    noTint();
     //---------------------------------\\
    
 
@@ -99,6 +105,18 @@ function DrawNpc() {
     }else if(NPC.sit == true){
       image(NPC.NPCskinSit, LocalNPCpos.x+7, LocalNPCpos.y, NPCconfiguration.npcSize.x, NPCconfiguration.npcSize.y);
     };
+
+    //Draw the NPC waiting time\\
+
+      if(NPCconfiguration.MaxWaitingTime - (TimePassed - NPC.enteredTime) < 10 && !NPC.fed){
+        let LocalBarSize = ((NPCconfiguration.MaxWaitingTime - (TimePassed - NPC.enteredTime)) * NPCconfiguration.npcSize.x) / 10;
+        fill(0);
+        rect(LocalNPCpos.x, LocalNPCpos.y + NPCconfiguration.npcSize.y + 10, NPCconfiguration.npcSize.x, 10);
+        fill(195, 217, 0);
+        rect(LocalNPCpos.x, LocalNPCpos.y + NPCconfiguration.npcSize.y + 10, LocalBarSize, 10);
+      };
+    //--------------------------\\
+
 
     //Check if the user has the dish the NPC wants\\
       for(let dish of dishesInventory){
