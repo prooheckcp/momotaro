@@ -159,32 +159,6 @@ CREATE TABLE ingredients_inventory(
 /*Triggers*/
 DELIMITER $$
 
-CREATE TRIGGER add_default_recipes
-AFTER INSERT ON restaurant
-FOR EACH ROW
-BEGIN
-
-	INSERT INTO recipes_inventory(dish_id, user_id, recipe_id)
-    VALUES('br_om', new.user_id, 'rcp_1');
-	
-    #Give the player a starting chair
-    INSERT INTO dec_in_inventory(item_id, user_id, item_amount)
-    VALUES('ch_fr', new.user_id, 1);
-    
-    #Give the player a starting round table
-    INSERT INTO dec_in_inventory(item_id, user_id, item_amount)
-    VALUES('ro_ta', new.user_id, 1);
-    
-    #Give some eggs
-    INSERT INTO ingredients_inventory(ingredient_id, user_id, ingredient_amount)
-    VALUES('eg', new.user_id, 3);
-
-    #Give some bread
-    INSERT INTO ingredients_inventory(ingredient_id, user_id, ingredient_amount)
-    VALUES('br', new.user_id, 3);
-    
-END$$
-
 
 
 /*Procedures*/
