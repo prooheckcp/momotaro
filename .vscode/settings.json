@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/0a1e062f-303c-42c6-9847-40063dd9119c/resourceGroups/Momotaro/providers/Microsoft.Web/sites/momotaro",
+    "appService.deploySubpath": "."
+}
