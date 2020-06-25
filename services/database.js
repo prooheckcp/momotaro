@@ -1,12 +1,12 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
     host: 'mysqlmomotaro.mysql.database.azure.com',
     user: 'prooheckcp@mysqlmomotaro',
     database: 'momotaro',
     password: 'Gatoderp12',
-    port: 3306,
-    ssl : true
+    port: 3306
+    //ssl : true
   });
 
   connection.connect((err)=>{
