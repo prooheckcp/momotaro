@@ -31,5 +31,5 @@ jobs:
       with:
         app-name: 'momotaro'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_9f681c1c4a45415a9644c5d55905ac4d }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_bac9412fe3954de59dc7704796b2a338 }}
         package: .
