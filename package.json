@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\"",
     "start": "node server.js",
-    "ss" : "nodemon server.js"
+    "ss": "nodemon server.js"
   },
   "author": "Gabriel Vergari, Vasco Soares",
   "license": "ISC",
@@ -14,6 +14,7 @@
     "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
     "nodemon": "^2.0.3"
   }
