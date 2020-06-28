@@ -84,11 +84,20 @@ function DrawNpc() {
 
     //The dish the NPC wants displayed\\
     image(ChatBalloon, LocalNPCpos.x + NPCconfiguration.npcSize.x, LocalNPCpos.y - 80, 80, 80);
+    
+    let LocalDebounce = false;
+
     for(let dish of dishesInventory){
-      if(dish.dish_id == NPC.dish.dish_id && dish.dishes_amount == 0 && !NPC.fed){
-        tint(190, 70, 70);
+      if(dish.dish_id == NPC.dish.dish_id && dish.dishes_amount > 0){
+        LocalDebounce = true;
       };
     };
+
+    if(!LocalDebounce){
+      tint(190, 70, 70);
+    };
+    
+
     image(FilterDishesByID(NPC.dish.dish_id).image, LocalNPCpos.x + NPCconfiguration.npcSize.x + 12, LocalNPCpos.y - 72, 64, 64);    
     noTint();
     //---------------------------------\\
