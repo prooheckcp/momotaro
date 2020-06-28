@@ -3,8 +3,8 @@
   //NPC default settings
   let NPCconfiguration = {
     npcSize : {x: 50, y: 50},
-    defaultTime: 10,
-    MaxWaitingTime: 25
+    defaultTime: 60,
+    MaxWaitingTime: 35
   };
 
   //Objects on which NPCs can sit

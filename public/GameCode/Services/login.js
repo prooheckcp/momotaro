@@ -8,7 +8,7 @@
     let Logged = false; 
 
     //The ID of the user that is playing the game
-    let UserID = 2; 
+    let UserID = 1; 
 
     //The name of the restarant
     let restaurantName = '';
